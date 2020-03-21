@@ -9,10 +9,25 @@
   </div>
 
   <div class="section">
-    <app-form-input
-      formControlName="name"
-      placeholder="Name..."
-    ></app-form-input>
+    <app-form-dropdown
+      formControlName="continent"
+      [defaultOption]="{ value: '', label: 'Choose a continent...' }"
+      [options]="[
+        { value: 'africa', label: 'Africa' },
+        { value: 'america', label: 'America' },
+        { value: 'asia', label: 'Asia' },
+        { value: 'europe', label: 'Europa' },
+        { value: 'oceania', label: 'Oceania' }
+      ]"
+    ></app-form-dropdown>
+  </div>
+
+  <div class="section">
+    <input formControlName="name" placeholder="Name...">
+  </div>
+
+  <div class="section">
+    <textarea formControlName="description" placeholder="Description..." rows="5" cols="23"></textarea>
   </div>
 
   <div class="section">

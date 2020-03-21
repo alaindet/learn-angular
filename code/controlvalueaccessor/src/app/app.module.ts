@@ -4,13 +4,13 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { FormRatingComponent } from './components/form/rating/rating.component';
-import { FormInputComponent } from './components/form/input/input.component';
+import { FormDropdownComponent } from './components/form/dropdown/dropdown.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     FormRatingComponent,
-    FormInputComponent,
+    FormDropdownComponent,
   ],
   imports: [
     BrowserModule,

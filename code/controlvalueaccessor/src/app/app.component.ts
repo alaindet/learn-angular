@@ -18,13 +18,17 @@ export class AppComponent implements OnInit {
     this.form = this.fb.group({
       rating: [null, Validators.required],
       name: ['', Validators.required],
+      description: ['', Validators.required],
+      continent: ['', Validators.required],
     });
   }
 
   public onFormChangeValue(): void {
     this.form.setValue({
-      rating: 2,
-      name: 'Alain',
+      rating: 3,
+      name: 'John',
+      description: 'Some boring description',
+      continent: 'europe',
     });
   }
 

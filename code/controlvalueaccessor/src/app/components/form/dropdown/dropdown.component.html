@@ -1,0 +1,27 @@
+<div class="dropdown" [class.has-margin]="hasMargin">
+
+  <!-- Current option -->
+  <div class="current-option" (click)="onOptionsToggle()" tabindex="0">
+    {{ this.currentLabel }}
+  </div>
+
+  <!-- Options -->
+  <div class="options" [class.are-open]="isOpen">
+
+    <!-- Default option -->
+    <div class="option" (click)="onSelectOption(defaultOption)">
+      {{ defaultOption.label }}
+    </div>
+
+    <!-- All options -->
+    <div
+      *ngFor="let option of options"
+      class="option"
+      [class.active]="option.value === currentValue"
+      (click)="onSelectOption(option)"
+    >
+      {{ option.label }}
+    </div>
+  </div>
+
+</div>
