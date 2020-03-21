@@ -1,0 +1,9 @@
+<div class="stars" [class.disabled]="disabled">
+  <span
+    *ngFor="let star of stars; let index = index"
+    class="star"
+    (click)="onClick(index)"
+  >
+    {{ star ? "⭐" : "."  }}
+  </span>
+</div>

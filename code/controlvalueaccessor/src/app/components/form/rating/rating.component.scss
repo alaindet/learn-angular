@@ -1,0 +1,18 @@
+$size: 32px;
+
+.star {
+  display: inline-block;
+  width: $size;
+  line-height: $size;
+  font-size: 0.66 * $size;
+  text-align: center;
+  cursor: pointer;
+
+  &:hover {
+    color: #ccc;
+  }
+}
+
+.disabled {
+  opacity: 0.25;
+}
