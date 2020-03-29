@@ -1,0 +1,41 @@
+<table>
+
+  <thead>
+    <tr>
+      <th *ngFor="let col of cols">
+        {{ col.name }}
+      </th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr *ngFor="let row of rows; let rowIndex = index">
+      <td *ngFor="let value of row; let colIndex = index">
+
+        <ng-container [ngSwitch]="cols[colIndex].type">
+
+          <!-- String -->
+          <ng-container *ngSwitchCase="'string'">
+            {{ value }}
+          </ng-container>
+
+          <!-- HTML -->
+          <ng-container *ngSwitchCase="'html'">
+            <div [outerHTML]="value"></div>
+          </ng-container>
+
+          <!-- Template -->
+          <ng-container *ngSwitchCase="'template'">
+            <ng-container
+              [ngTemplateOutlet]="cols[colIndex].template"
+              [ngTemplateOutletContext]="value"
+            ></ng-container>
+          </ng-container>
+
+        </ng-container>
+
+      </td>
+    </tr>
+  </tbody>
+
+</table>

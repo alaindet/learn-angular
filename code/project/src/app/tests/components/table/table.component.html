@@ -1,0 +1,7 @@
+<h2>app-table</h2>
+
+<app-table [cols]="cols" [rows]="rows"></app-table>
+
+<ng-template #customColumn let-name="name">
+  My name is {{ name }}
+</ng-template>
