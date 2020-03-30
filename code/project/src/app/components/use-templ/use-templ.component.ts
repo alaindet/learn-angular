@@ -1,7 +1,7 @@
 import { Component, Input, TemplateRef } from '@angular/core';
 
 @Component({
-  selector: 'app-use-template',
+  selector: 'app-use-templ',
   styles: [``],
   template: `
     <ng-container
@@ -10,7 +10,7 @@ import { Component, Input, TemplateRef } from '@angular/core';
     ></ng-container>
   `
 })
-export class UseTemplateComponent {
+export class UseTemplComponent {
 
   @Input() template: TemplateRef<any>;
   @Input() context: any;
