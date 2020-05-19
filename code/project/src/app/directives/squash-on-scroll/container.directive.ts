@@ -10,11 +10,12 @@ export class SquashOnScrollContainerDirective {
   @ContentChildren(SquashOnScrollItemDirective)
   items: QueryList<SquashOnScrollItemDirective>;
 
-  @Input() threshold = 100;
+  @Input() threshold:number;
 
   @Output() squashableHeight = new EventEmitter<number>();
 
-  private SCROLLED_DOWN = false;
+  private _squashableHeight: number;
+  private hasScrolledDown = false;
 
   constructor(
     private element: ElementRef,
@@ -22,6 +23,10 @@ export class SquashOnScrollContainerDirective {
 
   ngAfterViewInit() {
     this.calculateHeight();
+    if (!this.threshold) {
+      this.threshold = this._squashableHeight;
+      console.log('threshold', this.threshold);
+    }
   }
 
   private triggerSquashables() {
@@ -31,18 +36,18 @@ export class SquashOnScrollContainerDirective {
   }
 
   private calculateHeight() {
-    const height = this.element.nativeElement.offsetHeight;
-    this.squashableHeight.emit(height);
+    this._squashableHeight = this.element.nativeElement.offsetHeight;
+    this.squashableHeight.emit(this._squashableHeight);
   }
 
   private onScroll() {
-    if (window.pageYOffset > this.threshold && !this.SCROLLED_DOWN) {
-      this.SCROLLED_DOWN = true;
+    if (window.pageYOffset > this.threshold && !this.hasScrolledDown) {
+      this.hasScrolledDown = true;
       this.triggerSquashables();
       return;
     }
-    if (window.pageYOffset < this.threshold && this.SCROLLED_DOWN) {
-      this.SCROLLED_DOWN = false;
+    if (window.pageYOffset < this.threshold && this.hasScrolledDown) {
+      this.hasScrolledDown = false;
       this.triggerSquashables();
       return;
     }

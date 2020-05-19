@@ -7,7 +7,7 @@ import { SquashOnScroll } from './squash-on-scroll.enum';
 })
 export class SquashOnScrollItemDirective {
 
-  @Input() squashOnScroll: SquashOnScroll = SquashOnScroll.Collapse;
+  @Input() squashOnScroll: SquashOnScroll = SquashOnScroll.Squash;
 
   squashed = false;
   initialHeight: string;
