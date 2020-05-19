@@ -1,0 +1,85 @@
+<!-- Header -->
+<app-collapsable-header (headerHeight)="onHeaderHeight($event)">
+  <h1 class="collapsable">Full sized title</h1>
+  <h1 class="collapsable collapsed">Collapsed title</h1>
+
+  <div class="collapsable">Collapsable content</div>
+  <div class="collapsable">Collapsable content too</div>
+
+  <nav>
+    <ul>
+      <li><a href="#">Home</a>
+      <li>
+      <li><a href="#">Products</a>
+      <li>
+      <li><a href="#">About</a>
+      <li>
+    </ul>
+  </nav>
+</app-collapsable-header>
+
+<!-- Main content -->
+<main [ngStyle]="mainStyle">
+  <p>
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent aliquam ante volutpat, ornare mi cursus, varius
+    lectus. Maecenas maximus leo nec iaculis luctus. Nullam at massa sapien. Aenean erat diam, bibendum vel auctor eu,
+    pulvinar id ante. Aliquam sollicitudin quis justo eu volutpat. In hac habitasse platea dictumst. Aliquam id diam
+    eget urna ullamcorper molestie. Duis sed dui nisl. Nullam sapien enim, aliquet sed ex vel, hendrerit euismod est.
+    Morbi finibus tempor velit. Quisque viverra pellentesque blandit. Vestibulum malesuada porttitor est sit amet porta.
+    Pellentesque tellus est, elementum et eleifend quis, faucibus eget quam.
+  </p>
+  <p>
+    Phasellus semper diam ipsum, in dapibus erat laoreet eu. Vestibulum convallis risus eu quam eleifend pretium. Duis
+    volutpat neque quis massa lacinia, non aliquet diam tempor. Nam vel sem eget felis malesuada ultrices porttitor eget
+    elit. Fusce finibus elit convallis, interdum tortor non, blandit arcu. Fusce nec lorem non lectus egestas hendrerit
+    sed ut justo. Vestibulum at pharetra nibh, non mattis risus. Morbi in nibh magna. Morbi vitae tortor velit. Fusce
+    ullamcorper justo vel dolor gravida, quis placerat quam fermentum. Aliquam ullamcorper ligula sit amet arcu
+    interdum, elementum auctor neque pharetra. Sed justo nunc, hendrerit a felis ut, sollicitudin tempor lectus. Donec
+    mauris leo, scelerisque rhoncus tellus in, viverra laoreet ante. Proin porta lacus id massa ultrices, vel ultricies
+    lorem placerat. Praesent pharetra libero sit amet erat finibus, at blandit lacus efficitur. Donec faucibus iaculis
+    justo, non hendrerit urna.
+  </p>
+  <p>
+    In imperdiet, nulla nec porta vestibulum, quam sem vestibulum arcu, vitae cursus dui sapien quis metus. Vivamus
+    vitae eros elit. Morbi dictum dui nibh, a rhoncus dolor rutrum id. Nulla sodales lacus sed sapien vehicula lobortis.
+    Suspendisse nulla nisl, molestie at semper eu, feugiat sed eros. Vestibulum ante ipsum primis in faucibus orci
+    luctus et ultrices posuere cubilia curae; Sed dapibus est eu ipsum interdum lobortis vehicula et augue. Fusce non
+    lorem tristique nisl lacinia ullamcorper. Maecenas gravida, tortor sed cursus tempus, erat tortor tincidunt libero,
+    quis tempor massa lorem id massa. Nullam nec bibendum enim, id fermentum nisl.
+  </p>
+  <p>
+    Cras tellus enim, pharetra vitae vulputate vel, imperdiet ut mi. Cras placerat erat ac elementum semper. Sed sodales
+    quis tortor in pretium. Cras urna nisi, ultricies vel imperdiet dapibus, suscipit at turpis. Vestibulum ante lorem,
+    ornare et mattis et, eleifend et leo. Nulla lobortis pretium tellus, eu pellentesque nunc fermentum eget. Nam a
+    augue id lacus consequat commodo. Morbi ut sollicitudin elit. Aliquam pulvinar eleifend leo, in scelerisque est
+    iaculis quis.
+  </p>
+  <p>
+    Vivamus non diam sed tortor porttitor fringilla vitae non felis. Etiam ipsum dolor, feugiat at accumsan eu, pharetra
+    vitae tellus. Cras ultrices interdum mattis. Praesent urna velit, lacinia vel dolor lobortis, dictum scelerisque
+    sapien. Donec vitae laoreet urna. Maecenas ligula leo, feugiat a lacinia et, dictum sed diam. Vestibulum in blandit
+    ipsum. Mauris venenatis, sapien at consectetur luctus, justo nibh vehicula sem, at condimentum ex augue sed sapien.
+    Duis venenatis fringilla dignissim. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia
+    curae; Ut in ullamcorper nibh. Fusce ut dictum nulla. Nam auctor ultrices posuere. Duis lacus lacus, consectetur
+    quis ex id, consequat posuere augue.
+  </p>
+  <p>
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent aliquam ante volutpat, ornare mi cursus, varius
+    lectus. Maecenas maximus leo nec iaculis luctus. Nullam at massa sapien. Aenean erat diam, bibendum vel auctor eu,
+    pulvinar id ante. Aliquam sollicitudin quis justo eu volutpat. In hac habitasse platea dictumst. Aliquam id diam
+    eget urna ullamcorper molestie. Duis sed dui nisl. Nullam sapien enim, aliquet sed ex vel, hendrerit euismod est.
+    Morbi finibus tempor velit. Quisque viverra pellentesque blandit. Vestibulum malesuada porttitor est sit amet porta.
+    Pellentesque tellus est, elementum et eleifend quis, faucibus eget quam.
+  </p>
+  <p>
+    Phasellus semper diam ipsum, in dapibus erat laoreet eu. Vestibulum convallis risus eu quam eleifend pretium. Duis
+    volutpat neque quis massa lacinia, non aliquet diam tempor. Nam vel sem eget felis malesuada ultrices porttitor eget
+    elit. Fusce finibus elit convallis, interdum tortor non, blandit arcu. Fusce nec lorem non lectus egestas hendrerit
+    sed ut justo. Vestibulum at pharetra nibh, non mattis risus. Morbi in nibh magna. Morbi vitae tortor velit. Fusce
+    ullamcorper justo vel dolor gravida, quis placerat quam fermentum. Aliquam ullamcorper ligula sit amet arcu
+    interdum, elementum auctor neque pharetra. Sed justo nunc, hendrerit a felis ut, sollicitudin tempor lectus. Donec
+    mauris leo, scelerisque rhoncus tellus in, viverra laoreet ante. Proin porta lacus id massa ultrices, vel ultricies
+    lorem placerat. Praesent pharetra libero sit amet erat finibus, at blandit lacus efficitur. Donec faucibus iaculis
+    justo, non hendrerit urna.
+  </p>
+</main>

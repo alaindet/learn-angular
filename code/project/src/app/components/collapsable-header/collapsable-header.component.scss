@@ -1,0 +1,11 @@
+::ng-deep .collapsable {
+  transition: opacity 0.2s linear;
+  opacity: 1;
+
+  &.collapsed {
+    overflow: hidden;
+    margin: 0 !important;
+    height: 0 !important;
+    opacity: 0;
+  }
+}
