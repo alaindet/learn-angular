@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { ComponentsModule } from './../components/components.module';
+import { DirectivesModule } from './../directives/directives.module';
 
 import { TestTableComponent } from './components/table/table.component';
 import { TestCollapsableHeaderComponent } from './components/collapsable-header/collapsable-header.component';
@@ -21,6 +22,7 @@ const tests = [
   imports: [
     CommonModule,
     ComponentsModule,
+    DirectivesModule,
   ],
 })
 export class TestsModule {}

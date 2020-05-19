@@ -7,4 +7,9 @@ import { Component } from '@angular/core';
 })
 export class TestCollapseOnScrollComponent {
 
+  mainStyle: { [klass: string]: any } = {};
+
+  onCollapsableHeight(height: number) {
+    this.mainStyle = {marginTop: `${height + 16}px`};
+  }
 }
