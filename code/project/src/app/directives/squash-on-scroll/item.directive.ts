@@ -1,15 +1,15 @@
 import { Directive, Input, ElementRef, Renderer2 } from '@angular/core';
 
-import { OnScrollDown } from './on-scroll-down.enum';
+import { SquashOnScroll } from './squash-on-scroll.enum';
 
 @Directive({
-  selector: '[collapseOnScrollItem]'
+  selector: '[squashOnScroll]'
 })
-export class CollapseOnScrollItemDirective {
+export class SquashOnScrollItemDirective {
 
-  @Input() onScrollDown: OnScrollDown = OnScrollDown.Collapse;
+  @Input() squashOnScroll: SquashOnScroll = SquashOnScroll.Collapse;
 
-  collapsed = false;
+  squashed = false;
   initialHeight: string;
 
   private defaultStyle = {
@@ -17,7 +17,7 @@ export class CollapseOnScrollItemDirective {
     'opacity': '1',
   };
 
-  private collapsedStyle = {
+  private squashedStyle = {
     'overflow': 'hidden',
     'margin': '0',
     'width': '0',
@@ -33,31 +33,25 @@ export class CollapseOnScrollItemDirective {
   ngOnInit() {
     this.setStyle(this.defaultStyle);
 
-    // Initially collapse "inverted" items
-    if (this.onScrollDown === OnScrollDown.Expand) {
-      this.collapse();
+    // Initially squash "inverted" items
+    if (this.squashOnScroll === SquashOnScroll.Expand) {
+      this.squash();
     }
   }
 
-  setHeight() {
-    const el = this.element.nativeElement;
-    this.initialHeight = `${el.offsetHeight}px`;
-    this.renderer.setStyle(el, 'height', this.initialHeight);
+  toggleSquashedState() {
+    this.squashed ? this.expand() : this.squash();
   }
 
-  toggleCollapsable() {
-    this.collapsed ? this.expand() : this.collapse();
-  }
-
-  private collapse() {
-    this.collapsed = true;
+  private squash() {
+    this.squashed = true;
     this.renderer.removeStyle(this.element.nativeElement, 'height');
-    this.setStyle(this.collapsedStyle);
+    this.setStyle(this.squashedStyle);
   }
 
   private expand() {
-    this.collapsed = false;
-    for (const rule of Object.keys(this.collapsedStyle)) {
+    this.squashed = false;
+    for (const rule of Object.keys(this.squashedStyle)) {
       this.renderer.removeStyle(this.element.nativeElement, rule);
     }
   }

@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CollapseOnScrollComponent } from './collapse-on-scroll.component';
+import { TestSquashOnScrollComponent } from './squash-on-scroll.component';
 
-describe('CollapseOnScrollComponent', () => {
-  let component: CollapseOnScrollComponent;
-  let fixture: ComponentFixture<CollapseOnScrollComponent>;
+describe('TestSquashOnScrollComponent', () => {
+  let component: TestSquashOnScrollComponent;
+  let fixture: ComponentFixture<TestSquashOnScrollComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CollapseOnScrollComponent ]
+      declarations: [TestSquashOnScrollComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CollapseOnScrollComponent);
+    fixture = TestBed.createComponent(TestSquashOnScrollComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

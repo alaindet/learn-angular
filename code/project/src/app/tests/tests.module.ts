@@ -6,14 +6,14 @@ import { DirectivesModule } from './../directives/directives.module';
 
 import { TestTableComponent } from './components/table/table.component';
 import { TestCollapsableHeaderComponent } from './components/collapsable-header/collapsable-header.component';
-import { TestCollapseOnScrollComponent } from './directives/collapse-on-scroll/collapse-on-scroll.component';
+import { TestSquashOnScrollComponent } from './directives/squash-on-scroll/squash-on-scroll.component';
 import { TestUseTemplComponent } from './components/use-templ/use-templ.component';
 
 const tests = [
   TestUseTemplComponent,
   TestTableComponent,
   TestCollapsableHeaderComponent,
-  TestCollapseOnScrollComponent,
+  TestSquashOnScrollComponent,
 ];
 
 @NgModule({

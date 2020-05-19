@@ -1,20 +1,17 @@
-<header collapseOnScroll (collapsableHeight)="onCollapsableHeight($event)">
+<header squashOnScrollContainer (squashableHeight)="onSquashableHeight($event)">
 
-  <h1 collapseOnScrollItem onScrollDown="collapse">The quick brown fox jumps on the lazy dog</h1>
-  <h3 collapseOnScrollItem onScrollDown="expand">It did</h3>
+  <div squashOnScroll="squash">
+    <h1>The quick brown fox jumps on the lazy dog</h1>
+    <p>Collapsable content</p>
+    <p>Collapsable content too</p>
+  </div>
 
-  <p collapseOnScrollItem onScrollDown="collapse">Collapsable content</p>
-  <p collapseOnScrollItem onScrollDown="collapse">Collapsable content too</p>
+  <div squashOnScroll="expand">
+    <h3>It did</h3>
+    <p>Only visible when squashed</p>
+  </div>
 
   <p>Non-collapsable content</p>
-
-  <nav>
-    <ul>
-      <li><a href="#">Home</a></li>
-      <li><a href="#">Products</a></li>
-      <li><a href="#">About</a></li>
-    </ul>
-  </nav>
 
 </header>
 
