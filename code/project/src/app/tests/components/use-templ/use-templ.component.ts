@@ -1,7 +1,7 @@
 import { Component, ViewChild, TemplateRef } from '@angular/core';
 
 @Component({
-  selector: 'app-test-use-templ',
+  selector: 'test-use-templ',
   styles: [``],
   template: `
     <app-use-templ [template]="templ" [context]="context"></app-use-templ>

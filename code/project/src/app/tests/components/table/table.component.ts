@@ -1,7 +1,7 @@
 import { Component, ViewChild, TemplateRef, ChangeDetectorRef } from '@angular/core';
 
 @Component({
-  selector: 'app-test-table',
+  selector: 'test-table',
   templateUrl: './table.component.html',
   styleUrls: ['./table.component.scss']
 })
