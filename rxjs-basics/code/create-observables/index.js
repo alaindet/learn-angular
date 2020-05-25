@@ -1,4 +1,4 @@
-import { fromEvent } from 'rxjs';
+import { fromEvent, of, range, from } from 'rxjs';
 
 const observer = {
   next: (val) => console.log('next', val),
@@ -6,12 +6,23 @@ const observer = {
   complete: () => console.log('complete'),
 }
 
-// fromEvent
-const source$ = fromEvent(document, 'click');
-const subOne = source$.subscribe(observer);
-const subTwo = source$.subscribe(observer);
+// // fromEvent
+// const source$ = fromEvent(document, 'click');
+// source$.subscribe(observer);
 
-setTimeout(() => {
-  console.log('unsubscribing');
-  subOne.unsubscribe();
-}, 3000);
+// // of
+// const source$ = of(1, 2, 3, 4, 5);
+// source$.subscribe(observer);
+
+// // range
+// const source$ = range(1, 5);
+// source$.subscribe(observer);
+
+// from
+const arrayItems$ = from([1, 2, 3]);
+const stringLetters$ = from ('Hello');
+const fetchedData$ = from(fetch('https://api.github.com/users/octocat'));
+
+arrayItems$.subscribe(observer);
+stringLetters$.subscribe(observer);
+fetchedData$.subscribe(observer);
