@@ -1,10 +1,8 @@
 import { from } from 'rxjs';
 
-const observer = {
-  next: (val) => console.log('from:next', val),
-  error: (err) => console.log('from:error', err),
-  complete: () => console.log('from:complete'),
-};
+import { getDummyObserver } from './../common/dummy-observer';
+
+const observer = getDummyObserver('creationOperators:from');
 
 // from
 const arrayItems$ = from([1, 2, 3]);
