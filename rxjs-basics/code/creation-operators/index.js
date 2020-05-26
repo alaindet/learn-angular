@@ -1,7 +1,10 @@
 import './scripts/hello-world';
-import './scripts/from-event.js';
-import './scripts/of.js';
-import './scripts/range.js';
-import './scripts/from.js';
-import './scripts/interval.js';
-import './scripts/timer.js';
+import './scripts/from-event';
+import './scripts/of';
+import './scripts/range';
+import './scripts/from';
+import './scripts/interval';
+import './scripts/timer';
+
+import './scripts/using-callbacks';
+import './scripts/async-data';
