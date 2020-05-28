@@ -13,4 +13,5 @@
 // import './scripts/operators-basics/map-to';
 // import './scripts/operators-basics/pluck';
 // import './scripts/operators-basics/filter';
-import './scripts/operators-basics/labs/scroll-progress-bar';
+// import './scripts/operators-basics/labs/scroll-progress-bar';
+import './scripts/operators-basics/reduce';
