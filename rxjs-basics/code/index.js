@@ -9,6 +9,9 @@
 // import './scripts/creation-operators/range';
 // import './scripts/creation-operators/timer';
 
-import './scripts/operators-basics/map';
-import './scripts/operators-basics/map-to';
-import './scripts/operators-basics/pluck';
+// import './scripts/operators-basics/map';
+// import './scripts/operators-basics/map-to';
+// import './scripts/operators-basics/pluck';
+// import './scripts/operators-basics/filter';
+// import './scripts/operators-basics/labs/scroll-progress-bar';
+import './scripts/operators-basics/reduce';

@@ -1,0 +1,21 @@
+html {
+  font-size: 16px;
+  font-family: monospace;
+}
+
+p {
+  margin: 1rem 0;
+  background-color: #eee;
+  border-radius: 1rem;
+  padding: 1rem;
+  text-align: justify;
+}
+
+.progress-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 0.25rem;
+  width: 0;
+  background-color: #f0a;
+}
