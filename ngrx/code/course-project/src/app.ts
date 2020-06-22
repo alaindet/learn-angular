@@ -6,11 +6,7 @@ const button = document.querySelector('button') as HTMLButtonElement;
 const destroy = document.querySelector('.unsubscribe') as HTMLButtonElement;
 const todoList = document.querySelector('.todos') as HTMLLIElement;
 
-const reducers = {};
-const state = {
-  todos: [{ label: 'Eat pizza', complete: false }],
-};
-const store = new fromStore.Store(reducers, state);
+const store = new fromStore.Store({});
 
 button.addEventListener(
   'click',
