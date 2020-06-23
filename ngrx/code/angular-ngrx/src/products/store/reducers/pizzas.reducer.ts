@@ -89,3 +89,8 @@ export function reducer(
 
   return state;
 }
+
+// Selectors
+export const getPizzasLoading = (state: PizzaState): boolean => state.loading;
+export const getPizzasLoaded = (state: PizzaState): boolean => state.loaded;
+export const getPizzas = (state: PizzaState): Pizza[] => state.data;
