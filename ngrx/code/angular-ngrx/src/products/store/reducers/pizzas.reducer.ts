@@ -63,6 +63,9 @@ export function reducer(
   switch (action.type) {
 
     case fromPizzas.LOAD_PIZZAS: {
+
+      console.log('Loading pizzas...');
+
       return {
         ...state,
         loading: true,
@@ -71,6 +74,9 @@ export function reducer(
     }
 
     case fromPizzas.LOAD_PIZZAS_SUCCESS: {
+
+      console.log('Pizzas loaded successfully', action.payload);
+
       return {
         ...state,
         loading: false,
@@ -79,6 +85,9 @@ export function reducer(
     }
 
     case fromPizzas.LOAD_PIZZAS_FAIL: {
+
+      console.log('Pizzas loading FAILED', action.payload);
+
       return {
         ...state,
         loading: false,
