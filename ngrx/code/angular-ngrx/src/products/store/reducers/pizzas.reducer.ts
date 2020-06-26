@@ -2,15 +2,17 @@ import * as fromPizzas from './../actions/pizzas.action';
 
 import { Pizza } from './../../models/pizza.model';
 
+interface PizzaEntities {
+  [id: number]: Pizza;
+}
+
 export interface PizzaState {
-  // data: Pizza[];
-  entities: { [id: number]: Pizza };
+  entities: PizzaEntities;
   loaded: boolean;
   loading: boolean;
 }
 
 export const initialState: PizzaState = {
-  // data: [],
   entities: {},
   loaded: false,
   loading: false,
@@ -38,9 +40,12 @@ export function reducer(
 
       const pizzas = action.payload;
 
-      const entities = pizzas.reduce((entities, pizza) => {
-        return { ...entities, [pizza.id]: pizza };
-      }, { ...state.entities });
+      const entities = pizzas.reduce(
+        (entities: PizzaEntities, pizza: Pizza) => {
+          return {...entities, [pizza.id]: pizza};
+        },
+        { ...state.entities }
+      );
 
       return {
         ...state,
@@ -68,4 +73,4 @@ export function reducer(
 // Selectors
 export const getPizzasLoading = (state: PizzaState): boolean => state.loading;
 export const getPizzasLoaded = (state: PizzaState): boolean => state.loaded;
-export const getPizzasEntities = (state: PizzaState): Pizza[] => state.entities;
+export const getPizzasEntities = (state: PizzaState): PizzaEntities => state.entities;
