@@ -1,9 +1,9 @@
-import {Component, Inject} from '@angular/core';
-import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
-import {Course} from '../model/course';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {Observable} from 'rxjs';
-import {CoursesHttpService} from '../services/courses-http.service';
+import { Component, Inject } from '@angular/core';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { FormBuilder, FormGroup, Validators} from '@angular/forms';
+
+import { Course } from './../model/course';
+import { CoursesHttpService } from './../services/courses-http.service';
 
 @Component({
   selector: 'course-dialog',
@@ -13,43 +13,41 @@ import {CoursesHttpService} from '../services/courses-http.service';
 export class EditCourseDialogComponent {
 
   form: FormGroup;
-
   dialogTitle: string;
-
   course: Course;
-
   mode: 'create' | 'update';
-
-  loading$:Observable<boolean>;
+  loading = false;
 
   constructor(
     private fb: FormBuilder,
     private dialogRef: MatDialogRef<EditCourseDialogComponent>,
+    private coursesService: CoursesHttpService,
     @Inject(MAT_DIALOG_DATA) data,
-    private coursesService: CoursesHttpService) {
-
+  ) {
     this.dialogTitle = data.dialogTitle;
     this.course = data.course;
     this.mode = data.mode;
+  }
 
+  ngOnInit() {
     const formControls = {
       description: ['', Validators.required],
       category: ['', Validators.required],
       longDescription: ['', Validators.required],
-      promo: ['', []]
+      promo: ['', []],
     };
 
-    if (this.mode == 'update') {
+    if (this.mode === 'update') {
       this.form = this.fb.group(formControls);
-      this.form.patchValue({...data.course});
+      this.form.patchValue({ ...this.course });
+      return;
     }
-    else if (this.mode == 'create') {
-      this.form = this.fb.group({
-        ...formControls,
-        url: ['', Validators.required],
-        iconUrl: ['', Validators.required]
-      });
-    }
+
+    this.form = this.fb.group({
+      ...formControls,
+      url: ['', Validators.required],
+      iconUrl: ['', Validators.required],
+    });
   }
 
   onClose() {
@@ -63,13 +61,13 @@ export class EditCourseDialogComponent {
       ...this.form.value
     };
 
-    this.coursesService.saveCourse(course.id, course)
-      .subscribe(
-        () => this.dialogRef.close()
-      )
-
-
+    this.loading = true;
+    this.coursesService.saveCourse(course.id, course).subscribe(
+      () => {
+        console.log('Stored on the backend');
+        this.loading = false;
+        this.dialogRef.close();
+      }
+    );
   }
-
-
 }
