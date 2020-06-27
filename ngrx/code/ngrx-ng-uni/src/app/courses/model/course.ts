@@ -1,4 +1,3 @@
-
 export interface Course {
   id: number;
   seqNo:number;
@@ -12,17 +11,6 @@ export interface Course {
   promo: boolean;
 }
 
-
-export function compareCourses(c1:Course, c2: Course) {
-
-  const compare = c1.seqNo - c2.seqNo;
-
-  if (compare > 0) {
-    return 1;
-  }
-  else if ( compare < 0) {
-    return -1;
-  }
-  else return 0;
-
-}
+export const compareCourses = (a: Course, b: Course): number => {
+  return a.seqNo !== b.seqNo ? (a.seqNo > b.seqNo ? 1 : -1) : 0;
+};

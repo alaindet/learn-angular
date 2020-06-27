@@ -50,6 +50,9 @@ $theme: mat-light-theme($primary, $accent);
 // Include all theme styles for the components.
 @include angular-material-theme($theme);
 
+body {
+  margin: 0;
+}
 
 .spinner-container {
   position: fixed;

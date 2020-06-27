@@ -73,9 +73,6 @@ export const coursesRoutes: Routes = [
     CourseComponent
   ],
   entryComponents: [EditCourseDialogComponent],
-  providers: [
-    CoursesHttpService
-  ]
 })
 export class CoursesModule {
 
