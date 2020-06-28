@@ -1,10 +1,10 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { NavigationCancel, NavigationEnd, NavigationError, NavigationStart, Router } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
-import { map } from 'rxjs/operators';
-import { Store } from '@ngrx/store';
+import { Store, select } from '@ngrx/store';
 
 import { AppState } from './store/reducers';
+import { isLoggedIn, isLoggedOut } from './store/selectors';
 
 @Component({
   selector: 'app-root',
@@ -59,13 +59,7 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   private bindAuthLinksVisibilityToStore() {
-
-    this.isLoggedIn$ = this.store.pipe(
-      map((state: AppState) => !!state['auth'].user)
-    );
-
-    this.isLoggedOut$ = this.store.pipe(
-      map((state: AppState) => !state['auth'].user)
-    );
+    this.isLoggedIn$ = this.store.pipe(select(isLoggedIn));
+    this.isLoggedOut$ = this.store.pipe(select(isLoggedOut));
   }
 }
