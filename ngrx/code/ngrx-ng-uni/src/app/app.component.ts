@@ -5,6 +5,7 @@ import { Store, select } from '@ngrx/store';
 
 import { AppState } from './store/reducers';
 import { isLoggedIn, isLoggedOut } from './store/selectors';
+import { AuthActions } from './auth/store/actions';
 
 @Component({
   selector: 'app-root',
@@ -35,7 +36,7 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   logout() {
-    console.log('logout');
+    this.store.dispatch(AuthActions.logout());
   }
 
   private bindLoadingToRouterEvents() {
