@@ -6,7 +6,7 @@ import {
 } from '@ngrx/store';
 
 import { User } from './../../model/user.model';
-import { AuthActions } from './../actions';
+import * as AuthActions from './../actions';
 
 export interface AuthState {
   user: User,
