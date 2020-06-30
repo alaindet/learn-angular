@@ -1,4 +1,4 @@
-import { ActionReducerMap, MetaReducer, ActionReducer } from '@ngrx/store';
+import { ActionReducerMap, MetaReducer, ActionReducer, Action } from '@ngrx/store';
 import { routerReducer } from '@ngrx/router-store';
 
 import { environment } from '../../../environments/environment';
@@ -11,16 +11,13 @@ export const reducers: ActionReducerMap<AppState> = {
   router: routerReducer,
 };
 
-const loggerMetaReducer = (reducer: ActionReducer<any>): ActionReducer => {
-  return (state: AppState, action: any) => {
-    console.log('I am a logging meta reduer', state, action);
+const loggerMetaReducer = (reducer: ActionReducer<any>): ActionReducer<AppState, Action> => {
+  return (state: AppState, action: Action) => {
+    console.log('Meta reducer logging', state, action);
     return reducer(state, action);
   };
 };
 
-const isDev = !environment.production;
-export const metaReducers: MetaReducer<AppState>[] = isDev
-  ? [
-    loggerMetaReducer,
-  ]
-  : [];
+export const metaReducers: MetaReducer<AppState>[] = !environment.production ? [
+  loggerMetaReducer,
+] : [];
