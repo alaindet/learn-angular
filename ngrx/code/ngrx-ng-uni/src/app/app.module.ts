@@ -1,28 +1,33 @@
-import {BrowserModule} from '@angular/platform-browser';
-import {NgModule} from '@angular/core';
-
-import {AppComponent} from './app.component';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {MatMenuModule} from '@angular/material/menu';
-import {MatIconModule} from '@angular/material/icon';
-
-import {MatListModule} from '@angular/material/list';
-import {MatSidenavModule} from '@angular/material/sidenav';
-import { MatToolbarModule } from '@angular/material/toolbar';
+import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
+import { RouterModule, Routes } from '@angular/router';
+
+import { MatMenuModule } from '@angular/material/menu';
+import { MatIconModule } from '@angular/material/icon';
+import { MatListModule } from '@angular/material/list';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
-import { RouterModule, Routes } from '@angular/router';
-import { AuthModule } from './auth/auth.module';
 import { StoreModule } from '@ngrx/store';
-import { reducers } from './store/reducers';
+import { StoreRouterConnectingModule, RouterState } from '@ngrx/router-store';
+import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { environment } from '../environments/environment';
+
+import { AppComponent } from './app.component';
+import { AuthModule } from './auth/auth.module';
+import { AuthGuard } from './auth/auth.guard';
+import { reducers, metaReducers } from './store/reducers';
+import { environment } from './../environments/environment';
 
 const routes: Routes = [
   {
     path: 'courses',
-    loadChildren: () => import('./courses/courses.module').then(m => m.CoursesModule)
+    loadChildren: () => import('./courses/courses.module')
+      .then(m => m.CoursesModule),
+    canActivate: [AuthGuard],
   },
   {
     path: '**',
@@ -45,8 +50,21 @@ const routes: Routes = [
     MatProgressSpinnerModule,
     MatListModule,
     MatToolbarModule,
-    AuthModule,
-    StoreModule.forRoot(reducers),
+    AuthModule.forRoot(),
+    StoreModule.forRoot(reducers, {
+      metaReducers,
+      runtimeChecks: {
+        strictStateImmutability: true,
+        strictStateSerializability: true,
+        strictActionImmutability: true,
+        strictActionSerializability: true,
+      }
+    }),
+    EffectsModule.forRoot([]),
+    StoreRouterConnectingModule.forRoot({
+      stateKey: 'router',
+      routerState: RouterState.Minimal,
+    }),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
   ],
   bootstrap: [AppComponent]

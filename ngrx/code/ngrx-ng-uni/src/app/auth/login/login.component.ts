@@ -7,7 +7,7 @@ import { tap } from 'rxjs/operators';
 
 import { AuthService } from './../auth.service';
 import { AppState } from './../../store/reducers';
-import { AuthActions } from './../store/actions';
+import * as AuthActions from './../store/actions';
 
 @Component({
   selector: 'login',
