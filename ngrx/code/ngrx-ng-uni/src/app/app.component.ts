@@ -4,7 +4,9 @@ import { Observable, Subscription } from 'rxjs';
 import { Store, select } from '@ngrx/store';
 
 import { AppState } from './store/reducers';
+import * as AuthActions from './auth/store/actions';
 import { isLoggedIn, isLoggedOut } from './store/selectors';
+import { environment } from './../environments/environment';
 
 @Component({
   selector: 'app-root',
@@ -24,6 +26,7 @@ export class AppComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
+    this.tryReadUserFromLocalStorage();
     this.bindLoadingToRouterEvents();
     this.bindAuthLinksVisibilityToStore();
   }
@@ -36,6 +39,15 @@ export class AppComponent implements OnInit, OnDestroy {
 
   logout() {
     console.log('logout');
+  }
+
+  private tryReadUserFromLocalStorage() {
+    const key = environment.localStorage.user;
+    const userStorage = window.localStorage.getItem(key);
+    if (userStorage) {
+      const user = JSON.parse(userStorage);
+      this.store.dispatch(AuthActions.login({ user }))
+    }
   }
 
   private bindLoadingToRouterEvents() {
