@@ -38,7 +38,7 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   logout() {
-    console.log('logout');
+    this.store.dispatch(AuthActions.logout());
   }
 
   private tryReadUserFromLocalStorage() {
