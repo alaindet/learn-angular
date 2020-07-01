@@ -27,3 +27,7 @@ export const coursesReducer = createReducer(
     return adapter.addAll(action.courses, state);
   })
 );
+
+export const {
+  selectAll,
+} = adapter.getSelectors();
