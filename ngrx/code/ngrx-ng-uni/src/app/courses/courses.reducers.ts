@@ -15,7 +15,9 @@ export inteface FooState {
 }
 */
 
-export interface CoursesState extends EntityState<Course> {}
+export interface CoursesState extends EntityState<Course> {
+  allCoursesLoaded: boolean;
+}
 
 export const adapter = createEntityAdapter<Course>({
   sortComparer: compareCourses,
@@ -28,7 +30,10 @@ export const initialCoursesState = adapter.getInitialState();
 export const coursesReducer = createReducer(
   initialCoursesState,
   on(CoursesActions.allCoursesLoaded, (state, action) => {
-    return adapter.addAll(action.courses, state);
+    return adapter.addAll(action.courses, {
+      ...state,
+      allCoursesLoaded: true,
+    });
   })
 );
 
