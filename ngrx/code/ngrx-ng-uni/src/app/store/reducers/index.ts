@@ -19,5 +19,5 @@ const loggerMetaReducer = (reducer: ActionReducer<any>): ActionReducer<AppState,
 };
 
 export const metaReducers: MetaReducer<AppState>[] = !environment.production ? [
-  loggerMetaReducer,
+  // loggerMetaReducer,
 ] : [];
