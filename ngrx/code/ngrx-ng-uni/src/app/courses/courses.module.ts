@@ -20,14 +20,16 @@ import { MatIconModule } from '@angular/material/icon';
 
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
+import { EntityMetadataMap, EntityDefinitionService } from '@ngrx/data';
 
 import { HomeComponent } from './home/home.component';
 import { CourseComponent } from './course/course.component';
 import { CoursesCardListComponent } from './courses-card-list/courses-card-list.component';
 import { EditCourseDialogComponent } from './edit-course-dialog/edit-course-dialog.component';
-import { CoursesResolver } from './courses.resolver';
+import { CoursesResolver } from './services/courses.resolver';
 import { CoursesEffects } from './courses.effects';
 import { coursesReducer } from './courses.reducers';
+import { CourseEntityService } from './services/course-entity.service';
 
 export const coursesRoutes: Routes = [
   {
@@ -39,9 +41,16 @@ export const coursesRoutes: Routes = [
   },
   {
     path: ':courseUrl',
-    component: CourseComponent
+    component: CourseComponent,
+    resolve: {
+      courses: CoursesResolver,
+    },
   }
 ];
+
+const entityMetadata: EntityMetadataMap = {
+  Course: {}
+};
 
 @NgModule({
   imports: [
@@ -77,6 +86,16 @@ export const coursesRoutes: Routes = [
     EditCourseDialogComponent,
     CourseComponent
   ],
+  providers: [
+    CourseEntityService,
+    CoursesResolver,
+  ],
   entryComponents: [EditCourseDialogComponent],
 })
-export class CoursesModule {}
+export class CoursesModule {
+  constructor(
+    private eds: EntityDefinitionService,
+  ) {
+    eds.registerMetadataMap(entityMetadata);
+  }
+}

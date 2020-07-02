@@ -15,6 +15,7 @@ import { StoreModule } from '@ngrx/store';
 import { StoreRouterConnectingModule, RouterState } from '@ngrx/router-store';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { EntityDataModule } from '@ngrx/data';
 
 import { AppComponent } from './app.component';
 import { AuthModule } from './auth/auth.module';
@@ -61,6 +62,7 @@ const routes: Routes = [
       }
     }),
     EffectsModule.forRoot([]),
+    EntityDataModule.forRoot({}),
     StoreRouterConnectingModule.forRoot({
       stateKey: 'router',
       routerState: RouterState.Minimal,
