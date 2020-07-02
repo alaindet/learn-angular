@@ -29,11 +29,14 @@ export const initialCoursesState = adapter.getInitialState();
 
 export const coursesReducer = createReducer(
   initialCoursesState,
+
   on(CoursesActions.allCoursesLoaded, (state, action) => {
-    return adapter.addAll(action.courses, {
-      ...state,
-      allCoursesLoaded: true,
-    });
+    const newState = { ...state, allCoursesLoaded: true };
+    return adapter.addAll(action.courses, newState);
+  }),
+
+  on(CoursesActions.courseUpdated, (state, action) => {
+    return adapter.updateOne(action.update, state);
   })
 );
 

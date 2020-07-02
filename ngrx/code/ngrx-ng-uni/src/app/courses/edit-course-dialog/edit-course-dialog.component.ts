@@ -1,9 +1,13 @@
 import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { FormBuilder, FormGroup, Validators} from '@angular/forms';
+import { Store } from '@ngrx/store';
+import { Update } from '@ngrx/entity';
 
-import { Course } from './../model/course';
 import { CoursesHttpService } from './../services/courses-http.service';
+import { Course } from './../model/course';
+import { courseUpdated } from './../course.actions';
+import { AppState } from './../../store/reducers/index';
 
 @Component({
   selector: 'course-dialog',
@@ -23,6 +27,7 @@ export class EditCourseDialogComponent {
     private dialogRef: MatDialogRef<EditCourseDialogComponent>,
     private coursesService: CoursesHttpService,
     @Inject(MAT_DIALOG_DATA) data,
+    private store: Store<AppState>,
   ) {
     this.dialogTitle = data.dialogTitle;
     this.course = data.course;
@@ -61,13 +66,12 @@ export class EditCourseDialogComponent {
       ...this.form.value
     };
 
-    this.loading = true;
-    this.coursesService.saveCourse(course.id, course).subscribe(
-      () => {
-        console.log('Stored on the backend');
-        this.loading = false;
-        this.dialogRef.close();
-      }
-    );
+    const update: Update<Course> = {
+      id: course.id,
+      changes: course,
+    };
+
+    this.store.dispatch(courseUpdated({ update }));
+    this.dialogRef.close();
   }
 }
