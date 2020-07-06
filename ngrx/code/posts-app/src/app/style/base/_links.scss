@@ -1,0 +1,9 @@
+a {
+  text-decoration: none;
+  color: pal-color-get('black');
+  transition: 0.2s color ease-in;
+
+  &:hover {
+    color: pal-color-get('gray');
+  }
+}
