@@ -1,0 +1,84 @@
+<h2 mat-dialog-title>{{dialogTitle}}</h2>
+
+<mat-dialog-content>
+  <ng-container *ngIf="form">
+
+    <div class="spinner-container" *ngIf="loading">
+      <mat-spinner></mat-spinner>
+    </div>
+
+    <ng-container [formGroup]="form">
+
+      <!-- Description -->
+      <mat-form-field>
+        <input
+          matInput
+          placeholder="Course Description"
+          formControlName="description"
+        >
+      </mat-form-field>
+
+      <ng-container *ngIf="mode === 'create'">
+
+        <!-- Course URL -->
+        <mat-form-field>
+          <input
+            matInput
+            placeholder="Course Url"
+            formControlName="url"
+          >
+        </mat-form-field>
+
+        <!-- Icon URL -->
+        <mat-form-field>
+          <input
+            matInput
+            placeholder="Course Icon Url"
+            formControlName="iconUrl"
+          >
+        </mat-form-field>
+
+      </ng-container>
+
+      <!-- Category -->
+      <mat-form-field>
+        <mat-select placeholder="Select category" formControlName="category">
+          <mat-option value="BEGINNER">Beginner</mat-option>
+          <mat-option value="INTERMEDIATE">Intermediate</mat-option>
+          <mat-option value="ADVANCED">Advanced</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <!-- Promo flag -->
+      <div class="mat-form-field">
+        <mat-slide-toggle formControlName="promo">Promotion On</mat-slide-toggle>
+      </div>
+
+      <!-- Long description -->
+      <mat-form-field>
+        <textarea
+          matInput
+          placeholder="Description"
+          formControlName="longDescription"
+        ></textarea>
+      </mat-form-field>
+
+    </ng-container>
+
+  </ng-container>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+
+  <button mat-raised-button (click)="onClose()">
+    Close
+  </button>
+
+  <button
+    mat-raised-button
+    color="primary"
+    [disabled]="!form?.valid || loading"
+    (click)="onSave()"
+  >Save</button>
+
+</mat-dialog-actions>
