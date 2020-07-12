@@ -123,6 +123,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "posts-app"
+    }
+  },
+  "defaultProject": "posts-app",
+  "cli": {
+    "analytics": false
+  }
 }
