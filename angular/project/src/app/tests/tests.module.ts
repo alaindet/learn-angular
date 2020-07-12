@@ -8,12 +8,14 @@ import { TestTableComponent } from './components/table/table.component';
 import { TestCollapsableHeaderComponent } from './components/collapsable-header/collapsable-header.component';
 import { TestSquashOnScrollComponent } from './directives/squash-on-scroll/squash-on-scroll.component';
 import { TestUseTemplComponent } from './components/use-templ/use-templ.component';
+import { TestBooleanishComponent } from './decorators/booleanish.component';
 
 const tests = [
   TestUseTemplComponent,
   TestTableComponent,
   TestCollapsableHeaderComponent,
   TestSquashOnScrollComponent,
+  TestBooleanishComponent,
 ];
 
 @NgModule({
