@@ -1,0 +1,121 @@
+@import 'src/app/style';
+
+// Basic style for all buttons
+.button {
+  border: none;
+  font-size: 1rem;
+  line-height: 1rem;
+  text-align: center;
+  letter-spacing: 0.1rem;
+
+  &:hover {
+    transition: 0.2s all ease-in;
+  }
+  &:focus {
+    outline: none;
+  }
+}
+
+// Transformations and minor variations
+.is-uppercase {
+  text-transform: uppercase;
+}
+
+.has-margin {
+  @include pal-space('m1/2');
+}
+
+.no-padding {
+  padding: 0!important;
+}
+
+.has-icon {
+  @include pal-flex((
+    inline: true,
+    cross-axis: center,
+  ));
+  & ::ng-deep i {
+    @include pal-space('px1');
+  }
+}
+
+.is-full-width {
+  width: 100%;
+}
+
+.color-primary {
+  @include pal((
+    color: (background: 'blue', text: 'white'),
+  ));
+  &:hover, &:active, &:focus {
+    @include pal((
+      color: (backgruond: 'blue-light'),
+    ));
+  }
+}
+
+.color-primary-outline {
+  @include pal((
+    border: 2px 'blue',
+    color: (background: 'white', text: 'blue'),
+  ));
+  &:hover, &:active, &:focus {
+    @include pal((
+      color: (background: 'blue', text: 'white'),
+    ));
+  }
+}
+
+.color-secondary {
+  @include pal((
+    color: (background: 'gray', text: 'black'),
+  ));
+  &:hover, &:active, &:focus {
+    @include pal((
+      color: (background: 'gray-light'),
+    ));
+  }
+}
+
+.color-secondary-outline {
+  @include pal((
+    border: 2px 'gray',
+    color: (background: 'white', text: 'gray'),
+  ));
+  &:hover, &:active, &:focus {
+    @include pal((
+      color: (background: 'gray', text: 'black'),
+    ));
+  }
+}
+
+// Sizes
+.size-small { @include pal(( space: 'py0,5' 'px1,5' )) }
+.size-medium { @include pal(( space: 'py1' 'px2' )) }
+.size-large { @include pal(( space: 'py1,5' 'px3' )) }
+
+.shape-circle {
+  $circle-size: pal-get('units.4');
+
+  border-radius: 100%;
+  padding: 0;
+  width: $circle-size;
+  height: $circle-size;
+  min-width: $circle-size;
+  max-width: $circle-size;
+  min-height: $circle-size;
+  max-height: $circle-size;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+}
+
+// States
+.button[disabled] {
+  @include pal((
+    color: (
+      background: 'gray',
+      text: lighten(pal-get('colors.gray'), 5%)
+    ),
+  ));
+}

@@ -1,4 +1,7 @@
-import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy, Input, OnChanges } from '@angular/core';
+
+import { booleanish } from 'src/app/shared/ui/common/functions/booleanish.function';
+import { UiButton } from './button.interface';
 
 @Component({
   selector: 'ui-button',
@@ -6,4 +9,26 @@ import { Component, ChangeDetectionStrategy } from '@angular/core';
   templateUrl: './button.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class UiButtonComponent {}
+export class UiButtonComponent implements UiButton, OnChanges {
+
+  @Input() color: UiButton['color'] = 'primary';
+  @Input() size: UiButton['size'] = 'medium';
+  @Input() type: UiButton['type'] = 'button';
+  @Input() isDisabled: UiButton['isDisabled'] = false;
+  @Input() isUppercase: UiButton['isUppercase'] = true;
+  @Input() hasMargin: UiButton['hasMargin'] = true;
+  @Input() hasIcon: UiButton['hasIcon'] = false;
+  @Input() hasFullWidth: UiButton['hasFullWidth'] = false;
+  @Input() noPadding: UiButton['noPadding'] = false;
+
+  ngOnChanges() {
+    booleanish(this, [
+      'isDisabled',
+      'isUppercase',
+      'hasMargin',
+      'hasIcon',
+      'hasFullWidth',
+      'noPadding',
+    ]);
+  }
+}
