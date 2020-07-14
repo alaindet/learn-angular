@@ -1,5 +1,45 @@
 <h1>Demo: button</h1>
 
-<ui-button size="small">Button small</ui-button>
-<ui-button size="medium">Button medium</ui-button>
-<ui-button size="large">Button large</ui-button>
+<h2>Input: color</h2>
+<ui-button color="primary">Primary</ui-button>
+<ui-button color="primary-outline">Primary outline</ui-button>
+<ui-button color="secondary">Secondary</ui-button>
+<ui-button color="secondary-outline">Secondary outline</ui-button>
+
+<h2>Input: size</h2>
+<ui-button size="small">Small</ui-button>
+<ui-button size="medium">Medium</ui-button>
+<ui-button size="large">Large</ui-button>
+
+<h2>Input: Flags</h2>
+<ui-button isDisabled>Disabled</ui-button>
+<code>[isDisabled]=true</code>
+<br>
+
+<ui-button [isUppercase]="false">No uppercase</ui-button>
+<code>[isUppercase]=false</code>
+<br>
+
+<ui-button hasMargin>with margin</ui-button>
+<code>[hasMargin]=true</code>
+<br>
+
+<ui-button hasFullWidth>with full width</ui-button>
+<code>[hasFullWidth]=true</code>
+<br>
+
+<ui-button isCircle>C</ui-button>
+<code>[isCircle]=true</code>
+<br>
+
+<ui-button hasIcon hasSlots>
+  <fa-icon [icon]="faCoffee" slot="left"></fa-icon>
+  <span slot="right">Coffee</span>
+</ui-button>
+<code>[hasIcon]=true</code>
+<br>
+
+<ui-button hasIcon isCircle>
+  <fa-icon [icon]="faCoffee"></fa-icon>
+</ui-button>
+<code>[hasIcon]=true [isCircle]=true</code>

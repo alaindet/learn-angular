@@ -1,0 +1,22 @@
+$primary: #53b578;
+$secondary: #8dcdeb;
+
+$_: pal-set-merge('colors', (
+
+  // Mid light
+  'gray-mid-light': lighten(pal-get('colors.gray'), 15%),
+  'blue-mid-light': lighten(pal-get('colors.blue'), 15%),
+  'teal-mid-light': lighten(pal-get('colors.teal'), 15%),
+
+  'primary-1/5': darken($primary, 50%),
+  'primary-2/5': darken($primary, 35%),
+  'primary': $primary,
+  'primary-4/5': lighten($primary, 10%),
+  'primary-5/5': lighten($primary, 20%),
+
+  'secondary-1/5': darken($secondary, 50%),
+  'secondary-2/5': darken($secondary, 35%),
+  'secondary': $secondary,
+  'secondary-4/5': lighten($secondary, 10%),
+  'secondary-5/5': lighten($secondary, 20%),
+));

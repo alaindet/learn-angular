@@ -7,6 +7,8 @@
   line-height: 1rem;
   text-align: center;
   letter-spacing: 0.1rem;
+  cursor: pointer;
+  border-radius: pal-get('units.1/2');
 
   &:hover {
     transition: 0.2s all ease-in;
@@ -22,7 +24,9 @@
 }
 
 .has-margin {
-  @include pal-space('m1/2');
+  @include pal((
+    space: 'm1/2',
+  ));
 }
 
 .no-padding {
@@ -30,13 +34,30 @@
 }
 
 .has-icon {
-  @include pal-flex((
-    inline: true,
-    cross-axis: center,
+  @include pal((
+    flex: (
+      inline: true,
+      cross-axis: center,
+    )
   ));
-  & ::ng-deep i {
-    @include pal-space('px1');
+
+  ::ng-deep fa-icon {
+    @include pal((
+      space: 'mx1',
+    ));
   }
+}
+
+.slot-left {
+  @include pal((
+    space: 'mr1/2',
+  ));
+}
+
+.slot-right {
+  @include pal((
+    space: 'ml1/2',
+  ));
 }
 
 .is-full-width {
@@ -45,56 +66,64 @@
 
 .color-primary {
   @include pal((
-    color: (background: 'blue', text: 'white'),
+    color: (background: 'primary', text: 'white'),
   ));
   &:hover, &:active, &:focus {
     @include pal((
-      color: (backgruond: 'blue-light'),
+      color: (background: 'primary-4/5'),
     ));
   }
 }
 
 .color-primary-outline {
   @include pal((
-    border: 2px 'blue',
-    color: (background: 'white', text: 'blue'),
+    border: 2px 'primary',
+    color: (background: 'white', text: 'primary'),
   ));
   &:hover, &:active, &:focus {
     @include pal((
-      color: (background: 'blue', text: 'white'),
+      color: (background: 'primary', text: 'white'),
     ));
   }
 }
 
 .color-secondary {
   @include pal((
-    color: (background: 'gray', text: 'black'),
+    color: (background: 'secondary', text: 'white'),
   ));
   &:hover, &:active, &:focus {
     @include pal((
-      color: (background: 'gray-light'),
+      color: (background: 'secondary-4/5'),
     ));
   }
 }
 
 .color-secondary-outline {
   @include pal((
-    border: 2px 'gray',
-    color: (background: 'white', text: 'gray'),
+    border: 2px 'secondary',
+    color: (background: 'white', text: 'secondary'),
   ));
   &:hover, &:active, &:focus {
     @include pal((
-      color: (background: 'gray', text: 'black'),
+      color: (background: 'secondary', text: 'white'),
     ));
   }
 }
 
 // Sizes
-.size-small { @include pal(( space: 'py0,5' 'px1,5' )) }
-.size-medium { @include pal(( space: 'py1' 'px2' )) }
-.size-large { @include pal(( space: 'py1,5' 'px3' )) }
+.size-small {
+  @include pal(( space: 'py0,5' 'px1,5' ));
+}
 
-.shape-circle {
+.size-medium {
+  @include pal(( space: 'py1' 'px2' ));
+}
+
+.size-large {
+  @include pal(( space: 'py1,5' 'px3' ));
+}
+
+.is-circle {
   $circle-size: pal-get('units.4');
 
   border-radius: 100%;
@@ -111,11 +140,14 @@
 }
 
 // States
-.button[disabled] {
+.button[disabled],
+.button[disabled]:hover,
+.button[disabled]:active,
+.button[disabled]:focus {
   @include pal((
     color: (
-      background: 'gray',
-      text: lighten(pal-get('colors.gray'), 5%)
+      background: 'gray-mid-light',
+      text: 'gray',
     ),
   ));
 }

@@ -11,8 +11,9 @@ export interface UiButton {
   type: 'button' | 'submit';
   isDisabled: UiCommon['booleanish'];
   isUppercase: UiCommon['booleanish'];
+  isCircle: UiCommon['booleanish'];
   hasMargin: UiCommon['booleanish'];
   hasIcon: UiCommon['booleanish'];
   hasFullWidth: UiCommon['booleanish'];
-  noPadding: UiCommon['booleanish'];
+  hasSlots: UiCommon['booleanish'];
 }

@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
+import { faCoffee } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
-  selector: 'demo-ui-button',
   templateUrl: './button.component.html',
 })
-export class DemoUiButtonPage {}
+export class DemoUiButtonPage {
+  faCoffee = faCoffee;
+}

@@ -15,20 +15,22 @@ export class UiButtonComponent implements UiButton, OnChanges {
   @Input() size: UiButton['size'] = 'medium';
   @Input() type: UiButton['type'] = 'button';
   @Input() isDisabled: UiButton['isDisabled'] = false;
-  @Input() isUppercase: UiButton['isUppercase'] = true;
+  @Input() isUppercase: UiButton['isUppercase'] = false;
+  @Input() isCircle: UiButton['isCircle'] = false;
   @Input() hasMargin: UiButton['hasMargin'] = true;
   @Input() hasIcon: UiButton['hasIcon'] = false;
   @Input() hasFullWidth: UiButton['hasFullWidth'] = false;
-  @Input() noPadding: UiButton['noPadding'] = false;
+  @Input() hasSlots: UiButton['hasSlots'] = false;
 
   ngOnChanges() {
     booleanish(this, [
       'isDisabled',
       'isUppercase',
+      'isCircle',
       'hasMargin',
       'hasIcon',
       'hasFullWidth',
-      'noPadding',
+      'hasSlots',
     ]);
   }
 }
