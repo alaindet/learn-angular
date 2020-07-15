@@ -1,9 +1,10 @@
 a {
-  text-decoration: none;
-  color: pal-color-get('black');
+  text-decoration: underline;
+  color: pal-color-get('secondary-2/5');
   transition: 0.2s color ease-in;
 
   &:hover {
-    color: pal-color-get('gray');
+    text-decoration: none;
+    color: pal-color-get('primary');
   }
 }
