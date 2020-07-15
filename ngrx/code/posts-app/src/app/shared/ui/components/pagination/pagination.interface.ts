@@ -4,4 +4,5 @@ export interface UiPagination {
   current: UiCommon['asNumber'];
   total: UiCommon['asNumber'];
   show: UiCommon['asNumber'];
+  size: UiCommon['size'];
 }

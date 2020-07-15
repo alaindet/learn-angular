@@ -9,4 +9,18 @@
   ::ng-deep button {
     height: 100%;
   }
+
+  &.size-medium {
+    ::ng-deep button {
+      font-size: 1.5rem;
+      height: 3.75rem * 0.66;
+    }
+  }
+
+  &.size-large {
+    ::ng-deep button {
+      font-size: 1.75rem;
+      height: 4.5rem * 0.66;
+    }
+  }
 }
