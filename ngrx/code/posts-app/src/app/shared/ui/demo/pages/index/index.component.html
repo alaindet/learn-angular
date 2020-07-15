@@ -1,7 +1,7 @@
 <h2>Demo</h2>
 
 <ul>
-  <li *ngFor="let route of routes">
-    <a [routerLink]="'demo/' + route.path">{{ route.data.label }}</a>
+  <li *ngFor="let link of links">
+    <a [routerLink]="link.path">{{ link.label }}</a>
   </li>
 </ul>

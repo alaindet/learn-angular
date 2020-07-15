@@ -1,43 +1,36 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
+interface Link {
+  path: string;
+  label: string;
+}
+
 @Component({
   templateUrl: './index.component.html',
 })
 export class DemoUiIndex implements OnInit {
 
-  routes = [];
+  links: Link[] = [];
 
   constructor(
     private router: Router,
   ) {}
 
   ngOnInit() {
-    console.log(
-      this.router.config
-        .find(route => route.path === 'demo')
-    );
+    this.links = this.buildLinks();
+  }
+
+  private buildLinks(): Link[] {
+    return this.router.config
+      .find(route => route.path === 'demo')
+      ['_loadedConfig'] // TODO
+      .routes
+      .map(route => {
+        return {
+          path: route.path ? `/demo/${route.path}` : '/demo',
+          label: route.data.label,
+        };
+      });
   }
 }
-
-
-/*
-import { Router, Route } from "@angular/router";
-
-constructor(private router: Router) { }
-
-ngOnInit() {
-  this.printpath('', this.router.config);
-}
-
-printpath(parent: String, config: Route[]) {
-  for (let i = 0; i < config.length; i++) {
-    const route = config[i];
-    console.log(parent + '/' + route.path);
-    if (route.children) {
-      const currentPath = route.path ? parent + '/' + route.path : parent;
-      this.printpath(currentPath, route.children);
-    }
-  }
-}
-*/
