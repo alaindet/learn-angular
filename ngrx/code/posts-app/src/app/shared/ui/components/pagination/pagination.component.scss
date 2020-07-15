@@ -1,0 +1,12 @@
+@import 'src/app/style';
+
+.pagination {
+  @include pal((
+    flex: (main-axis: 'center'),
+    space: my2 mx0,
+  ));
+
+  ::ng-deep button {
+    height: 100%;
+  }
+}

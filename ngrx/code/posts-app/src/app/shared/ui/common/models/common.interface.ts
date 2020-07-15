@@ -1,4 +1,5 @@
 export interface UiCommon {
-  booleanish: string | boolean;
+  asBoolean: string | boolean;
+  asNumber: string | number;
   size: 'small' | 'medium' | 'large';
 }

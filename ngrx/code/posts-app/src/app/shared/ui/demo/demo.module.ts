@@ -3,10 +3,12 @@ import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
-import { UiButtonModule } from './../components/button/button.module';
 import { DemoUiIndex } from './pages/index/index.component';
-import { DemoUiButtonPage } from './pages/button/button.component';
 import { DemoUiColorPage } from './pages/color/color.component';
+import { UiButtonModule } from './../components/button/button.module';
+import { DemoUiButtonPage } from './pages/button/button.component';
+import { UiPaginationModule } from './../components/pagination/pagination.module';
+import { DemoUiPaginationPage } from './pages/pagination/pagination.component';
 
 export const routes: Routes = [
   {
@@ -24,6 +26,11 @@ export const routes: Routes = [
     component: DemoUiColorPage,
     data: { label: 'Demo: Color' },
   },
+  {
+    path: 'pagination',
+    component: DemoUiPaginationPage,
+    data: { label: 'Demo: Pagination' },
+  },
 ];
 
 @NgModule({
@@ -31,6 +38,7 @@ export const routes: Routes = [
     DemoUiIndex,
     DemoUiButtonPage,
     DemoUiColorPage,
+    DemoUiPaginationPage,
   ],
   imports: [
     CommonModule,
@@ -38,6 +46,7 @@ export const routes: Routes = [
     FontAwesomeModule,
 
     UiButtonModule,
+    UiPaginationModule,
   ],
 })
 export class UiDemoModule {}

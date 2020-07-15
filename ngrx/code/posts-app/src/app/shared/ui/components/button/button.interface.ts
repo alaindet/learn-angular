@@ -1,4 +1,4 @@
-import { UiCommon } from './../../common/models/common.interface';
+import { UiCommon } from 'src/app/shared/ui/common/models/common.interface';
 
 export interface UiButton {
   color: (
@@ -9,11 +9,11 @@ export interface UiButton {
   );
   size: UiCommon['size'];
   type: 'button' | 'submit';
-  isDisabled: UiCommon['booleanish'];
-  isUppercase: UiCommon['booleanish'];
-  isCircle: UiCommon['booleanish'];
-  hasMargin: UiCommon['booleanish'];
-  hasIcon: UiCommon['booleanish'];
-  hasFullWidth: UiCommon['booleanish'];
-  hasSlots: UiCommon['booleanish'];
+  isDisabled: UiCommon['asBoolean'];
+  isUppercase: UiCommon['asBoolean'];
+  isCircle: UiCommon['asBoolean'];
+  hasMargin: UiCommon['asBoolean'];
+  hasIcon: UiCommon['asBoolean'];
+  hasFullWidth: UiCommon['asBoolean'];
+  hasSlots: UiCommon['asBoolean'];
 }

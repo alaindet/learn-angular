@@ -146,8 +146,9 @@
 .button[disabled]:focus {
   @include pal((
     color: (
-      background: 'gray-mid-light',
-      text: 'gray',
+      background: 'gray-light',
+      text: 'gray-mid-light',
+      border: 'gray-light',
     ),
   ));
 }

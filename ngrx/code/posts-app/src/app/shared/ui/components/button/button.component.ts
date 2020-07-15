@@ -1,6 +1,6 @@
 import { Component, ChangeDetectionStrategy, Input, OnChanges } from '@angular/core';
 
-import { booleanish } from 'src/app/shared/ui/common/functions/booleanish.function';
+import { toBoolean } from 'src/app/shared/ui/common/functions/to-boolean.function';
 import { UiButton } from './button.interface';
 
 @Component({
@@ -23,14 +23,12 @@ export class UiButtonComponent implements UiButton, OnChanges {
   @Input() hasSlots: UiButton['hasSlots'] = false;
 
   ngOnChanges() {
-    booleanish(this, [
-      'isDisabled',
-      'isUppercase',
-      'isCircle',
-      'hasMargin',
-      'hasIcon',
-      'hasFullWidth',
-      'hasSlots',
-    ]);
+    this.isDisabled = toBoolean(this.isDisabled);
+    this.isUppercase = toBoolean(this.isUppercase);
+    this.isCircle = toBoolean(this.isCircle);
+    this.hasMargin = toBoolean(this.hasMargin);
+    this.hasIcon = toBoolean(this.hasIcon);
+    this.hasFullWidth = toBoolean(this.hasFullWidth);
+    this.hasSlots = toBoolean(this.hasSlots);
   }
 }
