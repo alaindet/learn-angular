@@ -9,6 +9,8 @@ import { UiButtonModule } from './../components/button/button.module';
 import { DemoUiButtonPage } from './pages/button/button.component';
 import { UiPaginationModule } from './../components/pagination/pagination.module';
 import { DemoUiPaginationPage } from './pages/pagination/pagination.component';
+import { UiItemGroupModule } from './../components/item-group/item-group.module';
+import { DemoUiItemGroupPage } from './pages/item-group/item-group.component';
 
 export const routes: Routes = [
   {
@@ -31,6 +33,11 @@ export const routes: Routes = [
     component: DemoUiPaginationPage,
     data: { label: 'Demo: Pagination' },
   },
+  {
+    path: 'item-group',
+    component: DemoUiItemGroupPage,
+    data: { label: 'Demo: Item group' },
+  }
 ];
 
 @NgModule({
@@ -39,6 +46,7 @@ export const routes: Routes = [
     DemoUiButtonPage,
     DemoUiColorPage,
     DemoUiPaginationPage,
+    DemoUiItemGroupPage,
   ],
   imports: [
     CommonModule,
@@ -47,6 +55,7 @@ export const routes: Routes = [
 
     UiButtonModule,
     UiPaginationModule,
+    UiItemGroupModule,
   ],
 })
 export class UiDemoModule {}
