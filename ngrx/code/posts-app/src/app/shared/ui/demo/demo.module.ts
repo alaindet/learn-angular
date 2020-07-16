@@ -3,25 +3,30 @@ import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
-import { DemoUiIndex } from './pages/index/index.component';
+import { DemoUiIndexPage } from './pages/index/index.component';
 import { DemoUiColorPage } from './pages/color/color.component';
 import { UiButtonModule } from './../components/button/button.module';
 import { DemoUiButtonPage } from './pages/button/button.component';
+import { UiCardModule } from './../components/card/card.module';
+import { DemoUiCardPage } from './pages/card/card.component';
 import { UiPaginationModule } from './../components/pagination/pagination.module';
 import { DemoUiPaginationPage } from './pages/pagination/pagination.component';
-import { UiItemGroupModule } from './../components/item-group/item-group.module';
-import { DemoUiItemGroupPage } from './pages/item-group/item-group.component';
 
 export const routes: Routes = [
   {
     path: '',
-    component: DemoUiIndex,
+    component: DemoUiIndexPage,
     data: { label: 'Demo: Index' },
   },
   {
     path: 'button',
     component: DemoUiButtonPage,
     data: { label: 'Demo: Button' },
+  },
+  {
+    path: 'card',
+    component: DemoUiCardPage,
+    data: { label: 'Demo: Card' },
   },
   {
     path: 'color',
@@ -33,20 +38,15 @@ export const routes: Routes = [
     component: DemoUiPaginationPage,
     data: { label: 'Demo: Pagination' },
   },
-  {
-    path: 'item-group',
-    component: DemoUiItemGroupPage,
-    data: { label: 'Demo: Item group' },
-  }
 ];
 
 @NgModule({
   declarations: [
-    DemoUiIndex,
+    DemoUiIndexPage,
     DemoUiButtonPage,
+    DemoUiCardPage,
     DemoUiColorPage,
     DemoUiPaginationPage,
-    DemoUiItemGroupPage,
   ],
   imports: [
     CommonModule,
@@ -54,8 +54,8 @@ export const routes: Routes = [
     FontAwesomeModule,
 
     UiButtonModule,
+    UiCardModule,
     UiPaginationModule,
-    UiItemGroupModule,
   ],
 })
 export class UiDemoModule {}

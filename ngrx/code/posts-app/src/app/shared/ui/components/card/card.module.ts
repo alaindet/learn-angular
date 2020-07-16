@@ -1,17 +1,17 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { UiItemGroupComponent } from './item-group.component';
+import { UiCardComponent } from './card.component';
 
 @NgModule({
   declarations: [
-    UiItemGroupComponent,
+    UiCardComponent,
   ],
   imports: [
     CommonModule,
   ],
   exports: [
-    UiItemGroupComponent,
+    UiCardComponent,
   ]
 })
-export class UiItemGroupModule {}
+export class UiCardModule {}

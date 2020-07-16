@@ -9,7 +9,7 @@ interface Link {
 @Component({
   templateUrl: './index.component.html',
 })
-export class DemoUiIndex implements OnInit {
+export class DemoUiIndexPage implements OnInit {
 
   links: Link[] = [];
 
