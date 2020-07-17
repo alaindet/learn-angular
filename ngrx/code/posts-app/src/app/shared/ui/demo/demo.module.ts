@@ -3,13 +3,16 @@ import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
-import { DemoUiIndexPage } from './pages/index/index.component';
-import { DemoUiColorPage } from './pages/color/color.component';
+import { UiAlertModule } from './../components/alert/alert.module';
 import { UiButtonModule } from './../components/button/button.module';
-import { DemoUiButtonPage } from './pages/button/button.component';
 import { UiCardModule } from './../components/card/card.module';
-import { DemoUiCardPage } from './pages/card/card.component';
 import { UiPaginationModule } from './../components/pagination/pagination.module';
+
+import { DemoUiIndexPage } from './pages/index/index.component';
+import { DemoUiAlertPage } from './pages/alert/alert.component';
+import { DemoUiColorPage } from './pages/color/color.component';
+import { DemoUiButtonPage } from './pages/button/button.component';
+import { DemoUiCardPage } from './pages/card/card.component';
 import { DemoUiPaginationPage } from './pages/pagination/pagination.component';
 
 export const routes: Routes = [
@@ -17,6 +20,11 @@ export const routes: Routes = [
     path: '',
     component: DemoUiIndexPage,
     data: { label: 'Demo: Index' },
+  },
+  {
+    path: 'alert',
+    component: DemoUiAlertPage,
+    data: { label: 'Demo: Alert' },
   },
   {
     path: 'button',
@@ -43,6 +51,7 @@ export const routes: Routes = [
 @NgModule({
   declarations: [
     DemoUiIndexPage,
+    DemoUiAlertPage,
     DemoUiButtonPage,
     DemoUiCardPage,
     DemoUiColorPage,
@@ -53,6 +62,7 @@ export const routes: Routes = [
     RouterModule.forChild(routes),
     FontAwesomeModule,
 
+    UiAlertModule,
     UiButtonModule,
     UiCardModule,
     UiPaginationModule,
