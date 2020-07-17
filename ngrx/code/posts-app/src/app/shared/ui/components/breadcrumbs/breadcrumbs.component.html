@@ -1,1 +1,20 @@
-<p>breadcrumbs works!</p>
+<ul class="breadcrumbs">
+  <ng-container *ngFor="let link of links; let last = last">
+
+    <ng-container
+      [ngTemplateOutlet]="link.path ? linkSegment : noLinkSegment"
+      [ngTemplateOutletContext]="{ link: link }"
+    ></ng-container>
+
+    <li *ngIf="!last" class="segment separator">/</li>
+
+  </ng-container>
+</ul>
+
+<ng-template #noLinkSegment let-link="link">
+  <span class="segment">{{ link.label }}</span>
+</ng-template>
+
+<ng-template #linkSegment let-link="link">
+  <a [routerLink]="link.path" class="segment link">{{ link.label }}</a>
+</ng-template>

@@ -1,6 +1,11 @@
-<h2>Demo: pagination</h2>
+<h2>Demo: Pagination</h2>
 
-<a routerLink="/demo">&lArr; Demo</a>
+<ui-breadcrumbs
+  [links]="[
+    { path: '/demo', label: 'Demo' },
+    { path: null, label: 'Pagination' }
+  ]"
+></ui-breadcrumbs>
 
 <ui-pagination
   current="1"

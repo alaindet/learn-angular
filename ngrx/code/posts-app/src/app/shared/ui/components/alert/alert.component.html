@@ -1,2 +1,4 @@
-<p>alert works!</p>
-<button (click)="onDismiss()">Close</button>
+<div class="alert type-{{ type }}">
+  <span class="message">{{ message }}</span>
+  <span class="dismiss" (click)="onDismiss()">&times;</span>
+</div>

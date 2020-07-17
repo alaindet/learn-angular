@@ -1,14 +1,18 @@
 <h2>Demo: Alert</h2>
 
-<p>
-  <a routerLink="/demo">&lArr; Demo</a>
-</p>
-
+<ui-breadcrumbs
+  [links]="[
+    { path: '/demo', label: 'Demo' },
+    { path: null, label: 'Alert' }
+  ]"
+></ui-breadcrumbs>
 <ui-button (click)="onShowAlert()">
   Show alert
 </ui-button>
 
 <ui-alert
   *ngIf="showAlert"
+  [message]="'Ciao'"
+  [type]="'error'"
   (dismissed)="onDismissAlert()"
 ></ui-alert>

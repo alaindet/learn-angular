@@ -1,6 +1,11 @@
-<h2>Demo: Colors</h2>
+<h2>Demo: Color palette</h2>
 
-<a routerLink="/demo">&lArr; Demo</a>
+<ui-breadcrumbs
+  [links]="[
+    { path: '/demo', label: 'Demo' },
+    { path: null, label: 'Color palette' }
+  ]"
+></ui-breadcrumbs>
 
 <h3>Primary</h3>
 <div class="boxes">

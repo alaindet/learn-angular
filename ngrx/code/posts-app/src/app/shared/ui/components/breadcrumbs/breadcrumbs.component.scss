@@ -1,1 +1,31 @@
 @import 'src/app/style';
+
+.breadcrumbs {
+  @include pal((
+    space: pl0,
+    color: 'secondary-5/5',
+    css: (
+      list-style: none,
+      display: flex,
+      border-radius: pal-get('units.1'),
+    )
+  ));
+}
+
+.segment {
+  @include pal((
+    space: py1 px1,
+  ));
+
+  &.separator {
+    @include pal((
+      color: (text: 'secondary'),
+    ));
+  }
+
+  &.link {
+    @include pal((
+      space: py1 px2,
+    ));
+  }
+}

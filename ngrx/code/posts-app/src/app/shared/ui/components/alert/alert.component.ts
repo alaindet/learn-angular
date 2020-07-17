@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy, Output, EventEmitter } from '@angular/core';
+import { Component, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
 
 import { UiAlert } from './alert.interface';
 
@@ -10,6 +10,8 @@ import { UiAlert } from './alert.interface';
 })
 export class UiAlertComponent implements UiAlert {
 
+  @Input() message: UiAlert['message'];
+  @Input() type: UiAlert['type'] = 'success';
   @Output() dismissed = new EventEmitter<boolean>();
 
   onDismiss() {

@@ -1,6 +1,11 @@
-<h2>Demo: button</h2>
+<h2>Demo: Button</h2>
 
-<a routerLink="/demo">&lArr; Demo</a>
+<ui-breadcrumbs
+  [links]="[
+    { path: '/demo', label: 'Demo' },
+    { path: null, label: 'Button' }
+  ]"
+></ui-breadcrumbs>
 
 <h3>Input: color</h3>
 <ui-button color="primary">Primary</ui-button>

@@ -1,7 +1,8 @@
 <h2>Demo: Breadcrumbs</h2>
 
-<p>
-  <a routerLink="/demo">&lArr; Demo</a>
-</p>
-
-<ui-breadcrumbs></ui-breadcrumbs>
+<ui-breadcrumbs
+  [links]="[
+    { path: '/demo', label: 'Demo' },
+    { path: null, label: 'Breadcrumbs' }
+  ]"
+></ui-breadcrumbs>

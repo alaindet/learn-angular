@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 
 import { UiBreadcrumbsComponent } from './breadcrumbs.component';
 
@@ -9,6 +10,7 @@ import { UiBreadcrumbsComponent } from './breadcrumbs.component';
   ],
   imports: [
     CommonModule,
+    RouterModule,
   ],
   exports: [
     UiBreadcrumbsComponent,

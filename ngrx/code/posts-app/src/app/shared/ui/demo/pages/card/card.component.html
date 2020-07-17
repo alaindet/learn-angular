@@ -1,6 +1,11 @@
 <h2>Demo: Card</h2>
 
-<a routerLink="/demo">&lArr; Demo</a>
+<ui-breadcrumbs
+  [links]="[
+    { path: '/demo', label: 'Demo' },
+    { path: null, label: 'Card' }
+  ]"
+></ui-breadcrumbs>
 
 <ui-card>
   <h2 slot="title">I am a title</h2>
@@ -9,7 +14,7 @@
     Lorem ipsum dolor sit amet...
   </div>
   <div slot="footer">
-    <button>Delete</button>
-    <button>Edit</button>
+    <ui-button>Edit</ui-button>
+    <ui-button color="secondary">Delete</ui-button>
   </div>
 </ui-card>
