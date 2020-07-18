@@ -7,4 +7,8 @@ a {
     text-decoration: none;
     color: pal-color-get('primary');
   }
+
+  &:visited {
+    color: pal-color-get('secondary-2/5');
+  }
 }

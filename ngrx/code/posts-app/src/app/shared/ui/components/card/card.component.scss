@@ -5,10 +5,10 @@
   flex-direction: column;
   justify-content: space-between;
   align-items: stretch;
-  margin: 1rem;
   padding: 2rem;
-  border-radius: 3rem;
-  box-shadow: 3px 3px 7px rgba(0,0,0,0.2);
+  border-radius: 1.5rem;
+  box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+  background-color: pal-get('colors.white');
 }
 
 .header {

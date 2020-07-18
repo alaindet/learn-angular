@@ -3,26 +3,50 @@
 .boxes {
   @include pal((
     flex: (
-      dir: column,
-    )
+      wrap: true,
+      main-axis: space-between,
+    ),
   ));
 }
 
 .box {
   @include pal((
-    size: w-full,
-    space: p2,
+    'any': (flex: (basis: 100%)),
+    'tablet+': (flex: (basis: 48%)),
   ));
 }
 
-.primary-1 { @include pal-color('primary-1/5' 'white') }
-.primary-2 { @include pal-color('primary-2/5' 'white') }
-.primary { @include pal-color('primary') }
-.primary-4 { @include pal-color('primary-4/5') }
-.primary-5 { @include pal-color('primary-5/5') }
+.stripe {
+  @include pal((
+    space: py1 px2,
+  ));
+}
 
-.secondary-1 { @include pal-color('secondary-1/5' 'white') }
-.secondary-2 { @include pal-color('secondary-2/5' 'white') }
-.secondary { @include pal-color('secondary') }
-.secondary-4 { @include pal-color('secondary-4/5') }
-.secondary-5 { @include pal-color('secondary-5/5') }
+$boxes: (
+
+  ('primary-dark', 'white'),
+  ('primary-mid-dark', 'white'),
+  ('primary', 'white'),
+  ('primary-mid-light', 'black'),
+  ('primary-light', 'black'),
+
+  ('secondary-dark', 'white'),
+  ('secondary-mid-dark', 'white'),
+  ('secondary', 'white'),
+  ('secondary-mid-light', 'black'),
+  ('secondary-light', 'black'),
+
+  ('grey-dark', 'white'),
+  ('grey-mid-dark', 'white'),
+  ('grey', 'white'),
+  ('grey-mid-light', 'black'),
+  ('grey-light', 'black'),
+
+);
+
+@each $box in $boxes {
+  $selector: nth($box, 1);
+  .#{$selector} {
+    @include pal-color($box);
+  }
+}

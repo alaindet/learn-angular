@@ -1,4 +1,4 @@
-<h2>Demo: Alert</h2>
+<h1>Alert</h1>
 
 <ui-breadcrumbs
   [links]="[
@@ -6,13 +6,27 @@
     { path: null, label: 'Alert' }
   ]"
 ></ui-breadcrumbs>
-<ui-button (click)="onShowAlert()">
-  Show alert
+
+<!-- Success -->
+<ui-button (click)="setSuccessAlert(true)" color="secondary">
+  Show success alert
 </ui-button>
 
 <ui-alert
-  *ngIf="showAlert"
-  [message]="'Ciao'"
+  *ngIf="showSuccessAlert"
+  [message]="'Something good just happened.'"
+  [type]="'success'"
+  (dismissed)="setSuccessAlert(false)"
+></ui-alert>
+
+<!-- Error -->
+<ui-button (click)="setErrorAlert(true)" color="primary">
+  Show error alert
+</ui-button>
+
+<ui-alert
+  *ngIf="showErrorAlert"
+  [message]="'Something unexpected just happened.'"
   [type]="'error'"
-  (dismissed)="onDismissAlert()"
+  (dismissed)="setErrorAlert(false)"
 ></ui-alert>

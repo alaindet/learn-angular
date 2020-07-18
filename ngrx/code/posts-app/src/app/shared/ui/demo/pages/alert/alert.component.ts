@@ -5,13 +5,14 @@ import { Component } from '@angular/core';
 })
 export class DemoUiAlertPage {
 
-  showAlert: boolean = false;
+  showSuccessAlert: boolean = false;
+  showErrorAlert: boolean = false;
 
-  onShowAlert() {
-    this.showAlert = true;
+  setSuccessAlert(show: boolean) {
+    this.showSuccessAlert = show;
   }
 
-  onDismissAlert() {
-    this.showAlert = false;
+  setErrorAlert(show: boolean) {
+    this.showErrorAlert = show;
   }
 }

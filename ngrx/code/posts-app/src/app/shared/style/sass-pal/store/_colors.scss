@@ -1,22 +1,28 @@
-$primary: #53b578;
-$secondary: #8dcdeb;
+$app-primary: #940f5a;
+$app-secondary: #3c3d87;
+$app-grey: #8d8b8e;
 
 $_: pal-set-merge('colors', (
 
-  // Mid light
-  'gray-mid-light': lighten(pal-get('colors.gray'), 15%),
-  'blue-mid-light': lighten(pal-get('colors.blue'), 15%),
-  'teal-mid-light': lighten(pal-get('colors.teal'), 15%),
+  // Primary
+  'primary-dark': scale_color($app-primary, $lightness: -70%),
+  'primary-mid-dark': scale_color($app-primary, $lightness: -50%),
+  'primary': $app-primary,
+  'primary-mid-light': scale_color($app-primary, $lightness: +50%),
+  'primary-light': scale_color($app-primary, $lightness: +70%),
 
-  'primary-1/5': darken($primary, 50%),
-  'primary-2/5': darken($primary, 35%),
-  'primary': $primary,
-  'primary-4/5': lighten($primary, 10%),
-  'primary-5/5': lighten($primary, 20%),
+  // Secondary
+  'secondary-dark': scale_color($app-secondary, $lightness: -70%),
+  'secondary-mid-dark': scale_color($app-secondary, $lightness: -50%),
+  'secondary': $app-secondary,
+  'secondary-mid-light': scale_color($app-secondary, $lightness: +50%),
+  'secondary-light': scale_color($app-secondary, $lightness: +70%),
 
-  'secondary-1/5': darken($secondary, 50%),
-  'secondary-2/5': darken($secondary, 35%),
-  'secondary': $secondary,
-  'secondary-4/5': lighten($secondary, 10%),
-  'secondary-5/5': lighten($secondary, 20%),
+  // Grey
+  'grey-dark': scale_color($app-grey, $lightness: -85%),
+  'grey-mid-dark': scale_color($app-grey, $lightness: -60%),
+  'grey': $app-grey,
+  'grey-mid-light': scale_color($app-grey, $lightness: +50%),
+  'grey-light': scale_color($app-grey, $lightness: +80%),
+
 ));

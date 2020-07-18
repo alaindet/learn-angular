@@ -1,25 +1,49 @@
 @import 'src/app/style';
 
+.alert-container {
+  @include pal((
+    position: 'fixed' (2 0 auto 0),
+    flex: center,
+  ));
+}
+
 .alert {
   @include pal((
-    size: maxw-alert,
     space: py1 px2,
+    color: (
+      text: 'grey-light',
+    ),
     flex: (
       main-axis: space-between,
       cross-axis: center,
     ),
-    color: (text: white),
+    css: (
+      font-size: 1.2rem,
+      width: auto,
+      min-width: pal-get('units.alert'),
+      border-radius: pal-get('units.1/2'),
+    )
   ));
 
-  &.success {
+  &.type-success {
     @include pal((
-      color: (background: green),
+      color: 'secondary',
     ));
   }
 
-  &.error {
+  &.type-error {
     @include pal((
-      color: (background: red),
+      color: 'primary',
     ));
   }
+}
+
+.dismiss {
+  @include pal((
+    space: ml2,
+    css: (
+      font-size: 1.5rem,
+      cursor: pointer,
+    )
+  ));
 }

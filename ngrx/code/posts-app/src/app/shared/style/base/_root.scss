@@ -1,11 +1,15 @@
 html {
-  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-  font-size: 16px;
   box-sizing: border-box;
 }
 
 body {
-  margin: 0;
+  @include pal((
+    space: m0,
+    color: (
+      background: 'grey-light',
+      text: 'secondary-dark',
+    ),
+  ));
 }
 
 *,

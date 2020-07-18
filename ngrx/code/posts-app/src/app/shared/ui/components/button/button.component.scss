@@ -2,13 +2,13 @@
 
 // Basic style for all buttons
 .button {
-  border: none;
-  font-size: 1rem;
-  line-height: 1rem;
+  font-size: pal-get('typography.base');
+  line-height: pal-get('typography.line-height');
   text-align: center;
   letter-spacing: 0.1rem;
-  cursor: pointer;
+  border: 2px solid transparent;
   border-radius: pal-get('units.1/2');
+  cursor: pointer;
 
   &:hover {
     transition: 0.2s all ease-in;
@@ -70,15 +70,15 @@
   ));
   &:hover, &:active, &:focus {
     @include pal((
-      color: (background: 'primary-4/5'),
+      color: (background: 'primary-mid-dark'),
     ));
   }
 }
 
 .color-primary-outline {
   @include pal((
-    border: 2px 'primary',
-    color: (background: 'white', text: 'primary'),
+    border: null 'primary',
+    color: (background: 'grey-light', text: 'primary'),
   ));
   &:hover, &:active, &:focus {
     @include pal((
@@ -93,15 +93,15 @@
   ));
   &:hover, &:active, &:focus {
     @include pal((
-      color: (background: 'secondary-4/5'),
+      color: (background: 'secondary-mid-dark'),
     ));
   }
 }
 
 .color-secondary-outline {
   @include pal((
-    border: 2px 'secondary',
-    color: (background: 'white', text: 'secondary'),
+    border: null 'secondary',
+    color: (background: 'grey-light', text: 'secondary'),
   ));
   &:hover, &:active, &:focus {
     @include pal((
@@ -112,15 +112,15 @@
 
 // Sizes
 .size-small {
-  @include pal(( space: 'py0,5' 'px1,5' ));
+  @include pal(( space: 'py0' 'px1,5' ));
 }
 
 .size-medium {
-  @include pal(( space: 'py1' 'px2' ));
+  @include pal(( space: 'py0,5' 'px2' ));
 }
 
 .size-large {
-  @include pal(( space: 'py1,5' 'px3' ));
+  @include pal(( space: 'py1' 'px3' ));
 }
 
 .is-circle {
@@ -147,7 +147,7 @@
   @include pal((
     color: (
       background: 'gray-light',
-      text: 'gray-mid-light',
+      text: 'gray',
       border: 'gray-light',
     ),
   ));

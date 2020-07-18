@@ -3,29 +3,35 @@
 .breadcrumbs {
   @include pal((
     space: pl0,
-    color: 'secondary-5/5',
+    color: (
+      background: 'secondary-mid-dark',
+      text: 'secondary-mid-light',
+    ),
     css: (
       list-style: none,
       display: flex,
-      border-radius: pal-get('units.1'),
+      border-radius: pal-get('units.1/2'),
     )
   ));
 }
 
 .segment {
   @include pal((
-    space: py1 px1,
+    space: py1 px2,
   ));
 
   &.separator {
     @include pal((
-      color: (text: 'secondary'),
+      space: px0,
     ));
   }
 
   &.link {
     @include pal((
-      space: py1 px2,
+      color: (text: 'primary-mid-light'),
+      css: (
+        font-weight: 600,
+      )
     ));
   }
 }

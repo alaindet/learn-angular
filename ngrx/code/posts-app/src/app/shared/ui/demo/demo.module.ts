@@ -16,6 +16,7 @@ import { DemoUiBreadcrumbsPage } from './pages/breadcrumbs/breadcrumbs.component
 import { DemoUiButtonPage } from './pages/button/button.component';
 import { DemoUiCardPage } from './pages/card/card.component';
 import { DemoUiPaginationPage } from './pages/pagination/pagination.component';
+import { DemoUiTypographyPage } from './pages/typography/typography.component';
 
 export const routes: Routes = [
   {
@@ -53,18 +54,14 @@ export const routes: Routes = [
     component: DemoUiPaginationPage,
     data: { label: 'Demo: Pagination' },
   },
+  {
+    path: 'typography',
+    component: DemoUiTypographyPage,
+    data: { label: 'Demo: Typography' },
+  },
 ];
 
 @NgModule({
-  declarations: [
-    DemoUiIndexPage,
-    DemoUiAlertPage,
-    DemoUiBreadcrumbsPage,
-    DemoUiButtonPage,
-    DemoUiCardPage,
-    DemoUiColorPage,
-    DemoUiPaginationPage,
-  ],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
@@ -75,6 +72,16 @@ export const routes: Routes = [
     UiButtonModule,
     UiCardModule,
     UiPaginationModule,
+  ],
+  declarations: [
+    DemoUiIndexPage,
+    DemoUiAlertPage,
+    DemoUiBreadcrumbsPage,
+    DemoUiButtonPage,
+    DemoUiCardPage,
+    DemoUiColorPage,
+    DemoUiPaginationPage,
+    DemoUiTypographyPage,
   ],
 })
 export class UiDemoModule {}

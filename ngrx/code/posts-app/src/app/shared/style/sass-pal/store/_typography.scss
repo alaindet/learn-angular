@@ -1,0 +1,19 @@
+$base: 18px;
+$factor: 1.45;
+
+$_: pal-set('typography', (
+
+  // Font family
+  'font-family': ('Segoe UI', Tahoma, Geneva, Verdana, sans-serif),
+
+  // Font size
+  'base': $base,
+  'h1': $base * $factor * $factor * $factor * $factor,
+  'h2': $base * $factor * $factor * $factor,
+  'h3': $base * $factor * $factor,
+  'h4': $base * $factor,
+  'h5': $base,
+  'h6': $base / $factor,
+  'line-height': $base * 1.66,
+
+));
