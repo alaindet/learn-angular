@@ -12,4 +12,8 @@ export class AppComponent {
   constructor(
     public ui: UiCoreService,
   ) {}
+
+  onDismissAlert() {
+    this.ui.setAlert(null);
+  }
 }

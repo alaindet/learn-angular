@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
+import { UiAlertModule } from './shared/ui/components/alert/alert.module';
 import { AppRoutingModule } from './app-routing.module';
 import { CoreModule } from './core/core.module';
 
@@ -13,6 +14,7 @@ import { CoreModule } from './core/core.module';
     BrowserModule,
     AppRoutingModule,
     CoreModule,
+    UiAlertModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
