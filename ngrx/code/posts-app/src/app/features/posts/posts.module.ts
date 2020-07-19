@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CommonModule } from '@angular/common';
 
-import { PostsContainerComponent } from './container/posts/posts.component';
+import { PostsContainerComponent } from './containers/posts/posts.component';
 
 const routes: Routes = [
   {
@@ -12,15 +12,12 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [
-    PostsContainerComponent,
-  ],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
   ],
-  exports: [
+  declarations: [
     PostsContainerComponent,
-  ]
+  ],
 })
 export class PostsFeatureModule {}

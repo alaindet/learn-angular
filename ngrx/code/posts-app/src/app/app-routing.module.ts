@@ -16,6 +16,11 @@ let routes: Routes = [
       .then(m => m.PostsFeatureModule)
   },
   {
+    path: 'users',
+    loadChildren: () => import('./features/users/users.module')
+      .then(m => m.UsersFeatureModule)
+  },
+  {
     path: '**',
     redirectTo: DEFAULT_ROUTE,
   }

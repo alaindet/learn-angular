@@ -1,0 +1,10 @@
+@import 'src/app/style';
+
+.users {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.user {
+  flex-basis: 20%;
+}

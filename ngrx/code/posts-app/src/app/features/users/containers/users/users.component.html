@@ -1,0 +1,27 @@
+<h1>Users</h1>
+
+<ui-breadcrumbs [links]="[
+  { path: '/', label: 'App' },
+  { paht: null, label: 'Users' }
+]"></ui-breadcrumbs>
+
+<ng-container *ngIf="!(ui.loading | async); else loadingRef">
+  <div class="users">
+    <ui-card *ngFor="let user of users; let index = index" class="user">
+
+      <h2 slot="title">{{ user.name }}</h2>
+      <h3 slot="subtitle">{{ user.username }} &lt;{{ user.email }}&gt;</h3>
+      <div slot="body">
+        City: {{ user.address.city }}
+      </div>
+      <div slot="footer">
+        <ui-button (click)="onShowUser(index)">Show</ui-button>
+      </div>
+
+    </ui-card>
+  </div>
+</ng-container>
+
+<ng-template #loadingRef>
+  Loading...
+</ng-template>
