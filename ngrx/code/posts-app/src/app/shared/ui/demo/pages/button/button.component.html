@@ -23,20 +23,16 @@
 <code>[isDisabled]=true</code>
 <br>
 
-<ui-button [isUppercase]="false">No uppercase</ui-button>
-<code>[isUppercase]=false</code>
+<ui-button [isUppercase]="true">Upper case</ui-button>
+<code>[isUppercase]=true</code>
 <br>
 
-<ui-button hasMargin>with margin</ui-button>
-<code>[hasMargin]=true</code>
+<ui-button [hasMargin]="false">without margin</ui-button>
+<code>[hasMargin]=false</code>
 <br>
 
 <ui-button hasFullWidth>with full width</ui-button>
 <code>[hasFullWidth]=true</code>
-<br>
-
-<ui-button isCircle>C</ui-button>
-<code>[isCircle]=true</code>
 <br>
 
 <ui-button hasIcon hasSlots>
@@ -50,3 +46,23 @@
   <fa-icon [icon]="faCoffee"></fa-icon>
 </ui-button>
 <code>[hasIcon]=true [isCircle]=true</code>
+
+
+<h3>Input: Circle</h3>
+<ui-button isCircle hasIcon size="small">
+  <fa-icon [icon]="faCoffee"></fa-icon>
+</ui-button>
+<code>isCircle hasIcon size="small"</code>
+<br>
+
+<ui-button isCircle hasIcon size="medium">
+  <fa-icon [icon]="faCoffee"></fa-icon>
+</ui-button>
+<code>isCircle hasIcon size="medium"</code>
+<br>
+
+<ui-button isCircle hasIcon size="large">
+  <fa-icon [icon]="faCoffee"></fa-icon>
+</ui-button>
+<code>isCircle hasIcon size="large"</code>
+<br>

@@ -1,5 +1,15 @@
 @import 'src/app/style';
 
+@mixin draw-circle ($radius) {
+  border-radius: 50%;
+  width: $radius;
+  height: $radius;
+  min-width: $radius;
+  max-width: $radius;
+  min-height: $radius;
+  max-height: $radius;
+}
+
 // Basic style for all buttons
 .button {
   font-size: pal-get('typography.base');
@@ -60,10 +70,11 @@
   ));
 }
 
-.is-full-width {
+.has-full-width {
   width: 100%;
 }
 
+// Color
 .color-primary {
   @include pal((
     color: (background: 'primary', text: 'white'),
@@ -110,33 +121,37 @@
   }
 }
 
-// Sizes
-.size-small {
-  @include pal(( space: 'py0' 'px1,5' ));
-}
-
-.size-medium {
-  @include pal(( space: 'py0,5' 'px2' ));
-}
-
-.size-large {
-  @include pal(( space: 'py1' 'px3' ));
-}
-
+// Circle
 .is-circle {
-  $circle-size: pal-get('units.4');
-
-  border-radius: 100%;
-  padding: 0;
-  width: $circle-size;
-  height: $circle-size;
-  min-width: $circle-size;
-  max-width: $circle-size;
-  min-height: $circle-size;
-  max-height: $circle-size;
+  padding: 0!important;
   display: inline-flex;
   justify-content: center;
   align-items: center;
+}
+
+
+// Size
+.size-small {
+  font-size: 0.9rem;
+  @include pal(( space: 'py0' 'px1,5' ));
+  &.is-circle {
+    @include draw-circle(pal-get('units.4'));
+  }
+}
+
+.size-medium {
+  @include pal(( space: 'py0,5' 'px3' ));
+  &.is-circle {
+    @include draw-circle(pal-get('units.6'));
+  }
+}
+
+.size-large {
+  font-size: 1.66rem;
+  @include pal(( space: 'py2' 'px5' ));
+  &.is-circle {
+    @include draw-circle(pal-get('units.8'));
+  }
 }
 
 // States
