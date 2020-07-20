@@ -8,6 +8,7 @@ import { UiBreadcrumbsModule } from './../components/breadcrumbs/breadcrumbs.mod
 import { UiButtonModule } from './../components/button/button.module';
 import { UiCardModule } from './../components/card/card.module';
 import { UiCardGroupModule } from './../components/card-group/card-group.module';
+import { UiGridModule } from './../components/grid/grid.module';
 import { UiPaginationModule } from './../components/pagination/pagination.module';
 
 import { DemoUiIndexPage } from './pages/index/index.component';
@@ -17,6 +18,7 @@ import { DemoUiBreadcrumbsPage } from './pages/breadcrumbs/breadcrumbs.component
 import { DemoUiButtonPage } from './pages/button/button.component';
 import { DemoUiCardPage } from './pages/card/card.component';
 import { DemoUiCardGroupPage } from './pages/card-group/card-group.component';
+import { DemoUiGridPage } from './pages/grid/grid.component';
 import { DemoUiPaginationPage } from './pages/pagination/pagination.component';
 import { DemoUiTypographyPage } from './pages/typography/typography.component';
 
@@ -57,6 +59,11 @@ export const routes: Routes = [
     data: { label: 'Demo: Color' },
   },
   {
+    path: 'grid',
+    component: DemoUiGridPage,
+    data: { label: 'Demo: Grid' },
+  },
+  {
     path: 'pagination',
     component: DemoUiPaginationPage,
     data: { label: 'Demo: Pagination' },
@@ -79,6 +86,7 @@ export const routes: Routes = [
     UiButtonModule,
     UiCardModule,
     UiCardGroupModule,
+    UiGridModule,
     UiPaginationModule,
   ],
   declarations: [
@@ -89,6 +97,7 @@ export const routes: Routes = [
     DemoUiCardPage,
     DemoUiCardGroupPage,
     DemoUiColorPage,
+    DemoUiGridPage,
     DemoUiPaginationPage,
     DemoUiTypographyPage,
   ],
