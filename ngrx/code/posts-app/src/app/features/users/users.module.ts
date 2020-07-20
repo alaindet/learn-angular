@@ -7,6 +7,7 @@ import { UsersContainerComponent } from './containers/users/users.component';
 import { UsersApiService } from './services/users-api.service';
 import { UsersService } from './services/users.service';
 import { UiBreadcrumbsModule } from './../../shared/ui/components/breadcrumbs/breadcrumbs.module';
+import { UiButtonModule } from './../../shared/ui/components/button/button.module';
 import { UiCardModule } from './../../shared/ui/components/card/card.module';
 
 const routes: Routes = [
@@ -22,6 +23,7 @@ const routes: Routes = [
     HttpClientModule,
     RouterModule.forChild(routes),
     UiBreadcrumbsModule,
+    UiButtonModule,
     UiCardModule,
   ],
   declarations: [
