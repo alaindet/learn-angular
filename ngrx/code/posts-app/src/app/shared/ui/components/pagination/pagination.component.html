@@ -1,11 +1,11 @@
-<div class="pagination size-{{ size }}">
+<div class="pagination">
 
   <!-- Previous -->
   <ui-button
     class="link back"
     color="primary-outline"
     type="button"
-    [size]="size"
+    size="small"
     [isDisabled]="!previous"
     (click)="onClick(previous)"
   >
@@ -17,8 +17,8 @@
     *ngFor="let page of pages"
     class="link"
     type="button"
+    size="small"
     [color]="page === current ? 'primary' : 'primary-outline'"
-    [size]="size"
     [isDisabled]="!page"
     (click)="onClick(page)"
   >
@@ -30,7 +30,7 @@
     class="link next"
     color="primary-outline"
     type="button"
-    [size]="size"
+    size="small"
     [isDisabled]="!next"
     (click)="onClick(next)"
   >

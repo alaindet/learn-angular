@@ -15,7 +15,6 @@ export class UiPaginationComponent implements OnChanges {
   @Input() current: UiPagination['current'];
   @Input() total: UiPagination['total'];
   @Input() show: UiPagination['show'] = 3;
-  @Input() size: UiPagination['size'] = 'medium';
   @Output() clicked = new EventEmitter<number>();
   pages: Array<number | null> = null;
   previous: number | null = null;
