@@ -6,8 +6,8 @@
       <input
         matInput
         type="email"
-        placeholder="Your email..."
         name="email"
+        placeholder="Your email..."
         ngModel
         required
         email
@@ -29,8 +29,8 @@
       <input
         matInput
         type="password"
-        placeholder="Your password..."
         name="password"
+        placeholder="Your password..."
         ngModel
         required
         minlength="6"
@@ -61,11 +61,22 @@
         matInput
         [matDatepicker]="datepicker"
         [max]="maxDate"
+        name="birthdate"
         placeholder="Your birthdate..."
+        ngModel
       >
       <mat-datepicker-toggle matSuffix [for]="datepicker"></mat-datepicker-toggle>
       <mat-datepicker #datepicker></mat-datepicker>
     </mat-form-field>
+
+    <!-- Terms and Conditions -->
+    <mat-checkbox
+      color="primary"
+      ngModel
+      name="agree"
+    >
+      Agree to Terms and Conditions
+    </mat-checkbox>
 
     <!-- Submit -->
     <button type="submit" mat-raised-button color="primary">
