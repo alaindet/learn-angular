@@ -1,17 +1,43 @@
-import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+import { AppRoutingModule } from './app-routing.module';
+import { MaterialComponentsModule } from './material-components.module';
 
 import { AppComponent } from './app.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MaterialComponentsModule } from './material-components.module';
+import { WelcomeComponent } from './welcome/welcome.component';
+
+// TODO: Move into separate module => auth
+import { SignupComponent } from './auth/signup/signup.component';
+import { LoginComponent } from './auth/login/login.component';
+
+// TODO: Move into separate module => training
+import { TrainingComponent } from './training/training.component';
+import { CurrentTrainingComponent } from './training/current-training/current-training.component';
+import { NewTrainingComponent } from './training/new-training/new-training.component';
+import { PastTrainingsComponent } from './training/past-trainings/past-trainings.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    WelcomeComponent,
+
+    // Auth
+    SignupComponent,
+    LoginComponent,
+
+    // Training
+    TrainingComponent,
+    CurrentTrainingComponent,
+    NewTrainingComponent,
+    PastTrainingsComponent,
+
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    AppRoutingModule,
     MaterialComponentsModule,
   ],
   providers: [],
