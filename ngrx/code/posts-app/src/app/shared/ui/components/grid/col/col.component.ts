@@ -1,5 +1,6 @@
 import { Component, ChangeDetectionStrategy, Input, ElementRef, OnChanges, Renderer2 } from '@angular/core';
 
+import { toNumber } from './../../../common/functions/to-number.function';
 import { UiCol } from './col.interface';
 
 @Component({
@@ -10,9 +11,9 @@ import { UiCol } from './col.interface';
 })
 export class UiColComponent implements UiCol, OnChanges {
 
-  @Input() size: number;
-  @Input('size-md') sizeMd: number;
-  @Input('size-lg') sizeLg: number;
+  @Input() size: UiCol['size'];
+  @Input() sizeMd: UiCol['sizeMd'];
+  @Input() sizeLg: UiCol['sizeLg'];
 
   constructor(
     private element: ElementRef,
@@ -20,10 +21,28 @@ export class UiColComponent implements UiCol, OnChanges {
   ) {}
 
   ngOnChanges() {
-    this.setSizes();
+    this.castInputsToNumber();
+    this.setClassesOnHost();
   }
 
-  private setSizes() {
-    // Add dyamic classes to element via renderer
+  private castInputsToNumber() {
+    this.size = toNumber(this.size);
+    this.sizeMd = toNumber(this.sizeMd);
+    this.sizeLg = toNumber(this.sizeLg);
+  }
+
+  private setClassesOnHost() {
+
+    const classNames = [
+      this.size ? `size-${this.size}` : null,
+      this.sizeMd ? `size-md-${this.sizeMd}` : null,
+      this.sizeLg ? `size-lg-${this.sizeLg}` : null,
+    ];
+
+    for (const className of classNames) {
+      if (className) {
+        this.renderer.addClass(this.element.nativeElement, className);
+      }
+    }
   }
 }
