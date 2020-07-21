@@ -7,7 +7,6 @@ import { UiAlertModule } from './../components/alert/alert.module';
 import { UiBreadcrumbsModule } from './../components/breadcrumbs/breadcrumbs.module';
 import { UiButtonModule } from './../components/button/button.module';
 import { UiCardModule } from './../components/card/card.module';
-import { UiCardGroupModule } from './../components/card-group/card-group.module';
 import { UiGridModule } from './../components/grid/grid.module';
 import { UiPaginationModule } from './../components/pagination/pagination.module';
 
@@ -17,7 +16,6 @@ import { DemoUiColorPage } from './pages/color/color.component';
 import { DemoUiBreadcrumbsPage } from './pages/breadcrumbs/breadcrumbs.component';
 import { DemoUiButtonPage } from './pages/button/button.component';
 import { DemoUiCardPage } from './pages/card/card.component';
-import { DemoUiCardGroupPage } from './pages/card-group/card-group.component';
 import { DemoUiGridPage } from './pages/grid/grid.component';
 import { DemoUiPaginationPage } from './pages/pagination/pagination.component';
 import { DemoUiTypographyPage } from './pages/typography/typography.component';
@@ -47,11 +45,6 @@ export const routes: Routes = [
     path: 'card',
     component: DemoUiCardPage,
     data: { label: 'Demo: Card' },
-  },
-  {
-    path: 'card-group',
-    component: DemoUiCardGroupPage,
-    data: { label: 'Demo: Card Group' },
   },
   {
     path: 'color',
@@ -85,7 +78,6 @@ export const routes: Routes = [
     UiBreadcrumbsModule,
     UiButtonModule,
     UiCardModule,
-    UiCardGroupModule,
     UiGridModule,
     UiPaginationModule,
   ],
@@ -95,7 +87,6 @@ export const routes: Routes = [
     DemoUiBreadcrumbsPage,
     DemoUiButtonPage,
     DemoUiCardPage,
-    DemoUiCardGroupPage,
     DemoUiColorPage,
     DemoUiGridPage,
     DemoUiPaginationPage,
