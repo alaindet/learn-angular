@@ -6,15 +6,14 @@
 ]"></ui-breadcrumbs>
 
 <ng-container *ngIf="!(ui.loading | async); else loadingRef">
-  <ui-row class="users" withGutters>
+  <ui-row withGutters>
     <ui-col
       *ngFor="let user of users; let index = index"
       size="12"
       sizeMd="6"
       sizeLg="4"
     >
-      <ui-card  class="user">
-
+      <ui-card>
         <h2 slot="title">{{ user.name.replace(' ', '&nbsp;') }}</h2>
         <h3 slot="subtitle">{{ user.email }}</h3>
         <div slot="body">
@@ -23,7 +22,6 @@
         <div slot="footer">
           <ui-button size="small" (click)="onShowUser(index)">Show</ui-button>
         </div>
-
       </ui-card>
     </ui-col>
   </ui-row>
