@@ -9,6 +9,7 @@ import { UsersService } from './services/users.service';
 import { UiBreadcrumbsModule } from './../../shared/ui/components/breadcrumbs/breadcrumbs.module';
 import { UiButtonModule } from './../../shared/ui/components/button/button.module';
 import { UiCardModule } from './../../shared/ui/components/card/card.module';
+import { UiGridModule } from './../../shared/ui/components/grid/grid.module';
 
 const routes: Routes = [
   {
@@ -22,9 +23,11 @@ const routes: Routes = [
     CommonModule,
     HttpClientModule,
     RouterModule.forChild(routes),
+
     UiBreadcrumbsModule,
     UiButtonModule,
     UiCardModule,
+    UiGridModule,
   ],
   declarations: [
     UsersContainerComponent,

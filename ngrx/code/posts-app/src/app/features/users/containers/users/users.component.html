@@ -6,20 +6,27 @@
 ]"></ui-breadcrumbs>
 
 <ng-container *ngIf="!(ui.loading | async); else loadingRef">
-  <div class="users">
-    <ui-card *ngFor="let user of users; let index = index" class="user">
+  <ui-row class="users" withGutters>
+    <ui-col
+      *ngFor="let user of users; let index = index"
+      size="12"
+      sizeMd="6"
+      sizeLg="4"
+    >
+      <ui-card  class="user">
 
-      <h2 slot="title">{{ user.name }}</h2>
-      <h3 slot="subtitle">{{ user.username }} &lt;{{ user.email }}&gt;</h3>
-      <div slot="body">
-        City: {{ user.address.city }}
-      </div>
-      <div slot="footer">
-        <ui-button size="small" (click)="onShowUser(index)">Show</ui-button>
-      </div>
+        <h2 slot="title">{{ user.name.replace(' ', '&nbsp;') }}</h2>
+        <h3 slot="subtitle">{{ user.email }}</h3>
+        <div slot="body">
+          City: {{ user.address.city }}
+        </div>
+        <div slot="footer">
+          <ui-button size="small" (click)="onShowUser(index)">Show</ui-button>
+        </div>
 
-    </ui-card>
-  </div>
+      </ui-card>
+    </ui-col>
+  </ui-row>
 </ng-container>
 
 <ng-template #loadingRef>
