@@ -12,6 +12,7 @@ import { WelcomeComponent } from './welcome/welcome.component';
 // TODO: Move into separate module => auth
 import { SignupComponent } from './auth/signup/signup.component';
 import { LoginComponent } from './auth/login/login.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 // TODO: Move into separate module => training
 import { TrainingComponent } from './training/training.component';
@@ -39,6 +40,7 @@ import { PastTrainingsComponent } from './training/past-trainings/past-trainings
     BrowserModule,
     BrowserAnimationsModule,
     FormsModule,
+    ReactiveFormsModule,
     AppRoutingModule,
     MaterialComponentsModule,
   ],
