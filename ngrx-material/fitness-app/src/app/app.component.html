@@ -1,3 +1,14 @@
-<main class="container">
-  <router-outlet></router-outlet>
-</main>
+<mat-sidenav-container>
+
+  <!-- Sidenav -->
+  <mat-sidenav #sidenav role="navigation">
+    <p>I'm a sidenav</p>
+  </mat-sidenav>
+
+  <!-- Content -->
+  <mat-sidenav-content>
+    <button (click)="sidenav.toggle()">Menu</button>
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+
+</mat-sidenav-container>
