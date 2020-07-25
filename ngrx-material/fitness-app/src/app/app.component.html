@@ -2,13 +2,62 @@
 
   <!-- Sidenav -->
   <mat-sidenav #sidenav role="navigation">
-    <p>I'm a sidenav</p>
+    <mat-nav-list>
+
+      <a
+        *ngFor="let link of links"
+        mat-list-item
+        [routerLink]="link.path"
+        class="nav-item"
+        (click)="sidenav.close()"
+      >
+        <mat-icon>{{ link.icon }}</mat-icon>
+        <span>{{ link.label }}</span>
+      </a>
+
+      <mat-list-item>
+        <button mat-icon-button class="nav-item">
+          <mat-icon>meeting_room</mat-icon>
+          <span>Logout</span>
+        </button>
+      </mat-list-item>
+
+    </mat-nav-list>
   </mat-sidenav>
 
-  <!-- Content -->
   <mat-sidenav-content>
-    <button (click)="sidenav.toggle()">Menu</button>
-    <router-outlet></router-outlet>
-  </mat-sidenav-content>
 
+    <!-- Toolbar -->
+    <mat-toolbar color="primary">
+
+      <!-- Menu -->
+      <div class="menu-handle">
+        <button mat-icon-button (click)="sidenav.toggle()">
+          <mat-icon>menu</mat-icon>
+        </button>
+      </div>
+
+      <!-- Logo -->
+      <div class="logo">
+        <a routerLink="/">LOGO</a>
+      </div>
+
+      <!-- Links -->
+      <ul class="links">
+        <li *ngFor="let link of links" class="link">
+          <a [routerLink]="link.path">{{ link.label }}</a>
+        </li>
+        <li class="link">
+          <a>Logout</a>
+        </li>
+      </ul>
+
+    </mat-toolbar>
+
+    <!-- Content -->
+    <main>
+      <router-outlet></router-outlet>
+    </main>
+
+  </mat-sidenav-content>
 </mat-sidenav-container>

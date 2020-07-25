@@ -1,0 +1,85 @@
+@import 'src/app/shared/style/scoped';
+
+mat-sidenav-container,
+mat-sidenav,
+mat-sidenav-content,
+main {
+  @include pal((
+    size: h-full,
+  ));
+}
+
+mat-sidenav {
+  width: pal-get('units.sidenav');
+}
+
+mat-toolbar {
+  position: relative;
+}
+
+.menu-handle {
+  @include pal((
+    'any': (
+      position: absolute (0 null 0 2),
+      flex: (cross-axis: center),
+    ),
+    'tablet+': (
+      css: (
+        display: none,
+      ),
+    )
+  ));
+}
+
+.nav-item {
+  @include pal((
+    flex: (cross-axis: center),
+  ));
+
+  mat-icon {
+    @include pal((
+      space: mr3,
+    ));
+  }
+}
+
+.logo {
+  @include pal((
+    'any': (
+      flex: (
+        main-axis: center,
+        cross-axis: center,
+        grow: more,
+      ),
+    ),
+    'tablet+': (
+      css: (
+        display: initial,
+      ),
+    ),
+  ));
+}
+
+.links {
+  @include pal((
+    'any': (
+      css: (
+        display: none,
+      ),
+    ),
+    'tablet+': (
+      size: w-full,
+      space: pl0,
+      flex: (main-axis: end),
+      css: (
+        list-style-type: none,
+      ),
+    ),
+  ));
+}
+
+.link {
+  @include pal((
+    space: px1,
+  ));
+}
