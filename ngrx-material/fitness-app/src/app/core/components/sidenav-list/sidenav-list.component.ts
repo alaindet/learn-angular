@@ -10,9 +10,9 @@ import { Link } from 'src/app/core/models/link.interface';
 export class SidenavListComponent {
 
   @Input() links: Link[] = [];
-  @Output() sidenavClose = new EventEmitter<boolean>();
+  @Output() sidenavClose = new EventEmitter<void>();
 
   onSidenavClose() {
-    this.sidenavClose.emit(true);
+    this.sidenavClose.emit();
   }
 }

@@ -10,9 +10,9 @@ import { Link } from 'src/app/core/models/link.interface';
 export class HeaderComponent {
 
   @Input() links: Link[] = [];
-  @Output() sidenavOpen = new EventEmitter<boolean>();
+  @Output() sidenavOpen = new EventEmitter<void>();
 
   onSidenavOpen() {
-    this.sidenavOpen.emit(true);
+    this.sidenavOpen.emit();
   }
 }
