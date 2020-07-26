@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
+import { MatTabsModule } from '@angular/material/tabs';
 
 import { TrainingPageComponent } from './containers/training/training.component';
 import { TrainingCurrentPageComponent } from './containers/training-current/training-current.component';
@@ -15,14 +16,17 @@ const routes: Routes = [
   {
     path: 'current',
     component: TrainingCurrentPageComponent,
+    outlet: 'training',
   },
   {
     path: 'new',
     component: TrainingNewPageComponent,
+    outlet: 'training',
   },
   {
     path: 'past',
     component: TrainingPastPageComponent,
+    outlet: 'training',
   },
 ];
 
@@ -30,6 +34,7 @@ const routes: Routes = [
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
+    MatTabsModule,
   ],
   declarations: [
     TrainingPageComponent,

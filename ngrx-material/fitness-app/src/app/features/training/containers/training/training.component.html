@@ -1,1 +1,9 @@
-<p>training works!</p>
+<nav mat-tab-nav-bar [backgroundColor]="background">
+  <a
+    *ngFor="let link of links"
+    mat-tab-link
+    [routerLink]="link.path"
+    [active]="activeLink == link.path"
+    (click)="activeLink = link.path"
+  >{{ link.label }}</a>
+</nav>
