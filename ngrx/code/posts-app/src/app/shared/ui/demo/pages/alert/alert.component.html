@@ -1,0 +1,18 @@
+<h1>Alert</h1>
+
+<ui-breadcrumbs
+  [links]="[
+    { path: '/demo', label: 'Demo' },
+    { path: null, label: 'Alert' }
+  ]"
+></ui-breadcrumbs>
+
+<!-- Success -->
+<ui-button (click)="setSuccessAlert(true)" color="secondary">
+  Show success alert
+</ui-button>
+
+<!-- Error -->
+<ui-button (click)="setErrorAlert(true)" color="primary">
+  Show error alert
+</ui-button>

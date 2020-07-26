@@ -1,0 +1,52 @@
+@import 'src/app/style';
+
+.boxes {
+  @include pal((
+    flex: (
+      wrap: true,
+      main-axis: space-between,
+    ),
+  ));
+}
+
+.box {
+  @include pal((
+    'any': (flex: (basis: 100%)),
+    'tablet+': (flex: (basis: 48%)),
+  ));
+}
+
+.stripe {
+  @include pal((
+    space: py1 px2,
+  ));
+}
+
+$boxes: (
+
+  ('primary-dark', 'white'),
+  ('primary-mid-dark', 'white'),
+  ('primary', 'white'),
+  ('primary-mid-light', 'black'),
+  ('primary-light', 'black'),
+
+  ('secondary-dark', 'white'),
+  ('secondary-mid-dark', 'white'),
+  ('secondary', 'white'),
+  ('secondary-mid-light', 'black'),
+  ('secondary-light', 'black'),
+
+  ('grey-dark', 'white'),
+  ('grey-mid-dark', 'white'),
+  ('grey', 'white'),
+  ('grey-mid-light', 'black'),
+  ('grey-light', 'black'),
+
+);
+
+@each $box in $boxes {
+  $selector: nth($box, 1);
+  .#{$selector} {
+    @include pal-color($box);
+  }
+}

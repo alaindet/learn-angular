@@ -1,0 +1,49 @@
+@import 'src/app/style';
+
+.alert-container {
+  @include pal((
+    position: 'fixed' (2 0 auto 0),
+    flex: center,
+  ));
+}
+
+.alert {
+  @include pal((
+    space: p2,
+    color: (
+      text: 'grey-light',
+    ),
+    flex: (
+      main-axis: space-between,
+      cross-axis: center,
+    ),
+    css: (
+      font-size: 1.2rem,
+      width: auto,
+      min-width: pal-get('units.alert'),
+      border-radius: pal-get('units.1/2'),
+    )
+  ));
+
+  &.type-success {
+    @include pal((
+      color: 'secondary',
+    ));
+  }
+
+  &.type-error {
+    @include pal((
+      color: 'primary',
+    ));
+  }
+}
+
+.dismiss {
+  @include pal((
+    space: ml2,
+    css: (
+      font-size: 1.5rem,
+      cursor: pointer,
+    )
+  ));
+}

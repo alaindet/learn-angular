@@ -1,0 +1,19 @@
+html {
+  box-sizing: border-box;
+}
+
+body {
+  @include pal((
+    space: m0,
+    color: (
+      background: 'grey-light',
+      text: 'secondary-dark',
+    ),
+  ));
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}

@@ -1,0 +1,68 @@
+<h1>Button</h1>
+
+<ui-breadcrumbs
+  [links]="[
+    { path: '/demo', label: 'Demo' },
+    { path: null, label: 'Button' }
+  ]"
+></ui-breadcrumbs>
+
+<h3>Input: color</h3>
+<ui-button color="primary">Primary</ui-button>
+<ui-button color="primary-outline">Primary outline</ui-button>
+<ui-button color="secondary">Secondary</ui-button>
+<ui-button color="secondary-outline">Secondary outline</ui-button>
+
+<h3>Input: size</h3>
+<ui-button size="small">Small</ui-button>
+<ui-button size="medium">Medium</ui-button>
+<ui-button size="large">Large</ui-button>
+
+<h3>Input: Flags</h3>
+<ui-button isDisabled>Disabled</ui-button>
+<code>[isDisabled]=true</code>
+<br>
+
+<ui-button [isUppercase]="true">Upper case</ui-button>
+<code>[isUppercase]=true</code>
+<br>
+
+<ui-button [hasMargin]="false">without margin</ui-button>
+<code>[hasMargin]=false</code>
+<br>
+
+<ui-button hasFullWidth>with full width</ui-button>
+<code>[hasFullWidth]=true</code>
+<br>
+
+<ui-button hasIcon hasSlots>
+  <fa-icon [icon]="faCoffee" slot="left"></fa-icon>
+  <span slot="right">Coffee</span>
+</ui-button>
+<code>[hasIcon]=true</code>
+<br>
+
+<ui-button hasIcon isCircle>
+  <fa-icon [icon]="faCoffee"></fa-icon>
+</ui-button>
+<code>[hasIcon]=true [isCircle]=true</code>
+
+
+<h3>Input: Circle</h3>
+<ui-button isCircle hasIcon size="small">
+  <fa-icon [icon]="faCoffee"></fa-icon>
+</ui-button>
+<code>isCircle hasIcon size="small"</code>
+<br>
+
+<ui-button isCircle hasIcon size="medium">
+  <fa-icon [icon]="faCoffee"></fa-icon>
+</ui-button>
+<code>isCircle hasIcon size="medium"</code>
+<br>
+
+<ui-button isCircle hasIcon size="large">
+  <fa-icon [icon]="faCoffee"></fa-icon>
+</ui-button>
+<code>isCircle hasIcon size="large"</code>
+<br>

@@ -1,0 +1,20 @@
+<div class="card">
+
+  <div class="header">
+    <div class="title">
+      <ng-content select="[slot='title']"></ng-content>
+    </div>
+    <div class="subtitle">
+      <ng-content select="[slot='subtitle']"></ng-content>
+    </div>
+  </div>
+
+  <div class="body">
+    <ng-content select="[slot='body']"></ng-content>
+  </div>
+
+  <div class="footer">
+    <ng-content select="[slot='footer']"></ng-content>
+  </div>
+
+</div>

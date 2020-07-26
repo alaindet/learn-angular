@@ -1,0 +1,169 @@
+@import 'src/app/style';
+
+@mixin draw-circle ($radius) {
+  border-radius: 50%;
+  width: $radius;
+  height: $radius;
+  min-width: $radius;
+  max-width: $radius;
+  min-height: $radius;
+  max-height: $radius;
+}
+
+// Basic style for all buttons
+.button {
+  font-size: pal-get('typography.base');
+  line-height: pal-get('typography.line-height');
+  text-align: center;
+  letter-spacing: 0.1rem;
+  border: 2px solid transparent;
+  border-radius: pal-get('units.1/2');
+  cursor: pointer;
+
+  &:hover {
+    transition: 0.2s all ease-in;
+  }
+  &:focus {
+    outline: none;
+  }
+}
+
+// Transformations and minor variations
+.is-uppercase {
+  text-transform: uppercase;
+}
+
+.has-margin {
+  @include pal((
+    space: 'm1/2',
+  ));
+}
+
+.no-padding {
+  padding: 0!important;
+}
+
+.has-icon {
+  @include pal((
+    flex: (
+      inline: true,
+      cross-axis: center,
+    )
+  ));
+
+  ::ng-deep fa-icon {
+    @include pal((
+      space: 'mx1',
+    ));
+  }
+}
+
+.slot-left {
+  @include pal((
+    space: 'mr1/2',
+  ));
+}
+
+.slot-right {
+  @include pal((
+    space: 'ml1/2',
+  ));
+}
+
+.has-full-width {
+  width: 100%;
+}
+
+// Color
+.color-primary {
+  @include pal((
+    color: (background: 'primary', text: 'white'),
+  ));
+  &:hover, &:active, &:focus {
+    @include pal((
+      color: (background: 'primary-mid-dark'),
+    ));
+  }
+}
+
+.color-primary-outline {
+  @include pal((
+    border: null 'primary',
+    color: (background: 'grey-light', text: 'primary'),
+  ));
+  &:hover, &:active, &:focus {
+    @include pal((
+      color: (background: 'primary', text: 'white'),
+    ));
+  }
+}
+
+.color-secondary {
+  @include pal((
+    color: (background: 'secondary', text: 'white'),
+  ));
+  &:hover, &:active, &:focus {
+    @include pal((
+      color: (background: 'secondary-mid-dark'),
+    ));
+  }
+}
+
+.color-secondary-outline {
+  @include pal((
+    border: null 'secondary',
+    color: (background: 'grey-light', text: 'secondary'),
+  ));
+  &:hover, &:active, &:focus {
+    @include pal((
+      color: (background: 'secondary', text: 'white'),
+    ));
+  }
+}
+
+// Circle
+.is-circle {
+  padding: 0!important;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+// Size
+.size-small {
+  font-size: 0.9rem;
+  @include pal(( space: 'py0' 'px1,5' ));
+  &.is-circle {
+    @include draw-circle(pal-get('units.4'));
+  }
+}
+
+.size-medium {
+  @include pal(( space: 'py0,5' 'px3' ));
+  &.is-circle {
+    @include draw-circle(pal-get('units.6'));
+  }
+}
+
+.size-large {
+  font-size: 1.66rem;
+  @include pal(( space: 'py2' 'px5' ));
+  &.is-circle {
+    @include draw-circle(pal-get('units.8'));
+  }
+}
+
+// States
+.button[disabled],
+.button[disabled]:hover,
+.button[disabled]:active,
+.button[disabled]:focus {
+  @include pal((
+    color: (
+      background: 'gray-light',
+      text: 'gray',
+      border: 'gray-light',
+    ),
+  ));
+}

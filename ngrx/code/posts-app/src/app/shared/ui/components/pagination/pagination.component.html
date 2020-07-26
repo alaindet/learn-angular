@@ -1,0 +1,40 @@
+<div class="pagination">
+
+  <!-- Previous -->
+  <ui-button
+    class="link back"
+    color="primary-outline"
+    type="button"
+    size="small"
+    [isDisabled]="!previous"
+    (click)="onClick(previous)"
+  >
+    <fa-icon [icon]="faChevronLeft"></fa-icon>
+  </ui-button>
+
+  <!-- Direct page links -->
+  <ui-button
+    *ngFor="let page of pages"
+    class="link"
+    type="button"
+    size="small"
+    [color]="page === current ? 'primary' : 'primary-outline'"
+    [isDisabled]="!page"
+    (click)="onClick(page)"
+  >
+    {{ page ? page : '...' }}
+  </ui-button>
+
+  <!-- Next -->
+  <ui-button
+    class="link next"
+    color="primary-outline"
+    type="button"
+    size="small"
+    [isDisabled]="!next"
+    (click)="onClick(next)"
+  >
+    <fa-icon [icon]="faChevronRight"></fa-icon>
+  </ui-button>
+
+</div>

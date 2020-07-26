@@ -1,0 +1,27 @@
+<button
+  class="button color-{{ color }} size-{{ size }}"
+  [class.is-uppercase]="isUppercase"
+  [class.is-circle]="isCircle"
+  [class.has-margin]="hasMargin"
+  [class.has-icon]="hasIcon"
+  [class.has-full-width]="hasFullWidth"
+  [type]="type"
+  [disabled]="isDisabled"
+>
+  <ng-container
+    [ngTemplateOutlet]="hasSlots ? withSlots : withoutSlots"
+  ></ng-container>
+</button>
+
+<ng-template #withSlots>
+  <span class="slot-left">
+    <ng-content select="[slot='left']"></ng-content>
+  </span>
+  <span class="slot-right">
+    <ng-content select="[slot='right']"></ng-content>
+  </span>
+</ng-template>
+
+<ng-template #withoutSlots>
+  <ng-content></ng-content>
+</ng-template>
