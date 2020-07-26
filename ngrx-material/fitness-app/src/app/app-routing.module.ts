@@ -1,29 +1,27 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, ExtraOptions, Routes } from '@angular/router';
 
-import { WelcomeComponent } from './welcome/welcome.component';
-
-import { SignupComponent } from './auth/signup/signup.component';
-import { LoginComponent } from './auth/login/login.component';
-
-import { TrainingComponent } from './training/training.component';
+import { WelcomePageComponent } from './features/welcome/containers/welcome/welcome.component';
+import { LoginPageComponent } from './features/auth/containers/login/login.component';
+import { SignupPageComponent } from './features/auth/containers/signup/signup.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: WelcomeComponent,
-  },
-  {
-    path: 'signup',
-    component: SignupComponent,
+    component: WelcomePageComponent,
   },
   {
     path: 'login',
-    component: LoginComponent,
+    component: LoginPageComponent,
+  },
+  {
+    path: 'signup',
+    component: SignupPageComponent,
   },
   {
     path: 'training',
-    component: TrainingComponent,
+    loadChildren: () => import('./features/training/traning.module')
+      .then(m => m.TrainingModule),
   },
 ];
 

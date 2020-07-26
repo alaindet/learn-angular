@@ -1,0 +1,96 @@
+<section>
+  <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+
+    <!-- Email -->
+    <mat-form-field>
+      <input
+        matInput
+        type="email"
+        placeholder="Your email..."
+        formControlName="email"
+      >
+
+      <!-- Validation errors -->
+      <ng-container *ngIf="emailField.touched && emailField.invalid">
+
+        <mat-error *ngIf="emailField.errors.required">
+          Email cannot be empty
+        </mat-error>
+
+        <mat-error *ngIf="emailField.errors.email">
+          Email is invalid
+        </mat-error>
+
+      </ng-container>
+
+    </mat-form-field>
+
+    <!-- Password -->
+    <mat-form-field>
+      <input
+        matInput
+        type="password"
+        placeholder="Your password..."
+        formControlName="password"
+      >
+
+      <mat-hint align="start">
+        Should be at leasy 6 characters long
+      </mat-hint>
+
+      <mat-hint align="end">
+        {{ passwordField.value?.length }} / 6
+      </mat-hint>
+
+      <!-- Validation errors -->
+      <ng-container *ngIf="passwordField.touched && passwordField.invalid">
+
+        <mat-error *ngIf="passwordField.errors.required">
+          Password is required
+        </mat-error>
+
+        <mat-error *ngIf="passwordField.errors.minlength">
+          Password must be at least 6 characters long
+        </mat-error>
+
+      </ng-container>
+
+    </mat-form-field>
+
+    <!-- Birthdate -->
+    <mat-form-field>
+      <mat-label>Your birth date...</mat-label>
+      <input
+        matInput
+        readonly
+        disabled
+        placeholder="Your birthdate..."
+        formControlName="birthdate"
+        [matDatepicker]="datepicker"
+        [matDatepickerFilter]="atLeastEighteen"
+        (click)="datepicker.open()"
+      >
+      <mat-datepicker-toggle matSuffix [for]="datepicker"></mat-datepicker-toggle>
+      <mat-datepicker #datepicker></mat-datepicker>
+    </mat-form-field>
+
+    <!-- Terms and Conditions -->
+    <mat-checkbox
+      color="primary"
+      formControlName="agree"
+    >
+      Agree to Terms and Conditions
+    </mat-checkbox>
+
+    <!-- Submit -->
+    <button
+      type="submit"
+      mat-raised-button
+      color="primary"
+      [disabled]="signupForm.invalid"
+    >
+      Submit
+    </button>
+
+  </form>
+</section>

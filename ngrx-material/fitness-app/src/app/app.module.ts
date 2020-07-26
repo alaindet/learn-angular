@@ -1,48 +1,27 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FormsModule } from '@angular/forms';
+import { MatSidenavModule } from '@angular/material/sidenav';
 
+import { CoreModule } from './core/core.module';
 import { AppRoutingModule } from './app-routing.module';
-import { MaterialComponentsModule } from './material-components.module';
-
 import { AppComponent } from './app.component';
-import { WelcomeComponent } from './welcome/welcome.component';
-
-// TODO: Move into separate module => auth
-import { SignupComponent } from './auth/signup/signup.component';
-import { LoginComponent } from './auth/login/login.component';
-import { ReactiveFormsModule } from '@angular/forms';
-
-// TODO: Move into separate module => training
-import { TrainingComponent } from './training/training.component';
-import { CurrentTrainingComponent } from './training/current-training/current-training.component';
-import { NewTrainingComponent } from './training/new-training/new-training.component';
-import { PastTrainingsComponent } from './training/past-trainings/past-trainings.component';
+import { WelcomeModule } from './features/welcome/welcome.module';
+import { AuthModule } from './features/auth/auth.module';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    WelcomeComponent,
-
-    // Auth
-    SignupComponent,
-    LoginComponent,
-
-    // Training
-    TrainingComponent,
-    CurrentTrainingComponent,
-    NewTrainingComponent,
-    PastTrainingsComponent,
-
-  ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    FormsModule,
-    ReactiveFormsModule,
     AppRoutingModule,
-    MaterialComponentsModule,
+    CoreModule,
+    WelcomeModule,
+    AuthModule,
+
+    MatSidenavModule,
+  ],
+  declarations: [
+    AppComponent,
   ],
   providers: [],
   bootstrap: [AppComponent]

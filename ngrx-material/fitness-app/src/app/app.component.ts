@@ -1,10 +1,7 @@
 import { Component } from '@angular/core';
 
-interface Link {
-  path: string;
-  label: string;
-  icon: string;
-}
+import { LINKS } from 'src/app/core/data/links.data';
+import { Link } from 'src/app/core/models/link.interface';
 
 @Component({
   selector: 'app-root',
@@ -13,21 +10,5 @@ interface Link {
 })
 export class AppComponent {
 
-  links: Link[] = [
-    {
-      path: '/signup',
-      label: 'Signup',
-      icon: 'account_circle',
-    },
-    {
-      path: '/login',
-      label: 'Login',
-      icon: 'login',
-    },
-    {
-      path: '/training',
-      label: 'Training',
-      icon: 'fitness_center',
-    }
-  ];
+  links: Link[] = LINKS;
 }

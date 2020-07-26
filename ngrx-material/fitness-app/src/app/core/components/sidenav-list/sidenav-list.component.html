@@ -1,0 +1,21 @@
+<mat-nav-list>
+
+  <a
+    *ngFor="let link of links"
+    mat-list-item
+    [routerLink]="link.path"
+    class="nav-item"
+    (click)="onSidenavClose()"
+  >
+    <mat-icon>{{ link.icon }}</mat-icon>
+    <span>{{ link.label }}</span>
+  </a>
+
+  <mat-list-item>
+    <button mat-icon-button class="nav-item">
+      <mat-icon>meeting_room</mat-icon>
+      <span>Logout</span>
+    </button>
+  </mat-list-item>
+
+</mat-nav-list>
