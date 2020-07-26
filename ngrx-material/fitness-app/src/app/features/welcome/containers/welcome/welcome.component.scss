@@ -1,1 +1,35 @@
 @import 'src/app/shared/style/scoped';
+
+.welcome {
+  @include pal((
+    'any': (
+      flex: (
+        dir: column,
+        cross-axis: stretch,
+      ),
+    ),
+    'tablet+': (
+      flex: (
+        dir: row,
+        main-axis: around,
+      ),
+    ),
+  ));
+}
+
+.welcome-section {
+  @include pal((
+    'any': (
+      space: m1,
+      css: (
+        text-align: center,
+      ),
+    ),
+    'tablet+': (
+      space: p2,
+      css: (
+        text-align: initial,
+      ),
+    )
+  ));
+}
