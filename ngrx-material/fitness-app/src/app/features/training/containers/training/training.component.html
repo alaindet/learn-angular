@@ -1,9 +1,18 @@
-<nav mat-tab-nav-bar [backgroundColor]="background">
-  <a
-    *ngFor="let link of links"
-    mat-tab-link
-    [routerLink]="link.path"
-    [active]="activeLink == link.path"
-    (click)="activeLink = link.path"
-  >{{ link.label }}</a>
-</nav>
+<mat-tab-group>
+
+  <!-- New training -->
+  <mat-tab label="New training">
+    <app-training-new></app-training-new>
+  </mat-tab>
+
+  <!-- Current training -->
+  <mat-tab label="Current training">
+    <app-training-current></app-training-current>
+  </mat-tab>
+
+  <!-- Past trainings -->
+  <mat-tab label="Past trainings">
+    <app-training-past></app-training-past>
+  </mat-tab>
+
+</mat-tab-group>

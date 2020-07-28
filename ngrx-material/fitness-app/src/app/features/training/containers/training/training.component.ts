@@ -8,18 +8,18 @@ import { Link } from 'src/app/core/models/link.interface';
 })
 export class TrainingPageComponent {
 
-  activeLink: string = '/training/current'
+  activeLink: string = 'current'
   links: Link[] = [
     {
-      path: '/training/current',
+      path: 'current',
       label: 'Current',
     },
     {
-      path: '/training/new',
+      path: 'new',
       label: 'New',
     },
     {
-      path: '/training/past',
+      path: 'past',
       label: 'Past',
     }
   ];
