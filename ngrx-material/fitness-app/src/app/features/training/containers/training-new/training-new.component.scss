@@ -1,0 +1,17 @@
+section {
+  display: flex;
+  justify-content: center;
+}
+
+mat-card {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  padding: 2rem;
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+}
+
+mat-card-title {
+  margin-bottom: 2rem;
+}

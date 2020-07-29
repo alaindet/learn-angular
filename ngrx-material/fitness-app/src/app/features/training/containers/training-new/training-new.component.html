@@ -1,1 +1,29 @@
-<p>training-new works!</p>
+<section>
+  <mat-card>
+    <mat-card-title>New Training</mat-card-title>
+
+    <mat-card-content>
+      <mat-form-field appearance="fill">
+        <mat-label>Select your training</mat-label>
+        <mat-select>
+          <mat-option
+            *ngFor="let food of [
+              { value: 'crunches', label: 'Crunches' },
+              { value: 'touch-toes', label: 'Touch toes' },
+              { value: 'side-lunges', label: 'Side lunges' },
+              { value: 'burpess', label: 'Burpees' }
+            ]"
+            [value]="food.value"
+          >
+            {{ food.label }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </mat-card-content>
+
+    <mat-card-actions>
+      <button mat-button type="submit">Start</button>
+    </mat-card-actions>
+
+  </mat-card>
+</section>
