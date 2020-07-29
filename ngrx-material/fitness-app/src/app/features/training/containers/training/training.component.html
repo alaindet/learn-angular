@@ -14,4 +14,7 @@
 
 </mat-tab-group>
 
-<app-training-current *ngIf="ongoingTraining"></app-training-current>
+<app-training-current
+  *ngIf="ongoingTraining"
+  (trainingExited)="onTrainingExit()"
+></app-training-current>

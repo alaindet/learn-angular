@@ -28,4 +28,8 @@ export class TrainingPageComponent {
   onTrainingStart() {
     this.ongoingTraining = true;
   }
+
+  onTrainingExit() {
+    console.log('onTrainingExit');
+  }
 }
