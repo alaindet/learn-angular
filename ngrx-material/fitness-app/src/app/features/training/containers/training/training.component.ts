@@ -8,6 +8,7 @@ import { Link } from 'src/app/core/models/link.interface';
 })
 export class TrainingPageComponent {
 
+  ongoingTraining = false;
   activeLink: string = 'current'
   links: Link[] = [
     {
@@ -23,4 +24,8 @@ export class TrainingPageComponent {
       label: 'Past',
     }
   ];
+
+  onTrainingStart() {
+    this.ongoingTraining = true;
+  }
 }
