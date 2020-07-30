@@ -1,20 +1,28 @@
 <section>
+  <mat-card>
 
-  <mat-progress-spinner
-    mode="determinate"
-    [value]="progress"
-  ></mat-progress-spinner>
+    <mat-card-title>
+      <h1>{{ exercise.name }}</h1>
+    </mat-card-title>
 
-  <h1>{{ progress }}%</h1>
-  <h2>{{ exercise.name }}</h2>
+    <mat-card-content>
 
-  <p>{{ elapsedSeconds }} / {{ exercise.duration }} seconds</p>
-  <p>{{ burnedCalories }} / {{ exercise.calories }} Kcal</p>
+      <mat-progress-spinner
+        mode="determinate"
+        [value]="progress"
+      ></mat-progress-spinner>
+      <h2>{{ progress }}%</h2>
 
-  <button
-    mat-raised-button
-    color="accent"
-    (click)="onStop()"
-  >Stop</button>
+      <p>{{ elapsedSeconds }} / {{ exercise.duration }} seconds</p>
+      <p>{{ burnedCalories }} / {{ exercise.calories }} Kcal</p>
 
+    </mat-card-content>
+
+    <mat-card-actions>
+      <button mat-raised-button color="accent" (click)="onStop()">
+        Stop
+      </button>
+    </mat-card-actions>
+
+  </mat-card>
 </section>
