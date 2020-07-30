@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
+import { AuthService } from './../../services/auth.service';
+
 @Component({
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
@@ -19,6 +21,7 @@ export class LoginPageComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
+    private authService: AuthService,
   ) {}
 
   get emailField() {
@@ -34,11 +37,15 @@ export class LoginPageComponent implements OnInit {
   }
 
   onSubmit() {
-    let formValue = 'no form value';
-    if (this.loginForm.valid) {
-      formValue = this.loginForm.value;
+
+    if (this.loginForm.invalid) {
+      return;
     }
-    console.log('onSubmit', formValue);
+
+    const formValue = this.loginForm.value;
+    const email = formValue.email;
+    const password =  formValue.password;
+    this.authService.login({ email, password });
   }
 
   private initLoginForm() {

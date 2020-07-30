@@ -17,7 +17,7 @@
     <li *ngFor="let link of links" class="link">
       <a [routerLink]="link.path">{{ link.label }}</a>
     </li>
-    <li class="link">
+    <li *ngIf="authService.isAuthenticated$ | async" class="link">
       <a>Logout</a>
     </li>
   </ul>

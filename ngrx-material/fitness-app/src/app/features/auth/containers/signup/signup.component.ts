@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm, FormBuilder, FormGroup, Validators } from '@angular/forms';
 
+import { AuthService } from './../../services/auth.service';
+
 @Component({
   templateUrl: './signup.component.html',
   styleUrls: ['./signup.component.scss']
@@ -12,6 +14,7 @@ export class SignupPageComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
+    private authService: AuthService,
   ) {}
 
   get emailField() {
@@ -36,11 +39,15 @@ export class SignupPageComponent implements OnInit {
   }
 
   onSubmit() {
-    let formValue = 'no form value';
-    if (this.signupForm.valid) {
-      formValue = this.signupForm.value;
+
+    if (this.signupForm.invalid) {
+      return;
     }
-    console.log('onSubmit', formValue);
+
+    const formValue = this.signupForm.value;
+    const email = formValue.email;
+    const password = formValue.password;
+    this.authService.registerUser({ email, password });
   }
 
   atLeastEighteen = (d: Date | null): boolean => {
