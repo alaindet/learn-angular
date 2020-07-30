@@ -5,6 +5,7 @@
     <app-sidenav-list
       [links]="links"
       (sidenavClose)="sidenav.close()"
+      (loggedOut)="onLogout()"
     ></app-sidenav-list>
   </mat-sidenav>
 
@@ -14,12 +15,12 @@
     <app-header
       [links]="links"
       (sidenavOpen)="sidenav.open()"
+      (loggedOut)="onLogout()"
     ></app-header>
 
     <!-- Content -->
     <main>
       <router-outlet></router-outlet>
-      <router-outlet name="training"></router-outlet>
     </main>
 
   </mat-sidenav-content>

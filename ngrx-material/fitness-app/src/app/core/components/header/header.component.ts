@@ -12,6 +12,7 @@ export class HeaderComponent {
 
   @Input() links: Link[] = [];
   @Output() sidenavOpen = new EventEmitter<void>();
+  @Output() loggedOut = new EventEmitter<void>();
 
   constructor(
     public authService: AuthService,
@@ -19,5 +20,9 @@ export class HeaderComponent {
 
   onSidenavOpen() {
     this.sidenavOpen.emit();
+  }
+
+  onLogout() {
+    this.loggedOut.emit();
   }
 }

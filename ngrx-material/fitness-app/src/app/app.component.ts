@@ -1,5 +1,6 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { MatSidenav } from '@angular/material/sidenav';
 
 import { AuthService } from './features/auth/services/auth.service';
 import { LINKS } from 'src/app/core/data/links.data';
@@ -15,6 +16,8 @@ export class AppComponent implements OnInit, OnDestroy {
   links: Link[] = LINKS;
   subs: { [sub: string]: Subscription } = {};
 
+  @ViewChild('sidenav') sidenavRef: MatSidenav;
+
   constructor(
     private authService: AuthService,
   ) {}
@@ -27,6 +30,11 @@ export class AppComponent implements OnInit, OnDestroy {
     for (const sub in this.subs) {
       this.subs[sub].unsubscribe();
     }
+  }
+
+  onLogout() {
+    this.authService.logout();
+    this.sidenavRef.close();
   }
 
   private hideAuthPathsOnAuthentication() {

@@ -11,7 +11,10 @@
     <span>{{ link.label }}</span>
   </a>
 
-  <mat-list-item *ngIf="authService.isAuthenticated$ | async">
+  <mat-list-item
+    *ngIf="authService.isAuthenticated$ | async"
+    (click)="onLogout()"
+  >
     <button mat-icon-button class="nav-item">
       <mat-icon>meeting_room</mat-icon>
       <span>Logout</span>

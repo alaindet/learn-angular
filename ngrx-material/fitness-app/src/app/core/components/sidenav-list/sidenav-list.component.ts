@@ -12,6 +12,7 @@ export class SidenavListComponent {
 
   @Input() links: Link[] = [];
   @Output() sidenavClose = new EventEmitter<void>();
+  @Output() loggedOut = new EventEmitter<void>();
 
   constructor(
     public authService: AuthService,
@@ -19,5 +20,9 @@ export class SidenavListComponent {
 
   onSidenavClose() {
     this.sidenavClose.emit();
+  }
+
+  onLogout() {
+    this.loggedOut.emit();
   }
 }
