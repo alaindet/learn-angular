@@ -31,16 +31,10 @@ export class AppComponent implements OnInit, OnDestroy {
 
   private hideAuthPathsOnAuthentication() {
     this.subs.isAuthenticated = this.authService.isAuthenticated$.subscribe(
-      (isAuthenticated: boolean) => {
-        this.links = this.links.filter(
-          (link: Link) => {
-            const isAuthPath = link.path === '/signup' || link.path === '/login';
-            if (isAuthenticated && isAuthPath) {
-              return false;
-            }
-            return true;
-          }
-        );
+      (isAuthenticated: boolean): void => {
+        this.links = LINKS.filter(
+          (link: Link): boolean => isAuthenticated ? link.onAuth : !link.onAuth
+        )
       }
     );
   }
