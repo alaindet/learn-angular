@@ -1,29 +1,23 @@
 <section>
-  <mat-card>
-    <mat-card-title>New Training</mat-card-title>
+  <form [formGroup]="newExerciseForm" (ngSubmit)="onSubmit()">
+    <mat-card>
+      <mat-card-title>New Training</mat-card-title>
 
-    <mat-card-content>
-      <mat-form-field appearance="fill">
-        <mat-label>Select your training</mat-label>
-        <mat-select>
-          <mat-option
-            *ngFor="let food of [
-              { value: 'crunches', label: 'Crunches' },
-              { value: 'touch-toes', label: 'Touch toes' },
-              { value: 'side-lunges', label: 'Side lunges' },
-              { value: 'burpess', label: 'Burpees' }
-            ]"
-            [value]="food.value"
-          >
-            {{ food.label }}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-    </mat-card-content>
+      <mat-card-content>
+        <mat-form-field appearance="fill">
+          <mat-label>Select your training</mat-label>
+          <mat-select formControlName="training">
+            <mat-option *ngFor="let exercise of exercises" [value]="exercise.id">
+              {{ exercise.name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </mat-card-content>
 
-    <mat-card-actions>
-      <button mat-button type="submit" (click)="onStartTraining()">Start</button>
-    </mat-card-actions>
+      <mat-card-actions>
+        <button mat-button type="submit">Start</button>
+      </mat-card-actions>
 
-  </mat-card>
+    </mat-card>
+  </form>
 </section>

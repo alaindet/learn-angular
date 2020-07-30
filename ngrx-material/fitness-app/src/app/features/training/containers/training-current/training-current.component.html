@@ -6,7 +6,10 @@
   ></mat-progress-spinner>
 
   <h1>{{ progress }}%</h1>
-  <p>Keep it up!</p>
+  <h2>{{ exercise.name }}</h2>
+
+  <p>{{ elapsedSeconds }} / {{ exercise.duration }} seconds</p>
+  <p>{{ burnedCalories }} / {{ exercise.calories }} Kcal</p>
 
   <button
     mat-raised-button
