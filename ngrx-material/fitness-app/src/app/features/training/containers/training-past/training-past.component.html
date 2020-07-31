@@ -1,1 +1,8 @@
-<p>training-past works!</p>
+<h1>Past exercises</h1>
+
+<ul>
+  <li *ngFor="let exercise of exercises">
+    {{ exercise.name }}
+    ({{ exercise.date | date }})
+  </li>
+</ul>
