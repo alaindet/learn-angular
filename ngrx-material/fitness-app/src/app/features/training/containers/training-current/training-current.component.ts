@@ -56,7 +56,7 @@ export class TrainingCurrentPageComponent implements OnInit {
   private onDialogClose(answer: 'yes' | 'no') {
 
     if (answer === 'yes') {
-      this.trainingService.stopExercising();
+      this.trainingService.cancelCurrentExercise(this.progress);
       return;
     }
 
