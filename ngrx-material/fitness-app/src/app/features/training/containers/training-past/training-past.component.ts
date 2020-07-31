@@ -1,5 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { MatTableDataSource } from '@angular/material/table';
 
 import { TrainingService } from './../../services/training.service';
 import { Exercise } from './../../models/exercise.model';
@@ -11,7 +12,16 @@ import { Exercise } from './../../models/exercise.model';
 })
 export class TrainingPastPageComponent implements OnInit, OnDestroy {
 
-  exercises: Exercise[] = [];
+  dataSource = new MatTableDataSource<Exercise>();
+  displayedColumns: string[] = [
+    'date',
+    'name',
+    'calories',
+    'duration',
+    'state',
+  ];
+
+
   private subs: { [sub: string]: Subscription } = {};
 
   constructor(
@@ -22,7 +32,7 @@ export class TrainingPastPageComponent implements OnInit, OnDestroy {
     this.subs.pastExercises = this.trainingService.getPastExercises()
       .subscribe(
         (exercises: Exercise[]) => {
-          this.exercises = exercises;
+          this.dataSource.data = exercises;
         }
       );
   }

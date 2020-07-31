@@ -1,8 +1,56 @@
-<h1>Past exercises</h1>
+<mat-table [dataSource]="dataSource">
 
-<ul>
-  <li *ngFor="let exercise of exercises">
-    {{ exercise.name }}
-    ({{ exercise.date | date }})
-  </li>
-</ul>
+  <!-- Date -->
+  <ng-container matColumnDef="date">
+    <mat-header-cell *matHeaderCellDef>
+      Date
+    </mat-header-cell>
+    <mat-cell *matCellDef="let element">
+      {{ element.date | date }}
+    </mat-cell>
+  </ng-container>
+
+  <!-- Name -->
+  <ng-container matColumnDef="name">
+    <mat-header-cell *matHeaderCellDef>
+      Name
+    </mat-header-cell>
+    <mat-cell *matCellDef="let element">
+      {{ element.name }}
+    </mat-cell>
+  </ng-container>
+
+  <!-- Calories -->
+  <ng-container matColumnDef="calories">
+    <mat-header-cell *matHeaderCellDef>
+      Calories
+    </mat-header-cell>
+    <mat-cell *matCellDef="let element">
+      {{ element.calories | number }}
+    </mat-cell>
+  </ng-container>
+
+  <!-- Duration -->
+  <ng-container matColumnDef="duration">
+    <mat-header-cell *matHeaderCellDef>
+      Duration
+    </mat-header-cell>
+    <mat-cell *matCellDef="let element">
+      {{ element.duration | number }}
+    </mat-cell>
+  </ng-container>
+
+  <!-- State -->
+  <ng-container matColumnDef="state">
+    <mat-header-cell *matHeaderCellDef>
+      State
+    </mat-header-cell>
+    <mat-cell *matCellDef="let element">
+      {{ element.state[0].toUpperCase() + element.state.slice(1) }}
+    </mat-cell>
+  </ng-container>
+
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+
+</mat-table>
