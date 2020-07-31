@@ -14,7 +14,7 @@
       <h2>{{ progress }}%</h2>
 
       <p>{{ elapsedSeconds }} / {{ exercise.duration }} seconds</p>
-      <p>{{ burnedCalories }} / {{ exercise.calories }} Kcal</p>
+      <p>{{ burnedCalories?.toFixed(1) }} / {{ exercise.calories }} Kcal</p>
 
     </mat-card-content>
 
