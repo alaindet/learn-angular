@@ -51,6 +51,7 @@ export class TrainingCurrentPageComponent implements OnInit {
     this.elapsedSeconds += 1;
     this.progress = Math.round(100 * this.elapsedSeconds / this.exercise.duration);
     this.burnedCalories = (this.progress / 100) * this.exercise.calories;
+    this.burnedCalories = Math.round(this.burnedCalories * 100) / 100;
   }
 
   private onDialogClose(answer: 'yes' | 'no') {

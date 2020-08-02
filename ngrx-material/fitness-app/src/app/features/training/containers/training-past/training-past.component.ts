@@ -1,6 +1,8 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit, OnDestroy, ViewChild } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { MatTableDataSource } from '@angular/material/table';
+import { MatSort } from '@angular/material/sort';
+import { MatPaginator } from '@angular/material/paginator';
 
 import { TrainingService } from './../../services/training.service';
 import { Exercise } from './../../models/exercise.model';
@@ -10,7 +12,10 @@ import { Exercise } from './../../models/exercise.model';
   templateUrl: './training-past.component.html',
   styleUrls: ['./training-past.component.scss']
 })
-export class TrainingPastPageComponent implements OnInit, OnDestroy {
+export class TrainingPastPageComponent implements OnInit, AfterViewInit, OnDestroy {
+
+  @ViewChild(MatSort) sortRef: MatSort;
+  @ViewChild(MatPaginator) paginatorRef: MatPaginator;
 
   dataSource = new MatTableDataSource<Exercise>();
   displayedColumns: string[] = [
@@ -37,9 +42,18 @@ export class TrainingPastPageComponent implements OnInit, OnDestroy {
       );
   }
 
+  ngAfterViewInit() {
+    this.dataSource.sort = this.sortRef;
+    this.dataSource.paginator = this.paginatorRef;
+  }
+
   ngOnDestroy() {
     for (const sub in this.subs) {
       this.subs[sub].unsubscribe();
     }
+  }
+
+  onFilterData(text: string) {
+    this.dataSource.filter = text.trim().toLowerCase();
   }
 }
