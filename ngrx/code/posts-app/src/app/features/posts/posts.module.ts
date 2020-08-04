@@ -3,14 +3,16 @@ import { RouterModule, Routes } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 
+import { UiBreadcrumbsModule } from './../../shared/ui/components/breadcrumbs/breadcrumbs.module';
+import { UiButtonModule } from './../../shared/ui/components/button/button.module';
+import { UiCardModule } from './../../shared/ui/components/card/card.module';
+import { UiGhostDotsModule } from './../../shared/ui/components/ghost/dots/dots.module';
+import { UiGridModule } from './../../shared/ui/components/grid/grid.module';
+
 import { PostsContainerComponent } from './containers/posts/posts.component';
 import { PostContainerComponent } from './containers/post/post.component';
 import { PostsApiService } from './services/posts-api.service';
 import { PostsService } from './services/posts.service';
-import { UiBreadcrumbsModule } from './../../shared/ui/components/breadcrumbs/breadcrumbs.module';
-import { UiButtonModule } from './../../shared/ui/components/button/button.module';
-import { UiCardModule } from './../../shared/ui/components/card/card.module';
-import { UiGridModule } from './../../shared/ui/components/grid/grid.module';
 
 const routes: Routes = [
   {
@@ -32,6 +34,7 @@ const routes: Routes = [
     UiBreadcrumbsModule,
     UiButtonModule,
     UiCardModule,
+    UiGhostDotsModule,
     UiGridModule,
   ],
   declarations: [
