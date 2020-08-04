@@ -7,6 +7,7 @@ import { UiAlertModule } from './../components/alert/alert.module';
 import { UiBreadcrumbsModule } from './../components/breadcrumbs/breadcrumbs.module';
 import { UiButtonModule } from './../components/button/button.module';
 import { UiCardModule } from './../components/card/card.module';
+import { UiGhostDotsModule } from './../components/ghost-dots/ghost-dots.module';
 import { UiGridModule } from './../components/grid/grid.module';
 import { UiPaginationModule } from './../components/pagination/pagination.module';
 
@@ -16,6 +17,7 @@ import { DemoUiColorPage } from './pages/color/color.component';
 import { DemoUiBreadcrumbsPage } from './pages/breadcrumbs/breadcrumbs.component';
 import { DemoUiButtonPage } from './pages/button/button.component';
 import { DemoUiCardPage } from './pages/card/card.component';
+import { DemoUiGhostPage } from './pages/ghost/ghost.component';
 import { DemoUiGridPage } from './pages/grid/grid.component';
 import { DemoUiPaginationPage } from './pages/pagination/pagination.component';
 import { DemoUiTypographyPage } from './pages/typography/typography.component';
@@ -52,6 +54,11 @@ export const routes: Routes = [
     data: { label: 'Demo: Color' },
   },
   {
+    path: 'ghost',
+    component: DemoUiGhostPage,
+    data: { label: 'Demo: Ghost' },
+  },
+  {
     path: 'grid',
     component: DemoUiGridPage,
     data: { label: 'Demo: Grid' },
@@ -78,6 +85,7 @@ export const routes: Routes = [
     UiBreadcrumbsModule,
     UiButtonModule,
     UiCardModule,
+    UiGhostDotsModule,
     UiGridModule,
     UiPaginationModule,
   ],
@@ -88,6 +96,7 @@ export const routes: Routes = [
     DemoUiButtonPage,
     DemoUiCardPage,
     DemoUiColorPage,
+    DemoUiGhostPage,
     DemoUiGridPage,
     DemoUiPaginationPage,
     DemoUiTypographyPage,
