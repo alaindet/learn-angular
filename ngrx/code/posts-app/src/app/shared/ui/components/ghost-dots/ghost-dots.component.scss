@@ -1,38 +1,40 @@
 @import 'src/app/style';
-@import 'src/app/shared/ui/common/animations/flash';
+@import 'src/app/shared/ui/common/scss/animations/flash';
+@import 'src/app/shared/ui/common/scss/mixins/circle';
 
-$medium-size: 1.66rem;
-$dark: rgba(0,0,0,.1);
-$light: rgba(255,255,255,.99);
+$dark: rgba(0,0,0,0.2);
+$light: rgba(255,255,255,0.33);
 
-:host {
-  display: flex;
+.dots {
+  display: inline-flex;
   align-items: center;
+
+  &.size-small .dot {
+    @include ui-circle(1rem);
+  }
+
+  &.size-medium .dot {
+    @include ui-circle(1.66rem);
+  }
+
+  &.size-large .dot {
+    @include ui-circle(2.5rem);
+  }
 }
 
 .dot {
   border-radius: 50%;
   background-color: $dark;
-  margin: 0.66rem;
+  background-image: linear-gradient(90deg, transparent 0%, $light 50%, transparent 100%);
+  background-size: 50%;
+  background-repeat: no-repeat;
+  animation: ui-flash 0.5s linear infinite;
 
-  &.size-medium {
-    min-width: $medium-size;
-    width: $medium-size;
-    max-width: $medium-size;
-    min-height: $medium-size;
-    height: $medium-size;
-    max-height: $medium-size;
+  &.left {
+    margin-right: 0.66rem;
+  }
+
+  &.right {
+    margin-left: 0.66rem;
   }
 }
-
-// $grey: #eee;
-// $grey-light: #fff;
-
-// .ghost-rect {
-//   background-color: $grey;
-//   background-image: linear-gradient(90deg, $grey 0%, $grey-light 50%, $grey 100%);
-//   background-size: 50%;
-//   background-repeat: no-repeat;
-//   animation: flash 1s linear infinite;
-//   border-radius: 0.33rem;
-// }
