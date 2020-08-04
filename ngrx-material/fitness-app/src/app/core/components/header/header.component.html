@@ -1,0 +1,28 @@
+<mat-toolbar color="primary">
+
+  <!-- Menu -->
+  <div class="menu-handle">
+    <button mat-icon-button (click)="onSidenavOpen()">
+      <mat-icon>menu</mat-icon>
+    </button>
+  </div>
+
+  <!-- Logo -->
+  <div class="logo">
+    <a routerLink="/">TRAINING APP</a>
+  </div>
+
+  <!-- Links -->
+  <ul class="links">
+
+    <li *ngFor="let link of links" class="link">
+      <a [routerLink]="link.path">{{ link.label }}</a>
+    </li>
+
+    <li *ngIf="authService.isAuthenticated$ | async" class="link">
+      <a (click)="onLogout()">Logout</a>
+    </li>
+
+  </ul>
+
+</mat-toolbar>

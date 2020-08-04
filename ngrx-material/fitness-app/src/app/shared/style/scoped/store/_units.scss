@@ -1,0 +1,7 @@
+// Default base unit is 0.5rem
+
+$_: pal-set-merge('units', (
+
+  'sidenav': 32, // 16rem
+
+));

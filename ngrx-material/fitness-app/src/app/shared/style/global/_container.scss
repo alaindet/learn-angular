@@ -1,0 +1,12 @@
+.container {
+  @include pal((
+    'any': ( space: px2, size: w-full ),
+    'tablet': ( space: px4 ),
+    'desktop': ( space: px8 ),
+  ));
+
+  @include pal-media-query(wider, up) {
+    margin: 0 auto;
+    max-width: 60rem;
+  }
+}

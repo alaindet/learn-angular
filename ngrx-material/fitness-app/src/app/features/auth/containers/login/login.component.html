@@ -1,0 +1,67 @@
+<section>
+  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+
+    <!-- Email -->
+    <mat-form-field>
+      <input
+        matInput
+        type="email"
+        placeholder="Your email..."
+        formControlName="email"
+      >
+
+      <!-- Validation errors -->
+      <ng-container *ngIf="emailField.touched && emailField.invalid">
+
+        <mat-error *ngIf="emailField.errors.required">
+          Email is required
+        </mat-error>
+
+        <mat-error *ngIf="emailField.errors.email">
+          Email is invalid
+        </mat-error>
+
+      </ng-container>
+
+    </mat-form-field>
+
+    <!-- Password -->
+    <mat-form-field>
+      <input
+        matInput
+        type="password"
+        placeholder="Your password..."
+        formControlName="password"
+      >
+
+      <!-- Validtion errors -->
+      <ng-container *ngIf="passwordField.touched && passwordField.invalid">
+
+        <mat-error *ngIf="passwordField.errors.required">
+          Password is required
+        </mat-error>
+
+        <mat-error *ngIf="passwordField.errors.minLength || passwordField.errors.maxLength">
+          Password must be 8-12 characters long
+        </mat-error>
+
+        <mat-error *ngIf="passwordField.errors.pattern">
+          Password must have at least one: lowercase, uppercase, digit and special character
+        </mat-error>
+
+      </ng-container>
+
+    </mat-form-field>
+
+    <!-- Submit -->
+    <button
+      type="submit"
+      mat-raised-button
+      color="primary"
+      [disabled]="loginForm.invalid"
+    >
+      Submit
+    </button>
+
+  </form>
+</section>
