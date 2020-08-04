@@ -13,7 +13,7 @@
       sizeMd="6"
       sizeLg="4"
     >
-      <ui-card>
+      <ui-card [fullHeight]="true">
         <h2 slot="title">{{ post.title[0].toUpperCase() + post.title.slice(1, 20) + '...' }}</h2>
         <div slot="body">
           {{ post.body.slice(0, 20) + '...' }}

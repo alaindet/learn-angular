@@ -1,6 +1,6 @@
 @import 'src/app/style';
 
-.card {
+:host {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
