@@ -8,7 +8,8 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "json-server": "json-server -w -c ./json-server/config.json ./json-server/db.json"
+    "json-server": "json-server -w -c ./json-server/config.json ./json-server/db.json",
+    "json-server-delayed": "json-server -w -d 2000 -c ./json-server/config.json ./json-server/db.json"
   },
   "private": true,
   "dependencies": {
