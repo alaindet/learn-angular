@@ -8,6 +8,7 @@ import { UiBreadcrumbsModule } from './../components/breadcrumbs/breadcrumbs.mod
 import { UiButtonModule } from './../components/button/button.module';
 import { UiCardModule } from './../components/card/card.module';
 import { UiGhostDotsModule } from './../components/ghost/dots/dots.module';
+import { UiGhostRectangleModule } from './../components/ghost/rectangle/rectangle.module';
 import { UiGridModule } from './../components/grid/grid.module';
 import { UiPaginationModule } from './../components/pagination/pagination.module';
 
@@ -86,6 +87,7 @@ export const routes: Routes = [
     UiButtonModule,
     UiCardModule,
     UiGhostDotsModule,
+    UiGhostRectangleModule,
     UiGridModule,
     UiPaginationModule,
   ],
