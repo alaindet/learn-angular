@@ -7,7 +7,7 @@ import { UiAlertModule } from './../components/alert/alert.module';
 import { UiBreadcrumbsModule } from './../components/breadcrumbs/breadcrumbs.module';
 import { UiButtonModule } from './../components/button/button.module';
 import { UiCardModule } from './../components/card/card.module';
-import { UiGhostDotsModule } from './../components/ghost-dots/ghost-dots.module';
+import { UiGhostDotsModule } from './../components/ghost/dots/dots.module';
 import { UiGridModule } from './../components/grid/grid.module';
 import { UiPaginationModule } from './../components/pagination/pagination.module';
 

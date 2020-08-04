@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { UiGhostDotsComponent } from './ghost-dots.component';
+import { UiGhostDotsComponent } from './dots.component';
 
 @NgModule({
   declarations: [

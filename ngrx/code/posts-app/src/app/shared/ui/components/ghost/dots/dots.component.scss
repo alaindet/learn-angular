@@ -2,6 +2,8 @@
 @import 'src/app/shared/ui/common/scss/mixins/circle';
 @import 'src/app/shared/ui/common/scss/ghost';
 
+$dark: rgba(0,0,0,.1);
+$light: rgba(255,255,255,.25);
 $flash-anim: ui-ghost-flash-animation 0.5s linear infinite;
 $float-anim: ui-ghost-float-animation 0.5s linear infinite;
 $float-delayed-anim: ui-ghost-float-animation 0.5s 0.25s linear infinite;
@@ -28,7 +30,7 @@ $float-delayed-anim: ui-ghost-float-animation 0.5s 0.25s linear infinite;
 }
 
 .dot {
-  @include ui-ghost-element();
+  @include ui-ghost-element($dark, $light);
   border-radius: 50%;
 
   &.left { margin-right: 0.66rem }
