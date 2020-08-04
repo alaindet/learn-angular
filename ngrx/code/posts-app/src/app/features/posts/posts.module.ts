@@ -4,6 +4,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 
 import { PostsContainerComponent } from './containers/posts/posts.component';
+import { PostContainerComponent } from './containers/post/post.component';
 import { PostsApiService } from './services/posts-api.service';
 import { PostsService } from './services/posts.service';
 import { UiBreadcrumbsModule } from './../../shared/ui/components/breadcrumbs/breadcrumbs.module';
@@ -15,7 +16,11 @@ const routes: Routes = [
   {
     path: '',
     component: PostsContainerComponent,
-  }
+  },
+  {
+    path: ':id',
+    component: PostContainerComponent,
+  },
 ];
 
 @NgModule({
@@ -31,6 +36,7 @@ const routes: Routes = [
   ],
   declarations: [
     PostsContainerComponent,
+    PostContainerComponent,
   ],
   providers: [
     PostsApiService,

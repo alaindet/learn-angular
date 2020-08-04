@@ -1,4 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 
 import { UiCoreService } from 'src/app/core/services/ui.service';
@@ -17,6 +18,7 @@ export class PostsContainerComponent implements OnInit, OnDestroy {
   constructor(
     public ui: UiCoreService,
     private postsService: PostsService,
+    private router: Router,
   ) {}
 
   ngOnInit() {
@@ -35,6 +37,6 @@ export class PostsContainerComponent implements OnInit, OnDestroy {
   }
 
   onShowPost(index: number) {
-    console.log('onShowPost', index);
+    this.router.navigate(['/posts', index]);
   }
 }
