@@ -7,6 +7,7 @@ import { UiBreadcrumbsModule } from './../../shared/ui/components/breadcrumbs/br
 import { UiButtonModule } from './../../shared/ui/components/button/button.module';
 import { UiCardModule } from './../../shared/ui/components/card/card.module';
 import { UiGhostDotsModule } from './../../shared/ui/components/ghost/dots/dots.module';
+import { UiGhostRectangleModule } from './../../shared/ui/components/ghost/rectangle/rectangle.module';
 import { UiGridModule } from './../../shared/ui/components/grid/grid.module';
 
 import { PostsContainerComponent } from './containers/posts/posts.component';
@@ -35,6 +36,7 @@ const routes: Routes = [
     UiButtonModule,
     UiCardModule,
     UiGhostDotsModule,
+    UiGhostRectangleModule,
     UiGridModule,
   ],
   declarations: [

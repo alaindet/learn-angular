@@ -28,7 +28,25 @@
 </ng-container>
 
 <ng-template #loadingRef>
-  <div class="ghost-dots">
-    <ui-ghost-dots></ui-ghost-dots>
-  </div>
+  <ui-row withGutters>
+    <ui-col
+      *ngFor="let item of [1, 2, 3]"
+      size="12"
+      sizeMd="6"
+      sizeLg="4"
+    >
+      <ui-card [fullHeight]="true">
+        <h2 slot="title">
+          <ui-ghost-rectangle width="80%"></ui-ghost-rectangle>
+        </h2>
+        <div slot="body">
+          <ui-ghost-rectangle></ui-ghost-rectangle>
+          <ui-ghost-rectangle width="66%"></ui-ghost-rectangle>
+        </div>
+        <div slot="footer">
+          <ui-ghost-rectangle width="20%" height="2rem"></ui-ghost-rectangle>
+        </div>
+      </ui-card>
+    </ui-col>
+  </ui-row>
 </ng-template>
