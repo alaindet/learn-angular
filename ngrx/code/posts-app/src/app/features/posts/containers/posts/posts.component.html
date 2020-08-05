@@ -6,6 +6,12 @@
 ]"></ui-breadcrumbs>
 
 <ng-container *ngIf="!(ui.loading | async); else loadingRef">
+  <ng-container
+    [ngTemplateOutlet]="posts.length ? postsListRef : noPostsRef"
+  ></ng-container>
+</ng-container>
+
+<ng-template #postsListRef>
   <ui-row withGutters>
     <ui-col
       *ngFor="let post of posts; let index = index"
@@ -24,7 +30,14 @@
       </ui-card>
     </ui-col>
   </ui-row>
-</ng-container>
+
+  <ui-pagination
+    simple
+    [current]="page"
+    color="secondary"
+    (clicked)="onChangePage($event)"
+  ></ui-pagination>
+</ng-template>
 
 <ng-template #loadingRef>
   <ui-row withGutters>
@@ -48,4 +61,8 @@
       </ui-card>
     </ui-col>
   </ui-row>
+</ng-template>
+
+<ng-template #noPostsRef>
+  <p>No posts to show</p>
 </ng-template>

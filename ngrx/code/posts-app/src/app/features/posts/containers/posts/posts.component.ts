@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { tap, switchMap } from 'rxjs/operators';
 
 import { UiCoreService } from 'src/app/core/services/ui.service';
 import { PostsService } from './../../services/posts.service';
@@ -12,6 +13,7 @@ import { Post } from './../../models/post.interface';
 })
 export class PostsContainerComponent implements OnInit, OnDestroy {
 
+  page: number;
   posts: Post[] = [];
   subs: { [sub: string]: Subscription } = {};
 
@@ -19,24 +21,37 @@ export class PostsContainerComponent implements OnInit, OnDestroy {
     public ui: UiCoreService,
     private postsService: PostsService,
     private router: Router,
+    private route: ActivatedRoute,
   ) {}
 
   ngOnInit() {
-    this.ui.setLoading(true);
-    this.subs.posts = this.postsService.getPosts()
-      .subscribe((users: Post[]) => {
-        this.posts = users;
+    this.subs.posts = this.route.queryParams
+      .pipe(
+        tap(() => this.ui.setLoading(true)),
+        switchMap((params: Params) => {
+          const page = params['page'] || 1;
+          this.page = +page;
+          return this.postsService.getPosts(page);
+        })
+      )
+      // TODO: Error handling
+      .subscribe((posts: Post[]) => {
+        this.posts = posts;
         this.ui.setLoading(false);
-      })
+      });
   }
 
   ngOnDestroy() {
-    for (const sub of Object.values(this.subs)) {
-      sub.unsubscribe();
+    for (const sub in this.subs) {
+      this.subs[sub].unsubscribe();
     }
   }
 
   onShowPost(index: number) {
     this.router.navigate(['/posts', index]);
+  }
+
+  onChangePage(page: number) {
+    this.router.navigate(['/posts'], { queryParams: { page } });
   }
 }

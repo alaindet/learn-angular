@@ -9,6 +9,7 @@ import { UiCardModule } from './../../shared/ui/components/card/card.module';
 import { UiGhostDotsModule } from './../../shared/ui/components/ghost/dots/dots.module';
 import { UiGhostRectangleModule } from './../../shared/ui/components/ghost/rectangle/rectangle.module';
 import { UiGridModule } from './../../shared/ui/components/grid/grid.module';
+import { UiPaginationModule } from './../../shared/ui/components/pagination/pagination.module';
 
 import { PostsContainerComponent } from './containers/posts/posts.component';
 import { PostContainerComponent } from './containers/post/post.component';
@@ -38,6 +39,7 @@ const routes: Routes = [
     UiGhostDotsModule,
     UiGhostRectangleModule,
     UiGridModule,
+    UiPaginationModule,
   ],
   declarations: [
     PostsContainerComponent,
