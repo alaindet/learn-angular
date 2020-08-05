@@ -11,7 +11,7 @@ export class PostsService {
     private api: PostsApiService,
   ) {}
 
-  getPosts(): Observable<Post[]> {
-    return this.api.getPosts();
+  getPosts(page = 1): Observable<Post[]> {
+    return this.api.getPosts(page);
   }
 }

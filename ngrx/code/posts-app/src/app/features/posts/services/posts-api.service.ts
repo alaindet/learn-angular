@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 import { Post } from './../models/post.interface';
@@ -7,20 +7,23 @@ import { Post } from './../models/post.interface';
 @Injectable()
 export class PostsApiService {
 
-  defaultOptions: any;
+  baseUrl = 'http://localhost:4242';
 
   constructor(
     private http: HttpClient,
-  ) {
-    this.defaultOptions = {
-      header: new HttpHeaders({
-        'Content-Type': 'application/json'
-      })
-    };
-  }
+  ) {}
 
-  getPosts(): Observable<Post[]> {
-    const url = 'http://localhost:4242/posts';
-    return this.http.get<Post[]>(url);
+  getPosts(page = 1): Observable<Post[]> {
+
+    const url = `${this.baseUrl}/posts`;
+
+    const options = {
+      header: new HttpHeaders()
+        .set('Content-Type', 'application/json'),
+      params: new HttpParams()
+        .set('_page', page.toString()),
+    };
+
+    return this.http.get<Post[]>(url, options);
   }
 }
