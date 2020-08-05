@@ -4,4 +4,6 @@ export interface UiPagination {
   current: UiCommon['asNumber'];
   total: UiCommon['asNumber'];
   show: UiCommon['asNumber'];
+  simple: UiCommon['asBoolean'];
+  color: 'primary' | 'secondary';
 }

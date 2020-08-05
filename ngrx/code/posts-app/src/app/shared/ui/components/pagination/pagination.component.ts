@@ -2,6 +2,7 @@ import { Component, ChangeDetectionStrategy, OnChanges, Input, Output, EventEmit
 import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
 
 import { toNumber } from 'src/app/shared/ui/common/functions/to-number.function';
+import { toBoolean } from 'src/app/shared/ui/common/functions/to-boolean.function';
 import { UiPagination } from './pagination.interface';
 
 @Component({
@@ -13,9 +14,12 @@ import { UiPagination } from './pagination.interface';
 export class UiPaginationComponent implements OnChanges {
 
   @Input() current: UiPagination['current'];
-  @Input() total: UiPagination['total'];
+  @Input() total: UiPagination['total'] = -1;
   @Input() show: UiPagination['show'] = 3;
+  @Input() simple: UiPagination['simple'] = false;
+  @Input() color: UiPagination['color'] = 'primary';
   @Output() clicked = new EventEmitter<number>();
+
   pages: Array<number | null> = null;
   previous: number | null = null;
   next: number | null = null;
@@ -26,9 +30,16 @@ export class UiPaginationComponent implements OnChanges {
     this.current = toNumber(this.current);
     this.total = toNumber(this.total);
     this.show = toNumber(this.show);
-    this.pages = this.calculatePageNumbers(this.current, this.total, this.show);
+    this.simple = toBoolean(this.simple);
+
+    if (!this.simple) {
+      this.pages = this.calculatePageNumbers(this.current, this.total, this.show);
+      this.next = this.calculateNextPage(this.current, this.total);
+    } else {
+      this.next = +this.current + 1;
+    }
+
     this.previous = this.calculatePreviousPage(this.current);
-    this.next = this.calculateNextPage(this.current, this.total);
   }
 
   public onClick(index: number): void {
@@ -98,6 +109,11 @@ export class UiPaginationComponent implements OnChanges {
    * If null, disable next link
    */
   private calculateNextPage(current: number, total: number): number | null {
+
+    if (total === -1) {
+      return (+current) + 1;
+    }
+
     return (current < total) ? (+current) + 1 : null;
   }
 }
