@@ -18,12 +18,21 @@ export class PostsApiService {
     const url = `${this.baseUrl}/posts`;
 
     const options = {
-      header: new HttpHeaders()
-        .set('Content-Type', 'application/json'),
-      params: new HttpParams()
-        .set('_page', page.toString()),
+      headers: new HttpHeaders().set('Content-Type', 'application/json'),
+      params: new HttpParams().set('_page', page.toString()),
     };
 
     return this.http.get<Post[]>(url, options);
+  }
+
+  getPost(id: string): Observable<Post> {
+
+    const url = `${this.baseUrl}/posts/${id}`;
+
+    const options = {
+      headers: new HttpHeaders().set('Content-Type', 'application/json'),
+    };
+
+    return this.http.get<Post>(url, options);
   }
 }

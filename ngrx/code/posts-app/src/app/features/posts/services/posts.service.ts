@@ -11,6 +11,10 @@ export class PostsService {
     private api: PostsApiService,
   ) {}
 
+  getPost(id: string): Observable<Post> {
+    return this.api.getPost(id);
+  }
+
   getPosts(page = 1): Observable<Post[]> {
     return this.api.getPosts(page);
   }

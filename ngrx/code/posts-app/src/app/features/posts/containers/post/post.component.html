@@ -1,1 +1,11 @@
-<p>Post works!</p>
+<h1>Post</h1>
+
+<ui-breadcrumbs [links]="breadcrumbs"></ui-breadcrumbs>
+
+<ng-container *ngIf="!(ui.loading | async); else loadingRef">
+
+</ng-container>
+
+<ng-template #loadingRef>
+  Loading...
+</ng-template>

@@ -1,4 +1,5 @@
 import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
+import { Location } from '@angular/common';
 
 import { UiBreadcrumbs } from './breadcrumbs.interface';
 
@@ -11,4 +12,12 @@ import { UiBreadcrumbs } from './breadcrumbs.interface';
 export class UiBreadcrumbsComponent implements UiBreadcrumbs {
 
   @Input() links: UiBreadcrumbs['links'] = [];
+
+  constructor(
+    private location: Location,
+  ) {}
+
+  onGoBack() {
+    this.location.back();
+  }
 }

@@ -2,7 +2,14 @@
   <ng-container *ngFor="let link of links; let last = last">
 
     <ng-container
-      [ngTemplateOutlet]="link.path ? linkSegment : noLinkSegment"
+      [ngTemplateOutlet]="
+        link.asBack
+          ? backLinkRef
+          : (!link.path
+            ? noLinkSegmentRef
+            : linkSegmentRef
+          )
+      "
       [ngTemplateOutletContext]="{ link: link }"
     ></ng-container>
 
@@ -11,10 +18,14 @@
   </ng-container>
 </ul>
 
-<ng-template #noLinkSegment let-link="link">
+<ng-template #linkSegmentRef let-link="link">
+  <a [routerLink]="link.path" class="segment link">{{ link.label }}</a>
+</ng-template>
+
+<ng-template #noLinkSegmentRef let-link="link">
   <span class="segment">{{ link.label }}</span>
 </ng-template>
 
-<ng-template #linkSegment let-link="link">
-  <a [routerLink]="link.path" class="segment link">{{ link.label }}</a>
+<ng-template #backLinkRef let-link="link">
+  <a class="segment link" (click)="onGoBack()">{{ link.label }}</a>
 </ng-template>
