@@ -9,6 +9,11 @@
   border-radius: 1.5rem;
   box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
   background-color: pal-get('colors.white');
+  transition: opacity 0.1s linear;
+}
+
+:host(.dismissing) {
+  opacity: 0;
 }
 
 .header {
@@ -26,11 +31,17 @@
   margin-bottom: 0.66rem;
 }
 
-.dismiss {
-  font-size: 2rem;
+.dismiss-button {
+  font-size: 1.66rem;
+  color: pal-get('colors.secondary');
+  line-height: 1rem;
   position: absolute;
-  top: -1rem;
-  right: -0.5rem;
+  top: -0.66rem;
+  right: -0.66rem;
+  border: none;
+  background-color: transparent;
+  padding: 0;
+  margin: 0;
   cursor: pointer;
 
   &:hover {

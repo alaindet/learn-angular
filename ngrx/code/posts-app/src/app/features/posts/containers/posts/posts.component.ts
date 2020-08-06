@@ -47,11 +47,21 @@ export class PostsContainerComponent implements OnInit, OnDestroy {
     }
   }
 
-  onShowPost(index: number) {
-    this.router.navigate(['/posts', index]);
+  onShowPost(id: string) {
+    this.router.navigate(['/posts', id]);
   }
 
   onChangePage(page: number) {
     this.router.navigate(['/posts'], { queryParams: { page } });
+  }
+
+  /**
+   * Hide posts at runtime, do not remove from database
+   *
+   * @param id
+   */
+  onRemovePost(id: string) {
+    const _id = +id;
+    this.posts = this.posts.filter((post: Post) => post.id !== _id);
   }
 }

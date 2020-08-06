@@ -30,7 +30,10 @@ export class UiCardComponent implements UiCard, OnChanges {
   }
 
   onDismiss() {
-    this.dismissed.emit();
+    this.renderer.addClass(this.element.nativeElement, 'dismissing');
+    setTimeout(() => {
+      this.dismissed.emit();
+    }, 200);
   }
 
   private makeFullHeight() {

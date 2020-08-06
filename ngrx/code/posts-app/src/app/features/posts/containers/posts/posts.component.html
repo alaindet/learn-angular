@@ -14,18 +14,18 @@
 <ng-template #postsListRef>
   <ui-row withGutters>
     <ui-col
-      *ngFor="let post of posts; let index = index"
+      *ngFor="let post of posts"
       size="12"
       sizeMd="6"
       sizeLg="4"
     >
-      <ui-card [fullHeight]="true">
+      <ui-card fullHeight dismissable (dismissed)="onRemovePost(post.id)">
         <h2 slot="title">{{ post.title[0].toUpperCase() + post.title.slice(1, 20) + '...' }}</h2>
         <div slot="body">
           {{ post.body.slice(0, 20) + '...' }}
         </div>
         <div slot="footer">
-          <ui-button size="small" (click)="onShowPost(index)">Show</ui-button>
+          <ui-button size="small" (click)="onShowPost(post.id)">Show</ui-button>
         </div>
       </ui-card>
     </ui-col>
@@ -47,7 +47,7 @@
       sizeMd="6"
       sizeLg="4"
     >
-      <ui-card [fullHeight]="true">
+      <ui-card fullHeight>
         <h2 slot="title">
           <ui-ghost-rectangle width="80%"></ui-ghost-rectangle>
         </h2>
