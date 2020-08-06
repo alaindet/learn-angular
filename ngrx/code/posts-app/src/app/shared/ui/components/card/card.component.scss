@@ -27,7 +27,15 @@
 }
 
 .dismiss {
-  font-size: 1.5rem;
+  font-size: 2rem;
+  position: absolute;
+  top: -1rem;
+  right: -0.5rem;
+  cursor: pointer;
+
+  &:hover {
+    color: pal-get('colors.primary-mid-light');
+  }
 }
 
 .footer:not(:empty) {

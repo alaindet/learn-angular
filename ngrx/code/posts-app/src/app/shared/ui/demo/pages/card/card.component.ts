@@ -5,4 +5,7 @@ import { Component } from '@angular/core';
 })
 export class DemoUiCardPage {
 
+  onDismiss() {
+    console.log('onDismiss');
+  }
 }

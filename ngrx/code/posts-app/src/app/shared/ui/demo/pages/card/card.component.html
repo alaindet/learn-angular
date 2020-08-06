@@ -7,6 +7,21 @@
   ]"
 ></ui-breadcrumbs>
 
+<p>
+  Every slot is optional
+</p>
+
+<h2>Basic <small>(slots: title, body)</small></h2>
+
+<ui-card>
+  <h2 slot="title">I am a title</h2>
+  <div slot="body">
+    Lorem ipsum dolor sit amet...
+  </div>
+</ui-card>
+
+<h2>Advanced <small>(slots: title, subtitle, body, action)</small></h2>
+
 <ui-card>
   <h2 slot="title">I am a title</h2>
   <h3 slot="subtitle">This is a subtitle</h3>
@@ -16,5 +31,17 @@
   <div slot="footer">
     <ui-button>Edit</ui-button>
     <ui-button color="secondary">Delete</ui-button>
+  </div>
+</ui-card>
+
+<h2>Dismissable</h2>
+
+<ui-card dismissable (dismissed)="onDismiss()">
+  <h2 slot="title">I am a title</h2>
+  <div slot="body">
+    Lorem ipsum dolor sit amet...
+  </div>
+  <div slot="footer">
+    <ui-button color="secondary-outline">Save</ui-button>
   </div>
 </ui-card>
