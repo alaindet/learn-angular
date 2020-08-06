@@ -1,10 +1,15 @@
 <div class="header">
+
   <div class="title">
     <ng-content select="[slot='title']"></ng-content>
   </div>
+
   <div class="subtitle">
     <ng-content select="[slot='subtitle']"></ng-content>
   </div>
+
+  <div *ngIf="dismissable" class="dismiss">&times;</div>
+
 </div>
 
 <div class="body">
