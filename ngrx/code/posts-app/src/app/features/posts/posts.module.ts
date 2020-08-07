@@ -6,10 +6,12 @@ import { CommonModule } from '@angular/common';
 import { UiBreadcrumbsModule } from './../../shared/ui/components/breadcrumbs/breadcrumbs.module';
 import { UiButtonModule } from './../../shared/ui/components/button/button.module';
 import { UiCardModule } from './../../shared/ui/components/card/card.module';
+import { UiCapitalizePipeModule } from './../../shared/ui/pipes/capitalize/capitalize.module';
 import { UiGhostDotsModule } from './../../shared/ui/components/ghost/dots/dots.module';
 import { UiGhostRectangleModule } from './../../shared/ui/components/ghost/rectangle/rectangle.module';
 import { UiGridModule } from './../../shared/ui/components/grid/grid.module';
 import { UiPaginationModule } from './../../shared/ui/components/pagination/pagination.module';
+import { UiTruncatePipeModule } from './../../shared/ui/pipes/truncate/truncate.module';
 
 import { PostsContainerComponent } from './containers/posts/posts.component';
 import { PostContainerComponent } from './containers/post/post.component';
@@ -36,10 +38,12 @@ const routes: Routes = [
     UiBreadcrumbsModule,
     UiButtonModule,
     UiCardModule,
+    UiCapitalizePipeModule,
     UiGhostDotsModule,
     UiGhostRectangleModule,
     UiGridModule,
     UiPaginationModule,
+    UiTruncatePipeModule,
   ],
   declarations: [
     PostsContainerComponent,

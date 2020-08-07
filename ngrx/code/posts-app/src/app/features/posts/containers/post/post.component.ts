@@ -9,7 +9,7 @@ import { BreadcrumbLink } from 'src/app/shared/ui/components/breadcrumbs/breadcr
 import { Post } from './../../models/post.interface';
 import { PostsService } from './../../services/posts.service';
 
-const PLACEHOLDER_BREADCRUMB = 'This post';
+const PLACEHOLDER_BREADCRUMB = 'Post ...';
 
 @Component({
   templateUrl: './post.component.html',

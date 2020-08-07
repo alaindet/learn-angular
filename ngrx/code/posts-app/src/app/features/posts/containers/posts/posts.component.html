@@ -20,10 +20,8 @@
       sizeLg="4"
     >
       <ui-card fullHeight dismissable (dismissed)="onRemovePost(post.id)">
-        <h2 slot="title">{{ post.title[0].toUpperCase() + post.title.slice(1, 20) + '...' }}</h2>
-        <div slot="body">
-          {{ post.body.slice(0, 20) + '...' }}
-        </div>
+        <h2 slot="title">{{ post.title | capitalize | truncate:20:'...' }}</h2>
+        <div slot="body">{{ post.body | capitalize | truncate:20:' [...]' }}</div>
         <div slot="footer">
           <ui-button size="small" (click)="onShowPost(post.id)">Show</ui-button>
         </div>
