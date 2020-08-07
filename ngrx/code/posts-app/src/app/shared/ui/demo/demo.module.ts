@@ -7,6 +7,7 @@ import { UiAlertModule } from './../components/alert/alert.module';
 import { UiBreadcrumbsModule } from './../components/breadcrumbs/breadcrumbs.module';
 import { UiButtonModule } from './../components/button/button.module';
 import { UiCardModule } from './../components/card/card.module';
+import { UiChipModule } from './../components/chip/chip.module';
 import { UiGhostDotsModule } from './../components/ghost/dots/dots.module';
 import { UiGhostRectangleModule } from './../components/ghost/rectangle/rectangle.module';
 import { UiGridModule } from './../components/grid/grid.module';
@@ -14,6 +15,7 @@ import { UiPaginationModule } from './../components/pagination/pagination.module
 
 import { DemoUiIndexPage } from './pages/index/index.component';
 import { DemoUiAlertPage } from './pages/alert/alert.component';
+import { DemoUiChipPage } from './pages/chip/chip.component';
 import { DemoUiColorPage } from './pages/color/color.component';
 import { DemoUiBreadcrumbsPage } from './pages/breadcrumbs/breadcrumbs.component';
 import { DemoUiButtonPage } from './pages/button/button.component';
@@ -48,6 +50,11 @@ export const routes: Routes = [
     path: 'card',
     component: DemoUiCardPage,
     data: { label: 'Demo: Card' },
+  },
+  {
+    path: 'chip',
+    component: DemoUiChipPage,
+    data: { label: 'Demo: Chip' },
   },
   {
     path: 'color',
@@ -86,6 +93,7 @@ export const routes: Routes = [
     UiBreadcrumbsModule,
     UiButtonModule,
     UiCardModule,
+    UiChipModule,
     UiGhostDotsModule,
     UiGhostRectangleModule,
     UiGridModule,

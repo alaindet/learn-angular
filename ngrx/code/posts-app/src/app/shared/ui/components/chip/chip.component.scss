@@ -1,0 +1,53 @@
+@import 'src/app/style';
+
+$sizes: (
+  'small': 0.66rem,
+  'medium': 1rem,
+  'large': 1.5rem,
+);
+
+// Background => color
+$colors: (
+  'primary-dark': 'white',
+  'primary-mid-dark': 'white',
+  'primary': 'white',
+  'primary-mid-light': 'black',
+  'primary-light': 'black',
+  'secondary-dark': 'white',
+  'secondary-mid-dark': 'white',
+  'secondary': 'white',
+  'secondary-mid-light': 'black',
+  'secondary-light': 'black',
+  'grey-dark': 'white',
+  'grey-mid-dark': 'white',
+  'grey': 'white',
+  'grey-mid-light': 'black',
+  'grey-light': 'black',
+);
+
+:host {
+  display: inline-flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid red;
+
+  &.ciao {
+    color: red !important;
+  }
+
+  @each $key, $value in $sizes {
+    &.size-#{$key} {
+      height: $value;
+      border-radius: $value / 2;
+    }
+  }
+
+  @each $background, $text in $colors {
+    &.color-#{$background} {
+      @include pal((
+        color: $background $text,
+      ));
+    }
+  }
+
+}
