@@ -1,6 +1,6 @@
 import { Component, ChangeDetectionStrategy, OnChanges, Input, Renderer2, ElementRef, Output, EventEmitter } from '@angular/core';
 
-import { toBoolean } from 'src/app/shared/ui/common/functions/to-boolean.function';
+import { toBoolean } from 'src/app/shared/ui/functions/to-boolean.function';
 import { UiCard } from './card.interface';
 
 @Component({

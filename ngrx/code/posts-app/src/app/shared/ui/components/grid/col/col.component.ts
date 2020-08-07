@@ -1,6 +1,6 @@
 import { Component, ChangeDetectionStrategy, Input, ElementRef, OnChanges, Renderer2 } from '@angular/core';
 
-import { toNumber } from './../../../common/functions/to-number.function';
+import { toNumber } from './../../../functions/to-number.function';
 import { UiCol } from './col.interface';
 
 @Component({

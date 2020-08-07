@@ -1,8 +1,8 @@
 import { Component, ChangeDetectionStrategy, OnChanges, Input, Output, EventEmitter } from '@angular/core';
 import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
 
-import { toNumber } from 'src/app/shared/ui/common/functions/to-number.function';
-import { toBoolean } from 'src/app/shared/ui/common/functions/to-boolean.function';
+import { toNumber } from 'src/app/shared/ui/functions/to-number.function';
+import { toBoolean } from 'src/app/shared/ui/functions/to-boolean.function';
 import { UiPagination } from './pagination.interface';
 
 @Component({

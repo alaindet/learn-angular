@@ -1,4 +1,4 @@
-import { UiCommon } from './../../../common/models/common.interface';
+import { UiCommon } from './../../../models/common.interface';
 
 export interface UiRow {
   noWrap: UiCommon['asBoolean'];
