@@ -9,6 +9,7 @@ export class UiCoreService {
   private alert$ = new BehaviorSubject<UiAlert | null>(null);
   private alertTimeout: any;
   private loading$ = new BehaviorSubject<boolean>(false);
+  private loaded$ = new BehaviorSubject<boolean>(false);
 
   get alert(): Observable<UiAlert | null> {
     return this.alert$.asObservable();
@@ -16,6 +17,10 @@ export class UiCoreService {
 
   get loading(): Observable<boolean> {
     return this.loading$.asObservable();
+  }
+
+  get loaded(): Observable<boolean> {
+    return this.loaded$.asObservable();
   }
 
   setAlert(alert: UiAlert | null, delay: number = 3000) {
@@ -26,5 +31,6 @@ export class UiCoreService {
 
   setLoading(loading: boolean) {
     this.loading$.next(loading);
+    this.loaded$.next(!loading);
   }
 }
