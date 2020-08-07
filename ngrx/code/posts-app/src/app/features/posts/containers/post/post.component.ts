@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { tap, switchMap } from 'rxjs/operators';
 
@@ -28,8 +28,9 @@ export class PostContainerComponent implements OnInit {
   constructor(
     public ui: UiCoreService,
     private location: Location,
-    private postsService: PostsService,
+    private router: Router,
     private route: ActivatedRoute,
+    private postsService: PostsService,
   ) {}
 
   ngOnInit() {
@@ -56,6 +57,8 @@ export class PostContainerComponent implements OnInit {
   }
 
   onGoBack() {
-    this.location.back();
+    if (this.router.navigated) {
+      this.location.back();
+    }
   }
 }

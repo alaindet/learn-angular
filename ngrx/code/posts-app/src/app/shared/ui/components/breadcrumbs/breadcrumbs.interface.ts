@@ -1,5 +1,7 @@
 import { NavigationExtras } from '@angular/router';
 
+import { UiCommon } from './../../models/common.interface';
+
 type BasicBreadcrumbPath = string;
 
 type AdvancedBreadcrumbPath = {
@@ -15,4 +17,5 @@ export interface BreadcrumbLink {
 
 export interface UiBreadcrumbs {
   links: BreadcrumbLink[];
+  withBack?: UiCommon['asBoolean'];
 }

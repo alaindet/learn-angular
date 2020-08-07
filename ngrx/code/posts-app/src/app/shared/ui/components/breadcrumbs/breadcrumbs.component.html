@@ -1,31 +1,42 @@
 <ul class="breadcrumbs">
-  <ng-container *ngFor="let link of links; let last = last">
 
+  <!-- Back button -->
+  <ng-container *ngIf="withBack && isHistory">
+    <ng-container
+      [ngTemplateOutlet]="backLinkRef"
+      [ngTemplateOutletContext]="{ link: { label: '&larr; Back' } }"
+    ></ng-container>
+    <li class="segment separator">/</li>
+  </ng-container>
+
+  <!-- Segments -->
+  <ng-container *ngFor="let link of links; let last = last">
     <ng-container
       [ngTemplateOutlet]="
         link.asBack
           ? backLinkRef
-          : (!link.path
-            ? noLinkSegmentRef
-            : linkSegmentRef
-          )
+          : link.path
+            ? linkSegmentRef
+            : noLinkSegmentRef
       "
       [ngTemplateOutletContext]="{ link: link }"
     ></ng-container>
-
     <li *ngIf="!last" class="segment separator">/</li>
-
   </ng-container>
+
 </ul>
 
-<ng-template #linkSegmentRef let-link="link">
-  <a [routerLink]="link.path" class="segment link">{{ link.label }}</a>
-</ng-template>
-
-<ng-template #noLinkSegmentRef let-link="link">
-  <span class="segment">{{ link.label }}</span>
-</ng-template>
-
+<!-- Back link -->
 <ng-template #backLinkRef let-link="link">
-  <a class="segment link" (click)="onGoBack()">{{ link.label }}</a>
+  <a class="segment link" (click)="onGoBack()" [innerHTML]="link.label"></a>
+</ng-template>
+
+<!-- Current page segment -->
+<ng-template #noLinkSegmentRef let-link="link">
+  <span class="segment" [innerHTML]="link.label"></span>
+</ng-template>
+
+<!-- Link segment -->
+<ng-template #linkSegmentRef let-link="link">
+  <a [routerLink]="link.path" class="segment link" [innerHTML]="link.label"></a>
 </ng-template>
