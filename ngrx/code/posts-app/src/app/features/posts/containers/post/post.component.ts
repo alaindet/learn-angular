@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Location } from '@angular/common';
-import { ActivatedRoute, Params, Router } from '@angular/router';
+import { ActivatedRoute, Params } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { tap, switchMap } from 'rxjs/operators';
 
@@ -19,7 +18,7 @@ export class PostContainerComponent implements OnInit {
 
   breadcrumbs: BreadcrumbLink[] = [
     { path: '/', label: 'App' },
-    { path: null, label: 'Posts', asBack: true },
+    { path: '/posts', label: 'Posts' },
     { path: null, label: PLACEHOLDER_BREADCRUMB },
   ];
   post: Post = null;
@@ -27,8 +26,6 @@ export class PostContainerComponent implements OnInit {
 
   constructor(
     public ui: UiCoreService,
-    private location: Location,
-    private router: Router,
     private route: ActivatedRoute,
     private postsService: PostsService,
   ) {}
@@ -54,11 +51,5 @@ export class PostContainerComponent implements OnInit {
         );
         this.ui.setLoading(false);
       });
-  }
-
-  onGoBack() {
-    if (this.router.navigated) {
-      this.location.back();
-    }
   }
 }

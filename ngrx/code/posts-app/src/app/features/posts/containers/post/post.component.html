@@ -5,9 +5,7 @@
   </ng-container>
 </h1>
 
-<ui-breadcrumbs [links]="breadcrumbs"></ui-breadcrumbs>
-
-<a class="back" (click)="onGoBack()">&larr; Back to posts</a>
+<ui-breadcrumbs [links]="breadcrumbs" withBack></ui-breadcrumbs>
 
 <ng-container *ngIf="!(ui.loading | async); else loadingRef">
   <article class="readable">
