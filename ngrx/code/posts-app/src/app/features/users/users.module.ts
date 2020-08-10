@@ -9,7 +9,7 @@ import { UsersService } from './services/users.service';
 import { UiBreadcrumbsModule } from './../../shared/ui/components/breadcrumbs/breadcrumbs.module';
 import { UiButtonModule } from './../../shared/ui/components/button/button.module';
 import { UiCardModule } from './../../shared/ui/components/card/card.module';
-import { UiGridModule } from './../../shared/ui/components/grid/grid.module';
+import { UiTilesModule } from './../../shared/ui/components/tiles/tiles.module';
 
 const routes: Routes = [
   {
@@ -27,7 +27,7 @@ const routes: Routes = [
     UiBreadcrumbsModule,
     UiButtonModule,
     UiCardModule,
-    UiGridModule,
+    UiTilesModule,
   ],
   declarations: [
     UsersContainerComponent,

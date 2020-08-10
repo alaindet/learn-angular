@@ -12,13 +12,8 @@
 </ng-container>
 
 <ng-template #postsListRef>
-  <ui-row withGutters>
-    <ui-col
-      *ngFor="let post of posts"
-      size="12"
-      sizeMd="6"
-      sizeLg="4"
-    >
+  <ui-tiles tiles="2" tilesMd="3" tilesLg="4" withGaps="medium">
+    <ui-tile *ngFor="let post of posts">
       <ui-card fullHeight dismissable (dismissed)="onRemovePost(post.id)">
         <h2 slot="title">{{ post.title | capitalize | truncate:20:'...' }}</h2>
         <div slot="body">{{ post.body | capitalize | truncate:20:' [...]' }}</div>
@@ -26,8 +21,8 @@
           <ui-button size="small" (click)="onShowPost(post.id)">Show</ui-button>
         </div>
       </ui-card>
-    </ui-col>
-  </ui-row>
+    </ui-tile>
+  </ui-tiles>
 
   <ui-pagination
     simple
@@ -38,14 +33,9 @@
 </ng-template>
 
 <ng-template #loadingRef>
-  <ui-row withGutters>
-    <ui-col
-      *ngFor="let item of [1, 2, 3]"
-      size="12"
-      sizeMd="6"
-      sizeLg="4"
-    >
-      <ui-card fullHeight>
+  <ui-tiles tiles="2" tilesMd="3" tilesLg="4" withGaps="medium">
+    <ui-tile *ngFor="let item of [1, 2, 3]">
+      <ui-card fullHeight *ngFor="let item of [1, 2, 3]">
         <h2 slot="title">
           <ui-ghost-rectangle width="80%"></ui-ghost-rectangle>
         </h2>
@@ -57,8 +47,8 @@
           <ui-ghost-rectangle width="20%" height="2rem"></ui-ghost-rectangle>
         </div>
       </ui-card>
-    </ui-col>
-  </ui-row>
+    </ui-tile>
+  </ui-tiles>
 </ng-template>
 
 <ng-template #noPostsRef>

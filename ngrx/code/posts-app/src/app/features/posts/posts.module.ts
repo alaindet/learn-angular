@@ -9,8 +9,8 @@ import { UiCardModule } from './../../shared/ui/components/card/card.module';
 import { UiCapitalizePipeModule } from './../../shared/ui/pipes/capitalize/capitalize.module';
 import { UiGhostDotsModule } from './../../shared/ui/components/ghost/dots/dots.module';
 import { UiGhostRectangleModule } from './../../shared/ui/components/ghost/rectangle/rectangle.module';
-import { UiGridModule } from './../../shared/ui/components/grid/grid.module';
 import { UiPaginationModule } from './../../shared/ui/components/pagination/pagination.module';
+import { UiTilesModule } from './../../shared/ui/components/tiles/tiles.module';
 import { UiTruncatePipeModule } from './../../shared/ui/pipes/truncate/truncate.module';
 
 import { PostsContainerComponent } from './containers/posts/posts.component';
@@ -41,8 +41,8 @@ const routes: Routes = [
     UiCapitalizePipeModule,
     UiGhostDotsModule,
     UiGhostRectangleModule,
-    UiGridModule,
     UiPaginationModule,
+    UiTilesModule,
     UiTruncatePipeModule,
   ],
   declarations: [
