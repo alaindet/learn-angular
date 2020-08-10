@@ -12,9 +12,13 @@
 </ng-container>
 
 <ng-template #postsListRef>
-  <ui-tiles tiles="2" tilesMd="3" tilesLg="4" withGaps="medium">
+  <ui-tiles tiles="2" tilesMd="3" withGaps="small">
     <ui-tile *ngFor="let post of posts">
-      <ui-card fullHeight dismissable (dismissed)="onRemovePost(post.id)">
+      <ui-card
+        fullHeight
+        dismissable
+        (dismissing)="onRemovePost($event, post.id)"
+      >
         <h2 slot="title">{{ post.title | capitalize | truncate:20:'...' }}</h2>
         <div slot="body">{{ post.body | capitalize | truncate:20:' [...]' }}</div>
         <div slot="footer">
@@ -33,9 +37,9 @@
 </ng-template>
 
 <ng-template #loadingRef>
-  <ui-tiles tiles="2" tilesMd="3" tilesLg="4" withGaps="medium">
+  <ui-tiles tiles="2" tilesMd="3" withGaps="small">
     <ui-tile *ngFor="let item of [1, 2, 3]">
-      <ui-card fullHeight *ngFor="let item of [1, 2, 3]">
+      <ui-card fullHeight>
         <h2 slot="title">
           <ui-ghost-rectangle width="80%"></ui-ghost-rectangle>
         </h2>

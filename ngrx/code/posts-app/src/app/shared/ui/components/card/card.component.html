@@ -8,7 +8,7 @@
     <ng-content select="[slot='subtitle']"></ng-content>
   </div>
 
-  <button *ngIf="dismissable" class="dismiss-button" (click)="onDismiss()">
+  <button *ngIf="dismissable" class="dismiss-button" (click)="onWillDismiss()">
     &times;
   </button>
 

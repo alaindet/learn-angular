@@ -9,11 +9,11 @@
   border-radius: 1.5rem;
   box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
   background-color: pal-get('colors.white');
-  transition: opacity 0.1s linear;
-}
+  transition: opacity 0.2s linear;
 
-:host(.dismissing) {
-  opacity: 0;
+  &.dismissed {
+    opacity: 0;
+  }
 }
 
 .header {

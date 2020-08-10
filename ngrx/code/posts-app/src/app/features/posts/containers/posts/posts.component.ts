@@ -25,7 +25,7 @@ export class PostsContainerComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
-    this.subs.posts = this.route.queryParams
+    this.subs.fetchedPosts = this.route.queryParams
       .pipe(
         tap(() => this.ui.setLoading(true)),
         switchMap((params: Params) => {
@@ -56,11 +56,20 @@ export class PostsContainerComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * Hide posts at runtime, do not remove from database
-   *
-   * @param id
+   * Hides posts at runtime, do not remove from database
    */
-  onRemovePost(id: string) {
+  onRemovePost(dismissing: any, id: string) {
+
+    // TODO: Add confirmation modal?
+    if (!confirm('Are you sure?')) {
+      return;
+    }
+
+    dismissing.animation();
+    setTimeout(() => this.removePost(id), dismissing.delay);
+  }
+
+  private removePost(id: string) {
     const _id = +id;
     this.posts = this.posts.filter((post: Post) => post.id !== _id);
   }

@@ -1,7 +1,7 @@
 import { Component, ChangeDetectionStrategy, OnChanges, Input, Renderer2, ElementRef, Output, EventEmitter } from '@angular/core';
 
 import { toBoolean } from 'src/app/shared/ui/functions/to-boolean.function';
-import { UiCard } from './card.interface';
+import { UiCard, UiCardEvents } from './card.interface';
 
 @Component({
   selector: 'ui-card',
@@ -13,7 +13,7 @@ export class UiCardComponent implements UiCard, OnChanges {
 
   @Input() fullHeight: UiCard['fullHeight'] = false;
   @Input() dismissable: UiCard['dismissable'] = false;
-  @Output() dismissed = new EventEmitter<void>();
+  @Output() dismissing = new EventEmitter<UiCardEvents['dismissing']>();
 
   constructor(
     private renderer: Renderer2,
@@ -29,11 +29,15 @@ export class UiCardComponent implements UiCard, OnChanges {
     }
   }
 
-  onDismiss() {
-    this.renderer.addClass(this.element.nativeElement, 'dismissing');
-    setTimeout(() => {
-      this.dismissed.emit();
-    }, 200);
+  onWillDismiss() {
+    this.dismissing.emit({
+      animation: () => this.onDismissed(),
+      delay: 200,
+    });
+  }
+
+  onDismissed() {
+    this.renderer.addClass(this.element.nativeElement, 'dismissed');
   }
 
   private makeFullHeight() {
