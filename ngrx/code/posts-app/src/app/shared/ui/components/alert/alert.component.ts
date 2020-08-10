@@ -26,6 +26,7 @@ export class UiAlertComponent implements UiAlert {
 
   ngOnChanges() {
     this.delay = toNumber(this.delay);
+    this.stopExpiration();
     this.setExpiration();
   }
 
