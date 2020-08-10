@@ -52,6 +52,7 @@ label {
   display: inline-flex;
   align-items: center;
   margin: 0;
+  cursor: pointer;
 }
 
 .text {
@@ -68,7 +69,6 @@ input {
 // Inactive switch: the slider
 .slider {
   position: absolute;
-  cursor: pointer;
   top: 0;
   left: 0;
   right: 0;
