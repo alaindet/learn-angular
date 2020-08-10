@@ -10,7 +10,6 @@ import { UiCardModule } from './../components/card/card.module';
 import { UiChipModule } from './../components/chip/chip.module';
 import { UiGhostDotsModule } from './../components/ghost/dots/dots.module';
 import { UiGhostRectangleModule } from './../components/ghost/rectangle/rectangle.module';
-import { UiGridModule } from './../components/grid/grid.module';
 import { UiPaginationModule } from './../components/pagination/pagination.module';
 import { UiTilesModule } from './../components/tiles/tiles.module';
 
@@ -22,7 +21,6 @@ import { DemoUiBreadcrumbsPage } from './pages/breadcrumbs/breadcrumbs.component
 import { DemoUiButtonPage } from './pages/button/button.component';
 import { DemoUiCardPage } from './pages/card/card.component';
 import { DemoUiGhostPage } from './pages/ghost/ghost.component';
-import { DemoUiGridPage } from './pages/grid/grid.component';
 import { DemoUiPaginationPage } from './pages/pagination/pagination.component';
 import { DemoUiTilesPage } from './pages/tiles/tiles.component';
 import { DemoUiTypographyPage } from './pages/typography/typography.component';
@@ -69,11 +67,6 @@ export const routes: Routes = [
     data: { label: 'Demo: Ghost' },
   },
   {
-    path: 'grid',
-    component: DemoUiGridPage,
-    data: { label: 'Demo: Grid' },
-  },
-  {
     path: 'pagination',
     component: DemoUiPaginationPage,
     data: { label: 'Demo: Pagination' },
@@ -103,7 +96,6 @@ export const routes: Routes = [
     UiChipModule,
     UiGhostDotsModule,
     UiGhostRectangleModule,
-    UiGridModule,
     UiPaginationModule,
     UiTilesModule,
   ],
@@ -116,7 +108,6 @@ export const routes: Routes = [
     DemoUiChipPage,
     DemoUiColorPage,
     DemoUiGhostPage,
-    DemoUiGridPage,
     DemoUiPaginationPage,
     DemoUiTilesPage,
     DemoUiTypographyPage,
