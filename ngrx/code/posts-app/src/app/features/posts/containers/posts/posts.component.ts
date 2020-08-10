@@ -55,9 +55,6 @@ export class PostsContainerComponent implements OnInit, OnDestroy {
     this.router.navigate(['/posts'], { queryParams: { page } });
   }
 
-  /**
-   * Hides posts at runtime, do not remove from database
-   */
   onRemovePost(dismissing: any, id: string) {
 
     // TODO: Add confirmation modal?
@@ -69,6 +66,7 @@ export class PostsContainerComponent implements OnInit, OnDestroy {
     setTimeout(() => this.removePost(id), dismissing.delay);
   }
 
+  // Just filter them out, do not remove them on the database
   private removePost(id: string) {
     const _id = +id;
     this.posts = this.posts.filter((post: Post) => post.id !== _id);

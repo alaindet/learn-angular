@@ -39,3 +39,10 @@ export interface UiCommon {
     | 'grey-light'
   );
 }
+
+export interface UiCommonEvents {
+  dismissing: {
+    animation: () => void;
+    delay: number;
+  };
+}

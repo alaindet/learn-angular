@@ -7,7 +7,6 @@ import { UiAlert } from './../../shared/ui/components/alert/alert.interface';
 export class UiCoreService {
 
   private alert$ = new BehaviorSubject<UiAlert | null>(null);
-  private alertTimeout: any;
   private loading$ = new BehaviorSubject<boolean>(false);
   private loaded$ = new BehaviorSubject<boolean>(false);
 
@@ -23,10 +22,12 @@ export class UiCoreService {
     return this.loaded$.asObservable();
   }
 
-  setAlert(alert: UiAlert | null, delay: number = 3000) {
+  setAlert(alert: UiAlert | null) {
     this.alert$.next(alert);
-    clearTimeout(this.alertTimeout);
-    this.alertTimeout = setTimeout(() => { this.alert$.next(null); }, delay);
+  }
+
+  clearAlert() {
+    this.alert$.next(null);
   }
 
   setLoading(loading: boolean) {

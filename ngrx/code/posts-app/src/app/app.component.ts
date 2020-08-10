@@ -13,7 +13,8 @@ export class AppComponent {
     public ui: UiCoreService,
   ) {}
 
-  onDismissAlert() {
-    this.ui.setAlert(null);
+  onDismissAlert(dismissing: any) {
+    dismissing.animation();
+    setTimeout(() => this.ui.setAlert(null), dismissing.delay);
   }
 }

@@ -6,6 +6,6 @@
   <ui-alert
     [message]="alert.message"
     [type]="alert.type"
-    (dismissed)="onDismissAlert()"
+    (dismissing)="onDismissAlert($event)"
   ></ui-alert>
 </ng-container>
