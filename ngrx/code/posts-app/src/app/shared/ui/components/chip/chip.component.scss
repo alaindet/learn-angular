@@ -33,11 +33,13 @@ $colors: (
 
   @each $key, $value in $sizes {
     &.size-#{$key} {
+      $font-size: 0.8 * $value;
+      $vertical-padding: 0.66 * $value;
       height: $value;
-      padding: (0.66 * $value) $value;
-      border-radius: (0.66 * 2 * $value + 0.9 * $value) / 2;
-      font-size: 0.9 * $value;
-      line-height: 0.9 * $value;
+      padding: $vertical-padding $value;
+      border-radius: ($vertical-padding * 2 + $font-size) / 2;
+      font-size: $font-size;
+      line-height: $font-size;
     }
   }
 
