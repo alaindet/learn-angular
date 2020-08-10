@@ -23,26 +23,18 @@ $sizes: (
   'large': 1.66rem,
 );
 
+$color-inactive: pal-get('colors.grey-mid-dark');
+$color-toggle: white;
 $colors: (
   'primary': (
-    'inactive': #ccc,
+    'inactive': $color-inactive,
     'active': pal-get('colors.primary'),
-    'toggle': white,
-  ),
-  'primary-mid-light': (
-    'inactive': #ccc,
-    'active': pal-get('colors.primary-mid-light'),
-    'toggle': white,
+    'toggle': $color-toggle,
   ),
   'secondary': (
-    'inactive': #ccc,
+    'inactive': $color-inactive,
     'active': pal-get('colors.secondary'),
-    'toggle': white,
-  ),
-  'secondary-mid-light': (
-    'inactive': #ccc,
-    'active': pal-get('colors.secondary-mid-light'),
-    'toggle': white,
+    'toggle': $color-toggle,
   ),
 );
 
