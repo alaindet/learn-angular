@@ -105,6 +105,7 @@ export const routes: Routes = [
     DemoUiBreadcrumbsPage,
     DemoUiButtonPage,
     DemoUiCardPage,
+    DemoUiChipPage,
     DemoUiColorPage,
     DemoUiGhostPage,
     DemoUiGridPage,

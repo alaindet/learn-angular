@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, ElementRef, Renderer2, ChangeDetectionStrategy } from '@angular/core';
+import { Component, Input, OnChanges, ElementRef, Renderer2, ChangeDetectionStrategy, Output, EventEmitter } from '@angular/core';
 
 import { toBoolean } from './../../functions/to-boolean.function';
 import { UiChip } from './chip.interface';
@@ -14,6 +14,7 @@ export class UiChipComponent implements UiChip, OnChanges {
   @Input() color: UiChip['color'] = 'primary';
   @Input() size: UiChip['size'] = 'medium';
   @Input() dismissable: UiChip['dismissable'] = false;
+  @Output() dismissed = new EventEmitter<void>();
 
   constructor(
     private element: ElementRef,
@@ -23,7 +24,10 @@ export class UiChipComponent implements UiChip, OnChanges {
   ngOnChanges() {
     this.dismissable = toBoolean(this.dismissable);
     this.setClassesOnHost();
-    this.renderer.addClass(this.element.nativeElement, 'ciao');
+  }
+
+  onDismiss() {
+    this.dismissed.emit();
   }
 
   private setClassesOnHost() {
