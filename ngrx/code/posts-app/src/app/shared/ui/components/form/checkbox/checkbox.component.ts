@@ -10,7 +10,7 @@ import { UiFormCheckbox } from './checkbox.interface';
 })
 export class UiFormCheckboxComponent implements UiFormCheckbox {
 
-  @Input() shape: UiFormCheckbox['shape'] = 'rounded';
-  @Input() size: UiFormCheckbox['size'] = 'medium';
+  @Input() shape: UiFormCheckbox['shape'] = 'round';
+  @Input() size: UiFormCheckbox['size'] = 'small';
   @Input() color: UiFormCheckbox['color'] = 'primary';
 }

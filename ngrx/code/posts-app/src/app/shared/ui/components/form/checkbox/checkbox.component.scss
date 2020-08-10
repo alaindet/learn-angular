@@ -18,8 +18,8 @@ $time-delay: 0.15s;
 $color-background: #ccc;
 
 $sizes: (
-  'small': 0.66rem,
-  'medium': 1rem,
+  'small': 1rem,
+  'medium': 1.2rem,
   'large': 1.66rem,
 );
 
@@ -29,28 +29,27 @@ $colors: (
     'active': pal-get('colors.primary'),
     'toggle': white,
   ),
+  'primary-mid-light': (
+    'inactive': #ccc,
+    'active': pal-get('colors.primary-mid-light'),
+    'toggle': white,
+  ),
   'secondary': (
     'inactive': #ccc,
     'active': pal-get('colors.secondary'),
     'toggle': white,
   ),
+  'secondary-mid-light': (
+    'inactive': #ccc,
+    'active': pal-get('colors.secondary-mid-light'),
+    'toggle': white,
+  ),
 );
-
-$SIZE: 1rem;
-$size-w-total: $SIZE * 2;
-$size-h-total: $SIZE;
-$size-gap: $SIZE * 0.15;
-$size-toggle: min($size-w-total, $size-h-total) - 2 * $size-gap;
-$color-background: #ccc;
-$color-toggle: #fff;
-$color-active: #ff0060;
 
 // The switch box
 label {
   position: relative;
   display: inline-block;
-  // width: $size-w-total;
-  // height: $size-h-total;
 }
 
 // Hide default checkbox
@@ -75,35 +74,8 @@ input {
 .slider::before {
   position: absolute;
   content: '';
-  // height: $size-h-total - $size-gap * 2;
-  // width: $size-h-total - $size-gap * 2;
-  // left: $size-gap;
-  // bottom: $size-gap;
   transition: $time-delay;
 }
-
-// // Active switch: the slider's toggle
-// input:checked + .slider::before {
-//   transform: translateX(
-//     max($size-w-total, $size-h-total)
-//     - $size-gap * 2
-//     - $size-toggle
-//   );
-// }
-
-// // Rounded variant
-// .shape-rounded .slider {
-//   border-radius: $size-h-total * 0.2;
-// }
-
-// .shape-rounded .slider::before {
-//   border-radius: $size-h-total * 0.2;
-// }
-
-// Circle variant
-// .shape-circle .slider {
-//   border-radius: $size-h-total;
-// }
 
 .shape-circle .slider::before {
   border-radius: 50%;
@@ -123,6 +95,7 @@ input {
       width: $w;
       height: $h;
     }
+
     // Inactive switch: the slider's toggle
     .slider::before {
       height: $h - $gap * 2;
@@ -130,19 +103,22 @@ input {
       left: $gap;
       bottom: $gap;
     }
+
     // Active switch: the slider's toggle
     input:checked + .slider::before {
       transform: translateX($w - $gap * 2 - $toggle);
     }
+
     // Rounded variant
-    .shape-rounded .slider {
+    &.shape-round .slider {
       border-radius: $h * 0.2;
     }
-    .shape-rounded .slider::before {
+    &.shape-round .slider::before {
       border-radius: $h * 0.2;
     }
+
     // Circle variant
-    .shape-circle .slider {
+    &.shape-circle .slider {
       border-radius: $h;
     }
   }
@@ -156,117 +132,17 @@ input {
   $toggle: map-get($color, 'toggle');
 
   .color-#{$label} {
+
     .slider::before {
       background-color: $toggle;
     }
+
     .slider {
       background-color: $inactive;
     }
+
     input:checked + .slider {
       background-color: $active;
     }
   }
 }
-
-// // Basic ----------------------------------------------------------------------
-// label {
-//   position: relative;
-//   display: inline-flex;
-// }
-
-// input {
-//   opacity: 0;
-//   width: 0;
-//   height: 0;
-// }
-
-// // Slider
-// .slider {
-//   position: absolute;
-//   top: 0;
-//   right: 0;
-//   bottom: 0;
-//   left: 0;
-//   cursor: pointer;
-//   transition: $time-delay;
-// }
-
-// // Toggle
-// .slider::before {
-//   content: '';
-//   position: absolute;
-//   transition: $time-delay;
-// }
-
-// // Variant: circle ------------------------------------------------------------
-// .shape-circle .slide::before {
-//   border-radius: 50%;
-// }
-
-// // Size -----------------------------------------------------------------------
-// @each $label, $size in $sizes {
-
-//   $shape: getShape($size);
-//   $w: map-get($shape, 'w');
-//   $h: map-get($shape, 'h');
-//   $gap: map-get($shape, 'gap');
-//   $toggle: map-get($shape, 'toggle');
-
-//   label {
-//     width: $w;
-//     height: $h;
-//   }
-
-//   // Toggle
-//   .size-#{$label} .slider:before {
-//     height: $h - $gap * 2;
-//     height: $w - $gap * 2;
-//     left: $gap;
-//     bottom: $gap;
-//   }
-
-//   // Toggle moving to the right
-//   .size-#{$label} input:checked + .slider::before {
-//     transform: translateX($w - $gap * 2 - $toggle);
-//   }
-
-//   // Adjust text label
-//   .size-#{$label} .label {
-//     margin-left: $w * 2;
-//   }
-
-//   // Rounded variation
-//   .size-#{$label} .shape-rounded .slider {
-//     border-radius: $h * 0.2;
-//   }
-
-//   .size-#{$label} .shape-rounded .slider::before {
-//     border-radius: $h * 0.2;
-//   }
-
-//   // Circle variation
-//   .size-#{$label} .shape-circle .slider {
-//     border-radius: $h;
-//   }
-// }
-
-// // Color ----------------------------------------------------------------------
-// @each $label, $color in $colors {
-
-//   $active: map-get($color, 'active');
-//   $inactive: map-get($color, 'inactive');
-//   $toggle: map-get($color, 'toggle');
-
-//   .color-#{$label} .slider {
-//     background-color: $inactive;
-//   }
-
-//   .color-#{$label} .slider::before {
-//     background-color: $toggle;
-//   }
-
-//   // Active switch: the slider
-//   .color-#{$label} input:checked + .slider {
-//     background-color: $active;
-//   }
-// }

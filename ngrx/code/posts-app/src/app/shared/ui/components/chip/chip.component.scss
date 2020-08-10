@@ -6,24 +6,8 @@ $sizes: (
   'large': 1.5rem,
 );
 
-// Background => color
-$colors: (
-  'primary-dark': 'white',
-  'primary-mid-dark': 'white',
-  'primary': 'white',
-  'primary-mid-light': 'white',
-  'primary-light': 'black',
-  'secondary-dark': 'white',
-  'secondary-mid-dark': 'white',
-  'secondary': 'white',
-  'secondary-mid-light': 'white',
-  'secondary-light': 'black',
-  'grey-dark': 'white',
-  'grey-mid-dark': 'white',
-  'grey': 'white',
-  'grey-mid-light': 'white',
-  'grey-light': 'black',
-);
+// Background => color or border
+$colors: pal-get('color-palette');
 
 :host {
   display: inline-flex;

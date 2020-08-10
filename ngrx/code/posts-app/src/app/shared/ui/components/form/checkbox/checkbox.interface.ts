@@ -4,11 +4,13 @@ export interface UiFormCheckbox {
   size: UiCommon['size'];
   color: (
     | 'primary'
+    | 'primary-mid-light'
     | 'secondary'
+    | 'secondary-mid-light'
   );
   shape: (
     | 'square'
-    | 'rounded'
+    | 'round'
     | 'circle'
   );
 }
