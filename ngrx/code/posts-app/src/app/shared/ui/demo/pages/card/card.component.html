@@ -36,7 +36,7 @@
 
 <h2>Dismissable</h2>
 
-<ui-card dismissable (dismissed)="onDismiss()">
+<ui-card dismissable (dismissing)="onDismiss($event)">
   <h2 slot="title">I am a title</h2>
   <div slot="body">
     Lorem ipsum dolor sit amet...

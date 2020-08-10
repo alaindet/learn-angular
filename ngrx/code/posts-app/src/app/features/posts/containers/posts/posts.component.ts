@@ -6,6 +6,7 @@ import { tap, switchMap } from 'rxjs/operators';
 import { UiCoreService } from 'src/app/core/services/ui.service';
 import { PostsService } from './../../services/posts.service';
 import { Post } from './../../models/post.interface';
+import { UiCardEvents } from './../../../../shared/ui/components/card/card.interface';
 
 @Component({
   templateUrl: './posts.component.html',
@@ -55,7 +56,7 @@ export class PostsContainerComponent implements OnInit, OnDestroy {
     this.router.navigate(['/posts'], { queryParams: { page } });
   }
 
-  onRemovePost(dismissing: any, id: string) {
+  onRemovePost(dismissing: UiCardEvents['dismissing'], id: string) {
 
     // TODO: Add confirmation modal?
     if (!confirm('Are you sure?')) {
