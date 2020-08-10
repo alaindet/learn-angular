@@ -8,6 +8,7 @@ import { UiBreadcrumbsModule } from './../components/breadcrumbs/breadcrumbs.mod
 import { UiButtonModule } from './../components/button/button.module';
 import { UiCardModule } from './../components/card/card.module';
 import { UiChipModule } from './../components/chip/chip.module';
+import { UiFormCheckboxModule } from './../components/form/checkbox/checkbox.module';
 import { UiGhostDotsModule } from './../components/ghost/dots/dots.module';
 import { UiGhostRectangleModule } from './../components/ghost/rectangle/rectangle.module';
 import { UiPaginationModule } from './../components/pagination/pagination.module';
@@ -20,6 +21,7 @@ import { DemoUiColorPage } from './pages/color/color.component';
 import { DemoUiBreadcrumbsPage } from './pages/breadcrumbs/breadcrumbs.component';
 import { DemoUiButtonPage } from './pages/button/button.component';
 import { DemoUiCardPage } from './pages/card/card.component';
+import { DemoUiFormCheckboxPage } from './pages/form/checkbox/checkbox.component';
 import { DemoUiGhostPage } from './pages/ghost/ghost.component';
 import { DemoUiPaginationPage } from './pages/pagination/pagination.component';
 import { DemoUiTilesPage } from './pages/tiles/tiles.component';
@@ -62,6 +64,11 @@ export const routes: Routes = [
     data: { label: 'Demo: Color' },
   },
   {
+    path: 'form/checkbox',
+    component: DemoUiFormCheckboxPage,
+    data: { label: 'Demo: Form checkbox' },
+  },
+  {
     path: 'ghost',
     component: DemoUiGhostPage,
     data: { label: 'Demo: Ghost' },
@@ -94,6 +101,7 @@ export const routes: Routes = [
     UiButtonModule,
     UiCardModule,
     UiChipModule,
+    UiFormCheckboxModule,
     UiGhostDotsModule,
     UiGhostRectangleModule,
     UiPaginationModule,
@@ -107,6 +115,7 @@ export const routes: Routes = [
     DemoUiCardPage,
     DemoUiChipPage,
     DemoUiColorPage,
+    DemoUiFormCheckboxPage,
     DemoUiGhostPage,
     DemoUiPaginationPage,
     DemoUiTilesPage,

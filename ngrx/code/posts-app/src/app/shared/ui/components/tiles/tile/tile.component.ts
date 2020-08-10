@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 
 import { UiTile } from './tile.interface';
 
@@ -6,6 +6,7 @@ import { UiTile } from './tile.interface';
   selector: 'ui-tile',
   styleUrls: ['./tile.component.scss'],
   templateUrl: './tile.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UiTileComponent implements UiTile {
 

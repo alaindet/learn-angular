@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, Renderer2, ElementRef } from '@angular/core';
+import { Component, Input, OnInit, Renderer2, ElementRef, ChangeDetectionStrategy } from '@angular/core';
 
 import { UiTiles } from './tiles.interface';
 
@@ -6,6 +6,7 @@ import { UiTiles } from './tiles.interface';
   selector: 'ui-tiles',
   styleUrls: ['./tiles.component.scss'],
   templateUrl: './tiles.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UiTilesComponent implements UiTiles, OnInit {
 
