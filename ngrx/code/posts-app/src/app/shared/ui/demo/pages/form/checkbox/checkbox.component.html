@@ -1,26 +1,36 @@
 <h1>Form checkbox</h1>
 
 <ui-breadcrumbs [links]="[
-    { path: '/demo', label: 'Demo' },
-    { path: null, label: 'Form checkbox' }
-  ]"></ui-breadcrumbs>
+  { path: '/demo', label: 'Demo' },
+  { path: null, label: 'Form checkbox' }
+]"></ui-breadcrumbs>
 
 <section>
   <h2>Style</h2>
-  <ui-form-checkbox shape="square">Square</ui-form-checkbox><br>
-  <ui-form-checkbox shape="round">Rounded</ui-form-checkbox><br>
+  <ui-form-checkbox shape="square">Square</ui-form-checkbox>
+  <ui-form-checkbox shape="round">Rounded</ui-form-checkbox>
   <ui-form-checkbox shape="circle">Circle</ui-form-checkbox>
 </section>
 
 <section>
   <h2>Size</h2>
-  <ui-form-checkbox size="small">Small</ui-form-checkbox><br>
-  <ui-form-checkbox size="medium">Medium</ui-form-checkbox><br>
+  <ui-form-checkbox size="small">Small</ui-form-checkbox>
+  <ui-form-checkbox size="medium">Medium</ui-form-checkbox>
   <ui-form-checkbox size="large">Large</ui-form-checkbox>
 </section>
 
 <section>
   <h2>Color</h2>
-  <ui-form-checkbox color="primary">Primary</ui-form-checkbox><br>
-  <ui-form-checkbox color="secondary">Secondary</ui-form-checkbox><br>
+  <ui-form-checkbox color="primary">Primary</ui-form-checkbox>
+  <ui-form-checkbox color="secondary">Secondary</ui-form-checkbox>
+</section>
+
+<section>
+  <h2>In form</h2>
+  <form [formGroup]="checkboxForm" (ngSubmit)="onSubmit()">
+    <ui-form-checkbox color="secondary" formControlName="foo">Foo</ui-form-checkbox>
+    <ui-form-checkbox shape="round" formControlName="bar">Bar</ui-form-checkbox>
+    <ui-form-checkbox size="large" formControlName="baz">Baz</ui-form-checkbox>
+    <ui-button type="submit">Submit</ui-button>
+  </form>
 </section>

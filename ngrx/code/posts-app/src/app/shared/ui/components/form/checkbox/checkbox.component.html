@@ -1,5 +1,8 @@
-<label class="shape-{{ shape }} size-{{ size }} color-{{ color }}">
-  <input type="checkbox">
+<label
+  class="shape-{{ shape }} size-{{ size }} color-{{ color }}"
+  [class.inline]="inline"
+>
+  <input #inputRef type="checkbox" (change)="onInputChange($event.target.checked)">
   <span class="slider"></span>
   <span class="text"><ng-content></ng-content></span>
 </label>
