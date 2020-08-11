@@ -9,21 +9,19 @@ import { UiFormRadio, UiFormRadioEvents } from './radio.interface';
   styleUrls: ['./radio.component.scss'],
   templateUrl: './radio.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [
-    {
-      provide: NG_VALUE_ACCESSOR,
-      multi: true,
-      useExisting: forwardRef(() => UiFormRadioComponent),
-    }
-  ],
+  providers: [{
+    provide: NG_VALUE_ACCESSOR,
+    multi: true,
+    useExisting: forwardRef(() => UiFormRadioComponent),
+  }],
 })
 export class UiFormRadioComponent implements UiFormRadio, OnChanges, ControlValueAccessor {
 
-  @Input() options: UiFormRadio['options'];
-  @Input() size: UiFormRadio['size'];
-  @Input() color: UiFormRadio['color'];
-  @Input() shape: UiFormRadio['shape'];
-  @Input() inline: UiFormRadio['inline'];
+  @Input() options: UiFormRadio['options'] = [];
+  @Input() size: UiFormRadio['size'] = 'small';
+  @Input() color: UiFormRadio['color'] = 'primary';
+  @Input() shape: UiFormRadio['shape'] = 'round';
+  @Input() inline: UiFormRadio['inline'] = false;
 
   @Output() selected = new EventEmitter<UiFormRadioEvents['selected']>();
 
@@ -38,10 +36,14 @@ export class UiFormRadioComponent implements UiFormRadio, OnChanges, ControlValu
   onInputChange(event: any) {
     this.value = event.target.value;
 
+    // Inside a form
     if (this.onChange && this.onTouched) {
       this.onChange(this.value);
       this.onTouched(this.value);
-    } else {
+    }
+
+    // Standalone
+    else {
       this.selected.emit(this.value);
     }
   }
