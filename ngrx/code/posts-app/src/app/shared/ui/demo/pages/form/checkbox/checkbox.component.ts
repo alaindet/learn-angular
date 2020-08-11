@@ -20,6 +20,10 @@ export class DemoUiFormCheckboxPage implements OnInit {
     });
   }
 
+  onInputChange(value: boolean) {
+    console.log('onInputChange', value);
+  }
+
   onSubmit() {
     console.log('onSubmit', this.checkboxForm.value);
   }

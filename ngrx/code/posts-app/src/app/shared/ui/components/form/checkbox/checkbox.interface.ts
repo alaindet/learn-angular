@@ -13,3 +13,7 @@ export interface UiFormCheckbox {
   );
   inline: UiCommon['asBoolean'];
 }
+
+export interface UiFormCheckboxEvents {
+  changed: boolean;
+}

@@ -1,8 +1,8 @@
-import { Component, ChangeDetectionStrategy, Input, OnChanges, ViewChild, ElementRef, forwardRef } from '@angular/core';
+import { Component, ChangeDetectionStrategy, Input, OnChanges, ViewChild, ElementRef, forwardRef, Output, EventEmitter } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 
 import { toBoolean } from './../../../functions/to-boolean.function';
-import { UiFormCheckbox } from './checkbox.interface';
+import { UiFormCheckbox, UiFormCheckboxEvents } from './checkbox.interface';
 
 @Component({
   selector: 'ui-form-checkbox',
@@ -26,6 +26,8 @@ export class UiFormCheckboxComponent implements UiFormCheckbox, OnChanges, Contr
   @Input() color: UiFormCheckbox['color'] = 'primary';
   @Input() inline: UiFormCheckbox['inline'] = false;
 
+  @Output() changed = new EventEmitter<UiFormCheckboxEvents['changed']>();
+
   private onChange: (value: boolean) => void;
 
   ngOnChanges() {
@@ -33,9 +35,9 @@ export class UiFormCheckboxComponent implements UiFormCheckbox, OnChanges, Contr
   }
 
   onInputChange(value: boolean) {
-    if (this.onChange) {
-      this.onChange(value);
-    };
+    this.onChange
+      ? this.onChange(value)
+      : this.changed.emit(value);
   }
 
   // From ControlValueAccessor

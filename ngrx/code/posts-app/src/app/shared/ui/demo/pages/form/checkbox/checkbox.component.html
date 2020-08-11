@@ -7,7 +7,7 @@
 
 <section>
   <h2>Style</h2>
-  <ui-form-checkbox shape="square">Square</ui-form-checkbox>
+  <ui-form-checkbox shape="square" (changed)="onInputChange($event)">Square</ui-form-checkbox>
   <ui-form-checkbox shape="round">Rounded</ui-form-checkbox>
   <ui-form-checkbox shape="circle">Circle</ui-form-checkbox>
 </section>
