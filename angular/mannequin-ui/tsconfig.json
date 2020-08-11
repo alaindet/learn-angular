@@ -12,6 +12,12 @@
     },
     {
       "path": "./projects/mannequin-lib/tsconfig.spec.json"
+    },
+    {
+      "path": "./projects/mannequin-demo/tsconfig.app.json"
+    },
+    {
+      "path": "./projects/mannequin-demo/tsconfig.spec.json"
     }
 ]
 }
