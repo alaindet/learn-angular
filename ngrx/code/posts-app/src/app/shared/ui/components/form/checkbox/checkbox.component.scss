@@ -15,7 +15,6 @@
 }
 
 $time-delay: 0.15s;
-$color-background: #ccc;
 
 $sizes: (
   'small': 1rem,
@@ -74,8 +73,8 @@ input {
 
 // Inactive switch: the slider's toggle
 .slider::before {
-  position: absolute;
   content: '';
+  position: absolute;
   transition: $time-delay;
 }
 
@@ -93,21 +92,19 @@ input {
   $toggle: map-get($shape, 'toggle');
 
   .size-#{$label} {
-    & {
-      height: $h;
-      margin: ($h * 0.5) 0;
-    }
+    height: $h;
+    margin: ($h * 0.5) 0;
 
     .slider {
       width: $w;
-    }
 
-    // Inactive switch: the slider's toggle
-    .slider::before {
-      height: $h - $gap * 2;
-      width: $h - $gap * 2;
-      left: $gap;
-      bottom: $gap;
+      // Inactive switch: the slider's toggle
+      &::before {
+        height: $h - $gap * 2;
+        width: $h - $gap * 2;
+        left: $gap;
+        bottom: $gap;
+      }
     }
 
     // Active switch: the slider's toggle
@@ -143,16 +140,25 @@ input {
 
   .color-#{$label} {
 
-    .slider::before {
-      background-color: $toggle;
-    }
-
     .slider {
       background-color: $inactive;
+      &::before {
+        background-color: $toggle;
+      }
     }
 
     input:checked + .slider {
       background-color: $active;
+    }
+
+    &:hover {
+      $active-lighter: scale_color($inactive, $lightness: +20%);
+      .slider {
+        background-color: $active-lighter;
+      }
+      input:checked +.slider {
+        background-color: $active-lighter;
+      }
     }
   }
 }
