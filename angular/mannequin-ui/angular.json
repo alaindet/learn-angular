@@ -2,8 +2,49 @@
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "version": 1,
   "newProjectRoot": "projects",
-  "projects": {},
+  "projects": {
+    "mannequin-lib": {
+      "projectType": "library",
+      "root": "projects/mannequin-lib",
+      "sourceRoot": "projects/mannequin-lib/src",
+      "prefix": "mq",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/mannequin-lib/tsconfig.lib.json",
+            "project": "projects/mannequin-lib/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/mannequin-lib/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/mannequin-lib/src/test.ts",
+            "tsConfig": "projects/mannequin-lib/tsconfig.spec.json",
+            "karmaConfig": "projects/mannequin-lib/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/mannequin-lib/tsconfig.lib.json",
+              "projects/mannequin-lib/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    }},
   "cli": {
     "analytics": false
-  }
+  },
+  "defaultProject": "mannequin-lib"
 }

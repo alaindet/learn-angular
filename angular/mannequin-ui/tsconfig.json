@@ -6,5 +6,12 @@
 */
 {
   "files": [],
-  "references": []
+  "references": [
+    {
+      "path": "./projects/mannequin-lib/tsconfig.lib.json"
+    },
+    {
+      "path": "./projects/mannequin-lib/tsconfig.spec.json"
+    }
+]
 }
