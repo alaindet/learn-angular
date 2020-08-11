@@ -153,12 +153,11 @@ input {
     }
 
     &:hover {
-      $active-lighter: scale_color($inactive, $lightness: +20%);
       .slider {
-        background-color: $active-lighter;
+        background-color: scale_color($inactive, $lightness: +20%);
       }
       input:checked +.slider {
-        background-color: $active-lighter;
+        background-color: scale_color($active, $lightness: +20%)
       }
     }
   }
