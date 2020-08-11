@@ -21,6 +21,7 @@ export class UiFormRadioComponent implements UiFormRadio, OnChanges, ControlValu
   @Input() size: UiFormRadio['size'] = 'small';
   @Input() color: UiFormRadio['color'] = 'primary';
   @Input() shape: UiFormRadio['shape'] = 'round';
+  @Input() name: UiFormRadio['name'] = 'ui-form-radio';
   @Input() inline: UiFormRadio['inline'] = false;
 
   @Output() selected = new EventEmitter<UiFormRadioEvents['selected']>();

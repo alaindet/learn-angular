@@ -6,7 +6,29 @@
 ]"></ui-breadcrumbs>
 
 <section>
-  <h2>Style</h2>
+  <h2>Shape</h2>
+
+  <ui-form-radio
+    [options]="dummyOptions"
+    name="shape-square"
+    shape="square"
+  ></ui-form-radio>
+
+  <ui-form-radio
+    [options]="dummyOptions"
+    name="shape-round"
+    shape="round">
+  </ui-form-radio>
+
+  <ui-form-radio
+    [options]="dummyOptions"
+    name="shape-circle"
+    shape="circle"
+  ></ui-form-radio>
+</section>
+
+<!-- <section>
+  <h2>Shape</h2>
   <ui-form-radio shape="square" (changed)="onInputChange($event)">Square</ui-form-radio>
   <ui-form-radio shape="round">Rounded</ui-form-radio>
   <ui-form-radio shape="circle">Circle</ui-form-radio>
@@ -23,7 +45,7 @@
   <h2>Color</h2>
   <ui-form-radio color="primary">Primary</ui-form-radio>
   <ui-form-radio color="secondary">Secondary</ui-form-radio>
-</section>
+</section> -->
 
 <!-- <section>
   <h2>In form</h2>

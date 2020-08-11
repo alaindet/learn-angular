@@ -1,1 +1,12 @@
-<p>radio works!</p>
+<ng-container *ngFor="let option of options; let index = index">
+  <label [for]="name + index">
+    <input
+      type="radio"
+      [value]="option.value"
+      [id]="name + index"
+      [checked]="option.value === value"
+      (change)="onInputChange($event)"
+    >
+    {{ option.label }}
+  </label>
+</ng-container>

@@ -1,7 +1,7 @@
 import { UiCommon } from './../../../models/common.interface';
 
 export interface UiFormRadioOption {
-  id: string;
+  id?: string;
   value: string;
   label: string;
 }
@@ -9,6 +9,7 @@ export interface UiFormRadioOption {
 export interface UiFormRadio {
   options: UiFormRadioOption[];
   size: UiCommon['size'];
+  name: string;
   color: (
     | 'primary'
     | 'secondary'
