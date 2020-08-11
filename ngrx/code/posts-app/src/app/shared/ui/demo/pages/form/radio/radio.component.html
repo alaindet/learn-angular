@@ -24,3 +24,21 @@
   <ui-form-radio color="primary">Primary</ui-form-radio>
   <ui-form-radio color="secondary">Secondary</ui-form-radio>
 </section>
+
+<section>
+  <h2>In form</h2>
+  <p>How many hours do you sleep per night on average?</p>
+  <form [formGroup]="radioForm" (ngSubmit)="onSubmit()">
+    <ui-form-radio
+      *ngFor="let option of radioFormOptions"
+      formControlName="sleep"
+      name="sleep"
+      [id]="option.id"
+      [value]="option.value"
+    >
+      {{ option.label }}
+    </ui-form-radio>
+
+    <ui-button type="submit">Submit</ui-button>
+  </form>
+</section>

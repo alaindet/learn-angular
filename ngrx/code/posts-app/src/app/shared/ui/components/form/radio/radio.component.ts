@@ -1,8 +1,8 @@
-import { Component, ChangeDetectionStrategy, Input, OnChanges, ViewChild, ElementRef, forwardRef } from '@angular/core';
+import { Component, ChangeDetectionStrategy, Input, Output, EventEmitter, OnChanges, forwardRef } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 
 import { toBoolean } from './../../../functions/to-boolean.function';
-import { UiFormRadio } from './radio.interface';
+import { UiFormRadio, UiFormRadioEvents } from './radio.interface';
 
 @Component({
   selector: 'ui-form-radio',
@@ -19,44 +19,45 @@ import { UiFormRadio } from './radio.interface';
 })
 export class UiFormRadioComponent implements UiFormRadio, OnChanges, ControlValueAccessor {
 
-  @ViewChild('inputRef', { static: true }) inputRef: ElementRef;
+  @Input() options: UiFormRadio['options'];
+  @Input() size: UiFormRadio['size'];
+  @Input() color: UiFormRadio['color'];
+  @Input() shape: UiFormRadio['shape'];
+  @Input() inline: UiFormRadio['inline'];
 
-  @Input() shape: UiFormRadio['shape'] = 'round';
-  @Input() size: UiFormRadio['size'] = 'small';
-  @Input() color: UiFormRadio['color'] = 'primary';
-  @Input() inline: UiFormRadio['inline'] = false;
+  @Output() selected = new EventEmitter<UiFormRadioEvents['selected']>();
 
-  private onChange: (value: boolean) => void;
+  value: string;
+  private onChange: Function;
+  private onTouched: Function;
 
   ngOnChanges() {
     this.inline = toBoolean(this.inline);
   }
 
-  onInputChange(value: boolean) {
-    if (this.onChange) {
-      this.onChange(value);
+  onInputChange(event: any) {
+    this.value = event.target.value;
+
+    if (this.onChange && this.onTouched) {
+      this.onChange(this.value);
+      this.onTouched(this.value);
+    } else {
+      this.selected.emit(this.value);
     }
   }
 
   // From ControlValueAccessor
-  // Angular => component
-  writeValue(value: boolean) {
-    this.inputRef.nativeElement.checked = value;
+  writeValue(value: string) {
+    this.value = value;
   }
 
   // From ControlValueAccessor
-  // Component => Angular
-  registerOnChange(fn: (value: boolean) => void) {
+  registerOnChange(fn: Function): void {
     this.onChange = fn;
   }
 
   // From ControlValueAccessor
-  registerOnTouched(fn: (value: boolean) => void) {
-    // Do nothing
-  }
-
-  // From ControlValueAccessor
-  setDisabledState(isDisabled: boolean) {
-    // Do nothing
+  registerOnTouched(fn: Function): void {
+    this.onTouched = fn;
   }
 }

@@ -10,7 +10,7 @@ import { UiButtonModule } from './../components/button/button.module';
 import { UiCardModule } from './../components/card/card.module';
 import { UiChipModule } from './../components/chip/chip.module';
 import { UiFormCheckboxModule } from './../components/form/checkbox/checkbox.module';
-import { UiFormRadioModule } from './../components/form/radio/radio.module';
+// import { UiFormRadioModule } from './../components/form/radio/radio.module';
 import { UiGhostDotsModule } from './../components/ghost/dots/dots.module';
 import { UiGhostRectangleModule } from './../components/ghost/rectangle/rectangle.module';
 import { UiPaginationModule } from './../components/pagination/pagination.module';
@@ -112,7 +112,7 @@ export const routes: Routes = [
     UiCardModule,
     UiChipModule,
     UiFormCheckboxModule,
-    UiFormRadioModule,
+    // UiFormRadioModule,
     UiGhostDotsModule,
     UiGhostRectangleModule,
     UiPaginationModule,

@@ -1,6 +1,13 @@
-import { UiCommon } from 'src/app/shared/ui/models/common.interface';
+import { UiCommon } from './../../../models/common.interface';
+
+export interface UiFormRadioOption {
+  id: string;
+  value: string;
+  label: string;
+}
 
 export interface UiFormRadio {
+  options: UiFormRadioOption[];
   size: UiCommon['size'];
   color: (
     | 'primary'
@@ -12,4 +19,8 @@ export interface UiFormRadio {
     | 'circle'
   );
   inline: UiCommon['asBoolean'];
+}
+
+export interface UiFormRadioEvents {
+  selected: string;
 }

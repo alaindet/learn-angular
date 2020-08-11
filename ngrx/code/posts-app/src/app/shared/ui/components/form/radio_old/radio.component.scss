@@ -1,0 +1,133 @@
+@import 'src/app/style';
+
+$time-delay: 0.15s;
+$size-border: 0.1rem;
+
+$sizes: (
+  'small': 1rem,
+  'medium': 1.2rem,
+  'large': 1.66rem,
+);
+
+$color-inactive: pal-get('colors.grey');
+$color-toggle: white;
+$colors: (
+  'primary': pal-get('colors.primary'),
+  'secondary': pal-get('colors.secondary'),
+);
+
+label {
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin: 0;
+  cursor: pointer;
+
+  &.inline {
+    display: inline-flex;
+  }
+}
+
+.text {
+  position: relative;
+  white-space: nowrap;
+}
+
+// Hide default radio
+input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+// Bullet container
+.bullet {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 50%;
+  transition: $time-delay;
+
+  // Bullet dot
+  &::before {
+    content: '';
+    position: absolute;
+    border-radius: 50%;
+    transition: $time-delay;
+  }
+}
+
+// Size -----------------------------------------------------------------------
+@each $label, $size in $sizes {
+
+  $gap: $size * 0.15;
+
+  .size-#{$label} {
+    height: $size;
+    width: $size;
+    margin: ($size * 0.5) 0;
+
+    .bullet {
+      width: $size;
+
+      &::before {
+        height: $size - $size-border * 2 - $gap * 2;
+        width: $size - $size-border * 2 - $gap * 2;
+        top: $gap;
+        left: $gap;
+        transform: scale(0);
+      }
+    }
+
+    .text {
+      left: $size;
+    }
+  }
+}
+
+.bullet {
+  border: $size-border solid pal-get('colors.grey');
+  background-color: transparent;
+
+  &::before {
+    background-color: transparent;
+  }
+}
+
+label:hover {
+  .bullet {
+    border-color: scale_color(pal-get('colors.grey'), $lightness: +50%);
+  }
+}
+
+// Color ----------------------------------------------------------------------
+@each $label, $color in $colors {
+
+  .color-#{$label} {
+
+    input:checked + .bullet {
+      border-color: $color;
+
+      &::before {
+        background-color: $color;
+        transform: scale(1);
+      }
+    }
+
+    &:hover {
+
+      $color-lighter: scale_color($color, $lightness: +20%);
+
+      input:checked + .bullet {
+        border-color: $color-lighter;
+
+        &::before {
+          background-color: $color-lighter;
+        }
+      }
+    }
+
+  }
+}

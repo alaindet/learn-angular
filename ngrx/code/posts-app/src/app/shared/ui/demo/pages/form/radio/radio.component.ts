@@ -7,6 +7,11 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 export class DemoUiFormRadioPage implements OnInit {
 
   radioForm: FormGroup;
+  radioFormOptions: any[] = [
+    { value: '0-4', label: 'At most 4 hours', id: 'radio-1' },
+    { value: '4-8', label: 'From 4 to 8 hours', id: 'radio-2' },
+    { value: '8+', label: 'More than 8 hours', id: 'radio-3' },
+  ];
 
   constructor(
     private fb: FormBuilder,
@@ -14,7 +19,7 @@ export class DemoUiFormRadioPage implements OnInit {
 
   ngOnInit() {
     this.radioForm = this.fb.group({
-      'sleep': '0-4',
+      'sleep': null,
     });
   }
 
