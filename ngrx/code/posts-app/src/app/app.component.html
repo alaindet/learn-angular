@@ -5,7 +5,8 @@
 <ng-container *ngIf="ui.alert | async as alert">
   <ui-alert
     [message]="alert.message"
-    [type]="alert.type"
-    (dismissed)="onDismissAlert()"
+    [type]="alert?.type"
+    [delay]="alert?.delay"
+    (dismissing)="onDismissAlert($event)"
   ></ui-alert>
 </ng-container>

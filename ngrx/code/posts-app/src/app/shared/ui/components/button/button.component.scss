@@ -89,7 +89,7 @@
 .color-primary-outline {
   @include pal((
     border: null 'primary',
-    color: (background: 'grey-light', text: 'primary'),
+    color: (background: transparent, text: 'primary'),
   ));
   &:hover, &:active, &:focus {
     @include pal((
@@ -112,7 +112,7 @@
 .color-secondary-outline {
   @include pal((
     border: null 'secondary',
-    color: (background: 'grey-light', text: 'secondary'),
+    color: (background: transparent, text: 'secondary'),
   ));
   &:hover, &:active, &:focus {
     @include pal((

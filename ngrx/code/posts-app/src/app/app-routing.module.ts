@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes, Route } from '@angular/router';
+import { RouterModule, Routes, Route, ExtraOptions } from '@angular/router';
 import { environment } from 'src/environments/environment';
 
 const DEFAULT_ROUTE = '/posts';
@@ -26,6 +26,10 @@ let routes: Routes = [
   }
 ];
 
+let options: ExtraOptions = {
+  scrollPositionRestoration: 'enabled',
+};
+
 if (!environment.production) {
 
   const route: Route = {
@@ -41,8 +45,9 @@ if (!environment.production) {
   ];
 }
 
+
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, options)],
   exports: [RouterModule]
 })
 export class AppRoutingModule {}

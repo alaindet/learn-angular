@@ -19,5 +19,6 @@ $app-headings: (
     line-height: $size * 1.05;
     margin-top: $size * 0.75;
     margin-bottom: $size * 0.5;
+    color: pal-get('colors.secondary-mid-dark');
   }
 }

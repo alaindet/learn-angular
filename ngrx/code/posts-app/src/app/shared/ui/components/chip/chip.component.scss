@@ -1,0 +1,43 @@
+@import 'src/app/style';
+
+$sizes: (
+  'small': 0.80rem,
+  'medium': 1rem,
+  'large': 1.5rem,
+);
+
+// Background => color or border
+$colors: pal-get('color-palette');
+
+:host {
+  display: inline-flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 2px 2px 2px rgba(0,0,0,0.1);
+
+  @each $key, $value in $sizes {
+    &.size-#{$key} {
+      $font-size: 0.8 * $value;
+      $vertical-padding: 0.66 * $value;
+      height: $value;
+      padding: $vertical-padding $value;
+      border-radius: ($vertical-padding * 2 + $font-size) / 2;
+      font-size: $font-size;
+      line-height: $font-size;
+    }
+  }
+
+  @each $background, $text in $colors {
+    &.color-#{$background} {
+      @include pal((
+        color: $background $text,
+      ));
+    }
+  }
+}
+
+.dismiss {
+  margin-left: 0.5rem;
+  font-size: 1.1em;
+  cursor: pointer;
+}

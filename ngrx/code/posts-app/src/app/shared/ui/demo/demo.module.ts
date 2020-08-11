@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
@@ -7,17 +8,26 @@ import { UiAlertModule } from './../components/alert/alert.module';
 import { UiBreadcrumbsModule } from './../components/breadcrumbs/breadcrumbs.module';
 import { UiButtonModule } from './../components/button/button.module';
 import { UiCardModule } from './../components/card/card.module';
-import { UiGridModule } from './../components/grid/grid.module';
+import { UiChipModule } from './../components/chip/chip.module';
+import { UiFormCheckboxModule } from './../components/form/checkbox/checkbox.module';
+import { UiFormRadioModule } from './../components/form/radio/radio.module';
+import { UiGhostDotsModule } from './../components/ghost/dots/dots.module';
+import { UiGhostRectangleModule } from './../components/ghost/rectangle/rectangle.module';
 import { UiPaginationModule } from './../components/pagination/pagination.module';
+import { UiTilesModule } from './../components/tiles/tiles.module';
 
 import { DemoUiIndexPage } from './pages/index/index.component';
 import { DemoUiAlertPage } from './pages/alert/alert.component';
+import { DemoUiChipPage } from './pages/chip/chip.component';
 import { DemoUiColorPage } from './pages/color/color.component';
 import { DemoUiBreadcrumbsPage } from './pages/breadcrumbs/breadcrumbs.component';
 import { DemoUiButtonPage } from './pages/button/button.component';
 import { DemoUiCardPage } from './pages/card/card.component';
-import { DemoUiGridPage } from './pages/grid/grid.component';
+import { DemoUiFormCheckboxPage } from './pages/form/checkbox/checkbox.component';
+import { DemoUiFormRadioPage } from './pages/form/radio/radio.component';
+import { DemoUiGhostPage } from './pages/ghost/ghost.component';
 import { DemoUiPaginationPage } from './pages/pagination/pagination.component';
+import { DemoUiTilesPage } from './pages/tiles/tiles.component';
 import { DemoUiTypographyPage } from './pages/typography/typography.component';
 
 export const routes: Routes = [
@@ -47,19 +57,39 @@ export const routes: Routes = [
     data: { label: 'Demo: Card' },
   },
   {
+    path: 'chip',
+    component: DemoUiChipPage,
+    data: { label: 'Demo: Chip' },
+  },
+  {
     path: 'color',
     component: DemoUiColorPage,
     data: { label: 'Demo: Color' },
   },
   {
-    path: 'grid',
-    component: DemoUiGridPage,
-    data: { label: 'Demo: Grid' },
+    path: 'form/checkbox',
+    component: DemoUiFormCheckboxPage,
+    data: { label: 'Demo: Form checkbox' },
+  },
+  {
+    path: 'form/radio',
+    component: DemoUiFormRadioPage,
+    data: { label: 'Demo: Form radio' },
+  },
+  {
+    path: 'ghost',
+    component: DemoUiGhostPage,
+    data: { label: 'Demo: Ghost' },
   },
   {
     path: 'pagination',
     component: DemoUiPaginationPage,
     data: { label: 'Demo: Pagination' },
+  },
+  {
+    path: 'tiles',
+    component: DemoUiTilesPage,
+    data: { label: 'Demo: Tiles' },
   },
   {
     path: 'typography',
@@ -72,14 +102,21 @@ export const routes: Routes = [
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
+    FormsModule,
+    ReactiveFormsModule,
     FontAwesomeModule,
 
     UiAlertModule,
     UiBreadcrumbsModule,
     UiButtonModule,
     UiCardModule,
-    UiGridModule,
+    UiChipModule,
+    UiFormCheckboxModule,
+    UiFormRadioModule,
+    UiGhostDotsModule,
+    UiGhostRectangleModule,
     UiPaginationModule,
+    UiTilesModule,
   ],
   declarations: [
     DemoUiIndexPage,
@@ -87,9 +124,13 @@ export const routes: Routes = [
     DemoUiBreadcrumbsPage,
     DemoUiButtonPage,
     DemoUiCardPage,
+    DemoUiChipPage,
     DemoUiColorPage,
-    DemoUiGridPage,
+    DemoUiFormCheckboxPage,
+    DemoUiFormRadioPage,
+    DemoUiGhostPage,
     DemoUiPaginationPage,
+    DemoUiTilesPage,
     DemoUiTypographyPage,
   ],
 })

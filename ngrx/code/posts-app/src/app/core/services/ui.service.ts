@@ -3,14 +3,16 @@ import { BehaviorSubject, Observable } from 'rxjs';
 
 import { UiAlert } from './../../shared/ui/components/alert/alert.interface';
 
+type NullableAlert = Partial<UiAlert> | null;
+
 @Injectable()
 export class UiCoreService {
 
-  private alert$ = new BehaviorSubject<UiAlert | null>(null);
-  private alertTimeout: any;
+  private alert$ = new BehaviorSubject<NullableAlert>(null);
   private loading$ = new BehaviorSubject<boolean>(false);
+  private loaded$ = new BehaviorSubject<boolean>(false);
 
-  get alert(): Observable<UiAlert | null> {
+  get alert(): Observable<NullableAlert> {
     return this.alert$.asObservable();
   }
 
@@ -18,13 +20,20 @@ export class UiCoreService {
     return this.loading$.asObservable();
   }
 
-  setAlert(alert: UiAlert | null, delay: number = 3000) {
+  get loaded(): Observable<boolean> {
+    return this.loaded$.asObservable();
+  }
+
+  setAlert(alert: NullableAlert) {
     this.alert$.next(alert);
-    clearTimeout(this.alertTimeout);
-    this.alertTimeout = setTimeout(() => { this.alert$.next(null); }, delay);
+  }
+
+  clearAlert() {
+    this.alert$.next(null);
   }
 
   setLoading(loading: boolean) {
     this.loading$.next(loading);
+    this.loaded$.next(!loading);
   }
 }

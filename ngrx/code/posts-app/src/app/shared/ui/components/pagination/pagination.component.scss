@@ -2,8 +2,10 @@
 
 .pagination {
   @include pal((
-    flex: (main-axis: 'center'),
     space: my2 mx0,
+    css: (
+      display: flex
+    )
   ));
 
   ::ng-deep button {

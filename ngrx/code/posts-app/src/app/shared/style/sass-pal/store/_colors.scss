@@ -26,3 +26,22 @@ $_: pal-set-merge('colors', (
   'grey-light': scale_color($app-grey, $lightness: +80%),
 
 ));
+
+// Background => color or border
+$_: pal-set('color-palette', (
+  'primary-dark': 'white',
+  'primary-mid-dark': 'white',
+  'primary': 'white',
+  'primary-mid-light': 'white',
+  'primary-light': 'black',
+  'secondary-dark': 'white',
+  'secondary-mid-dark': 'white',
+  'secondary': 'white',
+  'secondary-mid-light': 'white',
+  'secondary-light': 'black',
+  'grey-dark': 'white',
+  'grey-mid-dark': 'white',
+  'grey': 'white',
+  'grey-mid-light': 'white',
+  'grey-light': 'black',
+));

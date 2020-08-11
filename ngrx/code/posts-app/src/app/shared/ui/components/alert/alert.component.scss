@@ -1,5 +1,13 @@
 @import 'src/app/style';
 
+:host {
+  transition: opacity 0.2s linear;
+
+  &.dismissed {
+    opacity: 0;
+  }
+}
+
 .alert-container {
   @include pal((
     position: 'fixed' (2 0 auto 0),
@@ -26,14 +34,18 @@
   ));
 
   &.type-success {
+    $color: pal-get('colors.secondary');
     @include pal((
-      color: 'secondary',
+      'any': (color: $color),
+      'any:hover': (color: scale_color($color, $lightness: +10%)),
     ));
   }
 
   &.type-error {
+    $color: pal-get('colors.primary');
     @include pal((
-      color: 'primary',
+      'any': (color: $color),
+      'any:hover': (color: scale_color($color, $lightness: +10%)),
     ));
   }
 }

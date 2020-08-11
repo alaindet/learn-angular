@@ -6,13 +6,8 @@
 ]"></ui-breadcrumbs>
 
 <ng-container *ngIf="!(ui.loading | async); else loadingRef">
-  <ui-row withGutters>
-    <ui-col
-      *ngFor="let user of users; let index = index"
-      size="12"
-      sizeMd="6"
-      sizeLg="4"
-    >
+  <ui-tiles tiles="2" tilesMd="3" tilesLg="4" withGaps="medium">
+    <ui-tile *ngFor="let user of users; let index = index">
       <ui-card>
         <h2 slot="title">{{ user.name.replace(' ', '&nbsp;') }}</h2>
         <h3 slot="subtitle">{{ user.email }}</h3>
@@ -23,8 +18,8 @@
           <ui-button size="small" (click)="onShowUser(index)">Show</ui-button>
         </div>
       </ui-card>
-    </ui-col>
-  </ui-row>
+    </ui-tile>
+  </ui-tiles>
 </ng-container>
 
 <ng-template #loadingRef>
