@@ -10,6 +10,7 @@ import { UiButtonModule } from './../components/button/button.module';
 import { UiCardModule } from './../components/card/card.module';
 import { UiChipModule } from './../components/chip/chip.module';
 import { UiFormCheckboxModule } from './../components/form/checkbox/checkbox.module';
+import { UiFormRadioModule } from './../components/form/radio/radio.module';
 import { UiGhostDotsModule } from './../components/ghost/dots/dots.module';
 import { UiGhostRectangleModule } from './../components/ghost/rectangle/rectangle.module';
 import { UiPaginationModule } from './../components/pagination/pagination.module';
@@ -23,6 +24,7 @@ import { DemoUiBreadcrumbsPage } from './pages/breadcrumbs/breadcrumbs.component
 import { DemoUiButtonPage } from './pages/button/button.component';
 import { DemoUiCardPage } from './pages/card/card.component';
 import { DemoUiFormCheckboxPage } from './pages/form/checkbox/checkbox.component';
+import { DemoUiFormRadioPage } from './pages/form/radio/radio.component';
 import { DemoUiGhostPage } from './pages/ghost/ghost.component';
 import { DemoUiPaginationPage } from './pages/pagination/pagination.component';
 import { DemoUiTilesPage } from './pages/tiles/tiles.component';
@@ -70,6 +72,11 @@ export const routes: Routes = [
     data: { label: 'Demo: Form checkbox' },
   },
   {
+    path: 'form/radio',
+    component: DemoUiFormRadioPage,
+    data: { label: 'Demo: Form radio' },
+  },
+  {
     path: 'ghost',
     component: DemoUiGhostPage,
     data: { label: 'Demo: Ghost' },
@@ -105,6 +112,7 @@ export const routes: Routes = [
     UiCardModule,
     UiChipModule,
     UiFormCheckboxModule,
+    UiFormRadioModule,
     UiGhostDotsModule,
     UiGhostRectangleModule,
     UiPaginationModule,
@@ -119,6 +127,7 @@ export const routes: Routes = [
     DemoUiChipPage,
     DemoUiColorPage,
     DemoUiFormCheckboxPage,
+    DemoUiFormRadioPage,
     DemoUiGhostPage,
     DemoUiPaginationPage,
     DemoUiTilesPage,

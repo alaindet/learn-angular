@@ -1,0 +1,26 @@
+<h1>Form radio</h1>
+
+<ui-breadcrumbs [links]="[
+  { path: '/demo', label: 'Demo' },
+  { path: null, label: 'Form radio' }
+]"></ui-breadcrumbs>
+
+<section>
+  <h2>Style</h2>
+  <ui-form-radio shape="square" (changed)="onInputChange($event)">Square</ui-form-radio>
+  <ui-form-radio shape="round">Rounded</ui-form-radio>
+  <ui-form-radio shape="circle">Circle</ui-form-radio>
+</section>
+
+<section>
+  <h2>Size</h2>
+  <ui-form-radio size="small">Small</ui-form-radio>
+  <ui-form-radio size="medium">Medium</ui-form-radio>
+  <ui-form-radio size="large">Large</ui-form-radio>
+</section>
+
+<section>
+  <h2>Color</h2>
+  <ui-form-radio color="primary">Primary</ui-form-radio>
+  <ui-form-radio color="secondary">Secondary</ui-form-radio>
+</section>
