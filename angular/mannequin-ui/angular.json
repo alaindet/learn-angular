@@ -10,10 +10,17 @@
       "prefix": "mq",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-ng-packagr:build",
+          "builder": "@linnenschmidt/build-ng-packagr:build",
           "options": {
             "tsConfig": "projects/mannequin-lib/tsconfig.lib.json",
-            "project": "projects/mannequin-lib/ng-package.json"
+            "project": "projects/mannequin-lib/ng-package.json",
+            "assets": [
+              {
+                "glob": "**/*",
+                "input": "src/assets",
+                "output": "assets"
+              }
+            ]
           },
           "configurations": {
             "production": {
