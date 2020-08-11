@@ -1,20 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'mq-mannequin-lib',
+  styles: [`
+    :host {
+      padding: 1rem;
+      margin: 1rem;
+      border: 1px dashed red;
+    }
+  `],
   template: `
-    <p>
-      mannequin-lib works!
-    </p>
+    <ng-content></ng-content>
   `,
-  styles: [
-  ]
 })
-export class MannequinLibComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
-}
+export class MannequinLibComponent {}

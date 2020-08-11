@@ -3,8 +3,11 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "ng serve mannequin-demo",
+    "start:demo": "ng serve mannequin-demo",
     "build": "ng build",
+    "build:demo": "ng build mannequin-demo",
+    "build:lib": "ng build mannequin-lib",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
