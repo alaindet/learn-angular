@@ -19,6 +19,10 @@
       "mannequin-lib": [
         "dist/mannequin-lib/mannequin-lib",
         "dist/mannequin-lib"
+      ],
+      "mannequin-ui": [
+        "dist/mannequin-ui/mannequin-ui",
+        "dist/mannequin-ui"
       ]
     }
   }

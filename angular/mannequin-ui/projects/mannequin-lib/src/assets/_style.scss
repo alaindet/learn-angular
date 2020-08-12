@@ -1,0 +1,14 @@
+html {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background-color: red;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
