@@ -1,13 +1,26 @@
 import { Component } from '@angular/core';
 
+import { MannequinAlertService } from 'mannequin-lib';
+
 @Component({
   selector: 'app-root',
   styles: ['./../../../../dist/mannequin-lib/assets/_style.scss'],
   template: `
     <h1>Mannequin demo app</h1>
-    <mq-mannequin-lib>Some boxed content from the ui</mq-mannequin-lib>
+    <ng-container *ngIf="alertService.alert | async as alert">
+      <mq-alert>{{ alert }}</mq-alert>
+    </ng-container>
+    <button (click)="onShowAlert()">Show alert</button>
   `,
 })
 export class AppComponent {
 
+  constructor(
+    public alertService: MannequinAlertService,
+  ) {}
+
+  onShowAlert() {
+    console.log('onShowAlert');
+    this.alertService.setAlert('A message from the app component');
+  }
 }
