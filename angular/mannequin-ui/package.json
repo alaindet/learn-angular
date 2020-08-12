@@ -5,9 +5,10 @@
     "ng": "ng",
     "start": "ng serve mannequin-demo",
     "start:demo": "ng serve mannequin-demo",
-    "build": "ng build",
+    "build": "ng build mannequin-demo",
     "build:demo": "ng build mannequin-demo",
-    "build:lib": "ng build mannequin-lib",
+    "build:ui": "ng build mannequin-ui",
+    "build:ui:watch": "ng build mannequin-ui --watch",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
