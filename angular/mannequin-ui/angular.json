@@ -8,7 +8,8 @@
       "schematics": {
         "@schematics/angular:component": {
           "inlineTemplate": true,
-          "inlineStyle": true
+          "inlineStyle": true,
+          "styleext": "scss"
         }
       },
       "root": "projects/mannequin-demo",
@@ -29,7 +30,7 @@
               "projects/mannequin-demo/src/assets"
             ],
             "styles": [
-              "projects/mannequin-demo/src/styles.css"
+              "projects/mannequin-demo/src/styles.scss"
             ],
             "scripts": []
           },
@@ -93,7 +94,7 @@
               "projects/mannequin-demo/src/assets"
             ],
             "styles": [
-              "projects/mannequin-demo/src/styles.css"
+              "projects/mannequin-demo/src/styles.scss"
             ],
             "scripts": []
           }
@@ -130,6 +131,11 @@
       "root": "projects/mannequin-ui",
       "sourceRoot": "projects/mannequin-ui/src",
       "prefix": "maq",
+      "schematics": {
+        "@schematics/angular:component": {
+          "styleext": "scss"
+        }
+      },
       "architect": {
         "build": {
           "builder": "@linnenschmidt/build-ng-packagr:build",

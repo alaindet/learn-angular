@@ -1,0 +1,32 @@
+:host {
+  --maq-alert-text: #ff3333;
+  --maq-alert-text-hover: #ff6060;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.alert {
+  border: 2px solid var(--maq-alert-text);
+  padding: 1rem;
+  margin: 1rem 0;
+  border-radius: 0.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.message {
+  font-size: 1.1rem;
+}
+
+.dismiss {
+  font-size: 1.66rem;
+  color: var(--maq-alert-text);
+  cursor: pointer;
+}
+
+.dismiss:hover {
+  color: var(--maq-alert-text-hover);
+}

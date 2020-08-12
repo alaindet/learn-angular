@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { MannequinUiComponent } from './mannequin-ui.component';
+import { MannequinMagicBoxComponent } from './magic-box.component';
 
-describe('MannequinUiComponent', () => {
-  let component: MannequinUiComponent;
-  let fixture: ComponentFixture<MannequinUiComponent>;
+describe('MannequinMagicBoxComponent', () => {
+  let component: MannequinMagicBoxComponent;
+  let fixture: ComponentFixture<MannequinMagicBoxComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ MannequinUiComponent ]
+      declarations: [MannequinMagicBoxComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(MannequinUiComponent);
+    fixture = TestBed.createComponent(MannequinMagicBoxComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -1,0 +1,68 @@
+@import './../../scss/shared';
+
+:host {
+  margin: 50px;
+  display: inline-block;
+}
+
+.shape-square {
+  width: 100px;
+  height: 100px;
+  background: $maq-polygon-color;
+}
+
+.shape-pentagon {
+  position: relative;
+  width: 54px;
+  box-sizing: content-box;
+  border-width: 50px 18px 0;
+  border-style: solid;
+  border-color: $maq-polygon-color transparent;
+}
+.shape-pentagon:before {
+  content: '';
+  position: absolute;
+  height: 0;
+  width: 0;
+  top: -85px;
+  left: -18px;
+  border-width: 0 45px 35px;
+  border-style: solid;
+  border-color: transparent transparent $maq-polygon-color;
+}
+
+.shape-hexagon {
+  width: 100px;
+  height: 57.735px;
+  background: $maq-polygon-color;
+  position: relative;
+}
+.shape-hexagon::before {
+  content: '';
+  position: absolute;
+  top: -28.8675px;
+  left: 0;
+  width: 0;
+  height: 0;
+  border-left: 50px solid transparent;
+  border-right: 50px solid transparent;
+  border-bottom: 28.8675px solid $maq-polygon-color;
+}
+.shape-hexagon::after {
+  content: '';
+  position: absolute;
+  bottom: -28.8675px;
+  left: 0;
+  width: 0;
+  height: 0;
+  border-left: 50px solid transparent;
+  border-right: 50px solid transparent;
+  border-top: 28.8675px solid $maq-polygon-color;
+}
+
+.shape-circle {
+  width: 100px;
+  height: 100px;
+  background: $maq-polygon-color;
+  border-radius: 50%
+}

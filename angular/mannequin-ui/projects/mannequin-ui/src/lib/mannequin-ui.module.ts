@@ -1,12 +1,19 @@
 import { NgModule } from '@angular/core';
-import { MannequinUiComponent } from './mannequin-ui.component';
 
-
+import { MannequinMagicBoxModule } from './components/magic-box/magic-box.module';
+import { MannequinAlertModule} from './components/alert/alert.module';
+import { MannequinPolygonModule } from './components/polygon/polygon.module';
 
 @NgModule({
-  declarations: [MannequinUiComponent],
   imports: [
+    MannequinMagicBoxModule,
+    MannequinAlertModule,
+    MannequinPolygonModule,
   ],
-  exports: [MannequinUiComponent]
+  exports: [
+    MannequinMagicBoxModule,
+    MannequinAlertModule,
+    MannequinPolygonModule,
+  ],
 })
-export class MannequinUiModule { }
+export class MannequinUiModule {}
