@@ -1,12 +1,18 @@
 @import 'src/app/style';
 
 $time-delay: 0.15s;
-$size-border: 0.1rem;
+$size-border: 2px; // 0.12rem;
+
+$shapes: (
+  'square',
+  'round',
+  'circle',
+);
 
 $sizes: (
-  'small': 1rem,
-  'medium': 1.2rem,
-  'large': 1.66rem,
+  'small': ('bullet': 18px, 'gap': 2px),
+  'medium': ('bullet': 22px, 'gap': 3px),
+  'large': ('bullet': 28px, 'gap': 3px),
 );
 
 $color-inactive: pal-get('colors.grey');
@@ -15,6 +21,15 @@ $colors: (
   'primary': pal-get('colors.primary'),
   'secondary': pal-get('colors.secondary'),
 );
+
+:host {
+  display: flex;
+  flex-flow: column;
+
+  &.inline {
+    flex-flow: row;
+  }
+}
 
 label {
   position: relative;
@@ -29,7 +44,6 @@ label {
 }
 
 .text {
-  position: relative;
   white-space: nowrap;
 }
 
@@ -47,43 +61,70 @@ input {
   left: 0;
   right: 0;
   bottom: 0;
-  border-radius: 50%;
   transition: $time-delay;
 
   // Bullet dot
   &::before {
     content: '';
     position: absolute;
-    border-radius: 50%;
     transition: $time-delay;
+  }
+}
+
+.shape-square {
+  .bullet {
+    border-radius: 0;
+    &::before {
+      border-radius: 0;
+    }
+  }
+}
+
+.shape-circle {
+  .bullet {
+    border-radius: 50%;
+    &::before {
+      border-radius: 50%;
+    }
   }
 }
 
 // Size -----------------------------------------------------------------------
 @each $label, $size in $sizes {
 
-  $gap: $size * 0.15;
+  $bullet: map-get($size, 'bullet');
+  $gap: map-get($size, 'gap');
 
   .size-#{$label} {
-    height: $size;
-    width: $size;
-    margin: ($size * 0.5) 0;
+    height: $bullet;
+    padding-left: $bullet;
+    margin: ($bullet * 0.33) 0;
+
+    &.inline {
+      margin-right: $bullet * 0.66;
+    }
 
     .bullet {
-      width: $size;
+      width: $bullet;
 
       &::before {
-        height: $size - $size-border * 2 - $gap * 2;
-        width: $size - $size-border * 2 - $gap * 2;
         top: $gap;
+        right: $gap;
+        bottom: $gap;
         left: $gap;
         transform: scale(0);
       }
     }
 
-    .text {
-      left: $size;
+    &.shape-round {
+      .bullet {
+        border-radius: $bullet * 0.2;
+        &::before {
+          border-radius: $bullet * 0.1;
+        }
+      }
     }
+
   }
 }
 

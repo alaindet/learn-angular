@@ -74,13 +74,28 @@
 </section>
 
 <section>
-  <h2>In form</h2>
+  <h2>Inline</h2>
+  <ui-form-radio
+    [options]="[
+      { value: 'foo', label: 'Foo' },
+      { value: 'bar', label: 'Bar' },
+      { value: 'baz', label: 'Baz' }
+    ]"
+    name="inline"
+    inline
+  ></ui-form-radio>
+</section>
+
+<section>
+  <h2>In a form</h2>
   <p>How many hours do you sleep per night on average?</p>
   <form [formGroup]="radioForm" (ngSubmit)="onSubmit()">
     <ui-form-radio
       [options]="radioFormOptions"
       formControlName="sleep"
       name="sleep"
+      shape="circle"
+      color="secondary"
     ></ui-form-radio>
     <ui-button type="submit">Submit</ui-button>
   </form>

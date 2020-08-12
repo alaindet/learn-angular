@@ -26,7 +26,13 @@
 </section>
 
 <section>
-  <h2>In form</h2>
+  <h2>Inline</h2>
+  <ui-form-checkbox inline>Foo</ui-form-checkbox>
+  <ui-form-checkbox inline>Bar</ui-form-checkbox>
+</section>
+
+<section>
+  <h2>In a form</h2>
   <form [formGroup]="checkboxForm" (ngSubmit)="onSubmit()">
     <ui-form-checkbox color="secondary" formControlName="foo">I am Foo</ui-form-checkbox>
     <ui-form-checkbox shape="round" formControlName="bar">But also Bar</ui-form-checkbox>
