@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { MannequinLibModule } from 'mannequin-lib';
+import { MannequinAlertModule } from 'mannequin-lib';
 
 import { AppComponent } from './app.component';
 
@@ -10,9 +10,9 @@ import { AppComponent } from './app.component';
   ],
   imports: [
     BrowserModule,
-    MannequinLibModule,
+    MannequinAlertModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}
