@@ -1,5 +1,9 @@
 <ng-container *ngFor="let option of options; let index = index">
-  <label [for]="name + index">
+  <label
+    class="shape-{{ shape }} size-{{ size }} color-{{ color }}"
+    [class.inline]="inline"
+    [for]="name + index"
+  >
     <input
       type="radio"
       [value]="option.value"
@@ -7,6 +11,7 @@
       [checked]="option.value === value"
       (change)="onInputChange($event)"
     >
-    {{ option.label }}
+    <span class="bullet"></span>
+    <span class="text">{{ option.label }}</span>
   </label>
 </ng-container>

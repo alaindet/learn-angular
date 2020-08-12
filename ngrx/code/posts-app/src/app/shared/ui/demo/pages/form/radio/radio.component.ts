@@ -15,11 +15,6 @@ export class DemoUiFormRadioPage implements OnInit {
     { value: '8+', label: 'More than 8 hours' },
   ];
 
-  dummyOptions: UiFormRadioOption[] = [
-    { value: 'foo', label: 'Foo' },
-    { value: 'bar', label: 'Bar' },
-  ];
-
   constructor(
     private fb: FormBuilder,
   ) {}
