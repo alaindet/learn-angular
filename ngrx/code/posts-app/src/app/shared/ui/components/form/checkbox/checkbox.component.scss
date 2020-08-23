@@ -51,7 +51,6 @@ label {
 }
 
 .text {
-  position: relative;
   white-space: nowrap;
 }
 
@@ -95,6 +94,11 @@ input {
   .size-#{$label} {
     height: $h;
     margin: ($h * 0.5) 0;
+    padding-left: $w;
+
+    &.inline {
+      margin-right: $h * 0.66;
+    }
 
     .slider {
       width: $w;
@@ -111,10 +115,6 @@ input {
     // Active switch: the slider's toggle
     input:checked + .slider::before {
       transform: translateX($w - $gap * 2 - $toggle);
-    }
-
-    .text {
-      left: $w;
     }
 
     // Rounded variant

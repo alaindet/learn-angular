@@ -2,11 +2,10 @@
   <router-outlet></router-outlet>
 </div>
 
-<ng-container *ngIf="ui.alert | async as alert">
+<ng-container *ngIf="alertService.alert | async as alert">
   <ui-alert
     [message]="alert.message"
     [type]="alert?.type"
-    [delay]="alert?.delay"
     (dismissing)="onDismissAlert($event)"
   ></ui-alert>
 </ng-container>

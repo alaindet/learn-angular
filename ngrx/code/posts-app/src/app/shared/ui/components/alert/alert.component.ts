@@ -54,6 +54,8 @@ export class UiAlertComponent implements UiAlert {
   }
 
   private stopExpiration() {
-    clearTimeout(this.timeout);
+    if (this.timeout) {
+      clearTimeout(this.timeout);
+    }
   }
 }

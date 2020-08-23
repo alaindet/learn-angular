@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy, Input, Output, EventEmitter, OnChanges, forwardRef } from '@angular/core';
+import { Component, ChangeDetectionStrategy, Input, Output, EventEmitter, OnChanges, forwardRef, ElementRef, Renderer2 } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 
 import { toBoolean } from './../../../functions/to-boolean.function';
@@ -18,10 +18,11 @@ import { UiFormRadio, UiFormRadioEvents } from './radio.interface';
 export class UiFormRadioComponent implements UiFormRadio, OnChanges, ControlValueAccessor {
 
   @Input() options: UiFormRadio['options'] = [];
-  @Input() size: UiFormRadio['size'] = 'small';
+  @Input() size: UiFormRadio['size'] = 'medium';
   @Input() color: UiFormRadio['color'] = 'primary';
   @Input() shape: UiFormRadio['shape'] = 'round';
   @Input() name: UiFormRadio['name'] = 'ui-form-radio';
+  @Input() spacing: UiFormRadio['spacing'] = 'medium';
   @Input() inline: UiFormRadio['inline'] = false;
 
   @Output() selected = new EventEmitter<UiFormRadioEvents['selected']>();
@@ -30,8 +31,14 @@ export class UiFormRadioComponent implements UiFormRadio, OnChanges, ControlValu
   private onChange: Function;
   private onTouched: Function;
 
+  constructor(
+    private element: ElementRef,
+    private renderer: Renderer2,
+  ) { }
+
   ngOnChanges() {
     this.inline = toBoolean(this.inline);
+    this.setClassesOnHost();
   }
 
   onInputChange(event: any) {
@@ -62,5 +69,18 @@ export class UiFormRadioComponent implements UiFormRadio, OnChanges, ControlValu
   // From ControlValueAccessor
   registerOnTouched(fn: Function): void {
     this.onTouched = fn;
+  }
+
+  private setClassesOnHost() {
+
+    const classNames = [
+      this.inline ? 'inline' : null,
+    ];
+
+    for (const className of classNames) {
+      if (className) {
+        this.renderer.addClass(this.element.nativeElement, className);
+      }
+    }
   }
 }

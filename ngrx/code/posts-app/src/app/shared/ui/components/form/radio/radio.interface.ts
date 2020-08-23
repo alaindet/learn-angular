@@ -19,6 +19,7 @@ export interface UiFormRadio {
     | 'round'
     | 'circle'
   );
+  spacing: UiCommon['size'];
   inline: UiCommon['asBoolean'];
 }
 

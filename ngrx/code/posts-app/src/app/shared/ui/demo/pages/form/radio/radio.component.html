@@ -8,59 +8,95 @@
 <section>
   <h2>Shape</h2>
 
+  <h3>Square</h3>
   <ui-form-radio
-    [options]="dummyOptions"
+    [options]="[{ value: 'square', label: 'Square' }]"
     name="shape-square"
     shape="square"
   ></ui-form-radio>
 
+  <h3>Round</h3>
   <ui-form-radio
-    [options]="dummyOptions"
+    [options]="[{ value: 'round', label: 'Round' }]"
     name="shape-round"
     shape="round">
   </ui-form-radio>
 
+  <h3>Circle</h3>
   <ui-form-radio
-    [options]="dummyOptions"
+    [options]="[{ value: 'circle', label: 'Circle' }]"
     name="shape-circle"
     shape="circle"
   ></ui-form-radio>
 </section>
 
-<!-- <section>
-  <h2>Shape</h2>
-  <ui-form-radio shape="square" (changed)="onInputChange($event)">Square</ui-form-radio>
-  <ui-form-radio shape="round">Rounded</ui-form-radio>
-  <ui-form-radio shape="circle">Circle</ui-form-radio>
-</section>
-
 <section>
   <h2>Size</h2>
-  <ui-form-radio size="small">Small</ui-form-radio>
-  <ui-form-radio size="medium">Medium</ui-form-radio>
-  <ui-form-radio size="large">Large</ui-form-radio>
+
+  <h3>Small</h3>
+  <ui-form-radio
+    [options]="[{ value: 'small', label: 'Small' }]"
+    name="size-small"
+    size="small"
+  ></ui-form-radio>
+
+  <h3>Medium</h3>
+  <ui-form-radio
+    [options]="[{ value: 'medium', label: 'Medium' }]"
+    name="size-medium"
+    size="medium"
+  ></ui-form-radio>
+
+  <h3>Large</h3>
+  <ui-form-radio
+    [options]="[{ value: 'large', label: 'Large' }]"
+    name="size-large"
+    size="large"
+  ></ui-form-radio>
 </section>
 
 <section>
   <h2>Color</h2>
-  <ui-form-radio color="primary">Primary</ui-form-radio>
-  <ui-form-radio color="secondary">Secondary</ui-form-radio>
-</section> -->
 
-<!-- <section>
-  <h2>In form</h2>
+  <h3>Primary</h3>
+  <ui-form-radio
+    [options]="[{ value: 'primary', label: 'Primary' }]"
+    name="color-primary"
+    color="primary"
+  ></ui-form-radio>
+
+  <h3>Secondary</h3>
+  <ui-form-radio
+    [options]="[{ value: 'secondary', label: 'Secondary' }]"
+    name="color-secondary"
+    color="secondary"
+  ></ui-form-radio>
+</section>
+
+<section>
+  <h2>Inline</h2>
+  <ui-form-radio
+    [options]="[
+      { value: 'foo', label: 'Foo' },
+      { value: 'bar', label: 'Bar' },
+      { value: 'baz', label: 'Baz' }
+    ]"
+    name="inline"
+    inline
+  ></ui-form-radio>
+</section>
+
+<section>
+  <h2>In a form</h2>
   <p>How many hours do you sleep per night on average?</p>
   <form [formGroup]="radioForm" (ngSubmit)="onSubmit()">
     <ui-form-radio
-      *ngFor="let option of radioFormOptions"
+      [options]="radioFormOptions"
       formControlName="sleep"
       name="sleep"
-      [id]="option.id"
-      [value]="option.value"
-    >
-      {{ option.label }}
-    </ui-form-radio>
-
+      shape="circle"
+      color="secondary"
+    ></ui-form-radio>
     <ui-button type="submit">Submit</ui-button>
   </form>
-</section> -->
+</section>

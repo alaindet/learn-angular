@@ -1,1 +1,174 @@
 @import 'src/app/style';
+
+$time-delay: 0.15s;
+$size-border: 2px; // 0.12rem;
+
+$shapes: (
+  'square',
+  'round',
+  'circle',
+);
+
+$sizes: (
+  'small': ('bullet': 18px, 'gap': 2px),
+  'medium': ('bullet': 22px, 'gap': 3px),
+  'large': ('bullet': 28px, 'gap': 3px),
+);
+
+$color-inactive: pal-get('colors.grey');
+$color-toggle: white;
+$colors: (
+  'primary': pal-get('colors.primary'),
+  'secondary': pal-get('colors.secondary'),
+);
+
+:host {
+  display: flex;
+  flex-flow: column;
+
+  &.inline {
+    flex-flow: row;
+  }
+}
+
+label {
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin: 0;
+  cursor: pointer;
+
+  &.inline {
+    display: inline-flex;
+  }
+}
+
+.text {
+  white-space: nowrap;
+}
+
+// Hide default radio
+input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+// Bullet container
+.bullet {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  transition: $time-delay;
+
+  // Bullet dot
+  &::before {
+    content: '';
+    position: absolute;
+    transition: $time-delay;
+  }
+}
+
+.shape-square {
+  .bullet {
+    border-radius: 0;
+    &::before {
+      border-radius: 0;
+    }
+  }
+}
+
+.shape-circle {
+  .bullet {
+    border-radius: 50%;
+    &::before {
+      border-radius: 50%;
+    }
+  }
+}
+
+// Size -----------------------------------------------------------------------
+@each $label, $size in $sizes {
+
+  $bullet: map-get($size, 'bullet');
+  $gap: map-get($size, 'gap');
+
+  .size-#{$label} {
+    height: $bullet;
+    padding-left: $bullet;
+    margin: ($bullet * 0.33) 0;
+
+    &.inline {
+      margin-right: $bullet * 0.66;
+    }
+
+    .bullet {
+      width: $bullet;
+
+      &::before {
+        top: $gap;
+        right: $gap;
+        bottom: $gap;
+        left: $gap;
+        transform: scale(0);
+      }
+    }
+
+    &.shape-round {
+      .bullet {
+        border-radius: $bullet * 0.2;
+        &::before {
+          border-radius: $bullet * 0.1;
+        }
+      }
+    }
+
+  }
+}
+
+.bullet {
+  border: $size-border solid pal-get('colors.grey');
+  background-color: transparent;
+
+  &::before {
+    background-color: transparent;
+  }
+}
+
+label:hover {
+  .bullet {
+    border-color: scale_color(pal-get('colors.grey'), $lightness: +50%);
+  }
+}
+
+// Color ----------------------------------------------------------------------
+@each $label, $color in $colors {
+
+  .color-#{$label} {
+
+    input:checked + .bullet {
+      border-color: $color;
+
+      &::before {
+        background-color: $color;
+        transform: scale(1);
+      }
+    }
+
+    &:hover {
+
+      $color-lighter: scale_color($color, $lightness: +20%);
+
+      input:checked + .bullet {
+        border-color: $color-lighter;
+
+        &::before {
+          background-color: $color-lighter;
+        }
+      }
+    }
+
+  }
+}
