@@ -1,0 +1,22 @@
+<div class="month">
+  <div class="nav prev" (click)="onPrevMonth()">&lsaquo;</div>
+  <div class="current">{{ monthDisplay }}</div>
+  <div class="nav next" (click)="onNextMonth()">&rsaquo;</div>
+</div>
+
+<div class="weekdays">
+  <div *ngFor="let abbrev of weekDayAbbrevs" class="weekday">
+    {{ abbrev }}
+  </div>
+</div>
+
+<div class="days">
+  <div
+    *ngFor="let day of days"
+    class="day {{ day.weekDay }}"
+    [class.disabled]="day.monthDiff !== MonthDiff.Current"
+    (click)="onDayClick(day)"
+  >
+    {{ day.day }}
+  </div>
+</div>

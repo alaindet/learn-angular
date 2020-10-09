@@ -1,0 +1,84 @@
+:host {
+  border: 2px solid #ccc;
+  max-width: 20rem;
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  font-size: 20px;
+}
+
+.month {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+
+  .nav {
+    width: 2rem;
+    height: 2rem;
+    font-size: 1.3rem;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    user-select: none;
+    transition: 0.2s background-color ease-in-out;
+    cursor: pointer;
+
+    &:hover {
+      background-color: #ccc;
+    }
+  }
+
+  .current {
+    font-weight: bold;
+  }
+}
+
+.weekdays {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+}
+
+.weekday {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 0.66em;
+  margin-bottom: 0.5rem;
+  color: #888;
+}
+
+.days {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+}
+
+.day {
+  border: 2px solid #ccc;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: -1px; // The ultimate trick!
+  transition: 0.2s background-color ease-in-out;
+
+  &:not(.disabled):hover {
+    background-color: #ccc;
+    cursor: pointer;
+  }
+
+  &.sunday {
+    color: red;
+  }
+
+  &.disabled {
+    color: #ccc;
+  }
+
+  // Make it square!
+  &::before {
+    content: '';
+    display: inline-block;
+    padding-bottom: 100%;
+  }
+}
