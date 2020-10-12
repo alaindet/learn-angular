@@ -18,4 +18,5 @@ export interface CalendarDay {
   day: number;
   weekDay: WeekDay;
   monthDiff: MonthDiff;
+  isActive?: boolean;
 }

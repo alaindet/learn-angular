@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, OnChanges, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, ChangeDetectorRef } from '@angular/core';
 import dayjs, { Dayjs } from 'dayjs';
 
 import { configureDayJs } from './vendor';
@@ -9,14 +9,14 @@ import { ISO_WEEKDAY, MONTHS } from './calendar.const';
   selector: 'app-calendar',
   templateUrl: './calendar.component.html',
   styleUrls: ['./calendar.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CalendarComponent implements OnInit, OnChanges {
 
   @Input() date: number;
 
-  dateInstance: Dayjs;
+  @Output() clickedDate = new EventEmitter<Date>();
 
+  dateInstance: Dayjs;
   days: CalendarDay[] = [];
   weekDayAbbrevs: string[];
   monthDisplay: string;
@@ -48,12 +48,12 @@ export class CalendarComponent implements OnInit, OnChanges {
   }
 
   onNextMonth(): void {
-    this.dateInstance = this.dateInstance.add(1, 'month');
+    this.dateInstance = this.dateInstance.startOf('month').add(1, 'month');
     this.buildCalendar(this.dateInstance);
   }
 
   onPrevMonth(): void {
-    this.dateInstance = this.dateInstance.subtract(1, 'month');
+    this.dateInstance = this.dateInstance.startOf('month').subtract(1, 'month');
     this.buildCalendar(this.dateInstance);
   }
 
@@ -61,17 +61,19 @@ export class CalendarComponent implements OnInit, OnChanges {
     if (day.monthDiff !== MonthDiff.Current) {
       return;
     }
+    const timestamp = this.dateInstance.set('date', day.day).valueOf();
+    const clickedDate: Date = new Date(timestamp);
+    this.clickedDate.emit(clickedDate);
   }
 
   private buildCalendar(date: Dayjs): void {
     this.monthDisplay = this.buildMonthDisplay(date);
     this.days = this.buildCalendarDays(date);
-    this.cd.detectChanges();
   }
 
   private buildWeekDayAbbrevs(abbrevs: { [index: number]: string }): string[] {
     return Object.values(abbrevs).map(
-      (weekday: string): string => weekday.slice(0, 3)
+      (abbrev: string): string => abbrev.slice(0, 3)
     );
   }
 
@@ -88,6 +90,7 @@ export class CalendarComponent implements OnInit, OnChanges {
         day: leadingDay.date(),
         weekDay: ISO_WEEKDAY[leadingDay.isoWeekday()].toLowerCase(),
         monthDiff: MonthDiff.Previous,
+        isActive: false,
       };
       days = [day, ...days];
     }
@@ -103,6 +106,7 @@ export class CalendarComponent implements OnInit, OnChanges {
         day: day,
         weekDay: ISO_WEEKDAY[weekDayIndex].toLowerCase(),
         monthDiff: MonthDiff.Current,
+        isActive: day === this.dateInstance.date(),
       });
     }
 
@@ -115,6 +119,7 @@ export class CalendarComponent implements OnInit, OnChanges {
         day: trailingDay.date(),
         weekDay: ISO_WEEKDAY[trailingDay.isoWeekday()].toLowerCase(),
         monthDiff: MonthDiff.Next,
+        isActive: false,
       };
       days = [...days, day];
     }

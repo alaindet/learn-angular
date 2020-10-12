@@ -62,8 +62,10 @@
   margin: -1px; // The ultimate trick!
   transition: 0.2s background-color ease-in-out;
 
-  &:not(.disabled):hover {
+  &:not(.disabled):hover,
+  &:not(.disabled).active {
     background-color: #ccc;
+    color: black;
     cursor: pointer;
   }
 
