@@ -7,5 +7,5 @@ import { Component } from '@angular/core';
 })
 export class TestCalendarComponent {
 
-  date: number = (new Date()).valueOf();
+  date: number = (new Date('2020-11-15')).valueOf();
 }

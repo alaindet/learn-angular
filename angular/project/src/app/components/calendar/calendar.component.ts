@@ -1,24 +1,9 @@
 import { Component, OnInit, Input, OnChanges, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
+import dayjs, { Dayjs } from 'dayjs';
 
+import { configureDayJs } from './vendor';
 import { CalendarDay, MonthDiff } from './calendar.model';
 import { ISO_WEEKDAY, MONTHS } from './calendar.const';
-
-// Day.js
-// TODO: Move into another file
-import dayjs, { Dayjs } from 'dayjs';
-import relativeTime from 'dayjs/plugin/relativeTime';
-import weekday from 'dayjs/plugin/weekday';
-import isoWeek from 'dayjs/plugin/isoWeek';
-import utc from 'dayjs/plugin/utc';
-import timezone from 'dayjs/plugin/timezone';
-import 'dayjs/locale/it';
-dayjs.extend(relativeTime);
-dayjs.extend(weekday);
-dayjs.extend(isoWeek);
-dayjs.extend(utc);
-dayjs.extend(timezone);
-dayjs.tz.setDefault('Europe/Rome');
-dayjs.locale('it');
 
 @Component({
   selector: 'app-calendar',
@@ -36,10 +21,13 @@ export class CalendarComponent implements OnInit, OnChanges {
   weekDayAbbrevs: string[];
   monthDisplay: string;
   MonthDiff = MonthDiff;
+  weekDayIndex = 1;
 
   constructor(
     private cd: ChangeDetectorRef,
-  ) {}
+  ) {
+    configureDayJs();
+  }
 
   ngOnChanges(): void {
     if (this.date) {
@@ -104,18 +92,13 @@ export class CalendarComponent implements OnInit, OnChanges {
       days = [day, ...days];
     }
 
-    console.log('leading days', days);
-
     // Build current month's days
     const firstWeekDayOfMonth = firstDayOfMonth.isoWeekday();
-    console.log('firstWeekDayOfMonth', firstWeekDayOfMonth);
     const daysInMonth = date.daysInMonth();
+    this.setWeekday(firstWeekDayOfMonth);
     for (let day = 1; day <= daysInMonth; day++) {
-      let weekDayIndex = (day - firstWeekDayOfMonth) % 7;
-      if (weekDayIndex <= 0) {
-        weekDayIndex += 7;
-      }
-      console.log('weekdayIndex', day, weekDayIndex);
+      const weekDayIndex = (day === 1) ? firstWeekDayOfMonth : this.bumpWeekDay();
+
       days.push({
         day: day,
         weekDay: ISO_WEEKDAY[weekDayIndex].toLowerCase(),
@@ -137,6 +120,19 @@ export class CalendarComponent implements OnInit, OnChanges {
     }
 
     return days;
+  }
+
+  private setWeekday(value: number): void {
+    this.weekDayIndex = value;
+  }
+
+  // Cycles through week days
+  private bumpWeekDay(): number {
+    this.weekDayIndex++;
+    if (this.weekDayIndex > 7) {
+      this.weekDayIndex = 1;
+    }
+    return this.weekDayIndex;
   }
 
   private buildMonthDisplay(date: Dayjs): string {
