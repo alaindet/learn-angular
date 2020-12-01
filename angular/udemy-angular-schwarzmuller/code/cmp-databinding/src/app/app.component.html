@@ -1,0 +1,37 @@
+<div class="container">
+
+  <!--
+  LIFECYCLE HOOKS TEST
+  <app-lightbulb
+    *ngIf="!lightbulbRemoved"
+    [status]="lightbulbStatus"
+    (toggle)="onLightbulbToggled($event)"
+    (destroy)="onLightbulbDestroyed($event)"
+  ></app-lightbulb>
+  -->
+
+  <app-cockpit
+    (serverAdded)="onServerAdded($event)"
+    (blueprintAdded)="onBlueprintAdded($event)"
+  ></app-cockpit>
+  <hr>
+  <div class="row">
+    <div class="col-xs-12">
+      <app-server-element
+        *ngFor="let element of serverElements"
+        [element]="element"
+      >
+
+        <p #serverElementParagraph>
+          <strong *ngIf="element.type === 'server'" [ngStyle]="{color: 'red'}">
+            {{ element.content }}
+          </strong>
+          <em *ngIf="element.type === 'blueprint'">
+            {{ element.content }}
+          </em>
+        </p>
+
+      </app-server-element>
+    </div>
+  </div>
+</div>

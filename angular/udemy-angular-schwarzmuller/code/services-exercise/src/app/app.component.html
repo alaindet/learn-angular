@@ -1,0 +1,19 @@
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12 col-md-8 col-md-offset-2">
+
+      <h1>Users ({{ usersCount }})</h1>
+
+      <app-active-users
+        [users]="activeUsers"
+        [count]="activeUsersCount"
+      ></app-active-users>
+
+      <app-inactive-users
+        [users]="inactiveUsers"
+        [count]="inactiveUsersCount"
+      ></app-inactive-users>
+
+    </div>
+  </div>
+</div>

@@ -1,0 +1,67 @@
+<div class="container">
+  <div class="row">
+
+    <!-- Title -->
+    <div
+      class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2"
+      style="margin-bottom: 1rem;"
+      *ngIf="appName | async as appName$"
+    >
+      <h1>{{ appName$ }}</h1>
+    </div>
+
+    <div
+      class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2"
+      style="margin-bottom: 1rem;"
+    >
+
+      <!-- Server add -->
+      <div class="input-group" style="margin-bottom: 1rem;">
+        <input
+          type="text"
+          class="form-control input-lg"
+          placeholder="Server name..."
+          name="server-name"
+          #serverName
+        >
+        <span class="input-group-btn">
+          <button
+            class="btn btn-lg btn-default"
+            (click)="onAddServer(serverName.value)"
+          >Add Server</button>
+        </span>
+      </div>
+
+    </div>
+    <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
+
+      <!-- Servers save -->
+      <button
+        class="btn btn-lg btn-primary"
+        (click)="onStoreServers()"
+      >Store all servers remotely</button>
+
+      &nbsp;
+      <button
+        class="btn btn-lg btn-primary"
+        (click)="onReadServers()"
+      >Read all servers remotely</button>
+
+    </div>
+    <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
+
+      <hr>
+
+      <!-- Servers list -->
+      <ul class="list-group">
+        <li
+          class="list-group-item"
+          *ngFor="let server of servers"
+        >
+          {{ server.name }} (ID: {{ server.id }})
+        </li>
+      </ul>
+
+    </div>
+  </div>
+</div>

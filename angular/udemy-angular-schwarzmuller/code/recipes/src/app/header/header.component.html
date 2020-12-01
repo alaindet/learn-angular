@@ -1,0 +1,72 @@
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+
+    <!-- Brand -->
+    <div class="navbar-header">
+      <a href="#" class="navbar-brand">Recipe Book</a>
+    </div>
+
+    <div class="collapse navbar-collapse">
+
+      <!-- Left menu -->
+      <ul class="nav navbar-nav">
+
+        <!-- Recipes -->
+        <li routerLinkActive="active">
+          <a routerLink="/recipes">Recipes</a>
+        </li>
+
+        <!-- Shopping list -->
+        <li routerLinkActive="active">
+          <a routerLink="/shopping-list">Shopping list</a>
+        </li>
+
+      </ul>
+
+      <!-- Right menu -->
+      <ul class="nav navbar-nav navbar-right">
+
+        <!-- Not logged in -->
+        <ng-container *ngIf="!authService.isAuthenticated(); else authenticated">
+          <li><a routerLink="/signup">Register</a></li>
+          <li><a routerLink="/signin">Login</a></li>
+        </ng-container>
+
+        <!-- Logged in -->
+        <ng-template #authenticated>
+
+          <!-- Logout -->
+          <li><a class="pointer" (click)="onLogout()">Logout</a></li>
+
+          <!-- Store/fetch state -->
+          <li class="dropdown" appDropdown>
+            <a
+              class="dropdown-toggle"
+              role="button"
+              class="pointer"
+            >
+              Manage <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu">
+              <li>
+                <a
+                  (click)="onStoreData()"
+                  class="pointer"
+                >Save Data</a>
+              </li>
+              <li>
+                <a
+                  (click)="onFetchData()"
+                  class="pointer"
+                >Fetch Data</a>
+              </li>
+            </ul>
+          </li>
+
+        </ng-template>
+
+      </ul>
+
+    </div>
+  </div>
+</nav>

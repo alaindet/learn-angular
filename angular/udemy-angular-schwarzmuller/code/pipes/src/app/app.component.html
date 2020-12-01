@@ -1,0 +1,39 @@
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
+
+      <!-- Add new server -->
+      <hr>
+      <button
+        class="btn btn-primary"
+        (click)="onAddServer()"
+      >Add Server</button>
+
+      <!-- Status -->
+      <hr>
+      <p>App status: {{ appStatus | async }}</p>
+
+      <!-- Servers -->
+      <ul class="list-group">
+        <!-- Server -->
+        <li
+          class="list-group-item"
+          *ngFor="let server of servers | sortServers:'name':'asc'"
+          [ngClass]="getStatusClasses(server)"
+        >
+          Name: <strong>{{ server.name }}</strong><br>
+
+          Type:
+            {{ server.instanceType | uppercase }}
+            (reverse: {{ server.instanceType | uppercase | reverse }})
+            <br>
+
+          Started on: {{ server.started | date:'fullDate' | uppercase }}
+          <span class="badge">{{ server.status }}</span>
+
+        </li><!-- /Server -->
+      </ul><!-- /Servers -->
+
+    </div>
+  </div>
+</div>

@@ -1,0 +1,12 @@
+.text-lg,
+.text-lg .btn {
+  padding: 10px 16px;
+  font-size: 18px;
+  line-height: 1.3333333;
+  border-radius: 6px;
+}
+
+.text-lg .btn {
+  padding-left: 0;
+  padding-right: 0;
+}

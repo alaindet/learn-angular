@@ -1,0 +1,99 @@
+<form [formGroup]="myForm" (ngSubmit)="onSubmit()">
+
+  <!-- Group: requiredData -->
+  <div formGroupName="requiredData">
+
+    <!-- Control: Username -->
+    <div class="form-group">
+      <label for="username">Username</label>
+      <input
+        type="text"
+        id="username"
+        class="form-control"
+        formControlName="username"
+      >
+      <!-- Validation: Username -->
+      <span
+        class="help-block"
+        *ngIf="
+          !myForm.get('requiredData.username').valid &&
+          myForm.get('requiredData.username').touched
+        "
+      >
+        <span
+          class="help-block"
+          *ngIf="myForm.get('requiredData.username').errors['required']"
+        >Username is required.</span>
+        <span
+          class="help-block"
+          *ngIf="myForm.get('requiredData.username').errors['usernameIsForbidden']"
+        >Username is forbidden.</span>
+      </span>
+    </div>
+
+    <!-- Control: Email -->
+    <div class="form-group">
+      <label for="email">email</label>
+      <input
+        type="text"
+        id="email"
+        class="form-control"
+        formControlName="email"
+      >
+      <span
+        class="help-block"
+        *ngIf="
+          !myForm.get('requiredData.email').valid &&
+          myForm.get('requiredData.email').touched
+        "
+      >
+        Please enter a valid email.
+      </span>
+    </div>
+
+  </div><!-- /Group: requiredData -->
+
+  <!-- Control: Gender -->
+  <div class="radio" *ngFor="let gender of genders">
+    <label>
+      <input
+        type="radio"
+        [value]="gender"
+        formControlName="gender"
+      >
+      {{ gender }}
+    </label>
+  </div>
+
+  <!-- Custom controls -->
+  <div formArrayName="hobbies">
+    <h4>Your hobbies</h4>
+    <button
+      class="btn btn-default"
+      type="button"
+      (click)="onAddHobby()"
+    >Add Hobby</button>
+    <div
+      *ngFor="let hobby of myForm.get('hobbies').controls; let i = index;"
+      class="form-group"
+    >
+      <input
+        type="text"
+        class="form-control"
+        [formControlName]="i"
+      >
+    </div>
+  </div>
+
+  <!-- Submit -->
+  <hr>
+  <span
+    *ngIf="!myForm.valid && myForm.touched"
+    class="help-block"
+  >You need to enter valid data before submitting.</span>
+  <button
+    class="btn btn-primary"
+    type="submit"
+  >Submit</button>
+
+</form>

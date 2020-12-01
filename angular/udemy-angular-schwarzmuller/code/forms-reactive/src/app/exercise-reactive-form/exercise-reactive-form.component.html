@@ -1,0 +1,72 @@
+<div class="page-header">
+  <h1>Create a new project</h1>
+  <hr>
+</div>
+
+<form [formGroup]="myForm" (ngSubmit)="onSubmit()">
+
+  <!-- Control: name -->
+  <div class="form-group">
+    <label for="name">Name</label>
+    <input
+      type="text"
+      class="form-control"
+      name="name"
+      formControlName="name"
+      autofocus
+    >
+    <!-- Validation -->
+    <span
+      class="help-block"
+      *ngIf="!myForm.get('name').valid && myForm.get('name').touched"
+    >
+      <span *ngIf="myForm.get('name').errors['required']">
+        Name is required.
+      </span>
+      <span *ngIf="myForm.get('name').errors['nameIsTest']">
+        Name cannot be "Test".
+      </span>
+    </span>
+  </div>
+
+  <!-- Control: Email -->
+  <div class="form-group">
+    <label for="email">Email</label>
+    <input
+      type="text"
+      class="form-control"
+      name="email"
+      formControlName="email"
+    >
+    <span
+      class="help-block"
+      *ngIf="!myForm.get('email').valid && myForm.get('email').touched"
+    >
+      <span *ngIf="myForm.get('email').errors['required']">
+        Email is required.
+      </span>
+      <span *ngIf="myForm.get('email').errors['required']">
+        Email must be valid.
+      </span>
+    </span>
+  </div>
+
+  <!-- Control: Status -->
+  <div class="form-group">
+    <label for="status">Status</label>
+    <select
+      class="form-control"
+      formControlName="status"
+      name="status"
+    >
+      <option *ngFor="let status of stati" [value]="status">
+        {{ status | titlecase }}
+      </option>
+    </select>
+  </div>
+
+  <!-- Submit -->
+  <hr>
+  <button class="btn btn-primary" type="submit">Submit</button>
+
+</form>

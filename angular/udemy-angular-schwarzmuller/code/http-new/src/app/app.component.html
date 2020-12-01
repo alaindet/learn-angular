@@ -1,0 +1,113 @@
+<div class="container">
+
+  <!-- Form -->
+  <div class="row">
+    <div class="col-xs-12 col-md-6 col-md-offset-3">
+      <form
+        #postForm="ngForm"
+        (ngSubmit)="onCreatePost(postForm.value)"
+      >
+
+        <!-- Title -->
+        <div class="form-group">
+          <label for="title">Title</label>
+          <input
+            type="text"
+            class="form-control"
+            id="title"
+            required
+            ngModel
+            name="title"
+          >
+        </div>
+
+        <!-- Content -->
+        <div class="form-group">
+          <label for="content">Content</label>
+          <textarea
+            class="form-control"
+            id="content"
+            required
+            ngModel
+            name="content"
+          ></textarea>
+        </div>
+
+        <!-- Submit -->
+        <button
+          class="btn btn-primary"
+          type="submit"
+          [disabled]="!postForm.valid"
+        >
+          Send Post
+        </button>
+
+      </form>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- Actions -->
+  <div class="row">
+    <div class="col-xs-12 col-md-6 col-md-offset-3">
+
+      <!-- Read posts -->
+      <button
+        class="btn btn-primary"
+        (click)="onReadPosts()"
+      >
+        Read posts
+      </button>
+
+      &nbsp;
+
+      <!-- Delete posts -->
+      <button
+        class="btn btn-danger"
+        [disabled]="blogPosts.length === 0"
+        (click)="onDeletePosts()"
+      >
+        Delete posts
+      </button>
+
+    </div>
+  </div>
+
+  <!-- Output -->
+  <div class="row">
+    <div class="col-xs-12 col-md-6 col-md-offset-3">
+
+      <p *ngIf="isLoading && !error else loaded">
+        Loading...
+      </p>
+
+      <!-- Error alert -->
+      <div *ngIf="error" class="alert alert-danger">
+        <h1>Error</h1>
+        <p>{{ error }}</p>
+        <button class="btn btn-danger" (click)="onHandleError()">Ok</button>
+      </div>
+
+      <ng-container #loaded *ngIf="!blogPosts.length && !isLoading else showBlogPosts">
+        <p>No posts available!</p>
+      </ng-container>
+
+      <ng-template #showBlogPosts>
+        <ul>
+          <li
+            *ngFor="let blogPost of blogPosts"
+            class="blog-post-item"
+          >
+            <h3>{{ blogPost.title }}</h3>
+            <strong>ID: </strong>{{ blogPost.id }}
+            <br>
+            <strong>Content: </strong>{{ blogPost.content }}
+          </li>
+        </ul>
+      </ng-template>
+
+    </div>
+  </div>
+
+</div>

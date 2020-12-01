@@ -1,0 +1,128 @@
+<div class="container">
+  <div class="row">
+
+    <!-- Testing -->
+    <div class="col-xs-12">
+      <p *ngIf="userGroup.touched && !userGroup.valid">
+        The user group is not valid
+      </p>
+    </div>
+
+    <!-- Form -->
+    <div class="col-xs-12">
+
+      <form (ngSubmit)="onSubmit()" #f="ngForm">
+        <div
+          id="user-data"
+          ngModelGroup="userGroup"
+          #userGroup="ngModelGroup"
+        >
+
+          <!-- Control: username -->
+          <div class="form-group">
+            <label for="username">Username</label>
+            <input
+              type="text"
+              id="username"
+              class="form-control"
+              ngModel
+              name="username"
+              required
+            >
+          </div>
+
+          <!-- Control: suggest username -->
+          <button
+            class="btn btn-default"
+            type="button"
+            (click)="suggestUserName()"
+          >Suggest an Username</button>
+
+          <!-- Control: email ("email" is an Angular directive) -->
+          <div class="form-group">
+            <label for="email">Mail</label>
+            <input
+              type="email"
+              id="email"
+              class="form-control"
+              ngModel
+              name="email"
+              required
+              email
+              #email="ngModel"
+            >
+            <span class="help-block" *ngIf="email.touched && !email.valid">
+              Please enter a valid email!
+            </span>
+          </div>
+
+          <!-- Control: gender -->
+          <div class="radio" *ngFor="let gender of genders">
+            <label>
+              <input
+                type="radio"
+                name="gender"
+                ngModel="male"
+                [value]="gender"
+              >
+              {{ gender }}
+            </label>
+          </div>
+
+        </div><!-- /userGroup -->
+
+        <!-- Control: secret -->
+        <div class="form-group">
+          <label for="secret-question">Secret Question</label>
+          <select
+            id="secret"
+            class="form-control"
+            [ngModel]="defaultQuestion"
+            name="secret-question"
+          >
+            <option value="pet">Your first Pet?</option>
+            <option value="teacher">Your first teacher?</option>
+          </select>
+        </div>
+
+        <!-- Control: secret-answer (2-way-binding) -->
+        <input
+          type="password"
+          name="secret-answer"
+          class="form-control"
+          [(ngModel)]="secretAnswer"
+        >
+        <span class="help-block">{{ secretAnswer }}</span>
+
+        <!-- Control: submit -->
+        <button
+          type="submit"
+          class="btn btn-primary"
+          [disabled]="!f.valid"
+        >Submit</button>
+
+      </form>
+
+    </div>
+
+    <!-- Summary -->
+    <div class="col-xs-12">
+      <h2>Summary</h2>
+      <ul>
+        <li>Username: {{ formSummary.username }}</li>
+        <li>Email: {{ formSummary.email }}</li>
+        <li>Gender: {{ formSummary.gender }}</li>
+        <li>Secret question: {{ formSummary.secretQuestion }}</li>
+        <li>Secret answer: {{ formSummary.secretAnswer }} </li>
+      </ul>
+    </div>
+
+  </div>
+
+  <!-- EXERCISE -->
+  <div class="row">
+    <div class="col-xs-12">
+      <app-exercise-form></app-exercise-form>
+    </div>
+  </div>
+</div>

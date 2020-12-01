@@ -1,0 +1,72 @@
+<div class="row">
+  <div class="col-xs-12 col-sm-offset-3 col-sm-6">
+    <form (ngSubmit)="onSignup(f)" #f="ngForm">
+
+      <!-- Email -->
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          class="form-control"
+          placeholder="Email..."
+          ngModel
+          required
+        >
+      </div>
+
+      <!-- Group: passwords -->
+      <div
+        ngModelGroup="passwords"
+        #passwords="ngModelGroup"
+        appCheckPasswords
+      >
+
+        <!-- Password -->
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input
+            type="password"
+            id="password"
+            name="password"
+            class="form-control"
+            placeholder="Password..."
+            ngModel
+            required
+            minlength="6"
+            #passwordInput
+          >
+        </div>
+
+        <!-- Password again -->
+        <div class="form-group">
+          <label for="password-confirm">Confirm password</label>
+          <input
+            type="password"
+            id="password-confirm"
+            name="password-confirm"
+            class="form-control"
+            placeholder="Confirm password..."
+            ngModel
+            required
+            minlength="6"
+            #passwordConfirmInput
+          >
+          <span
+            *ngIf="passwords.errors?.passwordsDontMatch"
+            class="help-block"
+          >Passwords do not match</span>
+        </div>
+
+      </div><!-- /Group: passwords -->
+
+      <!-- Submit -->
+      <button
+        type="submit"
+        class="btn btn-primary"
+      >Sign Up</button>
+
+    </form>
+  </div>
+</div>

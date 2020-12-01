@@ -1,0 +1,75 @@
+<hr>
+<h2>Exercise</h2>
+
+<p *ngIf="exf.touched && !exf.valid">The form is invalid</p>
+
+
+<form (ngSubmit)="onSubmit()" #exf="ngForm">
+
+  <!-- Control: email -->
+  <div class="form-group">
+    <label for="exemail">Mail</label>
+    <input
+      type="email"
+      id="exemail"
+      class="form-control"
+      ngModel
+      name="exemail"
+      required
+      email
+      #exemail="ngModel"
+    >
+    <span class="help-block" *ngIf="exemail.touched && !exemail.valid">
+      Email is invalid
+    </span>
+  </div>
+
+  <!-- Control: password -->
+  <div class="form-group">
+    <label for="expassword">Password</label>
+    <input
+      type="password"
+      id="expassword"
+      class="form-control"
+      ngModel
+      name="expassword"
+      required
+      #expassword="ngModel"
+    >
+    <span class="help-block" *ngIf="expassword.touched && !expassword.valid">
+      Password is invalid
+    </span>
+  </div>
+
+  <!-- Control: secret -->
+  <div class="form-group">
+    <label for="exsub">Subscription</label>
+    <select
+      id="exsub"
+      class="form-control"
+      [ngModel]="defaults.sub"
+      name="exsub"
+    >
+      <option value="basic">Basic</option>
+      <option value="advanced">Advanced</option>
+      <option value="pro">Pro</option>
+    </select>
+  </div>
+
+  <!-- Control: submit -->
+  <button
+    type="submit"
+    class="btn btn-primary"
+    [disabled]="!exf.valid"
+  >Submit</button>
+
+</form>
+
+<div *ngIf="summary.filled">
+  <h3>Summary</h3>
+  <ul>
+    <li>Mail: {{ summary.email }}</li>
+    <li>Password: {{ summary.password }}</li>
+    <li>Subscription: {{ summary.subscription }}</li>
+  </ul>
+</div>

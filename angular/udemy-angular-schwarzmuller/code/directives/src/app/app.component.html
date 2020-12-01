@@ -1,0 +1,53 @@
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12">
+
+      <h1>Directives</h1>
+
+      <h2>Custom attribute directives</h2>
+
+      <p
+        appBasicHighlight
+      >
+        Styled with <strong>appBasicHighlight</strong> directive
+      </p>
+
+      <p
+        appBetterHighlight
+        [baseColor]="'transparent'"
+        [highlightColor]="'#ffff00'"
+      >
+        Styled with <strong>appBetterHighlight</strong> directive
+      </p>
+
+      <hr>
+
+      <h2>Property binding</h2>
+      <p appFoo>appFoo: no value</p>
+      <p appFoo="attribute-literal">appFoo: simple attribute literal</p>
+      <p [appFoo]="'string-literal'">appFoo: string literal expression</p>
+      <p [appFoo]="{value: 'object-prop'}">appFoo: object literal</p>
+
+      <hr>
+
+      <h2>Structural directives</h2>
+
+      <h3>*appUnless (custom)</h3>
+      <div *appUnless="true">Show unless true</div>
+      <div *appUnless="false">Show unless false</div>
+
+      <h3>*ngSwitch</h3>
+      <ng-container [ngSwitch]="2">
+        <p *ngSwitchCase="1">First paragraph</p>
+        <p *ngSwitchCase="2">Second paragraph</p>
+        <p *ngSwitchDefault>Default paragraph</p>
+      </ng-container>
+      <ng-container [ngSwitch]="42">
+        <p *ngSwitchCase="1">First paragraph</p>
+        <p *ngSwitchCase="2">Second paragraph</p>
+        <p *ngSwitchDefault>Default paragraph</p>
+      </ng-container>
+
+    </div>
+  </div>
+</div>
