@@ -1,0 +1,41 @@
+<ng-container *ngIf="isLoading; else loaded">
+  <div class="passenger-detail">
+    <app-loading-line></app-loading-line>
+    <app-loading-line></app-loading-line>
+  </div>
+</ng-container>
+<ng-template #loaded>
+  <div class="passenger-detail" [class.is-editing]="isEditing">
+
+    <span class="status" [class.checked-in]="item.checkedIn"></span>
+
+    <div *ngIf="isEditing; else showFullName">
+      <input type="text" [value]="item.fullName" (input)="onNameChange(fullName.value)" #fullName>
+    </div>
+    <ng-template #showFullName>
+      <div>
+        {{ item.fullName }}
+      </div>
+    </ng-template>
+
+    <div class="date">
+      Check in date:
+      {{ item.checkInDate ? item.checkInDate : 'not yet' }}
+    </div>
+
+    <div class="actions">
+      <button (click)="toggleEdit()" class="action" [class.active]="isEditing">
+        {{ isEditing ? 'Save' : 'Edit' }}
+      </button>
+
+      <button (click)="onRemove()" class="action">
+        Remove
+      </button>
+
+      <button (click)="onView()" class="action">
+        View
+      </button>
+    </div>
+
+  </div>
+</ng-template>

@@ -1,0 +1,71 @@
+$color-primary: #ff8000;
+
+.passenger-detail {
+
+  padding: .66rem 1rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  box-shadow: 1px 1px 3px 1px #ccc;
+  position: relative;
+  border: 1px solid transparent; // <-- Hack!
+
+  &.is-editing {
+    border: 1px solid $color-primary;
+  }
+
+  input {
+    padding: .33rem .66rem;
+    font-size: 1rem;
+    border: none;
+    box-shadow: inset 2px 2px 3px 1px #ccc;
+  }
+
+  .status {
+
+    width: 10px;
+    height: 10px;
+    background: #c0392b;
+    display: block;
+    margin: 8px 10px 0 0;
+    float: left;
+    border-radius: 50%;
+
+    &.checked-in {
+      background: #2ecc71;
+    }
+
+  }
+
+  .actions {
+
+    position: absolute;
+    top: .5rem;
+    right: .5rem;
+    display: flex;
+
+    .action {
+
+      cursor: pointer;
+      border: none;
+      background: none;
+      padding: .5rem;
+
+      &:hover,
+      &:active,
+      &:focus {
+        outline: none;
+      }
+
+      &:hover {
+        color: $color-primary;
+      }
+
+      &.active {
+        color: $color-primary;
+      }
+
+    }
+
+  }
+
+}

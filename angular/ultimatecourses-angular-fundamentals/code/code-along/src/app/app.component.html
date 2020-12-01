@@ -1,0 +1,21 @@
+<app-ui-container>
+
+  <nav class="links">
+    <a
+      *ngFor="let link of nav; first as first; last as last"
+      class="link"
+      [class.link--first]="first"
+      [class.link--last]="last"
+      [routerLink]="link.url"
+      routerLinkActive="active"
+      [routerLinkActiveOptions]="{ exact: link.exact }"
+    >
+      {{ link.label }}
+    </a>
+  </nav>
+
+  <hr>
+
+  <router-outlet></router-outlet>
+
+</app-ui-container>

@@ -1,0 +1,7 @@
+@import "theme";
+
+.component {
+  @extend %loading-item;
+  height: 16px;
+  margin: 8px 0;
+}

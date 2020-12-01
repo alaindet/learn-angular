@@ -1,0 +1,28 @@
+<h1>Airline Passengers</h1>
+
+<ng-container *ngIf="isAnyData; else loadingTemplate">
+
+  <app-passenger-count
+    [items]="passengers"
+  ></app-passenger-count>
+
+  <app-passenger-detail
+    *ngFor="let passenger of passengers"
+    [item]="passenger"
+    (edit)="onEdit($event)"
+    (remove)="onRemove($event)"
+    (view)="onView($event)"
+  ></app-passenger-detail>
+
+</ng-container>
+<ng-template #loadingTemplate>
+
+  <app-passenger-count
+    [isLoading]="isLoading"
+  ></app-passenger-count>
+
+  <app-passenger-detail
+    [isLoading]="isLoading"
+  ></app-passenger-detail>
+
+</ng-template>

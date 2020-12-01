@@ -1,0 +1,8 @@
+<ng-container *ngIf="isLoading; else loaded">
+  <app-loading-line width="50%"></app-loading-line>
+</ng-container>
+<ng-template #loaded>
+  <div>
+    Total checked in: {{ checkedInCount() }} out of {{ items.length || 0 }}
+  </div>
+</ng-template>

@@ -1,0 +1,17 @@
+.error {
+  color: red;
+}
+
+input,
+select {
+  margin: 8px 0;
+  padding: 4px 8px;
+  font-size: 1.1rem;
+}
+
+button[type="submit"] {
+  padding: 6px 16px;
+  margin: 8px 0;
+  font-size: 1.1rem;
+  cursor: pointer;
+}

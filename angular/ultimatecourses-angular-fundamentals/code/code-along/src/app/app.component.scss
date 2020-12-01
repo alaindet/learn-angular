@@ -1,0 +1,29 @@
+:host {
+  font-size: 16px;
+  font-family: Verdana;
+}
+
+.link {
+  display: inline-block;
+  margin: 0 8px;
+  padding: 4px 8px;
+  border-radius: 1rem;
+
+  &--first {
+    margin-left: 0;
+  }
+
+  &--last {
+    margin-right: 0;
+  }
+
+  &.active {
+    background-color: #333;
+    color: #f9f9f9;
+    text-decoration: none;
+  }
+}
+
+hr {
+  margin: 32px 0;
+}

@@ -1,0 +1,8 @@
+$color-loading: #eee;
+$color-loading-lighter: #fff;
+$color-loading-gradient: linear-gradient(
+  90deg,
+  $color-loading 0%,
+  $color-loading-lighter 50%,
+  $color-loading 100%
+);

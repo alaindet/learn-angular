@@ -1,0 +1,8 @@
+%loading-item {
+  background-color: $color-loading;
+  background-image: $color-loading-gradient;
+  background-size: 50%;
+  background-repeat: no-repeat;
+  border-radius: .25rem;
+  animation: flash-animation 1s linear infinite;
+}

@@ -1,0 +1,92 @@
+<form
+  #myCoolForm="ngForm"
+  novalidate
+  (ngSubmit)="onSubmit(myCoolForm.value, myCoolForm.valid)"
+>
+
+  <div>
+    Passenger ID:
+    <input
+      type="text"
+      required
+      #inputId="ngModel"
+      name="id"
+      [ngModel]="detail?.id"
+    >
+    <span
+      *ngIf="inputId.dirty && inputId.errors?.required"
+      class="error"
+    >
+      Passenger ID is required
+    </span>
+  </div>
+
+  <div>
+    Passenger name:
+    <input
+      type="text"
+      required
+      name="fullName"
+      #inputFullName="ngModel"
+      [ngModel]="detail?.fullName"
+    >
+    <span
+      *ngIf="inputFullName.dirty && inputFullName.errors?.required"
+      class="error"
+    >
+      Passenger name is required
+    </span>
+  </div>
+
+  <div>
+    <label>
+      <input
+        type="checkbox"
+        #inputCheckedIn
+        name="checkedIn"
+        [ngModel]="detail?.checkedIn"
+        (ngModelChange)="toggleCheckIn($event)"
+      >
+      Checked in?
+      {{ inputCheckedIn.errors | json }}
+    </label>
+  </div>
+
+  <div *ngIf="myCoolForm.value.checkedIn">
+    Check in date:
+    <input
+      type="number"
+      name="checkInDate"
+      [ngModel]="detail?.checkedInDate"
+    >
+  </div>
+
+  <div>
+    Luggage:
+    <select
+      name="baggage"
+      [ngModel]="detail?.baggage"
+    >
+      <option
+        *ngFor="let item of baggage"
+        [value]="item.key"
+        [selected]="detail?.baggage === item.key"
+      >
+        {{ item.value }}
+      </option>
+    </select>
+
+  </div>
+
+  <div>
+    <button
+      type="submit"
+      [disabled]="myCoolForm.invalid"
+    >
+      Update passenger
+    </button>
+  </div>
+
+  <pre>Form valid?: {{ myCoolForm.valid | json }}</pre>
+  <pre>Form value: {{ myCoolForm.value | json }}</pre>
+</form>
