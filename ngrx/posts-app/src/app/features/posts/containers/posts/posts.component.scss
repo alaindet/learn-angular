@@ -1,8 +1,0 @@
-@import 'src/app/style';
-
-.ghost-dots {
-  @include pal((
-    space: mt5,
-    flex: center,
-  ));
-}

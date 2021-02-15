@@ -1,8 +1,0 @@
-@import 'src/app/shared/style/scoped';
-
-.filters {
-  @include pal((
-    space: m3,
-    flex: center,
-  ));
-}
