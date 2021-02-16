@@ -4,7 +4,7 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { Product } from './products';
 
-import { AppState, ProductsActionType } from './store';
+import { AppState, ProductsActionType, productsSelector } from './store';
 
 @Component({
   selector: 'app-root',
@@ -22,7 +22,7 @@ export class AppComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.products$ = this.store.select('products');
+    this.products$ = this.store.select(productsSelector);
     this.initForm();
   }
 
