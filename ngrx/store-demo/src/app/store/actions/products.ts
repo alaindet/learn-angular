@@ -1,13 +1,28 @@
 import { Product } from '../../products/product';
-import { ProductsAction } from './products.enum';
+import { ProductsActionType } from './products.type';
 
-// TODO: Create action creators
-export interface CreateProductAction {
-  type: ProductsAction.Add;
-  payload: Product;
+// TODO: Create action creators?
+export interface ProductsAction {
+  type: ProductsActionType;
 }
 
-export interface RemoveProductAction {
-  type: ProductsAction.Remove;
-  payload: number;
+export interface CreateProductAction extends ProductsAction {
+  type: ProductsActionType.Create;
+  payload: {
+    product: Product;
+  };
+}
+
+export interface UpdateProductAction extends ProductsAction {
+  type: ProductsActionType.Update;
+  payload: {
+    product: Product;
+  };
+}
+
+export interface DeleteProductAction extends ProductsAction {
+  type: ProductsActionType.Delete;
+  payload: {
+    id: Product['id'];
+  };
 }

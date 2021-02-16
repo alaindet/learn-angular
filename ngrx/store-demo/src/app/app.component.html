@@ -1,10 +1,19 @@
 <h1>Store demo</h1>
-<button (click)="onAddProduct()">Add Product</button>
-<p>Products</p>
+<h2>Products</h2>
+
+<form [formGroup]="productForm" (ngSubmit)="onCreateProduct()">
+  <label for="product-name">
+    Add a product
+    <input type="text" formControlName="name" id="product-name">
+    <button type="submit" [disabled]="productForm.invalid">Add</button>
+  </label>
+</form>
 
 <ul *ngIf="products$ | async as products">
   <li *ngFor="let product of products">
-    {{ product.id }}) {{ product.name }}
+    #{{ product.id }}
+    <strong>{{ product.name }}</strong>
+    &nbsp;
     <button (click)="onRemoveProduct(product.id)">Remove</button>
   </li>
 </ul>

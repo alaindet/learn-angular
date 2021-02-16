@@ -1,2 +1,0 @@
-- Never use ChangeDetectionStrategy.OnPush while using ControlValueAccessor!
-- Never try to set the value property of <input> via Renderer2, use a simple binding to a `value` prop

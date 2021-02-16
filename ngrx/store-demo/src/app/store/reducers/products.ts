@@ -2,18 +2,43 @@ import { Action, ActionReducer } from '@ngrx/store';
 
 import { Product } from '../../products';
 import { AppState } from '../state';
-import { ProductsAction, CreateProductAction, RemoveProductAction } from '../actions';
+import {
+  ProductsActionType,
+  CreateProductAction,
+  UpdateProductAction,
+  DeleteProductAction,
+} from '../actions';
 
 export const productsReducer: ActionReducer<AppState['products'], Action> = (
-  state: AppState['products'] = [],
-  action: CreateProductAction | RemoveProductAction,
+  products: AppState['products'] = [],
+  action: (
+    | CreateProductAction
+    | UpdateProductAction
+    | DeleteProductAction
+  ),
 ) => {
   switch (action.type) {
-    case ProductsAction.Add:
-      return [...state, action.payload];
-    case ProductsAction.Remove:
-      return state.filter((prod: Product) => prod.id !== action.payload);
+
+    case ProductsActionType.Create: {
+      const { product } = action.payload;
+      return [...products, product];
+    }
+
+    case ProductsActionType.Update: {
+      const { product } = action.payload;
+      const id = product.id;
+      return products
+        .map((prod: Product): Product => prod.id === id ? product : prod);
+    }
+
+    case ProductsActionType.Delete: {
+      const { id } = action.payload;
+      return products
+        .filter((prod: Product): boolean => prod.id !== id);
+    }
+
     default:
-      return state;
+      return products;
+
   }
 };

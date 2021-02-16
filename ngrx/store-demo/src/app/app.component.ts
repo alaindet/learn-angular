@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
+import { Product } from './products';
 
-import { AppState } from './store';
+import { AppState, ProductsActionType } from './store';
 
 @Component({
   selector: 'app-root',
@@ -11,6 +13,7 @@ import { AppState } from './store';
 })
 export class AppComponent implements OnInit {
 
+  productForm: FormGroup;
   products$: Observable<AppState['products']>;
 
   constructor(
@@ -19,19 +22,38 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     this.products$ = this.store.select('products');
+    this.initForm();
   }
 
-  onRemoveProduct(id: number): void {
-    this.store.dispatch({
-      type: 'REMOVE',
-      payload: id,
-    });
+  onCreateProduct(): void {
+
+    if (this.productForm.invalid) {
+      return;
+    }
+
+    // New product
+    const id = Date.now();
+    const name = this.productForm.value.name;
+    const product: Product = { id, name };
+
+    // Dispatch
+    const type = ProductsActionType.Create;
+    const payload = { product };
+    this.store.dispatch({ type, payload });
+
+    // Reset form
+    this.productForm.reset();
   }
 
-  onAddProduct(): void {
-    this.store.dispatch({
-      type: 'ADD',
-      payload: { id: Date.now(), name: 'Foo' },
+  onRemoveProduct(id: Product['id']): void {
+    const type = ProductsActionType.Delete;
+    const payload = { id };
+    this.store.dispatch({ type, payload });
+  }
+
+  initForm(): void {
+    this.productForm = new FormGroup({
+      name: new FormControl(null, Validators.required),
     });
   }
 }
