@@ -4,7 +4,13 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { Product } from './products';
 
-import { AppState, ProductsActionType, productsSelector } from './store';
+import {
+  AppState,
+  productsSelector,
+  createProduct,
+  updateProduct,
+  deleteProduct,
+} from './store';
 
 @Component({
   selector: 'app-root',
@@ -27,11 +33,20 @@ export class AppComponent implements OnInit {
   }
 
   onCreateOrUpdateProduct(): void {
-    if (this.productForm.valid) {
-      this.product ? this.updateProduct() : this.createProduct();
-      this.productForm.reset();
-      this.product = null;
+    if (this.productForm.invalid) {
+      return;
     }
+
+    const id = this.product ? this.product.id : Date.now();
+    const name = this.productForm.value.name;
+    const product = { id, name };
+
+    this.product
+      ? this.updateProduct(product)
+      : this.createProduct(product);
+
+    this.productForm.reset();
+    this.product = null;
   }
 
   onSelectProduct(product: Product): void {
@@ -41,9 +56,9 @@ export class AppComponent implements OnInit {
   }
 
   onRemoveProduct(id: Product['id']): void {
-    const type = ProductsActionType.Delete;
     const payload = { id };
-    this.store.dispatch({ type, payload });
+    const action = deleteProduct(payload);
+    this.store.dispatch(action);
   }
 
   onCancel(): void {
@@ -57,21 +72,15 @@ export class AppComponent implements OnInit {
     });
   }
 
-  private createProduct(): void {
-    const id = Date.now();
-    const name = this.productForm.value.name;
-    const product = { id, name };
-    const type = ProductsActionType.Create;
+  private createProduct(product: Product): void {
     const payload = { product };
-    this.store.dispatch({ type, payload });
+    const action = createProduct(payload);
+    this.store.dispatch(action);
   }
 
-  private updateProduct(): void {
-    const id = this.product.id;
-    const name = this.productForm.value.name;
-    const product = { id, name };
-    const type = ProductsActionType.Update;
+  private updateProduct(product: Product): void {
     const payload = { product };
-    this.store.dispatch({ type, payload });
+    const action = updateProduct(payload);
+    this.store.dispatch(action);
   }
 }

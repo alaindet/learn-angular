@@ -1,2 +1,3 @@
-export * from './products.type';
-export * from './products';
+export * from './products.types';
+export * from './products.actions';
+export * from './products.creators';
