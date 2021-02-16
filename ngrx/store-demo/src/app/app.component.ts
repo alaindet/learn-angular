@@ -13,6 +13,7 @@ import { AppState, ProductsActionType } from './store';
 })
 export class AppComponent implements OnInit {
 
+  product: Product;
   productForm: FormGroup;
   products$: Observable<AppState['products']>;
 
@@ -25,24 +26,18 @@ export class AppComponent implements OnInit {
     this.initForm();
   }
 
-  onCreateProduct(): void {
-
-    if (this.productForm.invalid) {
-      return;
+  onCreateOrUpdateProduct(): void {
+    if (this.productForm.valid) {
+      this.product ? this.updateProduct() : this.createProduct();
+      this.productForm.reset();
+      this.product = null;
     }
+  }
 
-    // New product
-    const id = Date.now();
-    const name = this.productForm.value.name;
-    const product: Product = { id, name };
-
-    // Dispatch
-    const type = ProductsActionType.Create;
-    const payload = { product };
-    this.store.dispatch({ type, payload });
-
-    // Reset form
-    this.productForm.reset();
+  onSelectProduct(product: Product): void {
+    this.product = product;
+    const { name } = product;
+    this.productForm.patchValue({ name });
   }
 
   onRemoveProduct(id: Product['id']): void {
@@ -51,9 +46,32 @@ export class AppComponent implements OnInit {
     this.store.dispatch({ type, payload });
   }
 
-  initForm(): void {
+  onCancel(): void {
+    this.productForm.reset();
+    this.product = null;
+  }
+
+  private initForm(): void {
     this.productForm = new FormGroup({
       name: new FormControl(null, Validators.required),
     });
+  }
+
+  private createProduct(): void {
+    const id = Date.now();
+    const name = this.productForm.value.name;
+    const product = { id, name };
+    const type = ProductsActionType.Create;
+    const payload = { product };
+    this.store.dispatch({ type, payload });
+  }
+
+  private updateProduct(): void {
+    const id = this.product.id;
+    const name = this.productForm.value.name;
+    const product = { id, name };
+    const type = ProductsActionType.Update;
+    const payload = { product };
+    this.store.dispatch({ type, payload });
   }
 }
