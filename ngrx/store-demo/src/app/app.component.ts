@@ -2,14 +2,15 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { Product } from './products';
 
+import { Product } from './products';
 import {
   AppState,
   productsSelector,
   createProduct,
   updateProduct,
   deleteProduct,
+  createPayload,
 } from './store';
 
 @Component({
@@ -33,6 +34,7 @@ export class AppComponent implements OnInit {
   }
 
   onCreateOrUpdateProduct(): void {
+
     if (this.productForm.invalid) {
       return;
     }
@@ -56,7 +58,7 @@ export class AppComponent implements OnInit {
   }
 
   onRemoveProduct(id: Product['id']): void {
-    const payload = { id };
+    const payload = createPayload({ id });
     const action = deleteProduct(payload);
     this.store.dispatch(action);
   }
@@ -73,14 +75,12 @@ export class AppComponent implements OnInit {
   }
 
   private createProduct(product: Product): void {
-    const payload = { product };
-    const action = createProduct(payload);
-    this.store.dispatch(action);
+    const payload = createPayload({ product });
+    this.store.dispatch(createProduct(payload));
   }
 
   private updateProduct(product: Product): void {
-    const payload = { product };
-    const action = updateProduct(payload);
-    this.store.dispatch(action);
+    const payload = createPayload({ product });
+    this.store.dispatch(updateProduct(payload));
   }
 }

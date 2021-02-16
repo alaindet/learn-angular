@@ -1,6 +1,6 @@
 import { createAction, props } from '@ngrx/store';
 
-import { Product } from '../../products';
+import { Payload } from '../types';
 import { ProductsActionType } from './products.types';
 import {
   CreateProductAction,
@@ -9,22 +9,22 @@ import {
 } from './products.actions';
 
 export const createProduct: (
-  payload: { product: Product }
+  payload: Payload<CreateProductAction['payload']>,
 ) => CreateProductAction = createAction(
   ProductsActionType.Create,
-  props<{ product: Product }>(),
+  props<Payload<CreateProductAction['payload']>>(),
 );
 
 export const updateProduct: (
-  payload: { product: Product }
+  payload: Payload<UpdateProductAction['payload']>,
 ) => UpdateProductAction = createAction(
   ProductsActionType.Update,
-  props<{ product: Product }>(),
+  props<Payload<UpdateProductAction['payload']>>(),
 );
 
 export const deleteProduct: (
-  payload: { id: Product['id'] }
+  payload: Payload<DeleteProductAction['payload']>,
 ) => DeleteProductAction = createAction(
   ProductsActionType.Delete,
-  props<{ id: Product['id'] }>(),
+  props<Payload<DeleteProductAction['payload']>>(),
 );

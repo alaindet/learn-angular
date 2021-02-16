@@ -5,22 +5,30 @@ import { ProductsActionType } from './products.types';
 
 export interface CreateProductAction extends Action {
   type: ProductsActionType.Create;
-  product: Product;
+  payload: {
+    product: Product;
+  }
 }
 
 export interface GetProductAction extends Action {
   type: ProductsActionType.Get;
-  id: Product['id'];
+  payload: {
+    id: Product['id'];
+  }
 }
 
 export interface UpdateProductAction extends Action {
   type: ProductsActionType.Update;
-  product: Product;
+  payload: {
+    product: Product;
+  }
 }
 
 export interface DeleteProductAction extends Action {
   type: ProductsActionType.Delete;
-  id: Product['id'];
+  payload: {
+    id: Product['id'];
+  }
 }
 
 export type ProductsAction = (
