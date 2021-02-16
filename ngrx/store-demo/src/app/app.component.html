@@ -1,2 +1,10 @@
 <h1>Store demo</h1>
-<p>Counter: {{ counter$ | async }}</p>
+<button (click)="onAddProduct()">Add Product</button>
+<p>Products</p>
+
+<ul *ngIf="products$ | async as products">
+  <li *ngFor="let product of products">
+    {{ product.id }}) {{ product.name }}
+    <button (click)="onRemoveProduct(product.id)">Remove</button>
+  </li>
+</ul>

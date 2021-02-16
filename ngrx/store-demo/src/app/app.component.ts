@@ -11,13 +11,27 @@ import { AppState } from './store';
 })
 export class AppComponent implements OnInit {
 
-  counter$: Observable<AppState['counter']>;
+  products$: Observable<AppState['products']>;
 
   constructor(
     private store: Store<AppState>,
   ) {}
 
   ngOnInit(): void {
-    this.counter$ = this.store.select('counter');
+    this.products$ = this.store.select('products');
+  }
+
+  onRemoveProduct(id: number): void {
+    this.store.dispatch({
+      type: 'REMOVE',
+      payload: id,
+    });
+  }
+
+  onAddProduct(): void {
+    this.store.dispatch({
+      type: 'ADD',
+      payload: { id: Date.now(), name: 'Foo' },
+    });
   }
 }

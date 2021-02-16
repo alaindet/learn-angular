@@ -1,4 +1,6 @@
+import { Product } from '../../products';
+
 export interface AppState {
-  counter: number;
-  // products: any[];
+
+  products: Product[];
 }

@@ -1,2 +1,2 @@
-export * from './counter.enum';
 export * from './products.enum';
+export * from './products';
