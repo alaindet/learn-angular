@@ -1,21 +1,34 @@
 <h2>Products List</h2>
 
-<form [formGroup]="form" (ngSubmit)="onCreate()">
-  <input type="text" id="title" name="title">
-  <button type="submit">Add</button>
+<form
+  autocomplete="off"
+  [formGroup]="form"
+  (ngSubmit)="onCreate()"
+>
+  <input
+    type="text"
+    id="title"
+    name="title"
+    formControlName="title"
+    autofocus="false"
+  >
+  <button type="submit" [disabled]="form.invalid">Add</button>
 </form>
 
-<hr>
-<div *ngIf="selectedProduct$ | async as product">
-  #{{ product.id }}
-  <strong>{{ product.title }}</strong>
-</div>
-<hr>
+<ng-container *ngIf="selectedProduct$ | async as product">
+  <hr>
+  <div>
+    #{{ product.id }}
+    <strong>{{ product.title }}</strong>
+  </div>
+  <hr>
+</ng-container>
 
 <ul *ngIf="productsList$ | async as products">
   <li *ngFor="let product of products">
     #{{ product.id }}
     <strong>{{ product.title }}</strong>
+    &nbsp;
     <button (click)="onSelectProduct(product)">Select</button>
   </li>
 </ul>

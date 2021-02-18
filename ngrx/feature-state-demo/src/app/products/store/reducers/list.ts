@@ -2,7 +2,7 @@ import { ProductsActionType, AddProductAction } from '../actions';
 import { ProductsState } from './../state';
 
 export const listReducer = (
-  state: ProductsState['list'] = null,
+  state: ProductsState['list'] = [],
   action: AddProductAction,
 ) => {
   switch (action.type) {

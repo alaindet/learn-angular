@@ -1,9 +1,11 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { StoreModule } from '@ngrx/store';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
+import { environment } from 'src/environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { StoreModule } from '@ngrx/store';
 import { ProductModule } from './products/product.module';
 
 @NgModule({
@@ -14,6 +16,10 @@ import { ProductModule } from './products/product.module';
     BrowserModule,
     AppRoutingModule,
     StoreModule.forRoot({}),
+    StoreDevtoolsModule.instrument({
+      maxAge: 100,
+      logOnly: environment.production,
+    }),
     ProductModule
   ],
   providers: [],

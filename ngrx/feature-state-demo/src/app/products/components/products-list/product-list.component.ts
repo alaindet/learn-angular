@@ -31,6 +31,7 @@ export class ProductListComponent implements OnInit {
     if (this.form.valid) {
       const product = this.readProductFromForm();
       this.addProduct(product);
+      this.form.reset();
     }
   }
 
