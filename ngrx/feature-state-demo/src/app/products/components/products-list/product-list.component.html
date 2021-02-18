@@ -1,0 +1,21 @@
+<h2>Products List</h2>
+
+<form [formGroup]="form" (ngSubmit)="onCreate()">
+  <input type="text" id="title" name="title">
+  <button type="submit">Add</button>
+</form>
+
+<hr>
+<div *ngIf="selectedProduct$ | async as product">
+  #{{ product.id }}
+  <strong>{{ product.title }}</strong>
+</div>
+<hr>
+
+<ul *ngIf="productsList$ | async as products">
+  <li *ngFor="let product of products">
+    #{{ product.id }}
+    <strong>{{ product.title }}</strong>
+    <button (click)="onSelectProduct(product)">Select</button>
+  </li>
+</ul>
