@@ -1,0 +1,19 @@
+<form
+  autocomplete="off"
+  [formGroup]="form"
+  (ngSubmit)="onCreate()"
+>
+
+  <input
+    type="text"
+    id="title"
+    name="title"
+    formControlName="title"
+    autofocus="false"
+  >
+
+  <button type="submit" [disabled]="form.invalid">
+    Add
+  </button>
+
+</form>

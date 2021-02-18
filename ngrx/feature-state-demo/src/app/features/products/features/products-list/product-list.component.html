@@ -1,0 +1,17 @@
+<h2>Products</h2>
+
+<app-add-product
+  (created)="onCreateProduct($event)"
+></app-add-product>
+
+<app-selected-product
+  *ngIf="selectedProduct$ | async as product"
+  [product]="product"
+  (deselected)="onDeselectProduct()"
+></app-selected-product>
+
+<app-products-list
+  *ngIf="productsList$ | async as products"
+  [products]="products"
+  (selected)="onSelectProduct($event)"
+></app-products-list>

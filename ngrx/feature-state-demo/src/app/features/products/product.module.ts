@@ -4,8 +4,9 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { StoreModule } from '@ngrx/store';
 
 import { productsReducers } from './store';
-import { ProductListComponent } from './components/products-list/product-list.component';
 import { ProductsRoutingModule } from './products-routing.module';
+import * as features from './features';
+import * as components from './components';
 
 @NgModule({
   imports: [
@@ -15,7 +16,10 @@ import { ProductsRoutingModule } from './products-routing.module';
     StoreModule.forFeature('products', productsReducers),
   ],
   declarations: [
-    ProductListComponent,
+    features.ProductListFeatureComponent,
+    components.AddProductComponent,
+    components.ProductsListComponent,
+    components.SelectedProductComponent,
   ],
 })
 export class ProductModule {}

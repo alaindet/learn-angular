@@ -20,3 +20,13 @@ export interface SelectProductAction extends ProductsAction {
     product: Product;
   },
 }
+
+export interface DeselectProductAction extends ProductsAction {
+  type: ProductsActionType.Deselect;
+}
+
+export type AnyProductsAction = (
+  | AddProductAction
+  | SelectProductAction
+  | DeselectProductAction
+);

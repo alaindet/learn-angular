@@ -1,13 +1,10 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { ProductListComponent } from './components/products-list/product-list.component';
+import * as features from './features';
 
 const routes: Routes = [
-  {
-    path: '',
-    component: ProductListComponent,
-  },
+  { path: '', component: features.ProductListFeatureComponent },
 ];
 
 @NgModule({
