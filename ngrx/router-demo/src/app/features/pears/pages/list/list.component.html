@@ -1,0 +1,9 @@
+<h2>Pears</h2>
+
+<ul>
+  <li *ngFor="let item of items">
+    <a [routerLink]="['/pears', item.id]">
+      {{ item.name }}
+    </a>
+  </li>
+</ul>
