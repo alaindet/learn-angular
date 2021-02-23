@@ -1,0 +1,7 @@
+body {
+  margin: 2rem auto;
+  width: 100%;
+  max-width: 960px;
+  font-size: 18px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
