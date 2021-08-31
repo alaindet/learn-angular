@@ -21,8 +21,30 @@ export class AppComponent {
     private dialog: MatDialog,
   ) {}
 
-  editTask(list: string, task: Task): void {
-    // ...
+  editTask(list: 'done' | 'todo' | 'inProgress', task: Task): void {
+
+    const dialogRef = this.dialog.open(TaskDialogComponent, {
+      width: '270px',
+      data: {
+        task,
+        enableDelete: true,
+      },
+    });
+
+    dialogRef
+      .afterClosed()
+      .subscribe((result: TaskDialogOutput) => {
+
+        const dataList = this[list];
+        const taskIndex = dataList.indexOf(task);
+
+        if (result.delete) {
+          dataList.splice(taskIndex, 1);
+          return;
+        }
+
+        dataList[taskIndex] = task;
+      });
   }
 
   drop(event: CdkDragDrop<Task[]>): void {
@@ -42,6 +64,11 @@ export class AppComponent {
       event.previousIndex,
       event.currentIndex
     );
+
+    console.log('====\nLISTS STATUS\n====');
+    console.log('TODO LIST', this.todo);
+    console.log('IN PROGRESS LIST', this.inProgress);
+    console.log('DONE LIST', this.done);
   }
 
   newTask(): void {
