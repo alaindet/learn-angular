@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
-import { AuthInterceptorService } from './auth/services/auth-interceptor.service';
+import { AuthInterceptorService } from '@/features/auth';
 import { HeaderComponent } from './components/header/header.component';
 
 @NgModule({
