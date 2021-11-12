@@ -1,11 +1,11 @@
-import { AuthService } from '../auth/auth.service';
-import { ShoppingListService } from './../shopping-list/shopping-list.service';
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
-import { RecipeService } from '../recipes/recipe.service';
-import { Response } from '@angular/http';
-import { Recipe } from '../recipes/recipe.model';
+import { Http, Response } from '@angular/http';
 import { map } from 'rxjs/operators';
+
+import { AuthService } from '@/features/auth';
+import { ShoppingListService } from './../shopping-list/shopping-list.service';
+import { RecipeService } from '../recipes/recipe.service';
+import { Recipe } from '../recipes/recipe.model';
 import { Ingredient } from './ingredient.model';
 
 interface AppData {

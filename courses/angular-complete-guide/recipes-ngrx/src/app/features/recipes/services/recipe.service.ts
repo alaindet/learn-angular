@@ -3,7 +3,7 @@ import { Subject } from 'rxjs';
 
 import { Recipe } from '../types';
 import { Ingredient } from '@/shared/types';
-import { ShoppingListService } from '../../shopping-list/services/shopping-list.service';
+import { ShoppingListService } from '@/features/shopping-list';
 
 @Injectable()
 export class RecipeService {
@@ -24,7 +24,8 @@ export class RecipeService {
     return this.recipes.slice();
   }
 
-  getRecipe(index: number) {
+  getRecipe(rawIndex: number | string): Recipe {
+    const index = +rawIndex;
     return this.recipes[index];
   }
 

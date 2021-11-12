@@ -1,46 +1,49 @@
 import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 
 import { Ingredient } from '@/shared/types';
-
-export const MOCK_INGREDIENTS: Ingredient[] = [
-  new Ingredient('Apples', 5),
-  new Ingredient('Tomatoes', 10),
-];
+import { MOCK_INGREDIENTS } from '../mocks/ingredients';
 
 @Injectable()
 export class ShoppingListService {
 
-  ingredientsChanged = new Subject<Ingredient[]>();
-  startedEditing = new Subject<number>();
+  private _ingredients = MOCK_INGREDIENTS;
+  private _ingredients$ = new BehaviorSubject<Ingredient[]>(MOCK_INGREDIENTS);
+  private _startedEditing$ = new Subject<number>();
 
-  private ingredients: Ingredient[] = MOCK_INGREDIENTS;
+  get ingredients$(): Observable<Ingredient[]> {
+    return this._ingredients$.asObservable();
+  }
 
-  getIngredients(): Ingredient[] {
-    return this.ingredients.slice();
+  get startedEditing$(): Observable<number> {
+    return this._startedEditing$.asObservable();
+  }
+
+  startEditing(index: number): void {
+    this._startedEditing$.next(index);
   }
 
   getIngredient(index: number): Ingredient {
-    return this.ingredients[index];
+    return this._ingredients[index];
   }
 
   addIngredient(ingredient: Ingredient): void {
-    this.ingredients.push(ingredient);
-    this.ingredientsChanged.next(this.ingredients.slice());
+    this._ingredients.push(ingredient);
+    this._ingredients$.next([...this._ingredients]);
   }
 
   addIngredients(ingredients: Ingredient[]): void {
-    this.ingredients.push(...ingredients);
-    this.ingredientsChanged.next(this.ingredients.slice());
+    this._ingredients.push(...ingredients);
+    this._ingredients$.next([...this._ingredients]);
   }
 
-  updateIngredient(index: number, newIngredient: Ingredient): void {
-    this.ingredients[index] = newIngredient;
-    this.ingredientsChanged.next(this.ingredients.slice());
+  updateIngredient(index: number, ingredient: Ingredient): void {
+    this._ingredients[index] = ingredient;
+    this._ingredients$.next([...this._ingredients]);
   }
 
   deleteIngredient(index: number): void {
-    this.ingredients.splice(index, 1);
-    this.ingredientsChanged.next(this.ingredients.slice());
+    this._ingredients = this._ingredients.filter((_, i) => i !== index);
+    this._ingredients$.next([...this._ingredients]);
   }
 }

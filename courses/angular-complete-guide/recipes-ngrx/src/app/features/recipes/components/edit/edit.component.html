@@ -1,6 +1,8 @@
 <div class="row">
   <div class="col-xs-12">
     <form [formGroup]="recipeForm" (ngSubmit)="onSubmit()">
+
+      <!-- Controls -->
       <div class="row">
         <div class="col-xs-12">
           <button
@@ -15,6 +17,8 @@
           </button>
         </div>
       </div>
+
+      <!-- Name -->
       <div class="row">
         <div class="col-xs-12">
           <div class="form-group">
@@ -28,6 +32,8 @@
           </div>
         </div>
       </div>
+
+      <!-- Image URL -->
       <div class="row">
         <div class="col-xs-12">
           <div class="form-group">
@@ -42,11 +48,15 @@
           </div>
         </div>
       </div>
+
+      <!-- Image preview-->
       <div class="row">
         <div class="col-xs-12">
           <img [src]="imagePath.value" class="img-responsive" />
         </div>
       </div>
+
+      <!-- Description -->
       <div class="row">
         <div class="col-xs-12">
           <div class="form-group">
@@ -61,6 +71,8 @@
           </div>
         </div>
       </div>
+
+      <!-- Ingredients -->
       <div class="row">
         <div class="col-xs-12" formArrayName="ingredients">
           <div
@@ -80,11 +92,7 @@
               />
             </div>
             <div class="col-xs-2">
-              <button
-                type="button"
-                class="btn btn-danger"
-                (click)="onDeleteIngredient(i)"
-              >
+              <button type="button" class="btn btn-danger" (click)="onDeleteIngredient(i)">
                 X
               </button>
             </div>
@@ -92,11 +100,7 @@
           <hr />
           <div class="row">
             <div class="col-xs-12">
-              <button
-                type="button"
-                class="btn btn-success"
-                (click)="onAddIngredient()"
-              >
+              <button type="button" class="btn btn-success" (click)="onAddIngredient()">
                 Add Ingredient
               </button>
             </div>
