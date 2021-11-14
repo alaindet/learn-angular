@@ -28,9 +28,9 @@ export class RecipesApiService {
       .pipe(map(response => response.data));
   }
 
-  getRecipe(name: string): Observable<Ingredient> {
+  getRecipe(name: string): Observable<Recipe> {
     const url = `${this.baseUrl}/${name}`;
-    return this.http.get<Response<Ingredient>>(url)
+    return this.http.get<Response<Recipe>>(url)
       .pipe(map(response => response.data));
   }
 

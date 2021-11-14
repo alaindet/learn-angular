@@ -2,48 +2,67 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
 
 import { Ingredient } from '@/shared/types';
-import { MOCK_INGREDIENTS } from '../mocks/ingredients';
+import { IngredientsApiService } from './ingredients.api.service';
+import { map, switchMap, tap } from 'rxjs/operators';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root',
+})
 export class ShoppingListService {
 
-  private _ingredients = MOCK_INGREDIENTS;
-  private _ingredients$ = new BehaviorSubject<Ingredient[]>(MOCK_INGREDIENTS);
-  private _startedEditing$ = new Subject<number>();
+  private ingredients: Ingredient[] | null = null;
+  private _ingredients$ = new BehaviorSubject<Ingredient[] | null>(null);
+  private _currentIngredient$ = new BehaviorSubject<Ingredient | null>(null);
 
-  get ingredients$(): Observable<Ingredient[]> {
+  constructor(
+    private ingredientsApi: IngredientsApiService,
+  ) {}
+
+  setIngredients(ingredients: Ingredient[]): void {
+    this.ingredients = ingredients;
+    this._ingredients$.next(ingredients);
+  }
+
+  setCurrentIngredient(ingredient: Ingredient | null): void {
+    this._currentIngredient$.next(ingredient);
+  }
+
+  getCurrentIngredient(): Observable<Ingredient | null> {
+    return this._currentIngredient$.asObservable();
+  }
+
+  createRecipe(recipe: Ingredient): Observable<Ingredient> {
+    return this.ingredientsApi.createIngredient(recipe);
+  }
+
+  getIngredients(force = false): Observable<Ingredient[]> {
+    if (force || this.ingredients === null) {
+      return this.ingredientsApi.getIngredients().pipe(
+        tap(recipes => {
+          this.ingredients = recipes;
+          this._ingredients$.next(recipes);
+        }),
+        switchMap(() => this._ingredients$.asObservable()),
+      );
+    }
+
     return this._ingredients$.asObservable();
   }
 
-  get startedEditing$(): Observable<number> {
-    return this._startedEditing$.asObservable();
+  getIngredient(name: string, force = false): Observable<Ingredient> {
+    if (force || this.ingredients === null) {
+      return this.ingredientsApi.getIngredient(name);
+    }
+
+    return this._ingredients$.asObservable()
+      .pipe(map(recipes => recipes.find(i => i.name === name)[0]));
   }
 
-  startEditing(index: number): void {
-    this._startedEditing$.next(index);
+  updateRecipe(recipe: Ingredient): Observable<Ingredient> {
+    return this.ingredientsApi.updateIngredient(recipe);
   }
 
-  getIngredient(index: number): Ingredient {
-    return this._ingredients[index];
-  }
-
-  addIngredient(ingredient: Ingredient): void {
-    this._ingredients.push(ingredient);
-    this._ingredients$.next([...this._ingredients]);
-  }
-
-  addIngredients(ingredients: Ingredient[]): void {
-    this._ingredients.push(...ingredients);
-    this._ingredients$.next([...this._ingredients]);
-  }
-
-  updateIngredient(index: number, ingredient: Ingredient): void {
-    this._ingredients[index] = ingredient;
-    this._ingredients$.next([...this._ingredients]);
-  }
-
-  deleteIngredient(index: number): void {
-    this._ingredients = this._ingredients.filter((_, i) => i !== index);
-    this._ingredients$.next([...this._ingredients]);
+  deleteRecipe(name: string): Observable<Ingredient> {
+    return this.ingredientsApi.deleteIngredient(name);
   }
 }

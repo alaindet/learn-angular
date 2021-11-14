@@ -9,7 +9,7 @@ import { HttpClient } from '@angular/common/http';
 @Injectable({
   providedIn: 'root',
 })
-export class ShoppingListApiService {
+export class IngredientsApiService {
 
   baseUrl = `${environment.apiUrl}/ingredients`;
 
