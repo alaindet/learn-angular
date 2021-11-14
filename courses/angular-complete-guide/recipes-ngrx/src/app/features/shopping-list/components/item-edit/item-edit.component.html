@@ -4,6 +4,7 @@
       <div class="row">
         <div class="col-sm-5 form-group">
 
+          <!-- Name -->
           <label for="name">Name</label>
           <input
             type="text"
@@ -15,6 +16,7 @@
           >
         </div>
 
+        <!-- Amount -->
         <div class="col-sm-2 form-group">
           <label for="amount">Amount</label>
           <input
@@ -31,28 +33,18 @@
       <div class="row">
         <div class="col-xs-12">
 
-          <button
-            class="btn btn-success"
-            type="submit"
-            [disabled]="!itemForm.valid"
-          >
+          <!-- Submit -->
+          <button class="btn btn-success" type="submit" [disabled]="!itemForm.valid">
             {{ editMode ? 'Update' : 'Add' }}
           </button>
 
-          <button
-            class="btn btn-danger"
-            type="button"
-            (click)="onDelete()"
-            *ngIf="editMode"
-          >
+          <!-- Delete -->
+          <button *ngIf="editMode" type="button" class="btn btn-danger" (click)="onDelete()">
             Delete
           </button>
 
-          <button
-            class="btn btn-primary"
-            type="button"
-            (click)="onClear()"
-          >
+          <!-- Clear -->
+          <button class="btn btn-primary" type="button" (click)="onClear()">
             Clear
           </button>
 

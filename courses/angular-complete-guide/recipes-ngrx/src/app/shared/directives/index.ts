@@ -1,1 +1,1 @@
-export * from './dropdown.directive';
+export * from './dropdown/dropdown.directive';

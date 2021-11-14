@@ -14,10 +14,10 @@ export class ShoppingListItemEditComponent implements OnInit, OnDestroy {
   @ViewChild('itemForm', { static: false })
   shoppingListForm: NgForm;
 
-  subscription: Subscription;
   editMode = false;
   editedItemIndex: number;
   editedItem: Ingredient;
+  private subscription: Subscription;
 
   constructor(
     private shoppingListService: ShoppingListService,
