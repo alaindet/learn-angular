@@ -1,2 +1,0 @@
-- [ ] Update Angular version
-- [ ] Remove Firebase backend
