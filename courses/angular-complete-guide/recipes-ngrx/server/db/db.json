@@ -1,0 +1,137 @@
+{
+  "ingredients": [
+    {
+      "name": "Apples",
+      "amount": 2
+    },
+    {
+      "name": "Dough (g)",
+      "amount": 1000
+    },
+    {
+      "name": "Eggs",
+      "amount": 3
+    },
+    {
+      "name": "Flour (g)",
+      "amount": 240
+    },
+    {
+      "name": "Gounded Beef (g)",
+      "amount": 500
+    },
+    {
+      "name": "Honey (g)",
+      "amount": 30
+    },
+    {
+      "name": "Milk (g)",
+      "amount": 20
+    },
+    {
+      "name": "Mozzarella",
+      "amount": 2
+    },
+    {
+      "name": "Parmigiano (g)",
+      "amount": 100
+    },
+    {
+      "name": "Sauteed (g)",
+      "amount": 100
+    },
+    {
+      "name": "Sugar (g)",
+      "amount": 100
+    },
+    {
+      "name": "Tomato Sauce (l)",
+      "amount": 2
+    }
+  ],
+  "recipes": [
+    {
+      "name": "Apple Pie",
+      "imagePath": "http:4200/assets/apple-pie.jpg",
+      "description": "Duis labore nulla pariatur ex ea ullamco dolor. Labore ea ullamco enim esse officia minim. Reprehenderit amet dolore cillum adipisicing cupidatat ex voluptate duis et fugiat officia mollit quis ad. Ad deserunt in exercitation cillum aliquip eiusmod commodo.",
+      "ingredients": [
+        {
+          "name": "Apples",
+          "amount": 2
+        },
+        {
+          "name": "Flour (g)",
+          "amount": 200
+        },
+        {
+          "name": "Sugar (g)",
+          "amount": 100
+        },
+        {
+          "name": "Eggs",
+          "amount": 2
+        }
+      ]
+    },
+    {
+      "name": "Pancakes",
+      "imagePath": "http:4200/assets/apple-pie.jpg",
+      "description": "Sint laboris laboris veniam ipsum aliquip tempor. Esse fugiat minim sint non et tempor est ullamco duis laboris ea. Proident labore adipisicing excepteur aliquip laborum ipsum ullamco aute. Mollit sit exercitation dolor labore minim reprehenderit consequat nisi nulla velit velit non amet. Proident duis dolore aute do occaecat. Sunt elit exercitation nostrud sit nulla esse.",
+      "ingredients": [
+        {
+          "name": "Honey (g)",
+          "amount": 30
+        },
+        {
+          "name": "Milk (g)",
+          "amount": 20
+        },
+        {
+          "name": "Flour (g)",
+          "amount": 40
+        },
+        {
+          "name": "Eggs",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "name": "Lasagna",
+      "imagePath": "http:4200/assets/apple-pie.jpg",
+      "description": "Mollit excepteur id excepteur consequat aliquip aute anim esse. Sint ad cupidatat nostrud mollit sint nostrud est laborum pariatur. Veniam proident voluptate enim et nulla proident tempor velit deserunt pariatur.",
+      "ingredients": [
+        {
+          "name": "Dough (g)",
+          "amount": 1000
+        },
+        {
+          "name": "Tomato Sauce (l)",
+          "amount": 2
+        },
+        {
+          "name": "Gounded Beef (g)",
+          "amount": 500
+        },
+        {
+          "name": "Sauteed (g)",
+          "amount": 100
+        },
+        {
+          "name": "Mozzarella",
+          "amount": 2
+        },
+        {
+          "name": "Parmigiano (g)",
+          "amount": 100
+        }
+      ]
+    }
+  ],
+  "users": [
+    {
+      "email": "example@example.com",
+      "password": "example@example.com"
+    }
+  ]
+}

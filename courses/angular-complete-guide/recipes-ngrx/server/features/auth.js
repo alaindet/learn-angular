@@ -1,8 +1,7 @@
 const express = require('express');
 const bcrypt = require('bcrypt');
-const database = require('./utils/database');
-const successResponse = require('./utils/success-response');
-const errorResponse = require('./utils/error-response');
+const database = require('../utils/database');
+const { successResponse, errorResponse } = require('../utils/http');
 
 const router = express.Router();
 const COLLECTION = 'users';
@@ -33,6 +32,7 @@ router.post('/login', async (req, res) => {
 
 const authMiddleware = (req, res, next) => {
   console.log("Running auth middlware...");
+  next();
   // TODO...
 };
 
