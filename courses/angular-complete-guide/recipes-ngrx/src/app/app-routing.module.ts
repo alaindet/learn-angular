@@ -9,19 +9,19 @@ const routes: Routes = [
   },
   {
     path: 'recipes',
-    loadChildren: () => import('./recipes/recipes.module')
+    loadChildren: () => import('./features/recipes/recipes.module')
       .then(m => m.RecipesModule),
   },
   {
     path: 'shopping-list',
-    loadChildren: () => import('./shopping-list/shopping-list.module')
+    loadChildren: () => import('./features/shopping-list/shopping-list.module')
       .then(m => m.ShoppingListModule),
   },
-  {
-    path: 'auth',
-    loadChildren: () => import('./auth/auth.module#AuthModule')
-      .then(m => m.AuthModule),
-  }
+  // {
+  //   path: 'auth',
+  //   loadChildren: () => import('./features/auth/auth.module')
+  //     .then(m => m.AuthModule),
+  // },
 ];
 
 @NgModule({

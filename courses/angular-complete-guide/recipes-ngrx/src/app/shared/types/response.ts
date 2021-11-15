@@ -10,4 +10,7 @@ export interface ErrorResponse<T = null> {
   data: T;
 }
 
-export type Response<T = any, K = null> = SuccessResponse<T> | ErrorResponse<K>;
+export type Response<T = any, K = null> = (
+  | SuccessResponse<T>
+  | ErrorResponse<K>
+);
