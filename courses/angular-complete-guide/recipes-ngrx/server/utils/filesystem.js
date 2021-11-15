@@ -1,3 +1,5 @@
+const fs = require('fs');
+
 const fileExists = async (filePath) => {
   try {
     await fs.promises.access(filePath, fs.constants.F_OK);

@@ -8,7 +8,7 @@ const fetchDatabase = async () => {
   const fileExists = await filesystem.fileExists(DATABASE_PATH);
   if (!fileExists) return {};
   const options = { encoding: 'utf-8' };
-  const rawData = await fs.promises.readFile(collectionPath, optios);
+  const rawData = await fs.promises.readFile(DATABASE_PATH, options);
   return JSON.parse(rawData);
 };
 

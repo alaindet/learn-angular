@@ -8,6 +8,25 @@ const COLLECTION = 'users';
 
 const FAKE_TOKEN = 'some-super-secret-token';
 
+router.post('/register', async (req, res) => {
+  const { email, password } = req.body;
+  const users = await database.fetchCollection(COLLECTION);
+  const user = users.find((user) => user.email === email);
+
+  if (user) {
+    const message = 'User already exists';
+    return res.status(409).json(errorResponse(message));
+  }
+
+  const hashedPassword = await bcrypt.hash(password, 10);
+  const newUser = { email, password: hashedPassword };
+  users.push(newUser);
+  await database.storeCollection(COLLECTION, [...users]);
+  const message = 'User registered';
+  const data = { token: FAKE_TOKEN };
+  return res.status(201).json(successResponse(message, data));
+});
+
 router.post('/login', async (req, res) => {
   const { email, password } = req.body;
   const users = await database.fetchCollection(COLLECTION);

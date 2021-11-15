@@ -37,7 +37,7 @@ router.get('/:name', async (req, res) => {
 
 router.patch('/:name', async (req, res) => {
   const { name } = req.params;
-  const newItem = req.body;
+  const newItem = { ...req.body, name };
   let items = await database.fetchCollection(COLLECTION);
   const item = items.find((item) => item.name === name);
 
