@@ -3,7 +3,7 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { environment } from 'src/environments/environment';
-import { Ingredient, Response } from '@/shared/types';
+import { Response } from '@/shared/types';
 import { HttpClient } from '@angular/common/http';
 import { Recipe } from '../types';
 
