@@ -6,7 +6,8 @@ const { successResponse, errorResponse } = require('../utils/http');
 const router = express.Router();
 const COLLECTION = 'users';
 
-const FAKE_TOKEN = 'some-super-secret-token';
+const FAKE_AUTH_HEADER_NAME = 'recipes-authorization';
+const FAKE_AUTH_HEADER_VALUE = 'super-dumb-static-token';
 
 router.post('/register', async (req, res) => {
   const { email, password } = req.body;
@@ -49,10 +50,25 @@ router.post('/login', async (req, res) => {
   return res.json(successResponse(message, data));
 });
 
-const authMiddleware = (req, res, next) => {
-  console.log("Running auth middlware...");
-  next();
-  // TODO...
+const fakeAuthMiddleware = (req, res, next) => {
+
+  const publicPaths = ['/auth/login', '/auth/register'];
+
+  if (publicPaths.includes(req.path)) {
+    return next();
+  }
+
+  const authHeader = req.headers[FAKE_AUTH_HEADER_NAME];
+
+  if (!authHeader || authHeader !== FAKE_AUTH_HEADER_VALUE) {
+    const message = 'You are not authorized';
+    return res.status(401).json(errorResponse(message));
+  }
+
+  return  next();
 };
 
-module.exports = { router, authMiddleware };
+module.exports = {
+  router,
+  fakeAuthMiddleware,
+};
