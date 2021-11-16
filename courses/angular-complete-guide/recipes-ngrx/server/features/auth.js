@@ -9,24 +9,24 @@ const COLLECTION = 'users';
 const FAKE_AUTH_HEADER_NAME = 'recipes-authorization';
 const FAKE_AUTH_HEADER_VALUE = 'super-dumb-static-token';
 
-router.post('/register', async (req, res) => {
-  const { email, password } = req.body;
-  const users = await database.fetchCollection(COLLECTION);
-  const user = users.find((user) => user.email === email);
+// router.post('/register', async (req, res) => {
+//   const { email, password } = req.body;
+//   const users = await database.fetchCollection(COLLECTION);
+//   const user = users.find((user) => user.email === email);
 
-  if (user) {
-    const message = 'User already exists';
-    return res.status(409).json(errorResponse(message));
-  }
+//   if (user) {
+//     const message = 'User already exists';
+//     return res.status(409).json(errorResponse(message));
+//   }
 
-  const hashedPassword = await bcrypt.hash(password, 10);
-  const newUser = { email, password: hashedPassword };
-  users.push(newUser);
-  await database.storeCollection(COLLECTION, [...users]);
-  const message = 'User registered';
-  const data = { token: FAKE_TOKEN };
-  return res.status(201).json(successResponse(message, data));
-});
+//   const hashedPassword = await bcrypt.hash(password, 10);
+//   const newUser = { email, password: hashedPassword };
+//   users.push(newUser);
+//   await database.storeCollection(COLLECTION, [...users]);
+//   const message = 'User registered';
+//   const data = { token: FAKE_TOKEN };
+//   return res.status(201).json(successResponse(message, data));
+// });
 
 router.post('/login', async (req, res) => {
   const { email, password } = req.body;
@@ -46,7 +46,10 @@ router.post('/login', async (req, res) => {
   }
 
   const message = 'Login successfull';
-  const data = { token: FAKE_TOKEN };
+  const data = {
+    email,
+    token: FAKE_AUTH_HEADER_VALUE,
+  };
   return res.json(successResponse(message, data));
 });
 

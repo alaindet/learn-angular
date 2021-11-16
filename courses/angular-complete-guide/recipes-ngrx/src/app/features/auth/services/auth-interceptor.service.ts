@@ -3,6 +3,7 @@ import { HttpInterceptor, HttpRequest, HttpHandler } from '@angular/common/http'
 import { take, exhaustMap } from 'rxjs/operators';
 
 import { AuthService } from './auth.service';
+import { FAKE_AUTH_HEADER_NAME } from '../constants';
 
 @Injectable()
 export class AuthInterceptorService implements HttpInterceptor {
@@ -18,8 +19,7 @@ export class AuthInterceptorService implements HttpInterceptor {
         if (!user) {
           return next.handle(req);
         }
-        // Just a mock authorization system
-        const headers = req.headers.set('X-Recipes-Auth', user.token);
+        const headers = req.headers.set(FAKE_AUTH_HEADER_NAME, user.token);
         // const headers = req.headers.set('Authotization', `Bearer ${user.token}`);
         const modifiedReq = req.clone({ headers });
         return next.handle(modifiedReq);

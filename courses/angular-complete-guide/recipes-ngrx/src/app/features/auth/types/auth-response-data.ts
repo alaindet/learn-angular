@@ -1,9 +1,8 @@
-export interface AuthResponseData {
-  kind: string;
-  idToken: string;
+import { Response } from '@/shared/types';
+
+export interface LoginResponseData {
   email: string;
-  refreshToken: string;
-  expiresIn: string;
-  localId: string;
-  registered?: boolean;
+  token: string;
 }
+
+export type LoginResponse = Response<LoginResponseData>;
