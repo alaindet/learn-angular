@@ -15,21 +15,21 @@ export class ShoppingListItemEditComponent implements OnInit, OnDestroy {
   shoppingListForm: NgForm;
 
   editMode = false;
-  editedItemIndex: number;
-  editedItem: Ingredient;
-  private subscription: Subscription;
+  currentIngredient: Ingredient | null;
+  private subs: { [sub: string]: Subscription } = {};
 
   constructor(
     private shoppingListService: ShoppingListService,
   ) {}
 
   ngOnInit(): void {
-    this.subscription = this.shoppingListService.startedEditing$
-      .subscribe(this.setEditingItem.bind(this));
+    this.fetchCurrentIngredient();
   }
 
   ngOnDestroy(): void {
-    this.subscription.unsubscribe();
+    for (const sub of Object.values(this.subs)) {
+      sub.unsubscribe();
+    }
   }
 
   onSubmit(form: NgForm): void {
@@ -37,10 +37,10 @@ export class ShoppingListItemEditComponent implements OnInit, OnDestroy {
     const newIngredient = new Ingredient(name, amount);
 
     if (this.editMode) {
-      this.shoppingListService.updateIngredient(this.editedItemIndex, newIngredient);
+      this.shoppingListService.updateIngredient(newIngredient);
       this.editMode = false;
     } else {
-      this.shoppingListService.addIngredient(newIngredient);
+      this.shoppingListService.createIngredient(newIngredient);
     }
 
     form.reset();
@@ -52,15 +52,14 @@ export class ShoppingListItemEditComponent implements OnInit, OnDestroy {
   }
 
   onDelete(): void {
-    this.shoppingListService.deleteIngredient(this.editedItemIndex);
-    this.onClear();
+    if (this.currentIngredient !== null) {
+      this.shoppingListService.deleteIngredient(this.currentIngredient.name);
+      this.onClear();
+    }
   }
 
-  private setEditingItem(itemIndex: number): void {
-    this.editedItemIndex = itemIndex;
-    this.editMode = true;
-    this.editedItem = this.shoppingListService.getIngredient(itemIndex);
-    const { name, amount } = this.editedItem;
-    this.shoppingListForm.setValue({ name, amount });
+  private fetchCurrentIngredient(): void {
+    this.subs.ingredient = this.shoppingListService.getCurrentIngredient()
+      .subscribe(ingredient => this.currentIngredient = ingredient);
   }
 }

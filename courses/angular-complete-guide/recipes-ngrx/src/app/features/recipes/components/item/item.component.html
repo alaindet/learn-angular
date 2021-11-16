@@ -1,5 +1,5 @@
 <a
-  routerLink="/recipes/{{ index }}"
+  routerLink="/recipes/{{ recipe.name | appEncodeUri }}"
   routerLinkActive="active"
   class="list-group-item d-flex pointer"
 >

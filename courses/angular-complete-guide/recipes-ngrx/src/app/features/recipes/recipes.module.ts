@@ -2,29 +2,29 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
 
-import { RecipesComponent } from './recipes.component';
-import { RecipeListComponent } from './recipe-list/recipe-list.component';
-import { RecipeDetailComponent } from './components/details/details.component';
-import { RecipeItemComponent } from './recipe-list/recipe-item/recipe-item.component';
-import { RecipeStartComponent } from './recipe-start/recipe-start.component';
-import { RecipeEditComponent } from './recipe-edit/recipe-edit.component';
+import { SharedModule } from '@/shared/shared.module';
 import { RecipesRoutingModule } from './recipes-routing.module';
-import { SharedModule } from '../shared/shared.module';
+import { RecipeDetailsComponent } from './components/details/details.component';
+import { RecipeEditComponent } from './components/edit/edit.component';
+import { RecipeItemComponent } from './components/item/item.component';
+import { RecipesListComponent } from './components/list/list.component';
+import { RecipesComponent } from './components/recipes/recipes.component';
+import { RecipesStartComponent } from './components/start/start.component';
 
 @NgModule({
-  declarations: [
-    RecipesComponent,
-    RecipeListComponent,
-    RecipeDetailComponent,
-    RecipeItemComponent,
-    RecipeStartComponent,
-    RecipeEditComponent
-  ],
   imports: [
     RouterModule,
     ReactiveFormsModule,
     RecipesRoutingModule,
-    SharedModule
-  ]
+    SharedModule,
+  ],
+  declarations: [
+    RecipeDetailsComponent,
+    RecipeEditComponent,
+    RecipeItemComponent,
+    RecipesListComponent,
+    RecipesComponent,
+    RecipesStartComponent,
+  ],
 })
 export class RecipesModule {}

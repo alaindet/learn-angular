@@ -6,13 +6,13 @@ import { RecipesComponent } from './components/recipes/recipes.component';
 import { RecipesStartComponent } from './components/start/start.component';
 import { RecipeEditComponent } from './components/edit/edit.component';
 import { RecipeDetailsComponent } from './components/details/details.component';
-import { RecipesResolverService } from './services';
+// import { RecipesResolverService } from './services';
 
 const routes: Routes = [
   {
     path: '',
     component: RecipesComponent,
-    canActivate: [AuthGuard],
+    // canActivate: [AuthGuard],
     children: [
       {
         path: '',
@@ -23,14 +23,14 @@ const routes: Routes = [
         component: RecipeEditComponent,
       },
       {
-        path: ':id',
-        component: RecipeDetailComponent,
-        resolve: [RecipesResolverService],
+        path: ':name',
+        component: RecipeDetailsComponent,
+        // resolve: [RecipesResolverService],
       },
       {
-        path: ':id/edit',
+        path: ':name/edit',
         component: RecipeEditComponent,
-        resolve: [RecipesResolverService],
+        // resolve: [RecipesResolverService],
       },
     ]
   }

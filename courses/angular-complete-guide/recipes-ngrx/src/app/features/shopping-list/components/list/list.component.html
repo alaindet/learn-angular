@@ -4,8 +4,8 @@
     <hr>
     <ul class="list-group">
       <a
-        class="list-group-item pointer"
         *ngFor="let ingredient of ingredients; let i = index"
+        class="list-group-item pointer"
         (click)="onEditItem(i)"
       >
         {{ ingredient.name }} ({{ ingredient.amount }})

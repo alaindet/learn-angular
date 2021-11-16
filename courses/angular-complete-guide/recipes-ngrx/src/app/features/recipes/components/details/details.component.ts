@@ -1,41 +1,52 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Params, Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
-import { Recipe } from '../../types';
+import { Recipe } from '@/shared/types';
 import { RecipeService } from '../../services';
+import { finalize } from 'rxjs/operators';
+import { ShoppingListService } from '@/features/shopping-list';
 
 @Component({
   templateUrl: './details.component.html',
 })
 export class RecipeDetailsComponent implements OnInit {
 
+  name: string;
+  isLoading = false;
   recipe: Recipe;
-  id: number;
 
   constructor(
     private recipeService: RecipeService,
     private route: ActivatedRoute,
     private router: Router,
+    private shoppingListService: ShoppingListService,
   ) {}
 
   ngOnInit(): void {
-    this.route.params.subscribe((params: Params) => {
-      this.id = params['id'];
-      this.recipe = this.recipeService.getRecipe(this.id);
-    });
+    this.name = this.route.snapshot.params?.name;
+    this.fetchRecipe();
   }
 
+  // TODO: Perform upsert
   onAddToShoppingList(): void {
-    this.recipeService.addIngredientsToShoppingList(this.recipe.ingredients);
+    this.shoppingListService.createIngredient(this.recipe.ingredients);
   }
 
   onEditRecipe(): void {
-    this.router.navigate(['/recipes', this.id, 'edit']);
+    this.router.navigate(['/recipes', this.name, 'edit']);
   }
 
   onDeleteRecipe(): void {
-    this.recipeService.deleteRecipe(this.id);
+    this.isLoading = true;
+    this.recipeService.deleteRecipe(this.name);
     // TODO: Add Feedback?
     this.router.navigate(['/recipes']);
+  }
+
+  private fetchRecipe(): void {
+    this.isLoading = true;
+    this.recipeService.getRecipe(this.name)
+      .pipe(finalize(() => this.isLoading = false))
+      .subscribe(recipe => this.recipe = recipe);
   }
 }

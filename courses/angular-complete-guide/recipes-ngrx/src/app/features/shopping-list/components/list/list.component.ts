@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 
 import { Ingredient } from '@/shared/types';
 import { ShoppingListService } from '../../services';
-import { Subscription } from 'rxjs';
+import { finalize, Subscription } from 'rxjs';
 
 @Component({
   templateUrl: './list.component.html',
@@ -27,12 +27,14 @@ export class ShoppingListComponent implements OnInit, OnDestroy {
     }
   }
 
-  private fetchIngredients(): void {
-    this.isLoading = true;
-    this.subs.ingredients = this.shoppingListService.ingredients$
+  onEditItem(index: number): void {
+    this.shoppingListService.setCurrentIngredient(this.ingredients[index]);
   }
 
-  onEditItem(itemIndex: number): void {
-    this.shoppingListService.startEditing(itemIndex);
+  private fetchIngredients(): void {
+    this.isLoading = true;
+    this.shoppingListService.getIngredients()
+      .pipe(finalize(() => this.isLoading = false))
+      .subscribe(ingredients => this.ingredients = ingredients);
   }
 }

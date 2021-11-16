@@ -17,9 +17,13 @@ export class IngredientsApiService {
     private http: HttpClient,
   ) {}
 
-  createIngredient(ingredient: Ingredient): Observable<Ingredient> {
-    return this.http.post<Response<Ingredient>>(this.baseUrl, ingredient)
-      .pipe(map(response => response.data));
+  createIngredient(
+    ingredient: Ingredient | Ingredient[],
+  ): Observable<Ingredient | Ingredient[]> {
+    return this.http.post<Response<Ingredient | Ingredient[]>>(
+      this.baseUrl,
+      ingredient,
+    ).pipe(map(response => response.data));
   }
 
   getIngredients(): Observable<Ingredient[]> {

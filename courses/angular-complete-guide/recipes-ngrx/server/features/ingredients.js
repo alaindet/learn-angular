@@ -6,12 +6,24 @@ const router = express.Router();
 const COLLECTION = 'ingredients';
 
 router.post('/', async (req, res) => {
-  const item = req.body;
   const items = await database.fetchCollection(COLLECTION);
-  items.push(item);
+  const newItems = Array.isArray(req.body) ? req.body : [req.body];
+  for (const newItem of newItems) {
+    if (items.find(anItem => anItem.name === newItem.name)) {
+      const message = `Ingredient with name "${name}" already exists`;
+      return res.json(errorResponse(message));
+    }
+    items.push(newItem);
+  }
   await database.storeCollection(COLLECTION, [...items]);
   const message = 'Ingredient created';
-  return res.status(201).json(successResponse(message, item));
+  const data = Array.isArray(newItems) ? newItems : newItems[0];
+  return res.status(201).json(successResponse(message, data));
+});
+
+// TODO: Create massive upsert
+router.put('/', async (req, res) => {
+  res.send('ok');
 });
 
 router.get('/', async (req, res) => {

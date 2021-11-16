@@ -3,9 +3,8 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { environment } from 'src/environments/environment';
-import { Response } from '@/shared/types';
+import { Response, Recipe } from '@/shared/types';
 import { HttpClient } from '@angular/common/http';
-import { Recipe } from '../types';
 
 @Injectable({
   providedIn: 'root',
@@ -18,9 +17,11 @@ export class RecipesApiService {
     private http: HttpClient,
   ) {}
 
-  createRecipe(recipe: Recipe): Observable<Recipe> {
-    return this.http.post<Response<Recipe>>(this.baseUrl, recipe)
-      .pipe(map(response => response.data));
+  createRecipe(ingredient: Recipe | Recipe[]): Observable<Recipe | Recipe[]> {
+    return this.http.post<Response<Recipe | Recipe[]>>(
+      this.baseUrl,
+      ingredient,
+    ).pipe(map(response => response.data));
   }
 
   getRecipes(): Observable<Recipe[]> {

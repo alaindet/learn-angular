@@ -2,15 +2,13 @@ import { Injectable } from '@angular/core';
 import { Resolve, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { Observable } from 'rxjs';
 
-import { DataStorageService } from '@/shared/services';
-import { Recipe } from '../types';
+import { Recipe } from '@/shared/types';
 import { RecipeService } from './recipe.service';
 
 @Injectable({ providedIn: 'root' })
 export class RecipesResolverService implements Resolve<Recipe[]> {
 
   constructor(
-    private dataStorageService: DataStorageService,
     private recipesService: RecipeService,
   ) {}
 
@@ -19,12 +17,6 @@ export class RecipesResolverService implements Resolve<Recipe[]> {
     | Promise<Recipe[]>
     | Recipe[]
   ) {
-    const recipes = this.recipesService.getRecipes();
-
-    if (!recipes.length) {
-      return this.dataStorageService.fetchRecipes();
-    }
-
-    return recipes;
+    return this.recipesService.getRecipes();
   }
 }

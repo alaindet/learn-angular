@@ -4,7 +4,8 @@ import { CommonModule } from '@angular/common';
 import { AlertComponent } from './components/alert';
 import { LoadingSpinnerComponent } from './components/loading-spinner';
 import { PlaceholderDirective } from './components/placeholder';
-import { DropdownDirective } from './directives/dropdown';
+import { DropdownDirective } from './directives';
+import { EncodeUriPipe } from './pipes';
 
 @NgModule({
   imports: [
@@ -15,13 +16,17 @@ import { DropdownDirective } from './directives/dropdown';
     LoadingSpinnerComponent,
     PlaceholderDirective,
     DropdownDirective,
+    EncodeUriPipe,
   ],
   exports: [
     AlertComponent,
     LoadingSpinnerComponent,
     PlaceholderDirective,
     DropdownDirective,
+    EncodeUriPipe,
   ],
-  entryComponents: [AlertComponent],
+  entryComponents: [
+    AlertComponent,
+  ],
 })
 export class SharedModule {}

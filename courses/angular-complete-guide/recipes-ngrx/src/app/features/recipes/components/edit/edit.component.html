@@ -1,6 +1,10 @@
 <div class="row">
   <div class="col-xs-12">
-    <form [formGroup]="recipeForm" (ngSubmit)="onSubmit()">
+    <form
+      *ngIf="recipeForm && !isLoading"
+      [formGroup]="recipeForm"
+      (ngSubmit)="onSubmit()"
+    >
 
       <!-- Controls -->
       <div class="row">
@@ -107,6 +111,7 @@
           </div>
         </div>
       </div>
+
     </form>
   </div>
 </div>
