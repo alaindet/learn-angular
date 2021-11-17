@@ -22,18 +22,15 @@ export class DropdownDirective {
   onClickAway(event: MouseEvent): void {
 
     if (!this.handle) {
-      console.log('no handle');
       this.isOpen = false;
       return;
     }
 
     if (!this.handle.host.nativeElement.contains(event.target)) {
-      console.log('click out');
       this.isOpen = false;
       return;
     }
 
-    console.log('toggling dropdown');
     this.toggle();
   }
 }
