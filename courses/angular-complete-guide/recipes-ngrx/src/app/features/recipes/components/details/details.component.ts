@@ -23,8 +23,10 @@ export class RecipeDetailsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.name = this.route.snapshot.params?.name;
-    this.fetchRecipe();
+    this.route.params.subscribe(params => {
+      this.name = params?.name;
+      this.fetchRecipe();
+    });
   }
 
   // TODO: Perform upsert
