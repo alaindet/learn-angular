@@ -1,9 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable, tap } from 'rxjs';
 
-import { User } from '../types/user.model';
+import { LocalStorageService } from '@/core/services';
+import { AuthApiService } from './auth.api.service';
+import { LoginResponseData, User } from '../types';
 // import { AuthResponseData } from '../types/auth-response-data';
 
 @Injectable({
@@ -11,10 +13,12 @@ import { User } from '../types/user.model';
 })
 export class AuthService {
 
-  user = new BehaviorSubject<User>(null);
-  // private tokenExpirationTimer: any;
+  private _user$ = new BehaviorSubject<User | null>(null);
+  user$ = this._user$.asObservable();
 
   constructor(
+    private authApi: AuthApiService,
+    private localStorage: LocalStorageService,
     // private http: HttpClient,
     // private router: Router,
   ) {}
@@ -37,6 +41,21 @@ export class AuthService {
   //       })
   //     );
   // }
+
+  login(email: string, password: string): Observable<LoginResponseData> {
+    return this.authApi.login(email, password).pipe(
+      tap(response => {
+        const user = new User(email, response.token);
+        this._user$.next(user);
+
+        // const expirationDate = new Date(new Date().getTime() + expiresIn * 1000);
+        // const user = new User(email, userId, token, expirationDate);
+        // this.user.next(user);
+        // this.autoLogout(expiresIn * 1000);
+        // localStorage.setItem('userData', JSON.stringify(user));
+      })
+    );
+  }
 
   // login(email: string, password: string) {
   //   const url = 'http://example.com';
