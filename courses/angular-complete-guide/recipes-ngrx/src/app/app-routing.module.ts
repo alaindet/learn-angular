@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
+import { AuthGuard } from './features/auth';
+
 const routes: Routes = [
   {
     path: '',
@@ -9,11 +11,13 @@ const routes: Routes = [
   },
   {
     path: 'recipes',
+    canActivate: [AuthGuard],
     loadChildren: () => import('./features/recipes/recipes.module')
       .then(m => m.RecipesModule),
   },
   {
     path: 'shopping-list',
+    canActivate: [AuthGuard],
     loadChildren: () => import('./features/shopping-list/shopping-list.module')
       .then(m => m.ShoppingListModule),
   },

@@ -7,21 +7,21 @@ import { LocalStorageCacheService } from './local-storage.cache.service';
 })
 export class CacheService {
 
-  config = {
+  services = {
     localStorage: {
-      prefix: 'recipes',
+      instance: null,
+      config: {
+        prefix: 'recipes',
+      },
     },
   };
 
-  instances = {
-    localStorage: null,
-  };
-
   get localStorage(): LocalStorageCacheService {
-    if (!this.instances.localStorage) {
-      const config = this.config.localStorage;
-      this.instances.localStorage = new LocalStorageCacheService(config);
+    if (!this.services.localStorage.instance) {
+      const config = this.services.localStorage.config;
+      const instance = new LocalStorageCacheService(config);
+      this.services.localStorage.instance = instance;
     }
-    return this.instances.localStorage;
+    return this.services.localStorage.instance;
   }
 }
