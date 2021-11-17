@@ -13,14 +13,13 @@ export class AuthInterceptorService implements HttpInterceptor {
   ) {}
 
   intercept(req: HttpRequest<any>, next: HttpHandler) {
-    return this.authService.user.pipe(
+    return this.authService.user$.pipe(
       take(1),
       exhaustMap(user => {
         if (!user) {
           return next.handle(req);
         }
         const headers = req.headers.set(FAKE_AUTH_HEADER_NAME, user.token);
-        // const headers = req.headers.set('Authotization', `Bearer ${user.token}`);
         const modifiedReq = req.clone({ headers });
         return next.handle(modifiedReq);
       })

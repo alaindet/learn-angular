@@ -30,20 +30,23 @@ export class AuthService {
       tap(response => {
         const user = new User(email, response.token);
         this._user$.next(user);
-        this.localStorage.set(USER_KEY, user);
+        this.localStorage.set(USER_KEY, JSON.stringify(user));
       })
     );
   }
 
   autoLogin(): void {
-    const userData = JSON.parse(this.localStorage.get(USER_KEY));
-    const user = User.deserialize(userData);
-    this._user$.next(user);
+    const rawUserData = this.localStorage.get(USER_KEY);
+    if (rawUserData) {
+      const userData = JSON.parse(rawUserData);
+      const user = User.deserialize(userData);
+      this._user$.next(user);
+    }
   }
 
   logout(): void {
     this._user$.next(null);
     this.localStorage.delete(USER_KEY);
-    this.router.navigate(['/']);
+    this.router.navigate(['/auth']);
   }
 }

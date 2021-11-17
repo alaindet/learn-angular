@@ -3,8 +3,8 @@ import { CommonModule } from '@angular/common';
 
 import { AlertComponent } from './components/alert';
 import { LoadingSpinnerComponent } from './components/loading-spinner';
-import { PlaceholderDirective } from './components/placeholder';
-import { DropdownDirective } from './directives';
+import { PlaceholderDirective } from './directives/placeholder';
+import { DropdownDirective } from './directives/dropdown';
 import { EncodeUriPipe } from './pipes';
 
 @NgModule({

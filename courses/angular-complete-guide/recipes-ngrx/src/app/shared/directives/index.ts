@@ -1,1 +1,2 @@
-export * from './dropdown/dropdown.directive';
+export * from './dropdown';
+export * from './placeholder';

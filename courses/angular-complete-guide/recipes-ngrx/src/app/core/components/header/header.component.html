@@ -1,43 +1,42 @@
-<nav class="navbar navbar-default">
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary mb-4">
   <div class="container-fluid">
-    <div class="navbar-header">
-      <a routerLink="/" class="navbar-brand">Recipes Book</a>
-    </div>
 
-    <div class="collapse navbar-collapse">
+    <a class="navbar-brand" routerLink="/">Recipes Book</a>
 
-      <ul class="nav navbar-nav">
-        <li routerLinkActive="active" *ngIf="!isAuthenticated">
-          <a routerLink="/auth">Login</a>
+    <div class="collapse navbar-collapse d-flex justify-content-between">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+        <li class="nav-item">
+          <a
+            routerLinkActive="active"
+            routerLink="/recipes"
+            class="nav-link"
+            [class.disabled]="!(authService.user$ | async)"
+          >
+            Recipes
+          </a>
         </li>
-        <li routerLinkActive="active" *ngIf="isAuthenticated">
-          <a routerLink="/recipes">Recipes</a>
-        </li>
-        <li routerLinkActive="active">
-          <a routerLink="/shopping-list">Shopping List</a>
+
+        <li class="nav-item">
+          <a
+            routerLinkActive="active"
+            routerLink="/shopping-list"
+            class="nav-link"
+            [class.disabled]="!(authService.user$ | async)"
+          >
+            Shopping List
+          </a>
         </li>
       </ul>
 
-      <ul *ngIf="isAuthenticated" class="nav navbar-nav navbar-right">
-        <li>
-          <a class="pointer" (click)="onLogout()">Logout</a>
-        </li>
-        <li class="dropdown" appDropdown>
-          <a class="dropdown-toggle pointer" role="button">
-            Manage <span class="caret"></span>
-          </a>
-          <ul class="dropdown-menu">
-            <li>
-              <a class="pointer" (click)="onSaveData()">
-                Save Data
-              </a>
-            </li>
-            <li>
-              <a class="pointer" (click)="onFetchData()">
-                Fetch Data
-              </a>
-            </li>
-          </ul>
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <ng-container *ngIf="authService.user$ | async; else notAuthenticatedRef">
+            <a class="nav-link pointer" (click)="onLogout()">Logout</a>
+          </ng-container>
+          <ng-template #notAuthenticatedRef>
+            <a routerLinkActive="active" class="nav-link" routerLink="/auth">Login</a>
+          </ng-template>
         </li>
       </ul>
 

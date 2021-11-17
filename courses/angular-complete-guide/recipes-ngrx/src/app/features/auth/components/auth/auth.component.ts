@@ -1,13 +1,12 @@
 import { Component, ComponentFactoryResolver, ViewChild, OnDestroy } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Observable, Subscription } from 'rxjs';
-
-import { AuthService } from '../../services';
-import { AuthResponseData } from '../../types';
-import { AlertComponent } from 'src/app/shared/alert';
-import { PlaceholderDirective } from '../../../shared/placeholder/placeholder.directive';
+import { Subscription } from 'rxjs';
 import { finalize } from 'rxjs/operators';
+
+import { AlertComponent } from '@/shared/components/alert';
+import { PlaceholderDirective } from '@/shared/directives/placeholder';
+import { AuthService } from '../../services';
 
 @Component({
   selector: 'app-auth',
@@ -18,60 +17,39 @@ export class AuthComponent implements OnDestroy {
   @ViewChild(PlaceholderDirective, { static: false })
   alertHost: PlaceholderDirective;
 
-  isLoginMode = true;
   isLoading = false;
-  error: string | null = null;
 
   private closeSub: Subscription;
 
   constructor(
     private authService: AuthService,
     private router: Router,
-    private componentFactoryResolver: ComponentFactoryResolver
+    private componentFactoryResolver: ComponentFactoryResolver,
   ) {}
 
-  onSwitchMode() {
-    this.isLoginMode = !this.isLoginMode;
+  ngOnDestroy(): void {
+    if (this.closeSub) {
+      this.closeSub.unsubscribe();
+    }
   }
 
-  onSubmit(form: NgForm) {
+  onSubmit(form: NgForm): void {
+
     if (!form.valid) {
       return;
     }
 
     const { email, password } = form.value;
-    let authRequest: Observable<AuthResponseData>;
     this.isLoading = true;
-
-    if (this.isLoginMode) {
-      authRequest = this.authService.login(email, password);
-    } else {
-      authRequest = this.authService.signup(email, password);
-    }
-
-    authRequest
-      .pipe(finalize(() => this.isLoading = false))
+    this.authService.login(email, password)
+      .pipe(finalize(() => {
+        this.isLoading = false;
+        form.reset();
+      }))
       .subscribe({
-        next: () => {
-          this.router.navigate(['/recipes']);
-        },
-        error: errorMessage => {
-          this.error = errorMessage;
-          this.showErrorAlert(errorMessage);
-        },
+        next: () => this.router.navigate(['/recipes']),
+        error: err => this.showErrorAlert(err),
       });
-
-    form.reset();
-  }
-
-  onHandleError() {
-    this.error = null;
-  }
-
-  ngOnDestroy() {
-    if (this.closeSub) {
-      this.closeSub.unsubscribe();
-    }
   }
 
   private showErrorAlert(message: string) {

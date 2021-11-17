@@ -1,16 +1,7 @@
 <a
   routerLink="/recipes/{{ recipe.name | appEncodeUri }}"
   routerLinkActive="active"
-  class="list-group-item d-flex pointer"
+  class="list-group-item list-group-item-action"
 >
-  <div>
-    <h4 class="list-group-item-heading">{{ recipe.name }}</h4>
-    <p class="list-group-item-text">{{ recipe.description }}</p>
-  </div>
-  <img
-    [src]="recipe.imagePath"
-    alt="{{ recipe.name }}"
-    class="img-responsive"
-    style="max-height: 50px;"
-  >
+  {{ recipe.name }}
 </a>
