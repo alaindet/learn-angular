@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { AlertComponent } from './components/alert';
 import { LoadingSpinnerComponent } from './components/loading-spinner';
 import { PlaceholderDirective } from './directives/placeholder';
-import { DropdownDirective } from './directives/dropdown';
+import { DropdownDirective, DropdownHandleDirective } from './directives/dropdown';
 import { EncodeUriPipe } from './pipes';
 
 @NgModule({
@@ -16,6 +16,7 @@ import { EncodeUriPipe } from './pipes';
     LoadingSpinnerComponent,
     PlaceholderDirective,
     DropdownDirective,
+    DropdownHandleDirective,
     EncodeUriPipe,
   ],
   exports: [
@@ -23,6 +24,7 @@ import { EncodeUriPipe } from './pipes';
     LoadingSpinnerComponent,
     PlaceholderDirective,
     DropdownDirective,
+    DropdownHandleDirective,
     EncodeUriPipe,
   ],
   entryComponents: [

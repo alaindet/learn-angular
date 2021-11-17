@@ -1,4 +1,3 @@
-
 <div class="row" *ngIf="recipe">
   <div class="col-12">
     <h1>{{ recipe.name }}</h1>
@@ -23,24 +22,24 @@
         type="button"
         class="btn btn-primary dropdown-toggle"
         [class.show]="dropdown.isOpen"
-        (click)="dropdown.toggle()"
+        appDropdownHandle
       >
         Manage Recipe <span class="caret"></span>
       </button>
-      <ul
+      <div
         class="dropdown-menu"
         [class.show]="dropdown.isOpen"
       >
-        <li>
-          <a class="pointer" (click)="onAddToShoppingList()">To Shopping List</a>
-        </li>
-        <li>
-          <a class="pointer" (click)="onEditRecipe()">Edit Recipe</a>
-        </li>
-        <li>
-          <a class="pointer" (click)="onDeleteRecipe()">Delete Recipe</a>
-        </li>
-      </ul>
+        <a class="dropdown-item pointer" (click)="onAddToShoppingList()">
+          To Shopping List
+        </a>
+        <a class="dropdown-item pointer" (click)="onEditRecipe()">
+          Edit Recipe
+        </a>
+        <a class="dropdown-item pointer" (click)="onDeleteRecipe()">
+          Delete Recipe
+        </a>
+      </div>
     </div>
   </div>
 
