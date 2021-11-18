@@ -131,7 +131,7 @@
   "users": [
     {
       "email": "example@example.com",
-      "password": "example@example.com"
+      "password": "$2b$10$BHQrWFDrBsYSarIjNz89uOqegBE1GHWoudPq/X56kEyKuUZ90mWKy"
     }
   ]
 }

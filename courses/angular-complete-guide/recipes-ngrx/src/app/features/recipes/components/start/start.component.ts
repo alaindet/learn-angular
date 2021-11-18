@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
 @Component({
-  template: '<h1>Please select a recipe</h1>',
+  template: '<p>Please select a recipe</p>',
 })
 export class RecipesStartComponent {}

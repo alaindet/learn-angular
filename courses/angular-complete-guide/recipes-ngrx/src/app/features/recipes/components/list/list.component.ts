@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 
 import { Recipe } from '@/shared/types';
 import { RecipeService } from '../../services';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-recipes-list',
@@ -10,16 +11,16 @@ import { RecipeService } from '../../services';
 })
 export class RecipesListComponent implements OnInit {
 
-  recipes: Recipe[];
+  recipes$: Observable<Recipe[]>;
 
   constructor(
-    private recipeService: RecipeService,
+    public recipesService: RecipeService,
     private router: Router,
   ) {}
 
   ngOnInit(): void {
-    this.recipeService.getRecipes()
-      .subscribe(recipes => this.recipes = recipes);
+    this.recipesService.syncRecipes();
+    this.recipes$ = this.recipesService.recipes$;
   }
 
   onNewRecipe(): void {

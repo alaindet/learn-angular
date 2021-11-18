@@ -60,7 +60,9 @@ export class RecipeEditComponent implements OnInit {
   }
 
   onCancel(): void {
-    this.router.navigate(['/recipes', this.name]);
+    this.editMode
+      ? this.router.navigate(['/recipes', this.name])
+      : this.router.navigate(['/recipes']);
   }
 
   private initForm(): void {

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, BehaviorSubject } from 'rxjs';
 
 import { Recipe } from '@/shared/types';
 import { RecipesApiService } from './recipes.api.service';
@@ -9,12 +9,24 @@ import { RecipesApiService } from './recipes.api.service';
 })
 export class RecipeService {
 
+  _recipes$ = new BehaviorSubject<Recipe[] | null>(null);
+
   constructor(
     private recipesApi: RecipesApiService,
   ) {}
 
+  get recipes$(): Observable<Recipe[]> {
+    return this._recipes$.asObservable();
+  }
+
   createRecipe(recipe: Recipe | Recipe[]): Observable<Recipe | Recipe[]> {
     return this.recipesApi.createRecipe(recipe);
+  }
+
+  syncRecipes(): void {
+    this.recipesApi.getRecipes().subscribe(recipes => {
+      this._recipes$.next(recipes);
+    });
   }
 
   getRecipes(force = false): Observable<Recipe[]> {
