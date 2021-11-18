@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { AlertComponent } from './components/alert';
 import { LoadingSpinnerComponent } from './components/loading-spinner';
+import { SkeletonComponent } from './components/skeleton';
 import { PlaceholderDirective } from './directives/placeholder';
 import { DropdownDirective, DropdownHandleDirective } from './directives/dropdown';
 import { EncodeUriPipe } from './pipes';
@@ -12,6 +13,7 @@ import { EncodeUriPipe } from './pipes';
     CommonModule,
   ],
   declarations: [
+    SkeletonComponent,
     AlertComponent,
     LoadingSpinnerComponent,
     PlaceholderDirective,
@@ -20,6 +22,7 @@ import { EncodeUriPipe } from './pipes';
     EncodeUriPipe,
   ],
   exports: [
+    SkeletonComponent,
     AlertComponent,
     LoadingSpinnerComponent,
     PlaceholderDirective,

@@ -52,7 +52,7 @@
   "recipes": [
     {
       "name": "Apple Pie",
-      "imagePath": "http:4200/assets/apple-pie.jpg",
+      "imagePath": "http://localhost:4200/assets/placeholder-640x320.png",
       "description": "Duis labore nulla pariatur ex ea ullamco dolor. Labore ea ullamco enim esse officia minim. Reprehenderit amet dolore cillum adipisicing cupidatat ex voluptate duis et fugiat officia mollit quis ad. Ad deserunt in exercitation cillum aliquip eiusmod commodo.",
       "ingredients": [
         {
@@ -75,7 +75,7 @@
     },
     {
       "name": "Pancakes",
-      "imagePath": "http:4200/assets/apple-pie.jpg",
+      "imagePath": "http://localhost:4200/assets/placeholder-640x320.png",
       "description": "Sint laboris laboris veniam ipsum aliquip tempor. Esse fugiat minim sint non et tempor est ullamco duis laboris ea. Proident labore adipisicing excepteur aliquip laborum ipsum ullamco aute. Mollit sit exercitation dolor labore minim reprehenderit consequat nisi nulla velit velit non amet. Proident duis dolore aute do occaecat. Sunt elit exercitation nostrud sit nulla esse.",
       "ingredients": [
         {
@@ -98,7 +98,7 @@
     },
     {
       "name": "Lasagna",
-      "imagePath": "http:4200/assets/apple-pie.jpg",
+      "imagePath": "http://localhost:4200/assets/placeholder-640x320.png",
       "description": "Mollit excepteur id excepteur consequat aliquip aute anim esse. Sint ad cupidatat nostrud mollit sint nostrud est laborum pariatur. Veniam proident voluptate enim et nulla proident tempor velit deserunt pariatur.",
       "ingredients": [
         {

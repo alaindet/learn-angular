@@ -1,4 +1,4 @@
-<div class="row" *ngIf="recipe">
+<div class="row" *ngIf="!isLoading; else loadingRef">
   <div class="col-12">
     <h1>{{ recipe.name }}</h1>
   </div>
@@ -59,3 +59,25 @@
     </ul>
   </div>
 </div>
+
+<!-- [TEMPLATE] Loading -->
+<ng-template #loadingRef>
+  <div class="row">
+    <div class="col-12">
+      <app-skeleton height="3rem" width="16rem"></app-skeleton>
+    </div>
+    <div class="col-12 my-3">
+      <app-skeleton height="300px" width="640px"></app-skeleton>
+    </div>
+    <div class="col-12 my-3">
+      <app-skeleton height="3rem" width="10rem"></app-skeleton>
+    </div>
+    <div class="col-12 my-3">
+      <app-skeleton height="4rem" width="100%"></app-skeleton>
+    </div>
+    <div class="col-12">
+      <app-skeleton height="2.5rem" width="20rem"></app-skeleton>
+      <app-skeleton height="16rem" width="35rem"></app-skeleton>
+    </div>
+  </div>
+</ng-template>

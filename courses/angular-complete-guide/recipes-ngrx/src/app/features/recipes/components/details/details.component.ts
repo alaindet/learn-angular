@@ -39,10 +39,13 @@ export class RecipeDetailsComponent implements OnInit {
   }
 
   onDeleteRecipe(): void {
+    console.log('onDeleteRecipe');
     this.isLoading = true;
-    this.recipeService.deleteRecipe(this.name);
-    // TODO: Add Feedback?
-    this.router.navigate(['/recipes']);
+    // this.recipeService.deleteRecipe(this.name)
+    //   .pipe(() => this.isLoading)
+    //   .subscribe();
+    // // TODO: Add Feedback?
+    // this.router.navigate(['/recipes']);
   }
 
   private fetchRecipe(): void {
