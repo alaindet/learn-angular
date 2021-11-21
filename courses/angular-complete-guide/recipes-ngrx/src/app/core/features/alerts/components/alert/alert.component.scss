@@ -1,0 +1,27 @@
+.alert {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-width: 300px;
+  max-width: 90vw;
+}
+
+.-dismiss {
+  $size: 2rem;
+
+  border: 0;
+  background-color: transparent;
+  font-size: 1.2rem;
+  border-radius: 50%;
+  transition: 0.15s all ease-out;
+  width: $size;
+  height: $size;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+
+  &:hover {
+    background-color: rgba(0,0,0,0.07);
+  }
+}

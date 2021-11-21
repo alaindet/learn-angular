@@ -1,3 +1,4 @@
 <div class="alert alert-{{ type }}" role="alert">
   {{ message }}
+  <button class="-dismiss" (click)="dismissed.emit()">&times;</button>
 </div>

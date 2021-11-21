@@ -18,6 +18,7 @@ import { HeaderComponent } from './components';
   ],
   exports: [
     HeaderComponent,
+    AlertsModule,
   ],
   providers: [
     {

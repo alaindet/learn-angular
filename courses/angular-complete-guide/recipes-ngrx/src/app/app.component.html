@@ -7,3 +7,8 @@
     </div>
   </div>
 </div>
+
+<app-alerts
+  [alerts]="alertsService.alerts$ | async"
+  (dismissed)="alertsService.dismiss($event)"
+></app-alerts>

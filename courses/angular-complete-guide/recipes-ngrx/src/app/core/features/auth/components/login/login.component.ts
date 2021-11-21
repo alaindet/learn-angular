@@ -36,11 +36,12 @@ export class AuthComponent {
       .subscribe({
         next: () => {
           this.router.navigate(['/recipes']);
+          this.alertService.addSuccess('You logged in.');
           form.reset();
         },
         error: err => {
           console.error(err);
-          this.alertService.addError('Could not login');
+          this.alertService.addError(err.error.message);
         },
       });
   }

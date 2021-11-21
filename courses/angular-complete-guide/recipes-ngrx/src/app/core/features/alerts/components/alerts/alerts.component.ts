@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 import { Alert } from '../../types';
 
@@ -9,4 +9,5 @@ import { Alert } from '../../types';
 })
 export class AlertsComponent {
   @Input() alerts: Alert[] = [];
+  @Output() dismissed = new EventEmitter<number>();
 }

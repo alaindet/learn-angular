@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
-import { AuthService } from '@/features/auth';
+import { AuthService } from '@/core/features/auth';
+import { AlertsService } from './core/features/alerts';
 
 @Component({
   selector: 'app-root',
@@ -10,6 +11,7 @@ export class AppComponent implements OnInit {
 
   constructor(
     private authService: AuthService,
+    public alertsService: AlertsService,
   ) {}
 
   ngOnInit(): void {

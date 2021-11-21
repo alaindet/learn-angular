@@ -1,5 +1,6 @@
 <app-alert
-  *ngFor="let alert in alerts"
+  *ngFor="let alert of alerts; let index = index"
   [type]="alert.type"
   [message]="alert.message"
+  (dismissed)="dismissed.emit(index)"
 ></app-alert>
