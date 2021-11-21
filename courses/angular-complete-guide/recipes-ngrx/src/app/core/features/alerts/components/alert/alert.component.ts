@@ -4,7 +4,7 @@ import { AlertType } from '../../types';
 
 @Component({
   selector: 'app-alert',
-  template: `<div class="alert alert-{{ type }}" role="alert">{{ message }}</div>`,
+  templateUrl: './alert.component.html',
 })
 export class AlertComponent {
   @Input() type: AlertType = AlertType.Primary;

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
 
-import { CacheService, LocalStorageCacheService } from '@/core/services';
+import { CacheService, LocalStorageCacheService } from '@/core/features/cache';
 import { AuthApiService } from './auth.api.service';
 import { LoginResponseData } from '../types';
 import { User } from '../models';

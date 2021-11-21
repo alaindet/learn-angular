@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Subscription } from 'rxjs';
 
-import { AuthService } from '@/features/auth';
+import { AuthService } from '@/core/features/auth';
 
 @Component({
   selector: 'app-header',

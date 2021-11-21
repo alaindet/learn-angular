@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { AlertComponent } from './components/alert';
 import { LoadingSpinnerComponent } from './components/loading-spinner';
 import { SkeletonComponent } from './components/skeleton';
 import { PlaceholderDirective } from './directives/placeholder';
@@ -14,7 +13,6 @@ import { EncodeUriPipe } from './pipes';
   ],
   declarations: [
     SkeletonComponent,
-    AlertComponent,
     LoadingSpinnerComponent,
     PlaceholderDirective,
     DropdownDirective,
@@ -23,15 +21,11 @@ import { EncodeUriPipe } from './pipes';
   ],
   exports: [
     SkeletonComponent,
-    AlertComponent,
     LoadingSpinnerComponent,
     PlaceholderDirective,
     DropdownDirective,
     DropdownHandleDirective,
     EncodeUriPipe,
-  ],
-  entryComponents: [
-    AlertComponent,
   ],
 })
 export class SharedModule {}

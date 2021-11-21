@@ -4,6 +4,7 @@ export class User {
     public token: string,
   ) {}
 
+  // Instantiate a new User from a plain object
   static deserialize(arg: {
     email: string,
     token: string,

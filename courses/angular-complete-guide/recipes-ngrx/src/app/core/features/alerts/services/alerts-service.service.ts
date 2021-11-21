@@ -11,7 +11,7 @@ export class AlertsService {
   alerts: Alert[] = [];
   alerts$ = new BehaviorSubject<Alert[]>([]);
 
-  set(rawAlert: Alert): void {
+  add(rawAlert: Alert): void {
     const alert = {
       type: rawAlert.type ?? AlertType.Primary,
       message: rawAlert.message,
@@ -21,31 +21,36 @@ export class AlertsService {
     this.alerts$.next(this.alerts);
   }
 
-  setSuccess(message: string): void {
+  addSuccess(message: string): void {
     const alert = { type: AlertType.Success, message };
     this.alerts = [alert, ...this.alerts];
     this.alerts$.next(this.alerts);
   }
 
-  setPrimary(message: string): void {
+  addPrimary(message: string): void {
     const alert = { type: AlertType.Primary, message };
     this.alerts = [alert, ...this.alerts];
     this.alerts$.next(this.alerts);
   }
 
-  setError(message: string): void {
+  addError(message: string): void {
     const alert = { type: AlertType.Error, message };
     this.alerts = [alert, ...this.alerts];
     this.alerts$.next(this.alerts);
   }
 
-  setWarning(message: string): void {
+  addWarning(message: string): void {
     const alert = { type: AlertType.Warning, message };
     this.alerts = [alert, ...this.alerts];
     this.alerts$.next(this.alerts);
   }
 
+  pop(): void {
+    this.alerts = this.alerts.slice(0, -1);
+    this.alerts$.next(this.alerts);
+  }
+
   clear(): void {
-    this.alerts$.next(null);
+    this.alerts$.next([]);
   }
 }
