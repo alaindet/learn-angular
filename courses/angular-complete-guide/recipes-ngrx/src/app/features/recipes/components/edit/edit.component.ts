@@ -37,11 +37,21 @@ export class RecipeEditComponent implements OnInit {
 
     const recipe = this.recipeForm.value;
 
-    this.editMode
+    const request = this.editMode
       ? this.recipeService.updateRecipe(recipe)
       : this.recipeService.createRecipe(recipe);
 
-    this.onCancel();
+    request
+      .pipe(finalize(() => this.isLoading = false))
+      .subscribe({
+        error: err => {
+          console.error(err);
+        },
+        next: data => {
+          console.log('data', data)
+          this.onCancel();
+        },
+      });
   }
 
   onAddIngredient(): void {
