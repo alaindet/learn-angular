@@ -9,16 +9,27 @@ import { removeAt } from '@/shared/utils';
 })
 export class AlertsService {
 
-  alerts: RuntimeAlert[] = [];
-  timers: any[] = [];
-  delay = 3000;
-  _alerts$ = new BehaviorSubject<RuntimeAlert[]>([]);
+  private alerts: RuntimeAlert[] = [];
+  private automaticDismissDelay = 3000;
+  private addingAnimationDuration = 150;
+  private dismissingAnimationDuration = 150;
+  private _alerts$ = new BehaviorSubject<RuntimeAlert[]>([]);
+
   alerts$ = this._alerts$.asObservable();
 
   add(rawAlert: Alert): void {
-    const alert = {
+
+    const id = rawAlert.message.replace(/[^a-zA-Z0-9]/, '') + Date.now();
+
+    const alert: RuntimeAlert = {
       type: rawAlert.type ?? AlertType.Primary,
       message: rawAlert.message,
+      id,
+      timer: this.dismissAutomatically(id),
+      isAdding: true,
+      addingDuration: this.addingAnimationDuration,
+      isDismissing: false,
+      dismissingDuration: this.dismissingAnimationDuration,
     };
 
     this.alerts = [alert, ...this.alerts];
@@ -26,46 +37,54 @@ export class AlertsService {
   }
 
   addSuccess(message: string): void {
-    const alert = { type: AlertType.Success, message };
-    this.alerts = [alert, ...this.alerts];
-    this._alerts$.next(this.alerts);
+    this.add({ type: AlertType.Success, message });
   }
 
   addPrimary(message: string): void {
-    const alert = { type: AlertType.Primary, message };
-    this.alerts = [alert, ...this.alerts];
-    this._alerts$.next(this.alerts);
+    this.add({ type: AlertType.Primary, message });
   }
 
   addError(message: string): void {
-    const alert = { type: AlertType.Error, message };
-    this.alerts = [alert, ...this.alerts];
-    this._alerts$.next(this.alerts);
+    this.add({ type: AlertType.Error, message });
   }
 
   addWarning(message: string): void {
-    const alert = { type: AlertType.Warning, message };
-    this.alerts = [alert, ...this.alerts];
-    this._alerts$.next(this.alerts);
+    this.add({ type: AlertType.Warning, message });
   }
 
   pop(): void {
+    clearTimeout(this.alerts[this.alerts.length-1].timer);
     this.alerts = this.alerts.slice(0, -1);
     this._alerts$.next(this.alerts);
   }
 
   dismiss(index: number): void {
-    this.alerts = removeAt(this.alerts, index);
-    this._alerts$.next(this.alerts);
+    clearTimeout(this.alerts[index].timer);
+    this.animateAndDismiss(index);
   }
 
   clear(): void {
+    for (const alert of this.alerts) {
+      clearTimeout(alert.timer);
+    }
     this._alerts$.next([]);
   }
 
-  private startTimeout(): RuntimeAlert['timer'] {
+  private dismissAutomatically(id: string): RuntimeAlert['timer'] {
     return setTimeout(() => {
-      // TODO
-    }, this.delay);
+      const index = this.alerts.findIndex(alert => alert.id === id);
+      this.animateAndDismiss(index);
+    }, this.automaticDismissDelay);
+  }
+
+  private animateAndDismiss(index: number): void {
+    this.alerts = this.alerts.map((alert, anIndex) => {
+      return anIndex === index ? { ...alert, isDismissing: true } : alert;
+    });
+    this._alerts$.next(this.alerts);
+    setTimeout(() => {
+      this.alerts = removeAt(this.alerts, index);
+      this._alerts$.next(this.alerts);
+    }, this.dismissingAnimationDuration);
   }
 }

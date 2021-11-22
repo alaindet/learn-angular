@@ -11,5 +11,10 @@ export interface Alert {
 }
 
 export interface RuntimeAlert extends Alert {
+  id: string;
   timer: ReturnType<typeof setTimeout>;
+  isAdding: boolean;
+  addingDuration: number;
+  isDismissing: boolean;
+  dismissingDuration: number;
 }

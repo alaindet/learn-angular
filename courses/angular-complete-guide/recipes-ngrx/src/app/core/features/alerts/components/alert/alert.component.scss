@@ -1,9 +1,31 @@
+:host {
+  --dismissing-duration: 1s;
+  --adding-duration: 1s;
+}
+
 .alert {
   display: flex;
   align-items: center;
   justify-content: space-between;
   min-width: 300px;
   max-width: 90vw;
+  transform-origin: center center;
+  opacity: 0;
+  transform: scale(0);
+
+  &.--is-adding {
+    animation-name: app-appearing;
+    animation-duration: var(--adding-duration);
+    animation-timing-function: linear;
+    animation-fill-mode: forwards;
+  }
+
+  &.--is-dismissing {
+    animation-name: app-disappearing;
+    animation-duration: var(--dismissing-duration);
+    animation-timing-function: linear;
+    animation-fill-mode: forwards;
+  }
 }
 
 .-dismiss {
@@ -23,5 +45,27 @@
 
   &:hover {
     background-color: rgba(0,0,0,0.07);
+  }
+}
+
+@keyframes app-disappearing {
+  from {
+    opacity: 1;
+    transform: scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: scale(0);
+  }
+}
+
+@keyframes app-appearing {
+  from {
+    opacity: 0;
+    transform: scale(0);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
   }
 }

@@ -2,5 +2,9 @@
   *ngFor="let alert of alerts; let index = index"
   [type]="alert.type"
   [message]="alert.message"
+  [isAdding]="alert.isAdding"
+  [addingDuration]="alert.addingDuration"
+  [isDismissing]="alert.isDismissing"
+  [dismissingDuration]="alert.dismissingDuration"
   (dismissed)="dismissed.emit(index)"
 ></app-alert>

@@ -1,4 +1,9 @@
-<div class="alert alert-{{ type }}" role="alert">
+<div
+  class="alert alert-{{ type }}"
+  [class.--is-dismissing]="isDismissing"
+  [class.--is-adding]="isAdding"
+  role="alert"
+>
   {{ message }}
   <button class="-dismiss" (click)="dismissed.emit()">&times;</button>
 </div>
