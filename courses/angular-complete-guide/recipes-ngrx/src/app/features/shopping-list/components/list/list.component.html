@@ -1,15 +1,17 @@
 <div class="row">
-  <div class="col-xs-10">
+  <div class="col-6 offset-3">
     <app-shopping-list-item-edit></app-shopping-list-item-edit>
-    <hr>
-    <ul class="list-group">
-      <a
+
+    <div class="list-group mt-4">
+      <div
         *ngFor="let ingredient of ingredients; let i = index"
         class="list-group-item pointer"
+        [class.active]="ingredient.name === currentIngredient?.name"
         (click)="onEditItem(i)"
       >
-        {{ ingredient.name }} ({{ ingredient.amount }})
-      </a>
-    </ul>
+        {{ ingredient.name }}: <strong>{{ ingredient.amount }}</strong>
+      </div>
+    </div>
+
   </div>
 </div>

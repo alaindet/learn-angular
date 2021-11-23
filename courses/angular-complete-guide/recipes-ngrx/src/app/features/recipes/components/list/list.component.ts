@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { NavigationEnd, Router } from '@angular/router';
 
 import { Recipe } from '@/shared/types';
 import { RecipeService } from '../../services';
-import { Observable } from 'rxjs';
+import { filter, Observable } from 'rxjs';
 
 @Component({
   selector: 'app-recipes-list',
@@ -21,6 +21,8 @@ export class RecipesListComponent implements OnInit {
   ngOnInit(): void {
     this.recipesService.syncRecipes();
     this.recipes$ = this.recipesService.recipes$;
+    this.router.events.pipe(filter(event => event instanceof NavigationEnd))
+      .subscribe(() => this.recipesService.syncRecipes());
   }
 
   onNewRecipe(): void {

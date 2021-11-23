@@ -49,7 +49,7 @@ export class RecipeEditComponent implements OnInit {
         },
         next: data => {
           console.log('data', data)
-          this.onCancel();
+          this.router.navigate(['/recipes', encodeURI(recipe.name)]);
         },
       });
   }

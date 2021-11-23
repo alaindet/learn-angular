@@ -1,8 +1,9 @@
 <div class="row">
-  <div class="col-xs-12">
+  <div class="col">
     <form (ngSubmit)="onSubmit(itemForm)" #itemForm="ngForm">
+      <pre>{{ itemForm.errors | json }}</pre>
       <div class="row">
-        <div class="col-sm-5 form-group">
+        <div class="col-sm-7 form-group">
 
           <!-- Name -->
           <label for="name">Name</label>
@@ -13,11 +14,12 @@
             name="name"
             ngModel
             required
+            [value]="currentIngredient?.name"
           >
         </div>
 
         <!-- Amount -->
-        <div class="col-sm-2 form-group">
+        <div class="col-sm-5 form-group">
           <label for="amount">Amount</label>
           <input
             type="number"
@@ -26,26 +28,30 @@
             name="amount"
             ngModel
             required
-            pattern="^[1-9]+[0-9]*$"
+            [value]="currentIngredient?.amount"
           >
         </div>
       </div>
       <div class="row">
-        <div class="col-xs-12">
+        <div class="col d-flex justify-content-end">
 
-          <!-- Submit -->
-          <button class="btn btn-success" type="submit" [disabled]="!itemForm.valid">
-            {{ editMode ? 'Update' : 'Add' }}
+          <!-- Clear -->
+          <button class="btn btn-light" type="button" (click)="onClear()">
+            Clear
           </button>
+
+          &nbsp;
 
           <!-- Delete -->
           <button *ngIf="editMode" type="button" class="btn btn-danger" (click)="onDelete()">
             Delete
           </button>
 
-          <!-- Clear -->
-          <button class="btn btn-primary" type="button" (click)="onClear()">
-            Clear
+          &nbsp;
+
+          <!-- Submit -->
+          <button class="btn btn-success" type="submit" [disabled]="itemForm.invalid">
+            {{ editMode ? 'Update' : 'Add' }}
           </button>
 
         </div>

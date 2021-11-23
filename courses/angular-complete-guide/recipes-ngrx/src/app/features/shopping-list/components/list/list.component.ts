@@ -10,6 +10,7 @@ import { finalize, Subscription } from 'rxjs';
 export class ShoppingListComponent implements OnInit, OnDestroy {
 
   ingredients: Ingredient[];
+  currentIngredient: Ingredient | null;
   isLoading = true;
   private subs: { [sub: string]: Subscription } = {};
 
@@ -19,6 +20,8 @@ export class ShoppingListComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.fetchIngredients();
+    this.shoppingListService.getCurrentIngredient()
+      .subscribe(ingredient => this.currentIngredient = ingredient);
   }
 
   ngOnDestroy(): void {

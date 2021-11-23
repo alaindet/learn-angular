@@ -60,6 +60,9 @@ export class ShoppingListItemEditComponent implements OnInit, OnDestroy {
 
   private fetchCurrentIngredient(): void {
     this.subs.ingredient = this.shoppingListService.getCurrentIngredient()
-      .subscribe(ingredient => this.currentIngredient = ingredient);
+      .subscribe(ingredient => {
+        this.currentIngredient = ingredient;
+        this.editMode = !!this.currentIngredient;
+      });
   }
 }
