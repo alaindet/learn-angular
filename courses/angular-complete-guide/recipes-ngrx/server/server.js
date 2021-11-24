@@ -3,8 +3,8 @@ const express = require('express');
 const cors = require('cors');
 
 const { router: authRouter, fakeAuthMiddleware } = require('./features/auth');
-const ingredientsRouter = require('./features/ingredients');
-const recipesRouter = require('./features/recipes');
+const { router: ingredientsRouter } = require('./features/ingredients');
+const { router: recipesRouter } = require('./features/recipes');
 
 const app = express();
 const PORT = 3000;

@@ -1,4 +1,6 @@
 const express = require('express');
+
+const { COLLECTION: INGREDIENTS_COLLECTION } = require('./ingredients');
 const database = require('../utils/database');
 const { successResponse, errorResponse } = require('../utils/http');
 
@@ -21,16 +23,13 @@ router.post('/', async (req, res) => {
   return res.status(201).json(successResponse(message, data));
 });
 
-// TODO: Create massive upsert
-router.put('/', async (req, res) => {
-  res.send('ok');
-});
 
 router.get('/', async (req, res) => {
   const items = await database.fetchCollection(COLLECTION);
   const message = 'All recipes';
   return res.json(successResponse(message, items));
 });
+
 
 router.get('/:name', async (req, res) => {
   const { name } = req.params;
@@ -46,6 +45,7 @@ router.get('/:name', async (req, res) => {
   const data = item ?? null;
   return res.json(successResponse(message, data));
 });
+
 
 router.patch('/:name', async (req, res) => {
   const { name } = req.params;
@@ -64,6 +64,34 @@ router.patch('/:name', async (req, res) => {
   return res.json(successResponse(message, newItem));
 });
 
+
+// Adds recipe's ingredients to the shopping list
+// Creates new ones
+// Updates existing ones
+router.put('/:name/ingredients', async (req, res) => {
+  const { name } = req.params;
+  const recipes = await database.fetchCollection(COLLECTION);
+  const recipe = recipes.find((recipe) => recipe.name === name);
+  if (!recipe) {
+    const message = `No recipe with name "${name}"`;
+    return res.status(404).json(errorResponse(message));
+  }
+  const ingredients = await database.fetchCollection(INGREDIENTS_COLLECTION);
+  for (const newIngredient of recipe.ingredients) {
+    const existingIndex = ingredients.findIndex(ingr => ingr.name === newIngredient.name);
+    if (existingIndex !== -1) {
+      ingredients[existingIndex].amount += newIngredient.amount;
+    } else {
+      ingredients.push(newIngredient);
+    }
+  }
+  await database.storeCollection(INGREDIENTS_COLLECTION, [...ingredients]);
+  const message = 'Recipe\'s ingredients added to the ingredients collection';
+  const data = recipe.ingredients;
+  return res.status(201).json(successResponse(message, data));
+});
+
+
 router.delete('/:name', async (req, res) => {
   const { name } = req.params;
   let items = await database.fetchCollection(COLLECTION);
@@ -80,4 +108,5 @@ router.delete('/:name', async (req, res) => {
   return res.json(successResponse(message, item));
 });
 
-module.exports = router;
+
+module.exports = { router, COLLECTION };

@@ -1,5 +1,5 @@
-import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { Component, OnInit, OnDestroy, EventEmitter, Output } from '@angular/core';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 
 import { Ingredient } from '@/shared/types';
@@ -11,18 +11,22 @@ import { ShoppingListService } from '../../services';
 })
 export class ShoppingListItemEditComponent implements OnInit, OnDestroy {
 
-  @ViewChild('itemForm', { static: false })
-  shoppingListForm: NgForm;
+  @Output() submitted = new EventEmitter<void>();
 
+  form: FormGroup;
   editMode = false;
   currentIngredient: Ingredient | null;
+
+
   private subs: { [sub: string]: Subscription } = {};
 
   constructor(
     private shoppingListService: ShoppingListService,
+    private formBuilder: FormBuilder,
   ) {}
 
   ngOnInit(): void {
+    this.initForm();
     this.fetchCurrentIngredient();
   }
 
@@ -32,30 +36,41 @@ export class ShoppingListItemEditComponent implements OnInit, OnDestroy {
     }
   }
 
-  onSubmit(form: NgForm): void {
-    const { name, amount } = form.value;
+  onSubmit(): void {
+    const { name, amount } = this.form.value;
     const newIngredient = new Ingredient(name, amount);
+    const request = this.editMode
+      ? this.shoppingListService.updateIngredient(newIngredient)
+      : this.shoppingListService.createIngredient(newIngredient);
 
-    if (this.editMode) {
-      this.shoppingListService.updateIngredient(newIngredient);
+    request.subscribe(() => {
       this.editMode = false;
-    } else {
-      this.shoppingListService.createIngredient(newIngredient);
-    }
-
-    form.reset();
+      this.onClear();
+      this.form.reset();
+      this.submitted.emit();
+    });
   }
 
   onClear(): void {
-    this.shoppingListForm.reset();
+    this.form.reset();
     this.editMode = false;
   }
 
   onDelete(): void {
-    if (this.currentIngredient !== null) {
-      this.shoppingListService.deleteIngredient(this.currentIngredient.name);
-      this.onClear();
+    if (!this.currentIngredient) {
+      return;
     }
+
+    if (!confirm('Do you want to delete the ingredient?')) {
+      return;
+    }
+
+    this.shoppingListService
+      .deleteIngredient(this.currentIngredient.name)
+      .subscribe(() => {
+        this.onClear();
+        this.submitted.emit();
+      });
   }
 
   private fetchCurrentIngredient(): void {
@@ -63,6 +78,14 @@ export class ShoppingListItemEditComponent implements OnInit, OnDestroy {
       .subscribe(ingredient => {
         this.currentIngredient = ingredient;
         this.editMode = !!this.currentIngredient;
+        this.form.patchValue(ingredient);
       });
+  }
+
+  private initForm(existing?: Ingredient): void {
+    this.form = this.formBuilder.group({
+      name: [existing?.name ?? null, Validators.required],
+      amount: [existing?.amount ?? null, Validators.required],
+    });
   }
 }

@@ -5,6 +5,7 @@ import { finalize } from 'rxjs/operators';
 import { Recipe } from '@/shared/types';
 import { ShoppingListService } from '@/features/shopping-list';
 import { RecipeService } from '../../services';
+import { AlertsService } from '@/core/features/alerts';
 
 @Component({
   templateUrl: './details.component.html',
@@ -19,7 +20,7 @@ export class RecipeDetailsComponent implements OnInit {
     private recipesService: RecipeService,
     private route: ActivatedRoute,
     private router: Router,
-    private shoppingListService: ShoppingListService,
+    public alertsService: AlertsService,
   ) {}
 
   ngOnInit(): void {
@@ -29,9 +30,14 @@ export class RecipeDetailsComponent implements OnInit {
     });
   }
 
-  // TODO: Perform upsert
   onAddToShoppingList(): void {
-    this.shoppingListService.createIngredient(this.recipe.ingredients);
+    this.isLoading = true;
+    this.recipesService.addRecipeIngredients(this.recipe.name)
+      .pipe(finalize(() => this.isLoading = false))
+      .subscribe({
+        error: err => console.error(err),
+        next: () => this.alertsService.addSuccess('Ingredients added to the shopping list'),
+      });
   }
 
   onEditRecipe(): void {

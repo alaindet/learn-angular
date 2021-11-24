@@ -19,6 +19,10 @@ export class ShoppingListService {
     this._currentIngredient$.next(ingredient);
   }
 
+  clearCurrentIngredient(): void {
+    this._currentIngredient$.next(null);
+  }
+
   getCurrentIngredient(): Observable<Ingredient | null> {
     return this._currentIngredient$.asObservable();
   }

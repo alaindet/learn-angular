@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, BehaviorSubject } from 'rxjs';
 
-import { Recipe } from '@/shared/types';
+import { Ingredient, Recipe } from '@/shared/types';
 import { RecipesApiService } from './recipes.api.service';
 
 @Injectable({
@@ -21,6 +21,10 @@ export class RecipeService {
 
   createRecipe(recipe: Recipe | Recipe[]): Observable<Recipe | Recipe[]> {
     return this.recipesApi.createRecipe(recipe);
+  }
+
+  addRecipeIngredients(name: string): Observable<Ingredient[]> {
+    return this.recipesApi.addRecipeIngredients(name);
   }
 
   syncRecipes(): void {

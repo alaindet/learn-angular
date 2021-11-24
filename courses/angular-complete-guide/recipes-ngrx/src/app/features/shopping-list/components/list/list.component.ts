@@ -34,6 +34,11 @@ export class ShoppingListComponent implements OnInit, OnDestroy {
     this.shoppingListService.setCurrentIngredient(this.ingredients[index]);
   }
 
+  onFormSubmitted(): void {
+    this.shoppingListService.clearCurrentIngredient();
+    this.fetchIngredients();
+  }
+
   private fetchIngredients(): void {
     this.isLoading = true;
     this.shoppingListService.getIngredients()

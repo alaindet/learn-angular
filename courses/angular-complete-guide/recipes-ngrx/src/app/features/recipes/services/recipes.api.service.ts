@@ -3,7 +3,7 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { environment } from 'src/environments/environment';
-import { Response, Recipe } from '@/shared/types';
+import { Response, Recipe, Ingredient } from '@/shared/types';
 import { HttpClient } from '@angular/common/http';
 
 @Injectable({
@@ -22,6 +22,12 @@ export class RecipesApiService {
       this.baseUrl,
       ingredient,
     ).pipe(map(response => response.data));
+  }
+
+  addRecipeIngredients(name: string): Observable<Ingredient[]> {
+    const url = `${this.baseUrl}/${name}/ingredients`;
+    return this.http.put<Response<Ingredient[]>>(url, null)
+      .pipe(map(response => response.data));
   }
 
   getRecipes(): Observable<Recipe[]> {

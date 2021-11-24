@@ -1,4 +1,5 @@
 const express = require('express');
+
 const database = require('../utils/database');
 const { successResponse, errorResponse } = require('../utils/http');
 
@@ -21,16 +22,13 @@ router.post('/', async (req, res) => {
   return res.status(201).json(successResponse(message, data));
 });
 
-// TODO: Create massive upsert
-router.put('/', async (req, res) => {
-  res.send('ok');
-});
 
 router.get('/', async (req, res) => {
   const items = await database.fetchCollection(COLLECTION);
   const message = 'All ingredients';
   return res.json(successResponse(message, items));
 });
+
 
 router.get('/:name', async (req, res) => {
   const { name } = req.params;
@@ -46,6 +44,7 @@ router.get('/:name', async (req, res) => {
   const data = item ?? null;
   return res.json(successResponse(message, data));
 });
+
 
 router.patch('/:name', async (req, res) => {
   const { name } = req.params;
@@ -64,6 +63,7 @@ router.patch('/:name', async (req, res) => {
   return res.json(successResponse(message, newItem));
 });
 
+
 router.delete('/:name', async (req, res) => {
   const { name } = req.params;
   let items = await database.fetchCollection(COLLECTION);
@@ -80,4 +80,5 @@ router.delete('/:name', async (req, res) => {
   return res.json(successResponse(message, item));
 });
 
-module.exports = router;
+
+module.exports = { router, COLLECTION };
