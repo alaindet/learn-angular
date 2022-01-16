@@ -1,0 +1,17 @@
+<button type="button" class="counter__control" (click)="onDecreaseBy(decreaseBy)">
+  -{{ decreaseBy }}
+</button>
+
+<button type="button" class="counter__control" (click)="onDecrease()">
+  -1
+</button>
+
+<span class="counter__current">{{ value ? value : 0 }}</span>
+
+<button type="button" class="counter__control" (click)="onIncrease()">
+  +1
+</button>
+
+<button type="button" class="counter__control" (click)="onIncreaseBy(increaseBy)">
+  +{{ increaseBy }}
+</button>

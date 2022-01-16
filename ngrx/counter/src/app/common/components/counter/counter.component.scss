@@ -1,0 +1,52 @@
+// $primary: rgb(25, 180, 141);
+// $primary-dark: rgb(23, 153, 120);
+
+$primary: rgb(196, 69, 86);
+$primary-dark: rgb(163, 53, 67);
+
+:host {
+  margin: 1rem auto;
+  max-width: min(95vw, 500px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  line-height: 24px;
+
+  & > * {
+    margin: 0 0.2rem;
+  }
+
+  @media screen and (max-width: 768px) {
+    font-size: 18px;
+    line-height: 18px;
+  }
+}
+
+.counter__control {
+  border: 4px solid $primary-dark;
+  background-color: $primary;
+  color: white;
+  font-size: inherit;
+  line-height: inherit;
+  padding: 0.5rem 1rem;
+  border-radius: 100px;
+  cursor: pointer;
+  transition: 0.15s all ease-in-out;
+
+  &:hover,
+  &:focus {
+    outline: none;
+    background-color: $primary-dark;
+  }
+}
+
+.counter__current {
+  font-size: inherit;
+  line-height: inherit;
+  padding: 0.5rem 1rem;
+  border-radius: 100px;
+  border: 4px solid $primary-dark;
+  color: $primary-dark;
+  font-weight: bold;
+}
