@@ -1,11 +1,13 @@
 import { createSelector, createFeatureSelector } from '@ngrx/store';
 
 import { Book } from 'src/app/common/types';
-import { featureName } from './feature';
+import { collectionFeatureName } from './feature';
 import { CollectionState } from './state';
 import { selectBooks } from '../books';
 
-export const selectCollectionState = createFeatureSelector<CollectionState>(featureName);
+export const selectCollectionState = createFeatureSelector<CollectionState>(
+  collectionFeatureName
+);
 
 export const selectBookCollection = createSelector(
   selectBooks,

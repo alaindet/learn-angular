@@ -4,7 +4,7 @@ import { retrievedBookList } from './actions';
 import { initialState } from './state';
 import { retrievedBookListReducer } from './reducers';
 
-export const featureName = 'books';
+export const booksFeatureName = 'books';
 
 const reducer = createReducer(
   initialState,

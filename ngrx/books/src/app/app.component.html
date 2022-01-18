@@ -1,14 +1,12 @@
 <h1>NgRx Books</h1>
 
 <h2>All Books</h2>
-
 <app-books-list
   [books]="(books$ | async) || []"
   (added)="onAddBookToCollection($event)"
 ></app-books-list>
 
 <h2>Your books collection</h2>
-
 <app-books-collection
   [books]="(bookCollection$ | async) || []"
   (removed)="onRemoveBookFromCollection($event)"

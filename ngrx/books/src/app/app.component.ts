@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 
 import { Book } from 'src/app/common/types';
@@ -8,7 +8,7 @@ import { selectBooks, selectBookCollection, addBook, removeBook, retrievedBookLi
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppComponent {
 
@@ -21,19 +21,23 @@ export class AppComponent {
   ) {}
 
   ngOnInit(): void {
+    // TODO: Move into effect
     this.booksService.getBooks().subscribe(books => {
-      const action = retrievedBookList({ books });
-      this.store.dispatch(action);
+      this.store.dispatch(
+        retrievedBookList({ books })
+      );
     });
   }
 
   onAddBookToCollection(bookId: Book['id']): void {
-    const action = addBook({ bookId });
-    this.store.dispatch(action);
+    this.store.dispatch(
+      addBook({ bookId })
+    );
   }
 
   onRemoveBookFromCollection(bookId: Book['id']): void {
-    const action = removeBook({ bookId });
-    this.store.dispatch(action);
+    this.store.dispatch(
+      removeBook({ bookId })
+    );
   }
 }
