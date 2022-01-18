@@ -1,5 +1,6 @@
 import { createSelector, createFeatureSelector } from '@ngrx/store';
 
+import { Book } from 'src/app/common/types';
 import { featureName } from './feature';
 import { CollectionState } from './state';
 import { selectBooks } from '../books';
@@ -10,6 +11,6 @@ export const selectBookCollection = createSelector(
   selectBooks,
   selectCollectionState,
   (books, collection) => {
-    return collection.map(id => books.find(book => book.id === id));
+    return collection.map(id => books.find(book => book.id === id) as Book);
   }
 );

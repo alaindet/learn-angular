@@ -5,18 +5,20 @@ import { StoreModule } from '@ngrx/store';
 
 import { reducers } from 'src/app/core/store';
 import { AppComponent } from './app.component';
-import { BooksModule } from './features/books';
+
+import { BooksCollectionComponent, BooksListComponent } from './components';
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
   imports: [
     BrowserModule,
     HttpClientModule,
     StoreModule.forRoot(reducers),
-    BooksModule,
   ],
-  bootstrap: [AppComponent]
+  declarations: [
+    AppComponent,
+    BooksListComponent,
+    BooksCollectionComponent,
+  ],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

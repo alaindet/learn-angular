@@ -1,0 +1,14 @@
+<div *ngFor="let book of books" class="book">
+
+  <div class="book__info">
+    <div class="book__title">{{ book.volumeInfo.title }}</div>
+    <div class="book__author">{{ book.volumeInfo.authors }}</div>
+  </div>
+
+  <div class="book__actions">
+    <button class="book__action" (click)="removed.emit(book.id)">
+      Remove from Collection
+    </button>
+  </div>
+
+</div>
