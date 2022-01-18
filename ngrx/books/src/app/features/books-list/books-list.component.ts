@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 
-import { Book } from 'src/app/common/types';
+import { Book } from 'src/app/shared/types';
 
 @Component({
   selector: 'app-books-list',

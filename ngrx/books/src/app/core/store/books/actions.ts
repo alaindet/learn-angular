@@ -1,6 +1,6 @@
 import { createAction, props } from '@ngrx/store';
 
-import { Book } from 'src/app/common/types';
+import { Book } from 'src/app/shared/types';
 
 export const addBook = createAction(
   '[Books] Add book',

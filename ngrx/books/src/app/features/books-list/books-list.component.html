@@ -1,0 +1,8 @@
+<app-book-item
+  *ngFor="let book of books"
+  [title]="book.volumeInfo.title"
+  [authors]="book.volumeInfo.authors"
+  (actionClicked)="added.emit(book.id)"
+>
+  <button appButton appBookItemAction="add">Add to collection</button>
+</app-book-item>

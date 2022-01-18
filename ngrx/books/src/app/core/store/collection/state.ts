@@ -1,4 +1,4 @@
-import { Book } from 'src/app/common/types';
+import { Book } from 'src/app/shared/types';
 
 export type CollectionState = ReadonlyArray<Book['id']>;
 

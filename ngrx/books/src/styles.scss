@@ -1,4 +1,20 @@
 /* You can add global styles to this file, and also import other style files */
+:root {
+  --color-primary: rgb(64, 190, 142);
+  --color-primary-dark: rgb(49, 155, 114);
+  --color-background: #ffffff;
+  --color-foreground: #303030;
+
+  --font-size: 18px;
+  --font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+  --transition: 0.15s all ease-out;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
 html {
-  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: var(--font-family);
 }

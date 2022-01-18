@@ -1,13 +1,21 @@
 <h1>NgRx Books</h1>
 
-<h2>All Books</h2>
-<app-books-list
-  [books]="(books$ | async) || []"
-  (added)="onAddBookToCollection($event)"
-></app-books-list>
+<main>
 
-<h2>Your books collection</h2>
-<app-books-collection
-  [books]="(bookCollection$ | async) || []"
-  (removed)="onRemoveBookFromCollection($event)"
-></app-books-collection>
+  <section>
+    <h2>Available Books ({{ (booksCount$ | async) || 0 }})</h2>
+    <app-books-list
+      [books]="(books$ | async) || []"
+      (added)="onAddBookToCollection($event)"
+    ></app-books-list>
+  </section>
+
+  <section>
+    <h2>Your books collection ({{ (booksCollectionCount$ | async) || 0 }})</h2>
+    <app-books-collection
+      [books]="(booksCollection$ | async) || []"
+      (removed)="onRemoveBookFromCollection($event)"
+    ></app-books-collection>
+  </section>
+
+</main>

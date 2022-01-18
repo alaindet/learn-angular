@@ -1,0 +1,19 @@
+main {
+  display: flex;
+  align-items: flex-start;
+}
+
+main > section {
+  padding: 1rem;
+  flex: 1 1 0;
+}
+
+@media screen and (max-width: 768px) {
+  main {
+    flex-direction: column;
+  }
+
+  main > section {
+    width: 100%;
+  }
+}

@@ -1,0 +1,8 @@
+<app-book-item
+  *ngFor="let book of books"
+  [title]="book.volumeInfo.title"
+  [authors]="book.volumeInfo.authors"
+  (actionClicked)="removed.emit(book.id)"
+>
+  <button appButton appBookItemAction="add">Remove from collection</button>
+</app-book-item>
