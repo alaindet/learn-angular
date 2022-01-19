@@ -27,10 +27,6 @@ export class AppComponent {
     private store: Store,
   ) {}
 
-  // ngOnInit(): void {
-  //   this.onFetchBooks();
-  // }
-
   onFetchBooks(): void {
     this.store.dispatch(retrieveBooksList());
   }
