@@ -1,21 +1,28 @@
 <h1>NgRx Books</h1>
 
+<button appButton (click)="onFetchBooks()">Fetch books</button>
+<p *ngIf="booksLoading$ | async">Fetching books...</p>
+
 <main>
 
-  <section>
-    <h2>Available Books ({{ (booksCount$ | async) || 0 }})</h2>
-    <app-books-list
-      [books]="(books$ | async) || []"
-      (added)="onAddBookToCollection($event)"
-    ></app-books-list>
-  </section>
+  <ng-container *ngIf="(books$ | async) || [] as books">
+    <section *ngIf="books.length">
+      <h2>Available Books ({{ books.length }})</h2>
+      <app-books-list
+        [books]="books"
+        (added)="onAddBookToCollection($event)"
+      ></app-books-list>
+    </section>
+  </ng-container>
 
-  <section>
-    <h2>Your books collection ({{ (booksCollectionCount$ | async) || 0 }})</h2>
-    <app-books-collection
-      [books]="(booksCollection$ | async) || []"
-      (removed)="onRemoveBookFromCollection($event)"
-    ></app-books-collection>
-  </section>
+  <ng-container *ngIf="(booksCollection$ | async) || [] as booksCollection">
+    <section *ngIf="booksCollection.length">
+      <h2>Your books collection ({{ booksCollection.length }})</h2>
+      <app-books-collection
+        [books]="booksCollection"
+        (removed)="onRemoveBookFromCollection($event)"
+      ></app-books-collection>
+    </section>
+  </ng-container>
 
 </main>

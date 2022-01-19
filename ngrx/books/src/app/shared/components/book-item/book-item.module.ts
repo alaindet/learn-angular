@@ -1,6 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { BookItemActionDirective, BookItemComponent, ButtonComponent } from './components';
+
+import { BookItemComponent } from './book-item.component';
+import { BookItemActionDirective } from './book-item-action.directive';
 
 @NgModule({
   imports: [
@@ -9,12 +11,10 @@ import { BookItemActionDirective, BookItemComponent, ButtonComponent } from './c
   declarations: [
     BookItemComponent,
     BookItemActionDirective,
-    ButtonComponent,
   ],
   exports: [
     BookItemComponent,
     BookItemActionDirective,
-    ButtonComponent,
   ],
 })
-export class SharedModule {}
+export class BookItemModule {}

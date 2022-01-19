@@ -1,13 +1,14 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 
-import { SharedModule } from 'src/app/shared/shared.module';
+import { BookItemModule, ButtonModule } from 'src/app/shared/components';
 import { BooksCollectionComponent } from './books-collection.component';
 
 @NgModule({
   imports: [
     CommonModule,
-    SharedModule,
+    BookItemModule,
+    ButtonModule,
   ],
   declarations: [BooksCollectionComponent],
   exports: [BooksCollectionComponent],

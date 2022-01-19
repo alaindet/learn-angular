@@ -2,16 +2,14 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 
 import { Book } from 'src/app/shared/types';
-import { GoogleBooksService } from './core/services';
 import {
   selectBooks,
-  selectBooksCount,
+  selectBooksLoading,
   selectBooksCollection,
-  selectBooksCollectionCount,
   addBook,
   removeBook,
-  retrievedBookList,
-} from './core/store';
+  retrieveBooksList,
+} from 'src/app/core/store';
 
 @Component({
   selector: 'app-root',
@@ -22,33 +20,26 @@ import {
 export class AppComponent {
 
   books$ = this.store.select(selectBooks);
-  booksCount$ = this.store.select(selectBooksCount);
+  booksLoading$ = this.store.select(selectBooksLoading);
   booksCollection$ = this.store.select(selectBooksCollection);
-  booksCollectionCount$ = this.store.select(selectBooksCollectionCount);
 
   constructor(
-    private booksService: GoogleBooksService,
     private store: Store,
   ) {}
 
-  ngOnInit(): void {
-    // TODO: Move into effect
-    this.booksService.getBooks().subscribe(books => {
-      this.store.dispatch(
-        retrievedBookList({ books })
-      );
-    });
+  // ngOnInit(): void {
+  //   this.onFetchBooks();
+  // }
+
+  onFetchBooks(): void {
+    this.store.dispatch(retrieveBooksList());
   }
 
   onAddBookToCollection(bookId: Book['id']): void {
-    this.store.dispatch(
-      addBook({ bookId })
-    );
+    this.store.dispatch(addBook({ bookId }));
   }
 
   onRemoveBookFromCollection(bookId: Book['id']): void {
-    this.store.dispatch(
-      removeBook({ bookId })
-    );
+    this.store.dispatch(removeBook({ bookId }));
   }
 }
