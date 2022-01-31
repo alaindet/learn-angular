@@ -1,5 +1,5 @@
 import { Injectable, TemplateRef } from '@angular/core';
-import { Observable, BehaviorSubject, of, forkJoin, tap } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 import { computePosition, offset, flip } from '@floating-ui/dom';
 
 // TODO
@@ -20,13 +20,15 @@ export interface FloatingPairData {
 export interface FloatingPair {
   config: FloatingPairConfig;
   data: BehaviorSubject<FloatingPairData | null>;
-  targetTemplate: BehaviorSubject<TemplateRef<void> | null>;
+  targetTemplate: TemplateRef<void> | null;
 }
 
 @Injectable()
 export class FloatingService {
 
   pairs: { [pairName: string]: FloatingPair } = {};
+  private _templates$ = new BehaviorSubject<TemplateRef<void>[]>([]);
+  templates$ = this._templates$.asObservable();
 
   getFloatingPair(name: string): FloatingPair {
     return this.pairs[name];
@@ -34,7 +36,8 @@ export class FloatingService {
 
   setTemplate(name: string, template: TemplateRef<void>): void {
     this.createPairIfNeeded(name);
-    this.pairs[name].targetTemplate.next(template);
+    this.pairs[name].targetTemplate = template;
+    this.updateTemplates();
   }
 
   setTrigger(name: string, config: Partial<FloatingPairConfig>): void {
@@ -49,8 +52,8 @@ export class FloatingService {
 
   toggleTarget(name: string): void {
     const pair = this.pairs[name];
-    const { isOpen } = pair.data.getValue() as FloatingPairData;
-    isOpen ? this.closeTarget(name) : this.openTarget(name);
+    const data = pair.data.getValue() as FloatingPairData;
+    data?.isOpen ? this.closeTarget(name) : this.openTarget(name);
   }
 
   async openTarget(name: string): Promise<void> {
@@ -71,9 +74,22 @@ export class FloatingService {
           offset: 0,
         },
         data: new BehaviorSubject<FloatingPairData | null>(null),
-        targetTemplate: new BehaviorSubject<TemplateRef<void> | null>(null),
+        targetTemplate: null,
       };
     }
+  }
+
+  private updateTemplates(): void {
+
+    const templates: TemplateRef<void>[] = [];
+
+    for (const pair of Object.values(this.pairs)) {
+      if (pair.targetTemplate !== null) {
+        templates.push(pair.targetTemplate);
+      }
+    }
+
+    this._templates$.next(templates);
   }
 
   private async computePosition(name: string): Promise<{
@@ -82,10 +98,6 @@ export class FloatingService {
   }> {
     const trigger = this.pairs[name].config.triggerElement as HTMLElement;
     const target = this.pairs[name].config.targetElement as HTMLElement;
-
-    // TODO
-    console.log('trigger', trigger);
-    console.log('target', target);
 
     const targetOffset = this.pairs[name].config.offset;
 

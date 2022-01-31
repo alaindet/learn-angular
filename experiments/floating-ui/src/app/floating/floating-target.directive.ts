@@ -1,6 +1,6 @@
 import { Directive, Input, ElementRef, Renderer2, OnInit, OnDestroy } from '@angular/core';
 import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { filter, map, takeUntil } from 'rxjs/operators';
 
 import { FloatingPairData, FloatingService } from './floating.service';
 
@@ -25,9 +25,6 @@ export class FloatingTargetDirective implements OnInit, OnDestroy {
 
   ngOnInit(): void {
 
-    // TODO
-    console.log('FloatingTargetDirective ngOnInit', this.name);
-
     this.renderer.setStyle(this.host.nativeElement, 'position', 'fixed');
     this.renderer.setStyle(this.host.nativeElement, 'display', 'none');
 
@@ -36,25 +33,25 @@ export class FloatingTargetDirective implements OnInit, OnDestroy {
       offset: this.offset,
     });
 
-    // TODO
     this.floatingService.getFloatingPair(this.name).data
       .pipe(
         takeUntil(this.destroy$),
+        filter(data => data !== null),
+        map(data => data as FloatingPairData),
       )
       .subscribe(data => {
 
-        if (data?.isOpen && !this.isOpen) {
+        if (data.isOpen && !this.isOpen) {
           this.open(data);
           return;
         }
 
-        if (!data?.isOpen && this.isOpen) {
+        if (!data.isOpen && this.isOpen) {
           this.close();
           return;
         }
 
-        // TODO
-        this.updatePosition(data?.x, data?.y);
+        this.updatePosition(data.x, data.y);
       });
   }
 
@@ -75,8 +72,12 @@ export class FloatingTargetDirective implements OnInit, OnDestroy {
   }
 
   updatePosition(x: number | null, y: number | null): void {
-    // TODO
-    this.renderer.setStyle(this.host.nativeElement, 'left', `${x}px`);
-    this.renderer.setStyle(this.host.nativeElement, 'top', `${y}px`);
+    if (x !== null) {
+      this.renderer.setStyle(this.host.nativeElement, 'left', `${x}px`);
+    }
+
+    if (y !== null) {
+      this.renderer.setStyle(this.host.nativeElement, 'top', `${y}px`);
+    }
   }
 }

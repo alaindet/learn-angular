@@ -1,0 +1,19 @@
+.floating-trigger {
+  background-color: #adff2f;
+  border-radius: 0.5rem;
+  padding: 0.5rem 1rem;
+  border: 3px solid #94db28;
+  transition: 0.15s all ease-in-out;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #94db28;
+  }
+}
+
+.floating-target {
+  background-color: #ffffff;
+  border-radius: 0.33rem;
+  padding: 0.5rem 1rem;
+  border: 2px solid #94db28;
+}
