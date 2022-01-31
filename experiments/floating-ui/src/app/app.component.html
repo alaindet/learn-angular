@@ -1,0 +1,28 @@
+<h1>Floating UI</h1>
+
+<div id="one">
+  <div id="two">
+    <div id="three">
+
+      <p>Some content before floating content...</p>
+
+      <button
+        appFloatingTrigger="my-tooltip"
+        triggerOn="click"
+        class="floating-trigger"
+      >
+        Show tooltip
+      </button>
+      <ng-template appFloatingTemplate="my-tooltip">
+        <div appFloatingTarget="my-tooltip" class="floating-target">
+          This is the tooltip
+        </div>
+      </ng-template>
+
+      <p>Some content after floating content...</p>
+
+    </div>
+  </div>
+</div>
+
+<app-floating-host></app-floating-host>
