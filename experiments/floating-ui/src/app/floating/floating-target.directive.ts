@@ -32,25 +32,29 @@ export class FloatingTargetDirective implements OnInit, OnDestroy {
     this.renderer.setStyle(this.host.nativeElement, 'display', 'none');
 
     this.floatingService.setTarget(this.name, {
-      element: this.host.nativeElement,
+      targetElement: this.host.nativeElement,
       offset: this.offset,
     });
 
-    this.floatingService.getFloatingPairData(this.name)
-      .pipe(takeUntil(this.destroy$))
+    // TODO
+    this.floatingService.getFloatingPair(this.name).data
+      .pipe(
+        takeUntil(this.destroy$),
+      )
       .subscribe(data => {
 
-        if (data.isOpen && !this.isOpen) {
+        if (data?.isOpen && !this.isOpen) {
           this.open(data);
           return;
         }
 
-        if (!data.isOpen && this.isOpen) {
+        if (!data?.isOpen && this.isOpen) {
           this.close();
           return;
         }
 
-        this.updatePosition(data.x, data.y);
+        // TODO
+        this.updatePosition(data?.x, data?.y);
       });
   }
 
@@ -71,6 +75,7 @@ export class FloatingTargetDirective implements OnInit, OnDestroy {
   }
 
   updatePosition(x: number | null, y: number | null): void {
+    // TODO
     this.renderer.setStyle(this.host.nativeElement, 'left', `${x}px`);
     this.renderer.setStyle(this.host.nativeElement, 'top', `${y}px`);
   }
