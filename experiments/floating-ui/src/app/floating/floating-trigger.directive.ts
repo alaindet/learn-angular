@@ -21,8 +21,6 @@ export class FloatingTriggerDirective implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    console.log('FloatingTriggerDirective', this.name);
-
     this.floatingService.setTrigger(this.name, {
       triggerElement: this.host.nativeElement,
     });

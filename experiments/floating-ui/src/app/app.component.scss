@@ -1,3 +1,9 @@
+:host {
+  display: block;
+  margin: 1rem auto;
+  max-width: min(500px, 95vw);
+}
+
 .floating-trigger {
   background-color: #adff2f;
   border-radius: 0.5rem;
@@ -16,4 +22,5 @@
   border-radius: 0.33rem;
   padding: 0.5rem 1rem;
   border: 2px solid #94db28;
+  position: fixed;
 }

@@ -1,28 +1,80 @@
 <h1>Floating UI</h1>
 
-<div id="one">
-  <div id="two">
-    <div id="three">
+<main>
 
-      <p>Some content before floating content...</p>
+  <p>
+    Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro eaque repellat sapiente adipisci ipsam eos, alias cumque, praesentium quae sit aliquid odio ducimus ea doloribus explicabo officiis voluptatum. Adipisci, corrupti.
+  </p>
 
-      <button
-        appFloatingTrigger="my-tooltip"
-        triggerOn="click"
-        class="floating-trigger"
-      >
-        Show tooltip
-      </button>
-      <ng-template appFloatingTemplate="my-tooltip">
-        <div appFloatingTarget="my-tooltip" class="floating-target">
-          This is the tooltip
-        </div>
-      </ng-template>
+  <p>
+    Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro eaque repellat sapiente adipisci ipsam eos, alias cumque, praesentium quae sit aliquid odio ducimus ea doloribus explicabo officiis voluptatum. Adipisci, corrupti.
+  </p>
 
-      <p>Some content after floating content...</p>
+  <p>
+    Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro eaque repellat sapiente adipisci ipsam eos, alias cumque, praesentium quae sit aliquid odio ducimus ea doloribus explicabo officiis voluptatum. Adipisci, corrupti.
+  </p>
 
+  <!-- Floating trigger #1 -->
+  <button
+    appFloatingTrigger="floating-1"
+    triggerOn="click"
+    class="floating-trigger"
+  >
+    Trigger #1
+  </button>
+
+  &nbsp;
+
+  <!-- Floating target #1 -->
+  <!-- <ng-template appFloatingTemplate="floating-1">
+    <div appFloatingTarget="floating-1" class="floating-target">
+      <strong>#1</strong> This is a somewhat long tooltip content.
     </div>
-  </div>
-</div>
+  </ng-template> -->
 
+  <!-- Floating trigger #2 -->
+  <button
+    appFloatingTrigger="floating-2"
+    triggerOn="hover"
+    class="floating-trigger"
+  >
+    Trigger #2
+  </button>
+
+  <!-- Floating target #2 -->
+  <!-- <ng-template appFloatingTemplate="floating-2">
+    <div appFloatingTarget="floating-2" class="floating-target">
+      <strong>#2</strong> This is a somewhat long tooltip content.
+    </div>
+  </ng-template> -->
+
+  <p>
+    Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro eaque repellat sapiente adipisci ipsam eos, alias cumque, praesentium quae sit aliquid odio ducimus ea doloribus explicabo officiis voluptatum. Adipisci, corrupti.
+  </p>
+
+  <p>
+    Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro eaque repellat sapiente adipisci ipsam eos, alias cumque, praesentium quae sit aliquid odio ducimus ea doloribus explicabo officiis voluptatum. Adipisci, corrupti.
+  </p>
+
+  <p>
+    Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro eaque repellat sapiente adipisci ipsam eos, alias cumque, praesentium quae sit aliquid odio ducimus ea doloribus explicabo officiis voluptatum. Adipisci, corrupti.
+  </p>
+
+</main>
+
+<!-- Floating host -->
 <app-floating-host></app-floating-host>
+
+<!-- Floating target #1 -->
+<ng-template appFloatingTemplate="floating-1">
+  <div appFloatingTarget="floating-1" class="floating-target">
+    <strong>#1</strong> This is a somewhat long tooltip content.
+  </div>
+</ng-template>
+
+<!-- Floating target #2 -->
+<ng-template appFloatingTemplate="floating-2">
+  <div appFloatingTarget="floating-2" class="floating-target">
+    <strong>#2</strong> This is a somewhat long tooltip content.
+  </div>
+</ng-template>
