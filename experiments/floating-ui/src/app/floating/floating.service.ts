@@ -2,6 +2,8 @@ import { Injectable, TemplateRef } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { computePosition, offset, flip } from '@floating-ui/dom';
 
+import { calculatePosition } from './functions';
+
 // TODO
 export interface FloatingPairConfig {
   triggerElement: HTMLElement | null;
