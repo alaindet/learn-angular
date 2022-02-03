@@ -2,7 +2,8 @@ import { Directive, Input, ElementRef, Renderer2, OnInit, OnDestroy } from '@ang
 import { Subject } from 'rxjs';
 import { filter, map, takeUntil } from 'rxjs/operators';
 
-import { FloatingPairData, FloatingService } from './floating.service';
+import { FloatingService } from './floating.service';
+import { FloatingPairData } from './types';
 
 @Directive({
   selector: '[appFloatingTarget]',

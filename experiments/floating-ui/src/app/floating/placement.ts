@@ -1,7 +1,4 @@
-export interface Position {
-  x: number;
-  y: number;
-}
+import { Position } from './types';
 
 export const topLeftPlacement = (trigger: DOMRect, target: DOMRect): Position => {
   const y = trigger.top - target.height;
@@ -15,6 +12,7 @@ export const topLeftPlacement = (trigger: DOMRect, target: DOMRect): Position =>
 export const topPlacement = (trigger: DOMRect, target: DOMRect): Position => {
   const y = trigger.top - target.height;
   const x = trigger.left + (trigger.width / 2) - (target.width / 2);
+
   return { x, y };
 };
 
@@ -30,12 +28,14 @@ export const topRightPlacement = (trigger: DOMRect, target: DOMRect): Position =
 export const leftPlacement = (trigger: DOMRect, target: DOMRect): Position => {
   const y = trigger.top + (trigger.height / 2) - (target.height / 2);
   const x = trigger.left - target.width;
+
   return { x, y };
 };
 
 export const rightPlacement = (trigger: DOMRect, target: DOMRect): Position => {
   const y = trigger.top + (trigger.height / 2) - (target.height / 2);
   const x = trigger.right;
+
   return { x, y };
 };
 
@@ -44,12 +44,14 @@ export const bottomLeftPlacement = (trigger: DOMRect, target: DOMRect): Position
   const x = (trigger.width > target.width)
     ? trigger.left
     : (trigger.left - target.width + trigger.width);
-  return { x, y };
+
+    return { x, y };
 };
 
 export const bottomPlacement = (trigger: DOMRect, target: DOMRect): Position => {
   const y = trigger.bottom;
   const x = trigger.left + (trigger.width / 2) - (target.width / 2);
+
   return { x, y };
 };
 

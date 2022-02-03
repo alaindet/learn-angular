@@ -1,36 +1,34 @@
+import { PositionFunctionConfig, PositionFunction, PlacementFunction, FloatingPlacement, Position } from './types';
+import * as fromPlacement from './placement';
+
 const FPS = 1000 / 60;
 
-export interface CalculatePositionConfig {
-  // TODO: ...
-}
-
-export const waitFor = async (callback: Function, delay = 0) => {
-  return new Promise(resolve => setTimeout(() => resolve(callback()), delay));
+const placementFunctions: { [key in FloatingPlacement]: PlacementFunction } = {
+  [FloatingPlacement.TopLeft]: fromPlacement.topLeftPlacement,
+  [FloatingPlacement.Top]: fromPlacement.topPlacement,
+  [FloatingPlacement.TopRight]: fromPlacement.topRightPlacement,
+  [FloatingPlacement.Left]: fromPlacement.leftPlacement,
+  [FloatingPlacement.Right]: fromPlacement.rightPlacement,
+  [FloatingPlacement.BottomLeft]: fromPlacement.bottomLeftPlacement,
+  [FloatingPlacement.Bottom]: fromPlacement.bottomPlacement,
+  [FloatingPlacement.BottomRight]: fromPlacement.bottomRightPlacement,
 };
 
-// TODO
-export const calculatePosition = async (
-  config: CalculatePositionConfig,
-): Promise<
-  (triggerEl: HTMLElement, targetEl: HTMLElement) => Promise<{
-    x: number;
-    y: number;
-  }>
-> => {
+export const waitFor = async <T = any>(callback: Function, delay = 0) => {
+  return new Promise<T>(resolve => setTimeout(() => resolve(callback()), delay));
+};
 
-  // TODO: Extract "positioner" function and use it in the closure
+export const getPositionFunction = async (
+  config: PositionFunctionConfig,
+): Promise<PositionFunction> => {
 
-  return async (
-    triggerEl: HTMLElement,
-    targetEl: HTMLElement,
-  ): Promise<{ x: number; y: number; }> => {
-    const triggerRect = triggerEl.getBoundingClientRect();
-    const targetRect = await waitFor(() => targetEl.getBoundingClientRect(), FPS);
+  const placement = config?.placement ?? FloatingPlacement.BottomLeft;
+  const placementFunction = placementFunctions[placement];
 
-    // TODO ...
-
-    return new Promise(resolve => {
-      resolve({x: 0, y: 0});
-    });
+  return async (trigger: HTMLElement, target: HTMLElement): Promise<Position> => {
+    const triggerRect = trigger.getBoundingClientRect();
+    const targetRect = await waitFor<DOMRect>(() => target.getBoundingClientRect(), FPS);
+    const { x, y } = placementFunction(triggerRect, targetRect);
+    return new Promise<Position>(resolve => resolve({ x, y }));
   };
 };
