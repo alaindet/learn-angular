@@ -1,8 +1,6 @@
 import { PositionFunctionConfig, PositionFunction, PlacementFunction, FloatingPlacement, Position } from './types';
 import * as fromPlacement from './placement';
 
-const FPS = 1000 / 60;
-
 const placementFunctions: { [key in FloatingPlacement]: PlacementFunction } = {
   [FloatingPlacement.TopLeft]: fromPlacement.topLeftPlacement,
   [FloatingPlacement.Top]: fromPlacement.topPlacement,
@@ -27,7 +25,7 @@ export const getPositionFunction = async (
 
   return async (trigger: HTMLElement, target: HTMLElement): Promise<Position> => {
     const triggerRect = trigger.getBoundingClientRect();
-    const targetRect = await waitFor<DOMRect>(() => target.getBoundingClientRect(), FPS);
+    const targetRect = await waitFor<DOMRect>(() => target.getBoundingClientRect());
     const { x, y } = placementFunction(triggerRect, targetRect);
     return new Promise<Position>(resolve => resolve({ x, y }));
   };

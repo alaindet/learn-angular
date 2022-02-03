@@ -50,7 +50,7 @@ export const bottomLeftPlacement = (trigger: DOMRect, target: DOMRect): Position
 
 export const bottomPlacement = (trigger: DOMRect, target: DOMRect): Position => {
   const y = trigger.bottom;
-  const x = trigger.left + (trigger.width / 2) - (target.width / 2);
+  const x = trigger.left - (target.width - trigger.width) / 2;
 
   return { x, y };
 };

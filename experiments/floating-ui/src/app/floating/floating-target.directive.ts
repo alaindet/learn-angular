@@ -3,7 +3,7 @@ import { Subject } from 'rxjs';
 import { filter, map, takeUntil } from 'rxjs/operators';
 
 import { FloatingService } from './floating.service';
-import { FloatingPairData } from './types';
+import { FloatingPairData, FloatingPlacement } from './types';
 
 @Directive({
   selector: '[appFloatingTarget]',
@@ -12,7 +12,8 @@ import { FloatingPairData } from './types';
 export class FloatingTargetDirective implements OnInit, OnDestroy {
 
   @Input('appFloatingTarget') name!: string;
-  @Input() offset = 5; // 5px
+  @Input() placement?: string = FloatingPlacement.BottomLeft;
+  @Input() offset?: number = 5;
 
   isOpen = false;
 
@@ -27,10 +28,12 @@ export class FloatingTargetDirective implements OnInit, OnDestroy {
   ngOnInit(): void {
 
     this.renderer.setStyle(this.host.nativeElement, 'position', 'fixed');
-    this.renderer.setStyle(this.host.nativeElement, 'display', 'none');
+    this.renderer.setStyle(this.host.nativeElement, 'display', 'block');
+    this.renderer.setStyle(this.host.nativeElement, 'visibility', 'hidden');
 
     this.floatingService.setTarget(this.name, {
       targetElement: this.host.nativeElement,
+      placement: this.placement as FloatingPlacement,
       offset: this.offset,
     });
 
@@ -64,12 +67,13 @@ export class FloatingTargetDirective implements OnInit, OnDestroy {
   open(data: FloatingPairData): void {
     this.isOpen = true;
     this.renderer.setStyle(this.host.nativeElement, 'display', 'block');
+    this.renderer.setStyle(this.host.nativeElement, 'visibility', 'initial');
     this.updatePosition(data.x, data.y);
   }
 
   close(): void {
     this.isOpen = false;
-    this.renderer.setStyle(this.host.nativeElement, 'display', 'none');
+    this.renderer.setStyle(this.host.nativeElement, 'visibility', 'hidden');
   }
 
   updatePosition(x: number | null, y: number | null): void {
