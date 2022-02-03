@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { FloatingService } from './floating.service';
+import { FloatingService } from '../services/floating.service';
 
 @Component({
   selector: 'app-floating-host',

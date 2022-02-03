@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { FloatingTargetDirective } from './floating-target.directive';
-import { FloatingTriggerDirective } from './floating-trigger.directive';
-import { FloatingHostComponent } from './floating-host.component';
-import { FloatingTemplateDirective } from './floating-template.directive';
-import { FloatingService } from './floating.service';
+import { FloatingHostComponent } from './components/floating-host.component';
+import { FloatingTargetDirective } from './directives/floating-target.directive';
+import { FloatingTriggerDirective } from './directives/floating-trigger.directive';
+import { FloatingTemplateDirective } from './directives/floating-template.directive';
+import { FloatingService } from './services/floating.service';
 
 @NgModule({
   imports: [

@@ -2,8 +2,8 @@ import { Injectable, TemplateRef } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 // import { computePosition, offset, flip } from '@floating-ui/dom';
 
-import { getPositionFunction } from './functions';
-import { FloatingPair, PositionFunctionConfig, Position, FloatingPairConfig, FloatingPairData } from './types';
+import { getPositionFunction } from '../functions/functions';
+import { FloatingPair, PositionFunctionConfig, Position, FloatingPairConfig, FloatingPairData } from '../types/types';
 
 @Injectable()
 export class FloatingService {

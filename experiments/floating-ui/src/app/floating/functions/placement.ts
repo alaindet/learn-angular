@@ -1,4 +1,4 @@
-import { Position } from './types';
+import { Position } from './types/types';
 
 export const topLeftPlacement = (trigger: DOMRect, target: DOMRect): Position => {
   const y = trigger.top - target.height;

@@ -2,8 +2,8 @@ import { Directive, Input, ElementRef, Renderer2, OnInit, OnDestroy } from '@ang
 import { Subject } from 'rxjs';
 import { filter, map, takeUntil } from 'rxjs/operators';
 
-import { FloatingService } from './floating.service';
-import { FloatingPairData, FloatingPlacement } from './types';
+import { FloatingService } from '../services/floating.service';
+import { FloatingPairData, FloatingPlacement } from '../types/types';
 
 @Directive({
   selector: '[appFloatingTarget]',
@@ -12,7 +12,7 @@ import { FloatingPairData, FloatingPlacement } from './types';
 export class FloatingTargetDirective implements OnInit, OnDestroy {
 
   @Input('appFloatingTarget') name!: string;
-  @Input() placement?: string = FloatingPlacement.BottomLeft;
+  @Input() placement?: string = FloatingPlacement.BottomRight;
   @Input() offset?: number = 5;
 
   isOpen = false;

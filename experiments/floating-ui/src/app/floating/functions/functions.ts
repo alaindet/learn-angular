@@ -1,4 +1,4 @@
-import { PositionFunctionConfig, PositionFunction, PlacementFunction, FloatingPlacement, Position } from './types';
+import { PositionFunctionConfig, PositionFunction, PlacementFunction, FloatingPlacement, Position } from '../types/types';
 import * as fromPlacement from './placement';
 
 const placementFunctions: { [key in FloatingPlacement]: PlacementFunction } = {
