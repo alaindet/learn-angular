@@ -3,7 +3,7 @@ import { Subject } from 'rxjs';
 import { filter, map, takeUntil } from 'rxjs/operators';
 
 import { FloatingService } from '../services/floating.service';
-import { FloatingPairData, FloatingPlacement } from '../types/types';
+import { FloatingTargetPlacement, FloatingTargetData } from '../types';
 
 @Directive({
   selector: '[appFloatingTarget]',
@@ -12,7 +12,7 @@ import { FloatingPairData, FloatingPlacement } from '../types/types';
 export class FloatingTargetDirective implements OnInit, OnDestroy {
 
   @Input('appFloatingTarget') name!: string;
-  @Input() placement?: string = FloatingPlacement.BottomRight;
+  @Input() placement?: string = FloatingTargetPlacement.BottomRight;
   @Input() offset?: number = 5;
 
   isOpen = false;
@@ -33,7 +33,7 @@ export class FloatingTargetDirective implements OnInit, OnDestroy {
 
     this.floatingService.setTarget(this.name, {
       targetElement: this.host.nativeElement,
-      placement: this.placement as FloatingPlacement,
+      placement: this.placement as FloatingTargetPlacement,
       offset: this.offset,
     });
 
@@ -41,7 +41,7 @@ export class FloatingTargetDirective implements OnInit, OnDestroy {
       .pipe(
         takeUntil(this.destroy$),
         filter(data => data !== null),
-        map(data => data as FloatingPairData),
+        map(data => data as FloatingTargetData),
       )
       .subscribe(data => {
 
@@ -64,7 +64,7 @@ export class FloatingTargetDirective implements OnInit, OnDestroy {
     this.destroy$.complete();
   }
 
-  open(data: FloatingPairData): void {
+  open(data: FloatingTargetData): void {
     this.isOpen = true;
     this.renderer.setStyle(this.host.nativeElement, 'display', 'block');
     this.renderer.setStyle(this.host.nativeElement, 'visibility', 'initial');

@@ -2,7 +2,7 @@ import { Directive, ElementRef, Input, OnInit, OnDestroy } from '@angular/core';
 import { Subject, fromEvent } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
-import { FloatingService } from './floating.service';
+import { FloatingService } from '../services';
 
 @Directive({
   selector: '[appFloatingTrigger]',

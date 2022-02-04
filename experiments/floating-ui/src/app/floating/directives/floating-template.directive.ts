@@ -1,6 +1,6 @@
 import { Directive, Input, TemplateRef } from '@angular/core';
 
-import { FloatingService } from './floating.service';
+import { FloatingService } from '../services';
 
 @Directive({
   selector: '[appFloatingTemplate]',
