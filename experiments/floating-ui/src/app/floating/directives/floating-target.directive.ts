@@ -13,7 +13,8 @@ export class FloatingTargetDirective implements OnInit, OnDestroy {
 
   @Input('appFloatingTarget') name!: string;
   @Input() placement?: string = FloatingTargetPlacement.BottomRight;
-  @Input() offset?: number = 5;
+  @Input() offsetY?: number | string = 0;
+  @Input() offsetX?: number | string = 0;
 
   isOpen = false;
 
@@ -34,7 +35,8 @@ export class FloatingTargetDirective implements OnInit, OnDestroy {
     this.floatingService.setTarget(this.name, {
       targetElement: this.host.nativeElement,
       placement: this.placement as FloatingTargetPlacement,
-      offset: this.offset,
+      offsetX: +(this.offsetX ?? 0),
+      offsetY: +(this.offsetY ?? 0),
     });
 
     this.floatingService.getFloatingPair(this.name).data

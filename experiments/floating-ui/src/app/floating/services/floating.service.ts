@@ -1,7 +1,7 @@
 import { Injectable, TemplateRef } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
-import { getPositionFunction } from '../functions/functions';
+import { getPositionFunction } from '../functions';
 import { FloatingPair, FloatingTargetPositionConfig, FloatingTargetPosition, FloatingPairConfig, FloatingTargetData } from '../types/types';
 
 @Injectable()
@@ -65,7 +65,8 @@ export class FloatingService {
         config: {
           triggerElement: null,
           targetElement: null,
-          offset: 0,
+          offsetX: 0,
+          offsetY: 0,
         },
         data: new BehaviorSubject<FloatingTargetData | null>(null),
         targetTemplate: null,

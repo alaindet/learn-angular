@@ -1,6 +1,10 @@
 <h1>Floating UI</h1>
 
-<main>
+<main [ngStyle]="{
+  border: '2px dashed red',
+  maxHeight: '60vh',
+  overflowY: 'auto'
+}">
 
   <p>
     Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro eaque repellat sapiente adipisci ipsam eos, alias cumque, praesentium quae sit aliquid odio ducimus ea doloribus explicabo officiis voluptatum. Adipisci, corrupti.
@@ -15,11 +19,7 @@
   </p>
 
   <!-- Floating trigger #1 -->
-  <button
-    appFloatingTrigger="floating-1"
-    triggerOn="click"
-    class="floating-trigger"
-  >
+  <button appFloatingTrigger="floating-1" triggerOn="click" class="floating-trigger">
     Trigger #1
   </button>
 
@@ -27,26 +27,15 @@
 
   <!-- Floating target #1 -->
   <ng-template appFloatingTemplate="floating-1">
-    <div appFloatingTarget="floating-1" placement="bottom-right" class="floating-target">
+    <div
+      appFloatingTarget="floating-1"
+      placement="bottom-right"
+      offsetY="5"
+      class="floating-target"
+    >
       <strong>#1</strong> This is a somewhat long tooltip content.
     </div>
   </ng-template>
-
-  <!-- Floating trigger #2 -->
-  <!-- <button
-    appFloatingTrigger="floating-2"
-    triggerOn="hover"
-    class="floating-trigger"
-  >
-    Trigger #2
-  </button> -->
-
-  <!-- Floating target #2 -->
-  <!-- <ng-template appFloatingTemplate="floating-2">
-    <div appFloatingTarget="floating-2" placement="bottom" class="floating-target">
-      <strong>#2</strong> This is a somewhat long tooltip content.
-    </div>
-  </ng-template> -->
 
   <p>
     Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro eaque repellat sapiente adipisci ipsam eos, alias cumque, praesentium quae sit aliquid odio ducimus ea doloribus explicabo officiis voluptatum. Adipisci, corrupti.

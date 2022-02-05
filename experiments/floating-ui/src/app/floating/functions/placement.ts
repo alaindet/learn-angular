@@ -1,4 +1,4 @@
-import { Position } from './types/types';
+import { FloatingTargetPosition as Position } from '../types';
 
 export const topLeftPlacement = (trigger: DOMRect, target: DOMRect): Position => {
   const y = trigger.top - target.height;

@@ -19,7 +19,8 @@ export enum FloatingTargetPlacement {
 
 export interface FloatingTargetPositionConfig {
   placement?: FloatingTargetPlacement;
-  offset?: number;
+  offsetX?: number;
+  offsetY?: number;
 }
 
 export type FloatingPositionFunction = (
@@ -30,6 +31,10 @@ export type FloatingPositionFunction = (
 export type FloatingPlacementFunction = (
   trigger: DOMRect,
   target: DOMRect
+) => FloatingTargetPosition;
+
+export type FloatingOffsetFunction = (
+  position: FloatingTargetPosition,
 ) => FloatingTargetPosition;
 
 export interface FloatingPairConfig extends FloatingTargetPositionConfig {
