@@ -31,6 +31,7 @@ export class FloatingTargetDirective implements OnInit, OnDestroy {
     this.renderer.setStyle(this.host.nativeElement, 'position', 'fixed');
     this.renderer.setStyle(this.host.nativeElement, 'display', 'block');
     this.renderer.setStyle(this.host.nativeElement, 'visibility', 'hidden');
+    this.renderer.setStyle(this.host.nativeElement, 'transition', '0.1s all ease-in-out');
 
     this.floatingService.setTarget(this.name, {
       targetElement: this.host.nativeElement,
