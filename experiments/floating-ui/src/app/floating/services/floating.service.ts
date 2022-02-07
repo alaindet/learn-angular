@@ -1,19 +1,15 @@
-import { Injectable, OnDestroy, TemplateRef } from '@angular/core';
-import { animationFrameScheduler, BehaviorSubject, debounceTime, fromEvent, Subscription, take } from 'rxjs';
+import { Injectable, OnDestroy } from '@angular/core';
+import { animationFrameScheduler, BehaviorSubject, throttleTime, fromEvent, Subscription, take } from 'rxjs';
 
 import { getPositionFunction, getScrollParent } from '../functions';
 import { FloatingPair, FloatingTargetPositionConfig, FloatingTargetPosition, FloatingPairConfig, FloatingTargetData } from '../types/types';
 
-const OPTIMIZED_FPS = 1000 / 60;
-
 @Injectable()
 export class FloatingService implements OnDestroy {
 
-  private _templates$ = new BehaviorSubject<TemplateRef<void>[]>([]);
   private subs: { [sub: string]: Subscription } = {};
 
   pairs: { [pairName: string]: FloatingPair } = {};
-  templates$ = this._templates$.asObservable();
   calculatePosition!: (name: string) => Promise<FloatingTargetPosition>;
 
   ngOnDestroy(): void {
@@ -31,12 +27,6 @@ export class FloatingService implements OnDestroy {
 
   getFloatingPair(name: string): FloatingPair {
     return this.pairs[name];
-  }
-
-  setTemplate(name: string, template: TemplateRef<void>): void {
-    this.createPairIfNeeded(name);
-    this.pairs[name].targetTemplate = template;
-    this.updateTemplates();
   }
 
   setTrigger(name: string, config: Partial<FloatingPairConfig>): void {
@@ -73,7 +63,7 @@ export class FloatingService implements OnDestroy {
     const scrollParent = getScrollParent(trigger);
 
     this.subs[`scroll_${name}`] = fromEvent(scrollParent, 'scroll')
-      .pipe(debounceTime(OPTIMIZED_FPS, animationFrameScheduler))
+      .pipe(throttleTime(0, animationFrameScheduler))
       .subscribe(() => this.updatePosition(name));
 
     this.subs[`resize_${name}`] = fromEvent(window, 'resize')
@@ -104,18 +94,5 @@ export class FloatingService implements OnDestroy {
         targetTemplate: null,
       };
     }
-  }
-
-  private updateTemplates(): void {
-
-    const templates: TemplateRef<void>[] = [];
-
-    for (const pair of Object.values(this.pairs)) {
-      if (pair.targetTemplate !== null) {
-        templates.push(pair.targetTemplate);
-      }
-    }
-
-    this._templates$.next(templates);
   }
 }

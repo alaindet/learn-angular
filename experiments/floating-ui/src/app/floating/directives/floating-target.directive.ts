@@ -31,7 +31,7 @@ export class FloatingTargetDirective implements OnInit, OnDestroy {
     this.renderer.setStyle(this.host.nativeElement, 'position', 'fixed');
     this.renderer.setStyle(this.host.nativeElement, 'display', 'block');
     this.renderer.setStyle(this.host.nativeElement, 'visibility', 'hidden');
-    this.renderer.setStyle(this.host.nativeElement, 'transition', '0.1s all ease-in-out');
+    this.renderer.setStyle(this.host.nativeElement, 'transform', 'translate3d(0,0,0)');
 
     this.floatingService.setTarget(this.name, {
       targetElement: this.host.nativeElement,
@@ -69,7 +69,6 @@ export class FloatingTargetDirective implements OnInit, OnDestroy {
 
   open(data: FloatingTargetData): void {
     this.isOpen = true;
-    this.renderer.setStyle(this.host.nativeElement, 'display', 'block');
     this.renderer.setStyle(this.host.nativeElement, 'visibility', 'initial');
     this.updatePosition(data.x, data.y);
   }
