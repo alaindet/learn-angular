@@ -1,1 +1,3 @@
-This is my sandbox repository to try out tips, tricks and learning projects about **Angular**, **RxJS** and more. I'm happy to share my thoughts and discoveries here. See you!
+# Learn Angular
+
+This is my sandbox to try out tips, tricks and learning new things about **Angular** and its ecosystem
