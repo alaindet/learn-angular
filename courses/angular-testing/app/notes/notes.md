@@ -33,3 +33,10 @@ describe('should add two numbers', () => {
 
 - Jasmine provides a `spyOn()` utility that replaces a function or a method of an object with a proxy, so that you can spy on said method
 - Information provided by the proxy method created by `spyOn()` include timing, counting calls etc.
+
+## Jasmine Utilities
+
+- `fdescribe`/`fit`: creates a whitelist so that only tests with `fdescribe`/`fit` are executed
+- You can mark entire test suites with `fdescribe` or just single tests with `fit`
+- `xdescribe`/`xit`: creates a blacklist so that tests marked as `xdescribe`/`xit` are excluded from the executed tests
+- You can mark entire test suites with `xdescribe` or just single tests with `xit`
