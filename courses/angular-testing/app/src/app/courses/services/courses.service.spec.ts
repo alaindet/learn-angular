@@ -2,7 +2,10 @@ import { TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 
 import { CoursesService } from './courses.service';
-import { COURSES as TEST_COURSES_OBJ } from './../../../../server/db-data';
+import {
+  COURSES as TEST_COURSES_OBJ,
+  LESSONS as TEST_LESSONS_OBJ,
+} from './../../../../server/db-data';
 
 describe('CoursesService', () => {
 
@@ -83,10 +86,32 @@ describe('CoursesService', () => {
     };
 
     coursesService.saveCourse(TEST_ID, TEST_COURSE_CHANGE).subscribe({
-      next: course => fail('the save course should have failed'),
-      error: err => {
-
-      },
+      next: () => fail('the save course should have failed'),
+      error: err => expect(err.status).toBe(500),
     });
+
+    const req = http.expectOne(`/api/courses/${TEST_ID}`);
+    expect(req.request.method).toBe('PUT');
+    req.flush('Save course failed', { status: 500, statusText: 'Internal Server Error' });
+  });
+
+  it('should find a list of lessons', () => {
+    const TEST_ID = 12;
+    const testAllLessons = Object.values(TEST_LESSONS_OBJ);
+    const testLessons = testAllLessons.filter(l => l.courseId === TEST_ID);
+
+    coursesService.findLessons(TEST_ID).subscribe(lessons => {
+      expect(lessons).toBeTruthy();
+      expect(lessons.length).toBe(testLessons.length);
+    });
+
+    const req = http.expectOne(req => req.url === '/api/lessons'); // Ignore querystring
+    expect(req.request.method).toBe('GET');
+    expect(req.request.params.get('courseId')).toBe(TEST_ID.toString());
+    expect(req.request.params.get('filter')).toBe('');
+    expect(req.request.params.get('sortOrder')).toBe('asc');
+    expect(req.request.params.get('pageNumber')).toBe('0');
+    expect(req.request.params.get('pageSize')).toBe('3');
+    req.flush({ payload: testLessons });
   });
 });
