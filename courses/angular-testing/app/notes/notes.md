@@ -14,16 +14,17 @@
 describe('should add two numbers', () => {
 
   // A single functional test
+  // The 3 As rule applies here
   it('should add two numbers', () => {
 
-    // Setup
+    // 1. Arrange
     const logger = new LoggerService
     const calc = new CalculatorService(logger);
 
-    // Execution
+    // 2. Act
     const result = calc.add(2, 2);
 
-    // Assertions
+    // 3. Assert
     expect(result).toBe(4);
   });
 });
