@@ -1,40 +1,24 @@
-
 <div class="container">
+  <h3>All Courses</h3>
+  <mat-tab-group>
 
-    <h3>All Courses</h3>
+    <ng-container *ngIf="(beginnerCourses$ | async) as beginnerCourses">
+      <mat-tab label="Beginners" *ngIf="beginnerCourses?.length > 0">
+        <courses-card-list
+          [courses]="beginnerCourses"
+          (courseEdited)="reloadCourses()"
+        ></courses-card-list>
+      </mat-tab>
+    </ng-container>
 
-    <mat-tab-group>
+    <ng-container *ngIf="(advancedCourses$ | async) as advancedCourses">
+      <mat-tab label="Advanced" *ngIf="advancedCourses?.length > 0">
+        <courses-card-list
+          [courses]="advancedCourses"
+          (courseEdited)="reloadCourses()"
+        ></courses-card-list>
+      </mat-tab>
+    </ng-container>
 
-
-      <ng-container *ngIf="(beginnerCourses$ | async) as beginnerCourses">
-
-        <mat-tab label="Beginners" *ngIf="beginnerCourses?.length > 0">
-
-          <courses-card-list (courseEdited)="reloadCourses()"
-                             [courses]="beginnerCourses">
-
-          </courses-card-list>
-
-        </mat-tab>
-
-      </ng-container>
-
-
-      <ng-container  *ngIf="(advancedCourses$ | async) as advancedCourses">
-
-        <mat-tab label="Advanced" *ngIf="advancedCourses?.length > 0">
-
-          <courses-card-list (courseEdited)="reloadCourses()"
-                             [courses]="advancedCourses">
-
-
-          </courses-card-list>
-
-        </mat-tab>
-
-      </ng-container>
-
-    </mat-tab-group>
-
+  </mat-tab-group>
 </div>
-
