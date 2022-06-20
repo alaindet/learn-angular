@@ -50,3 +50,7 @@ describe('should add two numbers', () => {
 - `fakeAsync()` waits for all timers in the unit test and fails if any timer is still pending in the queue
 - `fakeAsync()` simulates the passage of time with `tick()` util in order to trigger timers
 - `tick()` is only usable inside `fakeAsync()`
+- Promises are **microtasks** and have priority over other timers (ex.: setTimeout) which are considered **macrotasks** or simply **tasks**
+- **microtasks have their own queue** and they do not cause Angular to re-render
+- The util `flushMicrotasks()` flushes all promises
+- The util `flush()` flushes all timers, but does not work with Observables, use `tick()` instead
