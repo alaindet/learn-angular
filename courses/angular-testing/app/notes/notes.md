@@ -54,3 +54,13 @@ describe('should add two numbers', () => {
 - **microtasks have their own queue** and they do not cause Angular to re-render
 - The util `flushMicrotasks()` flushes all promises
 - The util `flush()` flushes all timers, but does not work with Observables, use `tick()` instead
+
+
+### `waitForAsync` vs `fakeAsync`
+
+- `waitForAsync` runs in a zone and actually waits for async operations to be completed
+- `fakeAsync` allows to use utils like `tick()`, `flush()` and `flushMicrotasks()`
+- Generally speaking, `fakeAsync` gives better control of time and intermediate states and gives user a number of utilities
+- `waitForAsync` supports real HTTP requests (for example) which `fakeAsync`
+- In general, `fakeAsync` simulates async local operations and should be always preferred, while `waitForAsync` deals with stuff that MUST be async by nature (browser API, legacy code, third-party library, HTTP calls etc.)
+- `waitForAsync` is almost only used in the `beforeEach()` block
