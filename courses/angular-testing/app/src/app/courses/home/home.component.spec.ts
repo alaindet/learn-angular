@@ -1,8 +1,6 @@
 import { DebugElement } from '@angular/core';
-import { waitForAsync, ComponentFixture, fakeAsync, flush, flushMicrotasks, TestBed } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
-import { HttpClient } from '@angular/common/http';
 import { By } from '@angular/platform-browser';
 import { of } from 'rxjs';
 
@@ -21,6 +19,7 @@ describe('HomeComponent', () => {
   let coursesService: any;
 
   const beginnerCourses = setupCourses().filter(c => c.category === 'BEGINNER');
+  const advancedCourses = setupCourses().filter(c => c.category === 'ADVANCED');
 
   beforeEach(waitForAsync(() => {
 
@@ -59,14 +58,42 @@ describe('HomeComponent', () => {
   });
 
   it('should display only advanced courses', () => {
-    pending();
+    coursesService.findAllCourses.and.returnValue(of(advancedCourses));
+    fixt.detectChanges();
+    const tabs = el.queryAll(By.css('.mat-tab-label'));
+    expect(tabs.length).toBe(1, 'Unexpected number of tabs found');
   });
 
   it('should display both tabs', () => {
-    pending();
+    coursesService.findAllCourses.and.returnValue(of(setupCourses()));
+    fixt.detectChanges();
+    const tabs = el.queryAll(By.css('.mat-tab-label'));
+    expect(tabs.length).toBe(2, 'Unexpected number of tabs found');
   });
 
-  it('should display advanced courses when tab clicked', () => {
-    pending();
+  // This is an async test, since the "done" argument is passed to the callback
+  it('should display advanced courses when tab clicked', (done: DoneFn) => {
+    coursesService.findAllCourses.and.returnValue(of(setupCourses()));
+    fixt.detectChanges();
+    const tabs = el.queryAll(By.css('.mat-tab-label'));
+
+    // Simulate click on "Advanced" tab
+    click(tabs[1]);
+    fixt.detectChanges();
+
+    // Wait for tab animation to finish
+    fixt.whenStable().then(() => {
+      const cards = el.queryAll(By.css('.mat-tab-body-active .mat-card-title'));
+      expect(cards.length).toBeGreaterThan(0, 'Could not find card titles');
+      expect(cards[0].nativeElement.textContent).toContain('Angular Security Course');
+      done();
+    });
+
+    // setTimeout(() => {
+    //   const cards = el.queryAll(By.css('.mat-card-title'));
+    //   expect(cards.length).toBeGreaterThan(0, 'Could not find card titles');
+    //   expect(cards[0].nativeElement.textContent).toContain('Angular Security Course');
+    //   done();
+    // }, 500);
   });
 });

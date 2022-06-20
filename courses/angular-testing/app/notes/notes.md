@@ -6,6 +6,7 @@
   - `ng test` builds the application then listens to edits (watch mode)
 - Jasmine testing framework has a lot of testing utils, like `expect()`, `pending()` to signal pending status of a test, `fail()` to mark tests as failed etc
 - Without hot reload => `ng test --no-watch`
+- Max async time is 5 seconds for Jasmine
 
 ## Anatomy of a basic test
 
@@ -41,3 +42,11 @@ describe('should add two numbers', () => {
 - You can mark entire test suites with `fdescribe` or just single tests with `fit`
 - `xdescribe`/`xit`: creates a blacklist so that tests marked as `xdescribe`/`xit` are excluded from the executed tests
 - You can mark entire test suites with `xdescribe` or just single tests with `xit`
+
+## Async operations
+
+- Most async operations can be tested with a **zone**
+- Async tests should be wrapped in the `fakeAsync()` test utility coming from `@angular/core/testing`
+- `fakeAsync()` waits for all timers in the unit test and fails if any timer is still pending in the queue
+- `fakeAsync()` simulates the passage of time with `tick()` util in order to trigger timers
+- `tick()` is only usable inside `fakeAsync()`
