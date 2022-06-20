@@ -12,6 +12,7 @@
     "cypress:open": "cypress open",
     "cypress:run": "cypress run",
     "build:prod": "ng build --prod",
+    "build:serve": "http-server ./dist -a localhost -p 4200",
     "start:prod": "http-server ./dist -a localhost -p 4200",
     "build-and-start:prod": "run-s build:prod start:prod",
     "e2e": "start-server-and-test build-and-start:prod http://localhost:4200 cypress:run"
@@ -57,6 +58,7 @@
     "karma": "~6.3.2",
     "karma-chrome-launcher": "~3.1.0",
     "karma-cli": "~1.0.1",
+    "karma-coverage": "^2.2.0",
     "karma-coverage-istanbul-reporter": "~3.0.2",
     "karma-jasmine": "~4.0.0",
     "karma-jasmine-html-reporter": "^1.5.0",
