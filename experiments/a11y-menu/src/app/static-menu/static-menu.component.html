@@ -1,0 +1,34 @@
+<!-- Static reference -->
+<button type="button" id="dummy-before-1" title="Dummy button before 1">Dummy button before 1</button>
+<button type="button" id="dummy-before-2" title="Dummy button before 2">Dummy button before 2</button>
+
+<div id="the-menu-container">
+  <button
+    type="button"
+    title="Control the menu"
+    aria-expanded="true"
+    aria-haspopup="menu"
+    aria-pressed="true"
+    aria-controls="the-menu"
+    id="the-menu-handle"
+  >
+    Fruits
+  </button>
+
+  <ul
+    aria-expanded="true"
+    role="menu"
+    aria-activedescendant="cherries"
+    tabindex="0"
+    id="the-menu"
+    aria-labelledby="the-menu-handle"
+  >
+    <li role="menuitem" id="apples">Apples</li>
+    <li role="menuitem" id="bananas">Bananas</li>
+    <li role="menuitem" aria-current="true" id="cherries">Cherries</li>
+    <li role="menuitem" id="pineapple">Pineapple</li>
+  </ul>
+</div>
+
+<button type="button" id="dummy-after-1" title="Dummy button after 1">Dummy button after 1</button>
+<button type="button" id="dummy-after-2" title="Dummy button after 2">Dummy button after 2</button>
