@@ -1,0 +1,2 @@
+- [ ] Add Focus trap
+- [ ] Add floating positioning
