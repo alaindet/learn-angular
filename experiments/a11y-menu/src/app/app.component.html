@@ -1,21 +1,40 @@
-<button type="button" id="dummy-before-1" title="Dummy button before 1">Dummy button before 1</button>
-<button type="button" id="dummy-before-2" title="Dummy button before 2">Dummy button before 2</button>
+<button type="button" id="dummy-before-1" title="Dummy button before 1">
+  Dummy button before 1
+</button>
+
+<button type="button" id="dummy-before-2" title="Dummy button before 2">
+  Dummy button before 2
+</button>
+
+<pre>LAST CONFIRMED: {{ lastConfirmed }}</pre>
 
 <div
+  class="a11y-menu"
   a11yMenuContainer="the-menu-container"
-  (confirmed)="consoleLog('confirmed', $event)"
+  cssFocused="-focused"
+  (confirmed)="onConfirm($event)"
   (canceled)="consoleLog('canceled')"
 >
-  <button type="button" title="Fruits" a11MenuHandle="the-handle">
+  <button type="button" title="Fruits" a11yMenuHandle="the-handle" class="_handle">
     Fruits
   </button>
-  <ul a11Menu="the-menu">
-    <li a11MenuItem="apples">Apples</li>
-    <li a11MenuItem="bananas">Bananas</li>
-    <li a11MenuItem="cherries">Cherries</li>
-    <li a11MenuItem="pineapple">Pineapple</li>
+
+  <ul a11yMenu="the-menu" cssOpen="-open" class="_menu">
+    <li
+      *ngFor="let item of items"
+      [a11yMenuItem]="item.value"
+      cssActive="-active"
+      class="_item"
+    >
+      {{ item.label }}
+    </li>
   </ul>
 </div>
 
-<button type="button" id="dummy-after-1" title="Dummy button after 1">Dummy button after 1</button>
-<button type="button" id="dummy-after-2" title="Dummy button after 2">Dummy button after 2</button>
+<button type="button" id="dummy-after-1" title="Dummy button after 1">
+  Dummy button after 1
+</button>
+
+<button type="button" id="dummy-after-2" title="Dummy button after 2">
+  Dummy button after 2
+</button>
