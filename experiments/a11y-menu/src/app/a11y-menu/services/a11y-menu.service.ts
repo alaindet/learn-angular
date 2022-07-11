@@ -44,6 +44,16 @@ export class A11yMenuService implements OnDestroy {
     this._open$.next(!open);
   }
 
+  focusItemByValue(value?: string): void {
+    if (!value) {
+      this._focus$.next(null);
+      return;
+    }
+
+    const found = this.items.findIndex(i => i === value) !== -1;
+    this._focus$.next(found ? value : null);
+  }
+
   focusPreviousItem(): void {
     this.resetSearch();
     this.focusItemWithIndex(this.itemsIndex - 1);
@@ -92,6 +102,7 @@ export class A11yMenuService implements OnDestroy {
   }
 
   focusHandle(): void {
+    console.log('focusing handle'); // TODO: Remove
     this._focus$.next(FOCUS_HANDLE);
   }
 

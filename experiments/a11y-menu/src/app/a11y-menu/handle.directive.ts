@@ -1,6 +1,6 @@
 import { Directive, ElementRef, HostBinding, Input, OnInit } from '@angular/core';
 import { fromEvent } from 'rxjs';
-import { filter } from 'rxjs/operators';
+import { delay, filter } from 'rxjs/operators';
 
 import { A11yMenuService } from './services';
 import { FOCUS_HANDLE, KeyboardKey } from './types';
@@ -40,9 +40,12 @@ export class A11yMenuHandleDirective implements OnInit {
       .subscribe(isOpen => this.isOpen = isOpen ? 'true' : 'false');
   }
 
+  // Unfortunately, delay(0) is needed to push the execution at the end of the stack
+  // So that the focus event on the handle is the last thing that executes
+  // It is equivalent to setTimeout()
   private listenToFocus(): void {
     this.svc.focus$
-      .pipe(filter(focus => focus === FOCUS_HANDLE))
+      .pipe(filter(focus => focus === FOCUS_HANDLE), delay(0))
       .subscribe(() => this.host.nativeElement.focus());
   }
 

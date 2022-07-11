@@ -12,6 +12,7 @@
   class="a11y-menu"
   a11yMenuContainer="the-menu-container"
   cssFocused="-focused"
+  [selected]="lastConfirmed"
   (confirmed)="onConfirm($event)"
   (canceled)="consoleLog('canceled')"
 >
@@ -19,11 +20,16 @@
     Fruits
   </button>
 
-  <ul a11yMenu="the-menu" cssOpen="-open" class="_menu">
+  <ul
+    a11yMenu="the-menu"
+    cssOpen="-open"
+    class="_menu"
+  >
     <li
       *ngFor="let item of items"
       [a11yMenuItem]="item.value"
       cssActive="-active"
+      cssCurrent="-current"
       class="_item"
     >
       {{ item.label }}

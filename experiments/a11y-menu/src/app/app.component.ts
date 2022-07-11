@@ -9,7 +9,8 @@ import { A11yMenuFocusable } from './a11y-menu/types';
 export class AppComponent {
   consoleLog = console.log;
 
-  lastConfirmed!: string;
+  // lastConfirmed!: string;
+  lastConfirmed = 'cherries';
 
   items: { value: string; label: string; }[] = [
     { value: 'apples', label: 'Apples' },

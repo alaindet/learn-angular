@@ -19,6 +19,7 @@ export class A11yMenuItemDirective implements OnInit {
   id!: string;
 
   @Input() cssActive?: string;
+  @Input() cssCurrent?: string;
 
   @Output() confirmed = new EventEmitter<string>();
 
@@ -46,17 +47,28 @@ export class A11yMenuItemDirective implements OnInit {
 
   private listenToFocus(): void {
     this.svc.focus$
-      .pipe(filter(focus => (
-        focus !== null &&
-        focus !== FOCUS_HANDLE &&
-        focus !== FOCUS_DISMISS &&
-        focus !== FOCUS_CONFIRM
+      .pipe(filter(focused => (
+        focused !== null &&
+        focused !== FOCUS_HANDLE &&
+        focused !== FOCUS_DISMISS &&
+        focused !== FOCUS_CONFIRM
       )))
       .subscribe(focused => (focused === this.id) ? this.onFocus() : this.onBlur());
   }
 
   private listenToEvents(): void {
-    this.svc.confirmed$.subscribe(() => this.confirmed.emit());
+    this.svc.confirmed$.subscribe(confirmed => {
+
+      const host = this.host.nativeElement;
+
+      if (confirmed === this.id) {
+        this.confirmed.emit();
+        this.cssCurrent && this.renderer.addClass(host, this.cssCurrent);
+        return;
+      }
+
+      this.cssCurrent && this.renderer.removeClass(host, this.cssCurrent);
+    });
   }
 
   private onFocus(): void {
@@ -86,9 +98,8 @@ export class A11yMenuItemDirective implements OnInit {
       .pipe(takeUntil(this.svc.destroy$));
   }
 
-  private onMouseOver(event: MouseEvent): void {
-    const target = (event?.currentTarget as HTMLElement);
-    target?.focus();
+  private onMouseOver(_: MouseEvent): void {
+    requestAnimationFrame(() => this.svc.focusItemByValue(this.id));
   }
 
   private onClick(_: MouseEvent): void {

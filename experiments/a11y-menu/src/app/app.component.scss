@@ -6,6 +6,7 @@
   border: 2px dashed transparent;
   margin: 1rem;
   padding: 1rem;
+  position: relative;
 
   &.-focused {
     border-color: var(--color-primary);
@@ -35,17 +36,21 @@
 
   ._item {
     padding: 0.5rem;
+    transition: background-color 0.1s linear;
 
-    &:focus,
-    &:hover {
-      outline: 0;
-      background-color: var(--color-selected-background);
-      color: var(--color-selected-color) !important;
-      cursor: pointer;
+    &:focus {
+      outline: none;
     }
 
     &.-active {
-      color: var(--color-selected-background);
+      outline: 0;
+      background-color: var(--color-selected-background);
+      color: var(--color-selected-color);
+      cursor: pointer;
+    }
+
+    &.-current {
+      color: red;
     }
   }
 }

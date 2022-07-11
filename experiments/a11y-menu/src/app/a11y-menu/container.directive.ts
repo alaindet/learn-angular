@@ -1,10 +1,11 @@
-import { Directive, EventEmitter, HostBinding, Input, Output, ContentChild, AfterContentInit, OnInit, ElementRef, OnDestroy, Renderer2 } from '@angular/core';
+import { Directive, EventEmitter, HostBinding, Input, Output, ContentChild, AfterContentInit, OnInit, ElementRef, OnDestroy, Renderer2, SimpleChanges } from '@angular/core';
 import { fromEvent } from 'rxjs';
 
 import { A11yMenuService } from './services';
 import { A11yMenuFocusable } from './types';
 import { A11yMenuHandleDirective } from './handle.directive';
 import { A11yMenuDirective } from './menu.directive';
+import { didInputChange } from './utils';
 
 @Directive({
   selector: '[a11yMenuContainer]',
@@ -18,6 +19,8 @@ export class A11yMenuContainerDirective implements OnInit, AfterContentInit, OnD
   id!: string;
 
   @Input() cssFocused?: string;
+
+  @Input() selected?: string;
 
   @Output() confirmed = new EventEmitter<A11yMenuFocusable>();
   @Output() canceled = new EventEmitter<void>();
@@ -43,6 +46,15 @@ export class A11yMenuContainerDirective implements OnInit, AfterContentInit, OnD
     this.listenToCustomEvents();
     this.listenToNativeEvents();
     this.listenToClickOut();
+
+    // TODO: Remove
+    this.svc.focus$.subscribe(focused => console.log('focused', focused));
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (didInputChange(changes['selected'])) {
+      this.svc.focusItemByValue(this.selected);
+    }
   }
 
   ngAfterContentInit() {
