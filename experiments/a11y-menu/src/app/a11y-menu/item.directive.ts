@@ -52,7 +52,7 @@ export class A11yMenuItemDirective implements OnInit {
         focus !== FOCUS_DISMISS &&
         focus !== FOCUS_CONFIRM
       )))
-      .subscribe(focused => focused === this.id ? this.onFocus() : this.onBlur());
+      .subscribe(focused => (focused === this.id) ? this.onFocus() : this.onBlur());
   }
 
   private listenToEvents(): void {
