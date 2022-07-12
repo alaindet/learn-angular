@@ -102,13 +102,12 @@ export class A11yMenuService implements OnDestroy {
   }
 
   focusHandle(): void {
-    console.log('focusing handle'); // TODO: Remove
     this._focus$.next(FOCUS_HANDLE);
   }
 
   confirmItem(item: A11yMenuFocusable): void {
     this.resetSearch();
-    this._confirmed$.next(item);
+    setTimeout(() => this._confirmed$.next(item));
   }
 
   cancel(): void {

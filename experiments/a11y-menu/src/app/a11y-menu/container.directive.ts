@@ -46,14 +46,10 @@ export class A11yMenuContainerDirective implements OnInit, AfterContentInit, OnD
     this.listenToCustomEvents();
     this.listenToNativeEvents();
     this.listenToClickOut();
-
-    // TODO: Remove
-    this.svc.focus$.subscribe(focused => console.log('focused', focused));
   }
 
   ngOnChanges(changes: SimpleChanges) {
     if (didInputChange(changes['selected'])) {
-      console.log('selected'); // TODO: Remove does not work
       this.svc.focusItemByValue(this.selected);
       this.svc.confirmItem(this.selected as A11yMenuFocusable);
     }
