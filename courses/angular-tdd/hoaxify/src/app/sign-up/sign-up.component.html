@@ -1,0 +1,17 @@
+<h1>Sign Up</h1>
+
+<form (submit)="onSubmit($event)">
+  <label for="username">Username</label>
+  <input id="username" type="text" (input)="onChangeUsername($event)">
+
+  <label for="email">Email</label>
+  <input id="email" type="email" (input)="onChangeEmail($event)">
+
+  <label for="password">Password</label>
+  <input id="password" type="password" (input)="onChangePassword($event)">
+
+  <label for="password-confirm">Confirm Password</label>
+  <input id="password-confirm" type="password" (input)="onChangeConfirmPassword($event)">
+
+  <button type="submit" [disabled]="disabled">Sign Up</button>
+</form>

@@ -6,7 +6,9 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "jest": "jest --watch",
+    "jest:once": "jest"
   },
   "private": true,
   "dependencies": {
@@ -40,6 +42,7 @@
     "karma-jasmine": "~5.0.0",
     "karma-jasmine-html-reporter": "~1.7.0",
     "msw": "^0.44.1",
+    "ts-node": "^10.9.1",
     "typescript": "~4.7.2",
     "whatwg-fetch": "^3.6.2"
   }

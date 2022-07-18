@@ -8,6 +8,8 @@ const config: Config.InitialOptions = {
   transform: {
     '^.+\\.(ts|js|html)$': 'jest-preset-angular',
   },
+  testMatch: ['**/?(*.)+(jest).ts'],
+  testEnvironment: 'jsdom',
 };
 
 export default config;

@@ -2,10 +2,13 @@
 {
   "extends": "./tsconfig.json",
   "compilerOptions": {
+    "esModuleInterop": true,
     "outDir": "./out-tsc/spec",
     "types": [
-      "jasmine"
-    ]
+      "node",
+      "jest",
+      "@testing-library/jest-dom"
+    ],
   },
   "files": [
     "src/test.ts",
@@ -13,6 +16,7 @@
   ],
   "include": [
     "src/**/*.spec.ts",
-    "src/**/*.d.ts"
+    "src/**/*.d.ts",
+    "./setup.jest.ts"
   ]
 }
