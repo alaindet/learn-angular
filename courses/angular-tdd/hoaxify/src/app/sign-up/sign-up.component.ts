@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-sign-up',
@@ -13,6 +14,10 @@ export class SignUpComponent {
   pwdConfirm = '';
   disabled = true;
 
+  constructor(
+    private http: HttpClient,
+  ) {}
+
   onSubmit(event: Event): void {
     event.preventDefault();
 
@@ -22,13 +27,7 @@ export class SignUpComponent {
       password: this.pwd,
     };
 
-    fetch('/api/1.0/users', {
-      method: 'POST',
-      body: JSON.stringify(payload),
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    });
+    this.http.post('/api/1.0/users', payload).subscribe();
   }
 
   onChangeUsername(event: Event): void {

@@ -1,3 +1,4 @@
+import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SignUpComponent } from './sign-up.component';
@@ -8,6 +9,7 @@ describe('SignUpComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      imports: [HttpClientTestingModule],
       declarations: [SignUpComponent],
     }).compileComponents();
   });
@@ -94,28 +96,21 @@ describe('SignUpComponent', () => {
 
   describe('Interactions', () => {
 
-    it('enables button when password and password confirm match', () => {
-      const signUp = fixture.nativeElement as HTMLElement;
-      const pwd = signUp.querySelector('input[id="password"]') as HTMLInputElement;
-      const pwd2 = signUp.querySelector('input[id="password-confirm"]') as HTMLInputElement;
-      pwd.value = 'P4ssword';
-      pwd.dispatchEvent(new Event('input'));
-      pwd2.value = 'P4ssword';
-      pwd2.dispatchEvent(new Event('input'));
-      fixture.detectChanges();
-      const button = signUp.querySelector('button');
-      expect(button?.disabled).toBeFalsy();
+    let httpController: HttpTestingController;
+    let submitButton: HTMLButtonElement | null;
+    let signUpEl: HTMLElement;
+
+    const getValidPayload = () => ({
+      username: 'user1',
+      email: 'user1@example.com',
+      password: 'P4ssword',
     });
 
-    it('sends username, email and password to server after clicking button', () => {
+    const fillValidForm = () => {
+      httpController = TestBed.inject(HttpTestingController);
       const signUp = fixture.nativeElement as HTMLElement;
-      const fetchSpy = spyOn(window, 'fetch');
-      const payload = {
-        username: 'user1',
-        email: 'user1@example.com',
-        password: 'P4ssword',
-      };
-      
+      const payload = getValidPayload();
+
       // Simulate filling the form
       const username = signUp.querySelector('input[id="username"]') as HTMLInputElement;
       username.value = payload.username;
@@ -135,13 +130,20 @@ describe('SignUpComponent', () => {
 
       fixture.detectChanges();
 
-      // Simulate submitting the form
-      const button = signUp.querySelector('button');
-      button?.click();
+      submitButton = signUp.querySelector('button');
+    };
 
-      const args = fetchSpy.calls.allArgs()[0];
-      const fetchOptions = args[1] as RequestInit;
-      expect(fetchOptions.body).toEqual(JSON.stringify(payload));
+    it('enables button when password and password confirm match', () => {
+      fillValidForm();
+      expect(submitButton?.disabled).toBeFalsy();
+    });
+
+    it('sends username, email and password to server after clicking button', () => {
+      fillValidForm();
+      submitButton?.click();
+      const payload = getValidPayload();
+      const req = httpController.expectOne('/api/1.0/users');
+      expect(req.request.body).toEqual(payload);
     });
   });
 });
