@@ -24,7 +24,7 @@ describe('SignUpComponent', () => {
     it('has Sign Up header', () => {
       const signUp = fixture.nativeElement as HTMLElement;
       const h1 = signUp.querySelector('h1');
-      expect(h1?.textContent).toBe('Sign Up');
+      expect(h1?.textContent?.trim()).toBe('Sign Up');
     });
 
     it('has username input', () => {
@@ -141,9 +141,18 @@ describe('SignUpComponent', () => {
     it('sends username, email and password to server after clicking button', () => {
       fillValidForm();
       submitButton?.click();
-      const payload = getValidPayload();
       const req = httpController.expectOne('/api/1.0/users');
+      const payload = getValidPayload();
       expect(req.request.body).toEqual(payload);
+    });
+
+    it('disables button while performing API call', () => {
+      fillValidForm();
+      submitButton?.click();
+      fixture.detectChanges();
+      submitButton?.click();
+      httpController.expectOne('/api/1.0/users');
+      expect(submitButton?.disabled).toBeTruthy();
     });
   });
 });

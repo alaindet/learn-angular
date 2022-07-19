@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { finalize } from 'rxjs';
 
 @Component({
   selector: 'app-sign-up',
@@ -13,6 +14,7 @@ export class SignUpComponent {
   pwd = '';
   pwdConfirm = '';
   disabled = true;
+  loading = false;
 
   constructor(
     private http: HttpClient,
@@ -27,7 +29,10 @@ export class SignUpComponent {
       password: this.pwd,
     };
 
-    this.http.post('/api/1.0/users', payload).subscribe();
+    this.loading = true;
+    this.http.post('/api/1.0/users', payload)
+      .pipe(finalize(() => this.loading = false))
+      .subscribe();
   }
 
   onChangeUsername(event: Event): void {
