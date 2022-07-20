@@ -24,7 +24,7 @@ describe('SignUpComponent', () => {
     it('has Sign Up header', () => {
       const signUp = fixture.nativeElement as HTMLElement;
       const h1 = signUp.querySelector('h1');
-      expect(h1?.textContent?.trim()).toBe('Sign Up');
+      expect(h1?.textContent).toContain('Sign Up');
     });
 
     it('has username input', () => {
@@ -84,7 +84,7 @@ describe('SignUpComponent', () => {
     it('has Sign Up button', () => {
       const signUp = fixture.nativeElement as HTMLElement;
       const button = signUp.querySelector('button');
-      expect(button?.textContent).toBe('Sign Up');
+      expect(button?.textContent).toContain('Sign Up');
     });
 
     it('has Sign Up button disabled initially', () => {
@@ -108,29 +108,29 @@ describe('SignUpComponent', () => {
 
     const fillValidForm = () => {
       httpController = TestBed.inject(HttpTestingController);
-      const signUp = fixture.nativeElement as HTMLElement;
+      signUpEl = fixture.nativeElement as HTMLElement;
       const payload = getValidPayload();
 
       // Simulate filling the form
-      const username = signUp.querySelector('input[id="username"]') as HTMLInputElement;
+      const username = signUpEl.querySelector('input[id="username"]') as HTMLInputElement;
       username.value = payload.username;
       username.dispatchEvent(new Event('input'));
 
-      const email = signUp.querySelector('input[id="email"]') as HTMLInputElement;
+      const email = signUpEl.querySelector('input[id="email"]') as HTMLInputElement;
       email.value = payload.email;
       email.dispatchEvent(new Event('input'));
 
-      const pwd = signUp.querySelector('input[id="password"]') as HTMLInputElement;
+      const pwd = signUpEl.querySelector('input[id="password"]') as HTMLInputElement;
       pwd.value = payload.password;
       pwd.dispatchEvent(new Event('input'));
 
-      const pwd2 = signUp.querySelector('input[id="password-confirm"]') as HTMLInputElement;
+      const pwd2 = signUpEl.querySelector('input[id="password-confirm"]') as HTMLInputElement;
       pwd2.value = payload.password;
       pwd2.dispatchEvent(new Event('input'));
 
       fixture.detectChanges();
 
-      submitButton = signUp.querySelector('button');
+      submitButton = signUpEl.querySelector('button');
     };
 
     it('enables button when password and password confirm match', () => {
@@ -138,7 +138,7 @@ describe('SignUpComponent', () => {
       expect(submitButton?.disabled).toBeFalsy();
     });
 
-    it('sends username, email and password to server after clicking button', () => {
+    it('sends username, email and password to server after submitting', () => {
       fillValidForm();
       submitButton?.click();
       const req = httpController.expectOne('/api/1.0/users');
@@ -153,6 +153,21 @@ describe('SignUpComponent', () => {
       submitButton?.click();
       httpController.expectOne('/api/1.0/users');
       expect(submitButton?.disabled).toBeTruthy();
+    });
+
+    it('displays spinner after submitting', () => {
+      fillValidForm();
+      submitButton?.click();
+      fixture.detectChanges();
+      const spinner = signUpEl.querySelector('span[role="status"]');
+      expect(spinner).toBeTruthy();
+    });
+
+    it('does not display spinner while form is idle', () => {
+      fillValidForm();
+      // Here, we did not submit the form!
+      const spinner = signUpEl.querySelector('span[role="status"]');
+      expect(spinner).toBeFalsy();
     });
   });
 });
