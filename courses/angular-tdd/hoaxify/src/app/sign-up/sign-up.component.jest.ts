@@ -158,12 +158,17 @@ describe('SignUpComponent', () => {
       await waitFor(() => expect(mockServerRequestCount).toBe(1));
     });
 
-    it('displays spinner after submitting', async () => {
-      // TODO ...
+    it('does not display spinner while form is idle', async () => {
+      await setup();
+      await fillValidForm();
+      expect(screen.queryByRole('status', { hidden: true })).not.toBeInTheDocument();
     });
 
-    it('does not display spinner while form is idle', async () => {
-      // TODO ...
+    it('displays spinner after submitting', async () => {
+      await setup();
+      await fillValidForm();
+      await userEvent.click(submitButton);
+      expect(screen.queryByRole('status', { hidden: true })).toBeInTheDocument();
     });
   });
 });

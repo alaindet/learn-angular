@@ -169,5 +169,18 @@ describe('SignUpComponent', () => {
       const spinner = signUpEl.querySelector('span[role="status"]');
       expect(spinner).toBeFalsy();
     });
+
+    it('displays activation alert after request success', () => {
+      let alert = signUpEl.querySelector('.alert-success');
+      expect(alert).toBeFalsy();
+      fillValidForm();
+      submitButton?.click();
+      const req = httpController.expectOne('/api/1.0/users');
+      req.flush({}); // ?
+      fixture.detectChanges();
+      const successMessage = 'Please check your email to activate your account';
+      alert = signUpEl.querySelector('.alert-success');
+      expect(alert?.textContent).toContain(successMessage);
+    });
   });
 });
