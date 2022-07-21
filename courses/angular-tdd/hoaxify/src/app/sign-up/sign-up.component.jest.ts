@@ -170,5 +170,30 @@ describe('SignUpComponent', () => {
       await userEvent.click(submitButton);
       expect(screen.queryByRole('status', { hidden: true })).toBeInTheDocument();
     });
+
+    it('displays success alert after sign up request success', async () => {
+      // TODO
+      // let alert = signUpEl.querySelector('.alert-success');
+      // expect(alert).toBeFalsy();
+      // fillValidForm();
+      // submitButton?.click();
+      // const req = httpController.expectOne('/api/1.0/users');
+      // req.flush({}); // ?
+      // fixture.detectChanges();
+      // const successMessage = 'Please check your email to activate your account';
+      // alert = signUpEl.querySelector('.alert-success');
+      // expect(alert?.textContent).toContain(successMessage);
+    });
+
+    it('hides sign up form after sign up request success', async () => {
+      // TODO
+      // fillValidForm();
+      // expect(signUpEl.querySelector('div[data-test-id="signup-form"]')).toBeTruthy();
+      // submitButton?.click();
+      // const req = httpController.expectOne('/api/1.0/users');
+      // req.flush({}); // ?
+      // fixture.detectChanges();
+      // expect(signUpEl.querySelector('div[data-test-id="signup-form"]')).toBeFalsy();
+    });
   });
 });

@@ -15,6 +15,7 @@ export class SignUpComponent {
   pwdConfirm = '';
   disabled = true;
   loading = false;
+  response: 'success' | 'error' | null = null;
 
   constructor(
     private http: HttpClient,
@@ -32,7 +33,10 @@ export class SignUpComponent {
     this.loading = true;
     this.http.post('/api/1.0/users', payload)
       .pipe(finalize(() => this.loading = false))
-      .subscribe();
+      .subscribe({
+        next: () => this.response = 'success',
+        error: () => this.response = 'error',
+      });
   }
 
   onChangeUsername(event: Event): void {
