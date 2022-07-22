@@ -3,17 +3,17 @@ import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
-import { SignUpComponent } from './sign-up';
+import { SignUpModule } from './features/sign-up';
+import { AlertComponentModule } from './shared/alert';
 
 @NgModule({
   imports: [
     BrowserModule,
     HttpClientModule,
+    SignUpModule,
+    AlertComponentModule,
   ],
-  declarations: [
-    AppComponent,
-    SignUpComponent, // TODO: Move to component module
-  ],
+  declarations: [AppComponent],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

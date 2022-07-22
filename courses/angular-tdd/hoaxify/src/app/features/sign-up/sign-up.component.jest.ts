@@ -1,3 +1,4 @@
+import { SignUpModule } from './sign-up.module';
 import { HttpClientModule } from '@angular/common/http';
 import { render, screen, waitFor } from '@testing-library/angular';
 import userEvent from '@testing-library/user-event';
@@ -26,7 +27,12 @@ const setupMockServer = async () => {
 
 const setup = async () => {
   await render(SignUpComponent, {
-    imports: [HttpClientModule],
+    imports: [
+      HttpClientModule,
+      SignUpModule,
+    ],
+    // https://testing-library.com/docs/angular-testing-library/api/#excludecomponentdeclaration
+    excludeComponentDeclaration: true,
   });
 };
 
@@ -172,28 +178,29 @@ describe('SignUpComponent', () => {
     });
 
     it('displays success alert after sign up request success', async () => {
-      // TODO
-      // let alert = signUpEl.querySelector('.alert-success');
-      // expect(alert).toBeFalsy();
-      // fillValidForm();
-      // submitButton?.click();
-      // const req = httpController.expectOne('/api/1.0/users');
-      // req.flush({}); // ?
-      // fixture.detectChanges();
-      // const successMessage = 'Please check your email to activate your account';
-      // alert = signUpEl.querySelector('.alert-success');
-      // expect(alert?.textContent).toContain(successMessage);
+      await setup();
+      await fillValidForm();
+      const successMessage = 'Please check your email to activate your account';
+      expect(screen.queryByText(successMessage)).not.toBeInTheDocument();
+      await userEvent.click(submitButton);
+
+      // This waits until it finds it in the DOM
+      const alert = await screen.findByText(successMessage);
+
+      expect(alert).toBeInTheDocument();
     });
 
     it('hides sign up form after sign up request success', async () => {
-      // TODO
-      // fillValidForm();
-      // expect(signUpEl.querySelector('div[data-test-id="signup-form"]')).toBeTruthy();
-      // submitButton?.click();
-      // const req = httpController.expectOne('/api/1.0/users');
-      // req.flush({}); // ?
-      // fixture.detectChanges();
-      // expect(signUpEl.querySelector('div[data-test-id="signup-form"]')).toBeFalsy();
+      await setup();
+      await fillValidForm();
+      const successMessage = 'Please check your email to activate your account';
+
+      // Test fails automatically if getByTestId() fails to find the DOM node
+      const form = screen.getByTestId('signup-form');
+
+      await userEvent.click(submitButton);
+      await screen.findByText(successMessage);
+      expect(form).not.toBeInTheDocument();
     });
   });
 });

@@ -2,6 +2,7 @@ import { HttpClientTestingModule, HttpTestingController } from '@angular/common/
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SignUpComponent } from './sign-up.component';
+import { SignUpModule } from './sign-up.module';
 
 describe('SignUpComponent', () => {
   let component: SignUpComponent;
@@ -9,8 +10,10 @@ describe('SignUpComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule],
-      declarations: [SignUpComponent],
+      imports: [
+        SignUpModule,
+        HttpClientTestingModule,
+      ],
     }).compileComponents();
   });
 
@@ -185,12 +188,12 @@ describe('SignUpComponent', () => {
 
     it('hides sign up form after sign up request success', () => {
       fillValidForm();
-      expect(signUpEl.querySelector('div[data-test-id="signup-form"]')).toBeTruthy();
+      expect(signUpEl.querySelector('div[data-testid="signup-form"]')).toBeTruthy();
       submitButton?.click();
       const req = httpController.expectOne('/api/1.0/users');
       req.flush({}); // ?
       fixture.detectChanges();
-      expect(signUpEl.querySelector('div[data-test-id="signup-form"]')).toBeFalsy();
+      expect(signUpEl.querySelector('div[data-testid="signup-form"]')).toBeFalsy();
     });
   });
 });
