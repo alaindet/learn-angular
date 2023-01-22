@@ -56,7 +56,7 @@ export class ListsService implements OnDestroy {
 
     const list = { ...this._lists[id], ...dto };
     this._lists = { ...this._lists, [id]: list };
-    this._list$.next(this._list);
+    this._lists$.next(this._lists);
   }
 
   removeList(id: string) {
