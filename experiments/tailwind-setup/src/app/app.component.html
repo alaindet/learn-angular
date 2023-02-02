@@ -1,8 +1,12 @@
-<h1 class="text-3xl font-bold underline">
-  Hello world!
+<h1 class="text-3xl font-bold">
+  Hello Tailwind!
 </h1>
 
 <hr class="my-8">
+
+<h2 class="text-2xl font-bold">
+  Via Tailwind utility classes
+</h2>
 
 <figure class="w-2/5 border-2 bg-slate-100 rounded-xl p-8 dark:bg-slate-800">
   <img class="w-24 h-24 rounded-full mx-auto" src="https://via.placeholder.com/384/512" alt="" width="384" height="512">
@@ -27,22 +31,25 @@
 
 <hr class="my-8">
 
-<!-- TODO: Try styling this via @apply and @extend -->
+<h2 class="text-2xl font-bold">
+  Via CSS's native <code>@apply</code> and PostCSS
+</h2>
+
 <figure class="my-figure">
   <img src="https://via.placeholder.com/384/512" alt="" width="384" height="512">
-  <div>
+  <div class="my-figure__content">
     <blockquote>
-      <p>
+      <p class="my-figure_quote">
         “Tailwind CSS is the only framework that I've seen scale
         on large teams. It's easy to customize, adapts to any design,
         and the build size is tiny.”
       </p>
     </blockquote>
     <figcaption>
-      <div>
+      <div class="my-figure_name">
         Jane Doe
       </div>
-      <div>
+      <div class="my-figure_role">
         Staff Engineer, ACME Inc.
       </div>
     </figcaption>
