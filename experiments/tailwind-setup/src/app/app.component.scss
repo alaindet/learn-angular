@@ -1,0 +1,27 @@
+.my-figure {
+  @apply w-2/5 border-2 bg-slate-100 rounded-xl p-8 dark:bg-slate-800;
+
+  img {
+    @apply w-24 h-24 rounded-full mx-auto;
+  }
+
+  figcaption {
+    @apply font-medium;
+  }
+
+  &_content {
+    @apply pt-6 text-center space-y-4
+  }
+
+  &_quote {
+    @apply text-lg font-medium
+  }
+
+  &_name {
+    @apply text-sky-500 dark:text-sky-400;
+  }
+
+  &_role {
+    @apply text-slate-700 dark:text-slate-500;
+  }
+}
