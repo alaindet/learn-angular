@@ -2,9 +2,10 @@ import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  standalone: true,
+  template: `
+    <h1>Mock backend demo</h1>
+    <router-outlet></router-outlet>
+  `,
 })
-export class AppComponent {
-  title = 'mock-backend-interceptor';
-}
+export class AppComponent {}
