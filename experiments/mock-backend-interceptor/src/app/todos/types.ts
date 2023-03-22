@@ -4,11 +4,10 @@ export type Todo = {
   isDone: boolean;
 };
 
-export const PAGE_STATUS = {
-  PRISTINE: 'pristine',
-  LOADING: 'loading',
-  IDLE: 'idle',
-} as const;
+export type UpdateTodoDto = Partial<Todo> & {
+  id: Todo['id'];
+};
 
-// Enum-like
-export type PageStatus = typeof PAGE_STATUS[keyof typeof PAGE_STATUS];
+export type CreateTodoDto = {
+  title: Todo['title'];
+};
