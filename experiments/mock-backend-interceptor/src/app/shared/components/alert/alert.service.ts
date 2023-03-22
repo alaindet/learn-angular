@@ -21,6 +21,10 @@ export class AlertService implements OnDestroy {
     this._alert$.next(alert);
   }
 
+  dismiss() {
+    this._alert$.next(null);
+  }
+
   success(message: string) {
     this._alert$.next({ type: ALERT_TYPE.SUCCESS, message });
   }

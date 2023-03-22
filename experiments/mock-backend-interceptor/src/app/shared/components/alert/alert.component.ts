@@ -1,39 +1,62 @@
 import { ViewEncapsulation } from '@angular/compiler';
-import { Component, HostBinding, Input } from '@angular/core';
+import { Component, HostBinding, inject, Input, SimpleChanges } from '@angular/core';
 import { AlertService } from './alert.service';
 import { AlertType, ALERT_TYPE } from './types';
 
-const DEFAULT_CSS_CLASS = '-type-success';
+function getTypeCssClass(type?: AlertType): string {
+  switch (type) {
+    case ALERT_TYPE.ERROR:
+      return '-type-error';
+    case ALERT_TYPE.SUCCESS:
+    default:
+      return '-type-success';
+  }
+}
 
 @Component({
   selector: 'app-alert',
   standalone: true,
-  template: `<ng-content></ng-content>`,
+  template: `
+    <div class="__content">
+      <ng-content></ng-content>
+    </div>
+    <button type="button" title="Dismiss alert" (click)="onDismiss()">
+      &times;
+    </button>
+  `,
   styles: [`
     app-alert {
+      padding: 1rem;
+      border: 2px solid transparent;
+      border-radius: 0.25rem;
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 1rem;
+    }
 
+    app-alert.-type-error {
+      border-color: red;
+    }
+
+    app-alert.-type-success {
+      border-color: green;
     }
   `],
   encapsulation: ViewEncapsulation.None,
 })
-export class AlertHostComponent {
+export class AlertComponent {
 
-  @Input() type: AlertType = ALERT_TYPE.SUCCESS;
+  svc = inject(AlertService);
 
   @Input('type')
   set typeInput(input: AlertType) {
-    this.cssClass = this.styleType(input);
+    this.cssClass = getTypeCssClass(input);
   }
 
-  @HostBinding('class') cssClass = DEFAULT_CSS_CLASS;
+  @HostBinding('class') cssClass!: string;
 
-  private styleType(type: AlertType): string {
-    switch (type) {
-      case ALERT_TYPE.ERROR:
-        return '-type-error';
-      case ALERT_TYPE.SUCCESS:
-      default:
-        return '-type-success';
-    }
+  onDismiss() {
+    this.svc.dismiss();
   }
 }
