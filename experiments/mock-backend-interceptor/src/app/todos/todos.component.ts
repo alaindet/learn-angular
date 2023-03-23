@@ -6,12 +6,14 @@ import { QUERY_STATUS, QueryStatus } from '../shared/types';
 import { Todo } from './types';
 import { TodosService } from './todos.service';
 import { TodoFormComponent } from './todo-form.component';
+import { TodosListComponent } from './todos-list.component';
 
 @Component({
   standalone: true,
   imports: [
     CommonModule,
     TodoFormComponent,
+    TodosListComponent,
   ],
   providers: [TodosService],
   template: `
@@ -24,6 +26,13 @@ import { TodoFormComponent } from './todo-form.component';
           [selectedTodo]="selectedTodo"
           (savedTodo)="onSaveTodo($event)"
         ></app-todo-form>
+
+        <app-todos-list
+          [todos]="(todos$ | async) ?? []"
+          (checked)="onCheck($event)"
+          (edited)="onEdit($event)"
+          (removed)="onRemove($event)"
+        ></app-todos-list>
 
       </ng-container>
     </ng-container>
@@ -55,68 +64,73 @@ export class TodosComponent implements OnInit, OnDestroy {
   todos$ = this._todos.asObservable();
 
   ngOnInit() {
-    this._pageStatus.next(QUERY_STATUS.LOADING);
-    this.svc.getAll().subscribe({
-      error: () => this._pageStatus.next(QUERY_STATUS.ERROR),
-      next: todos => this._todos.next(todos),
-    });
-  }
-
-  private runHttpRequest<T>(
-    req: Observable<T>,
-    ok: (data: T) => void,
-    ko: (err: any) => void,
-  ): void {
-    this._pageStatus.next(QUERY_STATUS.LOADING);
-    req.subscribe({
-      error: err => {
-        this._pageStatus.next(QUERY_STATUS.ERROR);
-        ko(err);
-      },
-      next: todos => {
-        this._pageStatus.next(QUERY_STATUS.SUCCESS);
-      },
-    });
-  } 
-
-  onSaveTodo(payload: { title: Todo['title'] }) {
-
-    // Update?
-    if (this.selectedTodo) {
-      const { title } = payload;
-      this.svc.update({ ...this.selectedTodo, title });
-      this.selectedTodo = null;
-      return;
-    }
-
-    // Create?
-    this.
-  }
-
-  onCompleteTodo(todoId: string) {
-    this._todos.next(
-      this._todos.getValue().map(todo => {
-        return (todo.id === todoId)
-          ? { ...todo, isDone: true }
-          : todo;
-        }
-      )
-    );
-  }
-
-  onUndoTodo(todoId: string) {
-    this._todos.next(
-      this._todos.getValue().map(todo => {
-        return (todo.id === todoId)
-          ? { ...todo, isDone: false }
-          : todo;
-        }
-      )
-    );
+    this.fetchTodos();
   }
 
   ngOnDestroy() {
     this._pageStatus.complete();
     this._todos.complete();
   }
+
+  onSaveTodo(payload: { title: Todo['title'] }) {
+
+    // Creating?
+    let req!: Observable<Todo>;
+
+    // Updating?
+    if (this.selectedTodo) {
+      const { title } = payload;
+      const newTodo = { ...this.selectedTodo, title };
+      req = this.svc.update(newTodo);
+    }
+
+    else {
+      req = this.svc.create(payload);
+    }
+
+    this.runHttpRequest(req, () => {
+      this.selectedTodo = null;
+      this.fetchTodos();
+    });
+  }
+
+  onCheck([id, isDone]: [Todo['id'], Todo['isDone']]) {
+    const req = this.svc.update({ id, isDone });
+    this.runHttpRequest(req, () => this.fetchTodos());
+  }
+
+  onEdit(id: Todo['id']) {
+    const todos = this._todos.getValue();
+    this.selectedTodo = todos.find(t => t.id === id) ?? null;
+  }
+
+  onRemove(id: Todo['id']) {
+    const req = this.svc.delete(id);
+    this.runHttpRequest(req, () => this.fetchTodos());
+  }
+
+  private fetchTodos(): void {
+    this.runHttpRequest(
+      this.svc.getAll(),
+      todos => this._todos.next(todos),
+    );
+  }
+
+  private runHttpRequest<T>(
+    req: Observable<T>,
+    onSuccess?: (data: T) => void,
+    onError?: (err: any) => void,
+  ): void {
+    this._pageStatus.next(QUERY_STATUS.LOADING);
+    req.subscribe({
+      next: data => {
+        this._pageStatus.next(QUERY_STATUS.SUCCESS);
+        if (onSuccess) onSuccess(data);
+      },
+      error: err => {
+        this._pageStatus.next(QUERY_STATUS.ERROR);
+        if (onError) onError(err);
+      },
+    });
+  } 
 }
