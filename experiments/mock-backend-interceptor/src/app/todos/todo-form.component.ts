@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, inject, Input, Output, SimpleChanges } from '@angular/core';
-import { FormControl, FormGroup, ReactiveFormsModule, Validators, FormBuilder} from '@angular/forms';
+import { Component, ElementRef, EventEmitter, inject, Input, Output, SimpleChanges, ViewChild } from '@angular/core';
+import { FormControl, ReactiveFormsModule, Validators, FormBuilder} from '@angular/forms';
+
 import { didInputChange } from '../shared/functions';
 import { Todo } from './types';
 
@@ -26,12 +27,15 @@ import { Todo } from './types';
           Title *
         </label>
         <input
+          #inputTitleRef
           type="text"
           id="todo-title"
           formControlName="title"
           placeholder="What to do?"
         >
-        <p *ngIf="fTitle.invalid">Enter a valid title</p>
+        <p *ngIf="fTitle.touched && fTitle.invalid" class="error-message">
+          Enter a valid title
+        </p>
       </div>
 
       <!-- Submit -->
@@ -43,12 +47,29 @@ import { Todo } from './types';
 
     </form>
   `,
+  styles: [`
+    :host {
+      display: inline-block;
+      border: 2px solid #ccc;
+      border-radius: 0.25rem;
+      padding: 1rem;
+    }
+
+    .error-message {
+      font-size: 0.85rem;
+      font-style: italic;
+      color: red;
+    }
+  `],
 })
 export class TodoFormComponent {
 
   @Input() selectedTodo: Todo | null = null;
 
   @Output() savedTodo = new EventEmitter<{ title: Todo['title'] }>();
+
+  @ViewChild('inputTitleRef', { static: true })
+  inputTitleRef!: ElementRef;
 
   formBuilder = inject(FormBuilder);
 
@@ -74,5 +95,7 @@ export class TodoFormComponent {
 
     const title = this.theForm.value.title!;
     this.savedTodo.emit({ title });
+    this.theForm.reset();
+    this.inputTitleRef?.nativeElement?.focus();
   }
 }

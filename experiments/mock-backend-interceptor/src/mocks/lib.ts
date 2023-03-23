@@ -66,6 +66,9 @@ export class MockServer {
 
   handle<T = any>(req: HttpRequest<T>): Observable<HttpEvent<T>> {
 
+    const t = Date.now();
+    console.log(`[MockServer] (${t}) - `, req.method, req.url);
+
     const route = this.matchRoute(req);
 
     if (route === null) {
@@ -77,7 +80,9 @@ export class MockServer {
     }
 
     const handler = route.handler(route.urlParams, this.store);
-    return handler(req);
+    const res = handler(req);
+
+    return res;
   }
 
   private registerRoute<T = any>(
@@ -152,7 +157,7 @@ export class MockServer {
     }
 
     return {
-      regex: new RegExp(`/^${regexSegments.join('\\/')}$/gi`),
+      regex: new RegExp(`^${regexSegments.join('\\/')}$`, 'gi'),
       paramNames,
     };
   }

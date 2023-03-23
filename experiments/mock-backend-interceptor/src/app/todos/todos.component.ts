@@ -129,6 +129,7 @@ export class TodosComponent implements OnInit, OnDestroy {
       },
       error: err => {
         this._pageStatus.next(QUERY_STATUS.ERROR);
+        console.error(err);
         if (onError) onError(err);
       },
     });

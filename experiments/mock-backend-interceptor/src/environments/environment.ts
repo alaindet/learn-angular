@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   apiUrl: 'todoapp.mock',
-  mockApiUrl: 'todoapp.mock',
+  withMockServer: true,
 };
 
 /*

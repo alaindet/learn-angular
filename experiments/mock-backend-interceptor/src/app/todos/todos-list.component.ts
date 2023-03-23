@@ -10,7 +10,7 @@ import { Todo } from './types';
     CommonModule,
   ],
   template: `
-    <ul>
+    <ul *ngIf="todos.length; else noTodosTemplate">
       <li *ngFor="let todo of todos">
         <label>
 
@@ -44,6 +44,10 @@ import { Todo } from './types';
         </label>
       </li>
     </ul>
+
+    <ng-template #noTodosTemplate>
+      <p>No todos yet</p>
+    </ng-template>
   `,
 })
 export class TodosListComponent {
