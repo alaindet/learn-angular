@@ -33,7 +33,7 @@ import { Todo } from './types';
           formControlName="title"
           placeholder="What to do?"
         >
-        <p *ngIf="fTitle.touched && fTitle.invalid" class="error-message">
+        <p *ngIf="fTitle.dirty && fTitle.invalid" class="error-message">
           Enter a valid title
         </p>
       </div>
