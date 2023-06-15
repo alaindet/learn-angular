@@ -1,10 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 
-
 @use '@angular/material' as mat;
-@import "~firebaseui/dist/firebaseui.css";
-
-
+@import '~firebaseui/dist/firebaseui.css';
 
 // Include non-theme styles for core.
 @include mat.core();
@@ -39,7 +36,7 @@ $mat-primary: (
     A200: white,
     A400: white,
     A700: white,
-  )
+  ),
 );
 
 $mat-accent: (
@@ -72,12 +69,12 @@ $mat-accent: (
     A200: white,
     A400: white,
     A700: white,
-  )
+  ),
 );
 
 // Define a theme.
 $primary: mat.define-palette($mat-primary);
-$accent:  mat.define-palette($mat-accent, A200, A100, A400);
+$accent: mat.define-palette($mat-accent, A200, A100, A400);
 
 $theme: mat.define-light-theme($primary, $accent);
 
