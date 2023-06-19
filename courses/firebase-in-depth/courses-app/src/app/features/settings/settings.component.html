@@ -1,3 +1,11 @@
 <p>Settings page</p>
 
-<button type="button" (click)="onPopulateDatabase()">Populate database</button>
+<button type="button" (click)="onPopulateDatabase()">
+  Populate database
+</button>
+
+<button type="button" (click)="onFetchFromDatabase()">
+  Fetch from database
+</button>
+
+<pre *ngIf="courses$">{{ courses$ | async | json }}</pre>
