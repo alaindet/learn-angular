@@ -9,3 +9,7 @@
 </button>
 
 <pre *ngIf="courses$">{{ courses$ | async | json }}</pre>
+
+<button type="button" (click)="onSearchDatabase()">
+  Search on the database (check console)
+</button>

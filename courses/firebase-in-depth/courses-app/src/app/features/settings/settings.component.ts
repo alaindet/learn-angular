@@ -1,6 +1,6 @@
 import { AsyncPipe, JsonPipe, NgIf } from '@angular/common';
 import { Component, inject } from '@angular/core';
-import { Firestore, collection, addDoc, collectionData } from '@angular/fire/firestore';
+import { Firestore, collection, addDoc, collectionData, query, where, getDocs } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 
 import { MOCK_COURSES, findLessonsByCourseId } from 'src/mocks';
@@ -39,8 +39,22 @@ export class SettingsPageComponent {
     }
   }
 
-  onFetchFromDatabase() {
+  async onFetchFromDatabase() {
     const coursesCollection = collection(this.db, this.coursesCollectionId);
     this.courses$ = collectionData(coursesCollection);
+  }
+
+  async onSearchDatabase() {
+    const coursesCollection = collection(this.db, this.coursesCollectionId);
+    const search = query(coursesCollection, where('title', '==', 'Course #2'));
+    const resultSnapshots = await getDocs(search);
+
+    if (resultSnapshots.empty) {
+      console.log('No results');
+    } else {
+      resultSnapshots.forEach(result => {
+        console.log(result.id, result.data());
+      });
+    }
   }
 }
