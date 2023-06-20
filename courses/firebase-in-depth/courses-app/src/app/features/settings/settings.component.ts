@@ -57,4 +57,24 @@ export class SettingsPageComponent {
       });
     }
   }
+
+  async onSearchNestedCollection() {
+    const coursesRef = collection(this.db, 'courses');
+    const search = query(coursesRef, where('title', '==', 'Course #1'));
+    const results = await getDocs(search);
+
+    if (results.empty) {
+      console.log('No results');
+      return;
+    }
+
+    console.log(results.docs[0].data());
+  }
+
+  onFetchNestedCollection() {
+    const courseId = 'CHAQenIKBCfo6dZd9JMU'; // TODO: Change
+    const lessonsRef = collection(this.db, `/courses/${courseId}/lessons`);
+    const lessons = collectionData(lessonsRef);
+    lessons.subscribe(lessons => console.log('lessons', lessons));
+  }
 }
