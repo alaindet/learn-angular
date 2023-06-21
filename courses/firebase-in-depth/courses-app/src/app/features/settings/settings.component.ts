@@ -1,6 +1,6 @@
 import { AsyncPipe, JsonPipe, NgIf } from '@angular/common';
 import { Component, inject } from '@angular/core';
-import { Firestore, collection, addDoc, collectionData, query, where, getDocs } from '@angular/fire/firestore';
+import { Firestore, collection, addDoc, collectionData, query, where, getDocs, onSnapshot } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 
 import { MOCK_COURSES, findLessonsByCourseId } from 'src/mocks';
@@ -76,5 +76,37 @@ export class SettingsPageComponent {
     const lessonsRef = collection(this.db, `/courses/${courseId}/lessons`);
     const lessons = collectionData(lessonsRef);
     lessons.subscribe(lessons => console.log('lessons', lessons));
+  }
+
+  onListenToDataChange() {
+    const coursesRef = collection(this.db, this.coursesCollectionId);
+    this.courses$ = collectionData(coursesRef);
+
+    console.log('This query listens to data changes upon the "courses" collection');
+
+    const unsubscribe = onSnapshot(
+      coursesRef,
+      docs => {
+        const courses: any[] = [];
+        docs.forEach(doc => courses.push(doc.data()));
+        console.log('Courses updated', courses);
+      },
+      error => {
+        console.error(error);
+      },
+    );
+
+    /*
+    import { collection, query, where, onSnapshot } from "firebase/firestore";
+
+    const q = query(collection(db, "cities"), where("state", "==", "CA"));
+    const unsubscribe = onSnapshot(q, (querySnapshot) => {
+      const cities = [];
+      querySnapshot.forEach((doc) => {
+          cities.push(doc.data().name);
+      });
+      console.log("Current cities in CA: ", cities.join(", "));
+    });
+    */
   }
 }
