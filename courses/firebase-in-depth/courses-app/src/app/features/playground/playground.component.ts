@@ -12,12 +12,12 @@ const imports = [
 ];
 
 @Component({
-  selector: 'app-page-settings',
-  templateUrl: './settings.component.html',
+  selector: 'app-page-playground',
+  templateUrl: './playground.component.html',
   standalone: true,
   imports,
 })
-export class SettingsPageComponent {
+export class PlaygroundPageComponent {
 
   private db = inject(Firestore);
   private coursesCollectionId = 'courses';

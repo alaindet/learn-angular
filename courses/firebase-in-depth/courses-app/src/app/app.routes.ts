@@ -6,5 +6,5 @@ export const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: DEFAULT_ROUTE },
   { path: 'users', loadChildren: () => import('./features/users') },
   { path: 'courses', loadChildren: () => import('./features/courses') },
-  { path: 'settings', loadChildren: () => import('./features/settings') },
+  { path: 'playground', loadChildren: () => import('./features/playground') },
 ];
