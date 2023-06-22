@@ -9,11 +9,8 @@ export function convertSnapshots<T = any>(
   });
 }
 
-
 export function firebaseQueryToObservable<T = any>(
   query: Query<DocumentData>,
 ): Observable<T[]> {
-  return from(
-    getDocs(query).then(snaps => convertSnapshots<T>(snaps)),
-  );
+  return from(getDocs(query).then(snaps => convertSnapshots<T>(snaps)));
 }
