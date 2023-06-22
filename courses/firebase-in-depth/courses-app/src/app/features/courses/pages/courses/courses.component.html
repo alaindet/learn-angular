@@ -1,1 +1,38 @@
-<p>Courses page</p>
+<h1>Courses</h1>
+
+<h2>Beginner</h2>
+<ng-container *ngIf="beginnerCourses$ | async as beginnerCourses">
+  <ul *ngIf="beginnerCourses.length; else noBeginnerCoursesRef">
+    <li *ngFor="let course of beginnerCourses">
+      <ul>
+        <li><strong>ID: </strong> {{ course.id }}</li>
+        <li><strong>Title: </strong> {{ course.title }}</li>
+        <li><strong>Description: </strong> {{ course.description }}</li>
+      </ul>
+    </li>
+  </ul>
+</ng-container>
+
+<ng-template #noBeginnerCoursesRef>
+  <p>No beginner courses</p>
+</ng-template>
+
+<hr>
+
+<h2>Advanced</h2>
+
+<ng-container *ngIf="advancedCourses$ | async as advancedCourses">
+  <ul *ngIf="advancedCourses.length; else noAdvancedCoursesRef">
+    <li *ngFor="let course of advancedCourses">
+      <ul>
+        <li><strong>ID: </strong> {{ course.id }}</li>
+        <li><strong>Title: </strong> {{ course.title }}</li>
+        <li><strong>Description: </strong> {{ course.description }}</li>
+      </ul>
+    </li>
+  </ul>
+</ng-container>
+
+<ng-template #noAdvancedCoursesRef>
+  <p>No advanced courses</p>
+</ng-template>

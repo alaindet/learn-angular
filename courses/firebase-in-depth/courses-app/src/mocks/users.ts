@@ -1,10 +1,6 @@
-export type User = {
-  id: number;
-  email: string;
-  password: string;
-};
+import { User } from 'src/app/core/types/users';
 
-export const USERS = [
+export const MOCK_USERS: User[] = [
   {
     id: 1,
     email: 'example@example.com',

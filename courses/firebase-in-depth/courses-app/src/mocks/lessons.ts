@@ -1,11 +1,4 @@
-import { Course } from './courses';
-
-export type Lesson = {
-  id: number;
-  courseId: Course['id'];
-  title: string;
-  duration: string;
-};
+import { Lesson } from 'src/app/core/types/lessons';
 
 export const MOCK_LESSONS: Lesson[] = [
   {

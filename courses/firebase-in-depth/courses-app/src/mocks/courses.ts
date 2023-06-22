@@ -1,9 +1,4 @@
-export type Course = {
-  id: number;
-  title: string;
-  description: string;
-  categories: string[];
-};
+import { Course } from 'src/app/core/types/courses';
 
 export const MOCK_COURSES: Course[] = [
   {
