@@ -1,7 +1,7 @@
 import { Course } from './courses';
 
 export type Lesson = {
-  id: number;
+  id: string;
   courseId: Course['id'];
   title: string;
   duration: string;
