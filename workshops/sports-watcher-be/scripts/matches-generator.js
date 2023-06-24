@@ -10,9 +10,10 @@ for (const team of teams) {
   for (const otherTeam of otherTeams) {
     for (const game of [1, 2, 3]) {
       results.push({
+        id: String(Date.now() * Math.random()),
         home: team.id,
         away: otherTeam.id,
-        won: Math.random() > 0.5 ? team.id : otherTeam.id,
+        winner: Math.random() > 0.5 ? team.id : otherTeam.id,
       });
     }
   }
