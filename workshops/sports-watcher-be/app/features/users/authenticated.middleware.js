@@ -1,7 +1,6 @@
 const jwt = require('jsonwebtoken');
 
-// https://www.digitalocean.com/community/tutorials/nodejs-jwt-expressjs
-export function authenticateToken(req, res, next) {
+function authenticated(req, res, next) {
 
   const authHeader = req.headers['authorization'];
 
@@ -19,13 +18,18 @@ export function authenticateToken(req, res, next) {
     });
   }
 
-  jwt.verify(token, process.env.TOKEN_SECRET, (err, user) => {
-    console.log(err)
+  jwt.verify(token, process.env.SPORTS_WATCHER_SECRET, (err, payload) => {
 
-    if (err) return res.sendStatus(403)
+    if (err) {
+      console.error(err);
+      return res.status(403).send({
+        message: 'You cannot perform this request',
+      });
+    }
 
-    req.user = user
-
-    next()
-  })
+    req.user = payload;
+    next();
+  });
 }
+
+module.exports = authenticated;

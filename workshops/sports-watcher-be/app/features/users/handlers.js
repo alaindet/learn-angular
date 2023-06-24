@@ -20,7 +20,7 @@ function signIn(req, res) {
     return err();
   }
 
-  // TODO: Add hashing please
+  // TODO: Add hashing please?
   if (user.password !== inputPassword) {
     return err();
   }
@@ -37,8 +37,6 @@ function generateAccessToken(email, role) {
   const payload = { email, role };
   const secret = process.env.SPORTS_WATCHER_SECRET;
   const options = { expiresIn: '86400s' };
-
-  console.log(payload, secret);
 
   return jwt.sign(payload, secret, options);
 }
