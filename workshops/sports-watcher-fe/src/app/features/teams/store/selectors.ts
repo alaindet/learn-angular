@@ -1,0 +1,52 @@
+import { createFeatureSelector, createSelector } from '@ngrx/store';
+import { TEAMS_FEATURE_NAME, TeamsFeatureState } from './state';
+import { LoadingStatus } from '@app/common/types';
+import { CACHE_MAX_AGE } from '@app/core/constants';
+
+const selectTeamsFeature = createFeatureSelector<TeamsFeatureState>(
+  TEAMS_FEATURE_NAME,
+);
+
+export const selectTeamsStatus = createSelector(
+  selectTeamsFeature,
+  state => state.status,
+);
+
+export const selectTeamsIsLoading = createSelector(
+  selectTeamsFeature,
+  state => state.status === LoadingStatus.Loading,
+);
+
+export const selectTeamsIsLoaded = createSelector(
+  selectTeamsFeature,
+  state => state.status === LoadingStatus.Idle,
+);
+
+export const selectTeamsInErrorStatus = createSelector(
+  selectTeamsFeature,
+  state => state.status === LoadingStatus.Error,
+);
+
+export const selectTeamsShouldFetch = createSelector(
+  selectTeamsFeature,
+  state => {
+
+    if (state.status === LoadingStatus.Pristine) {
+      return true;
+    }
+
+    if (state.lastUpdated === null) {
+      return true;
+    }
+
+    if (Date.now() - state.lastUpdated > CACHE_MAX_AGE) {
+      return true;
+    }
+
+    if (!state.teams.length) {
+      return true;
+    }
+
+    return false;
+  },
+);
