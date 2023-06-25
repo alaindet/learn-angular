@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { AsyncPipe, JsonPipe, NgIf } from '@angular/common';
+import { NgIf } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import { Store } from '@ngrx/store';
 
@@ -9,8 +9,6 @@ import { NotificationType } from './common/types';
 const imports = [
   NgIf,
   RouterOutlet,
-  JsonPipe,
-  AsyncPipe,
 ];
 
 @Component({
@@ -25,7 +23,6 @@ export class AppComponent {
   private store = inject(Store);
   notificationExists = this.store.selectSignal(selectUiNotificationsExist);
   notification = this.store.selectSignal(selectUiNotification);
-  notification$ = this.store.select(selectUiNotification);
   NotificationType = NotificationType;
 
   onAddError() {

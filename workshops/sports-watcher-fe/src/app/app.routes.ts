@@ -4,7 +4,7 @@ import { LoggedLayoutComponent } from '@app/core/layouts';
 import { isLoggedGuard } from '@app/core/guards';
 import { SignInPageComponent } from './features/user/pages/sign-in/sign-in.component';
 
-const DEFAULT_ROUTE = '/rankings';
+const DEFAULT_ROUTE = '/teams';
 
 let routes: Routes = [
   {

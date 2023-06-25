@@ -11,3 +11,11 @@ export const signInActions = createActionGroup({
     signOut: emptyProps(),
   },
 });
+
+export const storageActions = createActionGroup({
+  source: 'User',
+  events: {
+    storeUser: props<{ user: User }>(),
+    fetchUser: emptyProps(),
+  },
+});

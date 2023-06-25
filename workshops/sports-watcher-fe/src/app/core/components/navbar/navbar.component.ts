@@ -1,6 +1,9 @@
 import { Component, inject } from '@angular/core';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { NgIf } from '@angular/common';
+import { Store } from '@ngrx/store';
+
+import { signInActions } from '@app/features/user/store';
 
 const imports = [
   NgIf,
@@ -18,9 +21,10 @@ const imports = [
 export class NavbarComponent {
 
   private router = inject(Router);
+  private store = inject(Store);
 
   onSignOut() {
-    // TODO: Dispatch sign out action
+    this.store.dispatch(signInActions.signOut());
     this.router.navigate(['/signin']);
   }
 }

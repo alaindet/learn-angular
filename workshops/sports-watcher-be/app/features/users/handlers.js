@@ -27,7 +27,7 @@ function signIn(req, res) {
 
   const jwt = generateAccessToken(user.email, user.role);
   res.json({
-    message: 'You signed in',
+    message: `Welcome ${user.email}, your role is "${user.role}"`,
     data: {
       token: jwt,
       email: user.email,

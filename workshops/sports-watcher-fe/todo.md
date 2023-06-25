@@ -1,2 +1,2 @@
-- [ ] Add interceptor for JWT
-- [ ] Add guard for roles
+- [x] Add interceptor for JWT
+- [x] Add guard for roles

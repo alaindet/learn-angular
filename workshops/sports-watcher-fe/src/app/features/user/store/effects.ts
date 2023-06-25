@@ -23,13 +23,15 @@ export class UserEffects {
     )),
   ));
 
-  redirectAfterSignIn$ = createEffect(() => this.actions.pipe(
+  onSignIn$ = createEffect(() => this.actions.pipe(
     ofType(signInActions.signInSuccess),
+    tap(({ user }) => this.userService.saveToStorage(user)),
     tap(() => this.router.navigate(['/'])),
   ), { dispatch: false });
 
-  redirectAfterSignOut$ = createEffect(() => this.actions.pipe(
+  onSignOut$ = createEffect(() => this.actions.pipe(
     ofType(signInActions.signOut),
+    tap(() => this.userService.clearStorage()),
     tap(() => this.router.navigate(['/signin'])),
   ), { dispatch: false });
 

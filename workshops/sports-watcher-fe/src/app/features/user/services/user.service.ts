@@ -12,10 +12,25 @@ import { environment } from '@app/environment';
 export class UserService {
 
   private http = inject(HttpClient);
+  private storageKey = 'sports_watcher.user';
 
   signIn(credentials: UserCredentials): Observable<User> {
     const url = `${environment.apiUrl}/users/signin`;
     return this.http.post<DataResponse<User>>(url, credentials)
       .pipe(map(res => res.data));
+  }
+
+  fetchFromStorage(): User | null {
+    const serializedUser = window.localStorage.getItem(this.storageKey);
+    return serializedUser ? JSON.parse(serializedUser) : null;
+  }
+
+  saveToStorage(user: User | null) {
+    const serializedUser = user ? JSON.stringify(user) : '';
+    window.localStorage.setItem(this.storageKey, serializedUser);
+  }
+
+  clearStorage() {
+    window.localStorage.removeItem(this.storageKey);
   }
 }
