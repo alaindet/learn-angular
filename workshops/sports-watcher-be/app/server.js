@@ -16,5 +16,5 @@ app.use('/matches', matchesRoutes);
 app.use('/users', usersRoutes);
 
 app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`);
+  console.log(`Sports Watcher listening on port ${port}`);
 });
