@@ -1,4 +1,4 @@
-import { JsonPipe, NgFor, NgIf } from '@angular/common';
+import { JsonPipe, NgClass, NgFor, NgIf } from '@angular/common';
 import { Component, OnInit, inject, signal } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { RouterLink } from '@angular/router';
@@ -7,14 +7,14 @@ import { selectUserIsAdmin } from '@app/features/user/store';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { uiSetPageTitle } from '@app/core/store/ui';
 import { matchCreateActions, matchesFetchActions, selectMatches, selectMatchesGroupedByTeam, selectMatchesIsLoaded } from '../../store';
-import { selectTeams } from '@app/features/teams/store';
+import { selectTeams, selectTeamsMap } from '@app/features/teams/store';
 
 const imports = [
   NgIf,
   NgFor,
   RouterLink,
   ReactiveFormsModule,
-  JsonPipe,
+  NgClass,
 ];
 
 @Component({
@@ -33,9 +33,11 @@ export class MatchesPageComponent implements OnInit {
   matches = this.store.selectSignal(selectMatches);
   isAdmin = this.store.selectSignal(selectUserIsAdmin);
   matchesGroupedByTeam = this.store.selectSignal(selectMatchesGroupedByTeam);
-  homeTeamOptions = this.store.selectSignal(selectTeams); // TODO
-  awayTeamOptions = this.store.selectSignal(selectTeams); // TODO
-  winnerTeamOptions = this.store.selectSignal(selectTeams); // TODO
+  homeTeamOptions = this.store.selectSignal(selectTeams); // TODO: Filter
+  awayTeamOptions = this.store.selectSignal(selectTeams); // TODO: Filter
+  winnerTeamOptions = this.store.selectSignal(selectTeams); // TODO: Filter
+  teamsMap = this.store.selectSignal(selectTeamsMap);
+  openAccordion = signal<string | null>(null);
 
   matchForm!: FormGroup;
 
@@ -43,6 +45,12 @@ export class MatchesPageComponent implements OnInit {
     this.store.dispatch(matchesFetchActions.fetchMatches());
     this.store.dispatch(uiSetPageTitle({ title: 'Matches - Sports Watcher' }));
     this.initForm();
+  }
+
+  onToggleOpenAccordion(teamId: string) {
+    this.openAccordion() === teamId
+      ? this.openAccordion.set(null)
+      : this.openAccordion.set(teamId);
   }
 
   onCreateMatch() {

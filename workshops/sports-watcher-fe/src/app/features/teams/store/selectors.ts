@@ -71,6 +71,9 @@ export const selectTeamsMap = createSelector(
   selectTeamsFeature,
   state => {
     if (!state.teams) return null;
+
+    console.log('teams', state.teams); // TODO: Remove
+
     const teams = [...state.teams ?? []];
     const teamsMap: { [teamId: Team['id']]: Team } = {};
     teams.forEach(t => teamsMap[t.id] = t);

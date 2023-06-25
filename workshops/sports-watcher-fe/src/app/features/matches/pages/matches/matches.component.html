@@ -72,29 +72,61 @@
 </div>
 
 <ng-container *ngIf="loaded(); else loadingRef">
-  <div class="accordion" id="teamMatchesAccordion">
-    <div *ngFor="let teamMatches of matchesGroupedByTeam()" class="accordion-item">
+  <div class="accordion">
+    <div
+      *ngFor="let teamMatches of matchesGroupedByTeam()"
+      class="accordion-item"
+    >
       <h2 class="accordion-header" [id]="teamMatches.team.id + '-header'">
         <button
           class="accordion-button"
+          [class.collapsed]="openAccordion() !== teamMatches.team.id"
           type="button"
-          data-bs-toggle="collapse"
-          [attr.data-bs-target]="'#' + teamMatches.team.id + '-body'"
-          aria-expanded="true"
-          [attr.aria-controls]="teamMatches.team.id + '-body'"
+          (click)="onToggleOpenAccordion(teamMatches.team.id)"
+          [attr.aria-expanded]="openAccordion() === teamMatches.team.id"
+          [attr.aria-controls]="teamMatches.team.id"
         >
           {{ teamMatches.team.name }}
+          ({{ teamMatches.matches.length }})
         </button>
       </h2>
 
       <div
-        [id]="teamMatches.team.id + '-body'"
+        id="collapseTwo"
         class="accordion-collapse collapse show"
+        [class.show]="openAccordion() === teamMatches.team.id"
         [attr.aria-labelledby]="teamMatches.team.id + '-header'"
-        data-bs-parent="#teamMatchesAccordion"
       >
         <div class="accordion-body">
-          Matches: {{ teamMatches.matches.length }}
+          <ul>
+            <li *ngFor="let match of teamMatches.matches">
+
+              <span [ngClass]="[
+                'badge',
+                match.winner === teamMatches.team.id ? 'bg-success' : 'bg-danger'
+              ]">
+                {{ match.winner === teamMatches.team.id ? 'WIN' : 'LOSS' }}
+              </span>
+
+              &nbsp;
+
+              <strong *ngIf="match.home === teamMatches.team.id; else opponentHomeTeam">
+                {{ teamsMap()![match.home].name }}
+              </strong>
+              <ng-template #opponentHomeTeam>
+                <span>{{ teamsMap()![match.home].name }}</span>
+              </ng-template>
+
+              vs.
+
+              <strong *ngIf="match.away === teamMatches.team.id; else opponentAwayTeam">
+                {{ teamsMap()![match.away].name }}
+              </strong>
+              <ng-template #opponentAwayTeam>
+                <span>{{ teamsMap()![match.away].name }}</span>
+              </ng-template>
+            </li>
+          </ul>
         </div>
       </div>
     </div>
