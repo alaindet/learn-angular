@@ -3,9 +3,9 @@
 <div *ngIf="isAdmin()" class="card mb-4 bg-light">
   <div class="card-body">
     <h2>Create a new match</h2>
-    <div class="container-fluid">
+    <div class="container-fluid gx-0">
       <form
-        class="row g-3 align-items-center"
+        class="row g-3 align-items-end"
         *ngIf="matchForm"
         [formGroup]="matchForm"
         (ngSubmit)="onCreateMatch()"
@@ -13,7 +13,7 @@
 
         <!-- Home team -->
         <div class="col-3">
-          <label class="visually-hidden" for="matchhome">Home Team</label>
+          <label for="matchhome">Home Team</label>
           <select
             id="matchhome"
             formControlName="home"
@@ -28,7 +28,7 @@
 
         <!-- Away team -->
         <div class="col-3">
-          <label class="visually-hidden" for="matchaway">Away Team</label>
+          <label for="matchaway">Away Team</label>
           <select
             id="matchaway"
             formControlName="away"
@@ -43,7 +43,7 @@
 
         <!-- Winner team -->
         <div class="col-3">
-          <label class="visually-hidden" for="matchwinner">Winner Team</label>
+          <label for="matchwinner">Winner Team</label>
           <select
             id="matchwinner"
             formControlName="winner"
@@ -72,7 +72,33 @@
 </div>
 
 <ng-container *ngIf="loaded(); else loadingRef">
-  <p>Matches count: {{ matches()?.length ?? 0 }}</p>
+  <div class="accordion" id="teamMatchesAccordion">
+    <div *ngFor="let teamMatches of matchesGroupedByTeam()" class="accordion-item">
+      <h2 class="accordion-header" [id]="teamMatches.team.id + '-header'">
+        <button
+          class="accordion-button"
+          type="button"
+          data-bs-toggle="collapse"
+          [attr.data-bs-target]="'#' + teamMatches.team.id + '-body'"
+          aria-expanded="true"
+          [attr.aria-controls]="teamMatches.team.id + '-body'"
+        >
+          {{ teamMatches.team.name }}
+        </button>
+      </h2>
+
+      <div
+        [id]="teamMatches.team.id + '-body'"
+        class="accordion-collapse collapse show"
+        [attr.aria-labelledby]="teamMatches.team.id + '-header'"
+        data-bs-parent="#teamMatchesAccordion"
+      >
+        <div class="accordion-body">
+          Matches: {{ teamMatches.matches.length }}
+        </div>
+      </div>
+    </div>
+  </div>
 </ng-container>
 
 <!-- Template: loading -->

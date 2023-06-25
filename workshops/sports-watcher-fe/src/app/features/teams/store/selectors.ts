@@ -3,8 +3,9 @@ import { TEAMS_FEATURE_NAME, TeamsFeatureState } from './state';
 import { LoadingStatus } from '@app/common/types';
 import { CACHE_MAX_AGE } from '@app/core/constants';
 import { ascendingByKey } from '@app/common/utils';
+import { Team } from '../types';
 
-const selectTeamsFeature = createFeatureSelector<TeamsFeatureState>(
+export const selectTeamsFeature = createFeatureSelector<TeamsFeatureState>(
   TEAMS_FEATURE_NAME,
 );
 
@@ -64,4 +65,15 @@ export const selectTeams = createSelector(
 export const selectTeam = (teamId: string) => createSelector(
   selectTeamsFeature,
   state => state.teams!.find(t => t.id === teamId)!,
+);
+
+export const selectTeamsMap = createSelector(
+  selectTeamsFeature,
+  state => {
+    if (!state.teams) return null;
+    const teams = [...state.teams ?? []];
+    const teamsMap: { [teamId: Team['id']]: Team } = {};
+    teams.forEach(t => teamsMap[t.id] = t);
+    return teamsMap;
+  },
 );

@@ -7,6 +7,7 @@ import { createUiController } from '@app/core/store/ui';
 import { TeamsService } from '../services';
 import { teamCreateActions, teamDeleteActions, teamsFetchActions } from './actions';
 import { selectTeamsShouldFetch } from './selectors';
+import { matchesFetchActions } from '@app/features/matches/store';
 
 @Injectable()
 export class TeamsEffects {
@@ -38,6 +39,22 @@ export class TeamsEffects {
       map(teams => teamsFetchActions.fetchTeamsSuccess({ teams })),
       catchError(({ message }) => of(teamsFetchActions.fetchTeamsError({ message }))),
     )),
+  ));
+
+  autoFetchTeamsAfterWrite$ = createEffect(() => this.actions.pipe(
+    ofType(
+      teamCreateActions.createTeamSuccess,
+      teamDeleteActions.deleteTeamSuccess,
+    ),
+    switchMap(() => of(teamsFetchActions.forceFetchTeams())),
+  ));
+
+  autoFetchMatchesAfterWrite$ = createEffect(() => this.actions.pipe(
+    ofType(
+      teamCreateActions.createTeamSuccess,
+      teamDeleteActions.deleteTeamSuccess,
+    ),
+    switchMap(() => of(matchesFetchActions.forceFetchMatches())),
   ));
 
   createTeam$ = createEffect(() => this.actions.pipe(
@@ -74,7 +91,6 @@ export class TeamsEffects {
   );
 
   showSuccess$ = this.ui.showSuccessOn(
-    teamsFetchActions.fetchTeamsSuccess,
     teamCreateActions.createTeamSuccess,
     teamDeleteActions.deleteTeamSuccess,
   );

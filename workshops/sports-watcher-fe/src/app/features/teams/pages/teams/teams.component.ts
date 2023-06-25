@@ -48,7 +48,6 @@ export class TeamsPageComponent implements OnInit {
     const { id, name } = this.teamForm.value;
     const team = { id, name };
     this.store.dispatch(teamCreateActions.createTeam({ team }));
-    this.store.dispatch(teamsFetchActions.forceFetchTeams());
   }
 
   private initForm(): void {

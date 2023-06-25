@@ -74,7 +74,6 @@ export class MatchesEffects {
   );
 
   showSuccess$ = this.ui.showSuccessOn(
-    matchesFetchActions.fetchMatchesSuccess,
     matchCreateActions.createMatchSuccess,
     matchDeleteActions.deleteMatchSuccess,
   );

@@ -1,4 +1,4 @@
-import { NgFor, NgIf } from '@angular/common';
+import { JsonPipe, NgFor, NgIf } from '@angular/common';
 import { Component, OnInit, inject, signal } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { RouterLink } from '@angular/router';
@@ -6,7 +6,7 @@ import { RouterLink } from '@angular/router';
 import { selectUserIsAdmin } from '@app/features/user/store';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { uiSetPageTitle } from '@app/core/store/ui';
-import { matchCreateActions, matchesFetchActions, selectMatches, selectMatchesIsLoaded } from '../../store';
+import { matchCreateActions, matchesFetchActions, selectMatches, selectMatchesGroupedByTeam, selectMatchesIsLoaded } from '../../store';
 import { selectTeams } from '@app/features/teams/store';
 
 const imports = [
@@ -14,6 +14,7 @@ const imports = [
   NgFor,
   RouterLink,
   ReactiveFormsModule,
+  JsonPipe,
 ];
 
 @Component({
@@ -31,6 +32,7 @@ export class MatchesPageComponent implements OnInit {
   loaded = this.store.selectSignal(selectMatchesIsLoaded);
   matches = this.store.selectSignal(selectMatches);
   isAdmin = this.store.selectSignal(selectUserIsAdmin);
+  matchesGroupedByTeam = this.store.selectSignal(selectMatchesGroupedByTeam);
   homeTeamOptions = this.store.selectSignal(selectTeams); // TODO
   awayTeamOptions = this.store.selectSignal(selectTeams); // TODO
   winnerTeamOptions = this.store.selectSignal(selectTeams); // TODO
