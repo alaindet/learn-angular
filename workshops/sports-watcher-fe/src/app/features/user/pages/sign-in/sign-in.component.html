@@ -1,7 +1,7 @@
 <main class="text-center form-signin">
   <h1>Sports Watcher</h1>
 
-  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+  <form *ngIf="loginForm" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
     <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
 
     <div class="form-floating">

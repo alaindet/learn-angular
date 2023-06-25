@@ -23,9 +23,7 @@ export class NavbarComponent {
   private router = inject(Router);
   private store = inject(Store);
 
-  onSignOut(event: Event) {
-    event.preventDefault();
-    event.stopImmediatePropagation();
+  onSignOut() {
     this.store.dispatch(signInActions.signOut());
     this.router.navigate(['/signin']);
   }

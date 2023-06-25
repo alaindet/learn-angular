@@ -1,43 +1,51 @@
-<h1 class="mb-5">Teams</h1>
+<h1 class="mb-4">Teams</h1>
 
-<ng-container *ngIf="isAdmin()">
-  <form
-    class="row row-cols-lg-auto g-3 align-items-center mb-5"
-    [formGroup]="teamForm"
-    (ngSubmit)="onCreateTeam()"
-  >
+<div *ngIf="isAdmin()" class="card mb-4 bg-light">
+  <div class="card-body">
+  <h2>Create a new team</h2>
+    <form
+      class="row row-cols-lg-auto g-3 align-items-center"
+      [formGroup]="teamForm"
+      (ngSubmit)="onCreateTeam()"
+    >
 
-    <!-- ID -->
-    <div class="col-12">
-      <label class="visually-hidden" for="teamid">ID</label>
-      <input
-        type="text"
-        class="form-control"
-        formControlName="id"
-        id="teamid"
-        placeholder="Team ID..."
-      >
-    </div>
+      <!-- ID -->
+      <div class="col-12">
+        <label class="visually-hidden" for="teamid">ID</label>
+        <input
+          type="text"
+          class="form-control"
+          formControlName="id"
+          id="teamid"
+          placeholder="Team ID..."
+        >
+      </div>
 
-    <!-- Name -->
-    <div class="col-12">
-      <label class="visually-hidden" for="teamname">Name</label>
-      <input
-        type="text"
-        class="form-control"
-        formControlName="name"
-        id="teamname"
-        placeholder="Team Name..."
-      >
-    </div>
+      <!-- Name -->
+      <div class="col-12">
+        <label class="visually-hidden" for="teamname">Name</label>
+        <input
+          type="text"
+          class="form-control"
+          formControlName="name"
+          id="teamname"
+          placeholder="Team Name..."
+        >
+      </div>
 
-    <!-- Submit -->
-    <div class="col-12">
-      <button type="submit" class="btn btn-primary">Create team</button>
-    </div>
-  </form>
-
-</ng-container>
+      <!-- Submit -->
+      <div class="col-12">
+        <button
+          type="submit"
+          class="btn btn-primary"
+          [disabled]="teamForm.invalid"
+        >
+          Create team
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
 
 <ng-container *ngIf="loaded(); else loadingRef">
   <ul class="list-group">

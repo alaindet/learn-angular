@@ -6,6 +6,7 @@ import { RouterLink } from '@angular/router';
 import { selectTeams, selectTeamsIsLoaded, teamsCreateActions, teamsFetchActions } from '../../store';
 import { selectUserIsAdmin } from '@app/features/user/store';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { uiSetPageTitle } from '@app/core/store/ui';
 
 const imports = [
   NgIf,
@@ -34,6 +35,7 @@ export class TeamsPageComponent implements OnInit {
 
   ngOnInit() {
     this.store.dispatch(teamsFetchActions.fetchTeams());
+    this.store.dispatch(uiSetPageTitle({ title: 'Teams - Sports Watcher' }));
     this.initForm();
   }
 

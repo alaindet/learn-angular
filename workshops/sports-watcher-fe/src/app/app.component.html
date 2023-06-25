@@ -1,16 +1,11 @@
+<!-- Spinner -->
+<app-linear-spinner *ngIf="loading" />
+
 <!-- Notification -->
-<div *ngIf="notificationExists()" class="alert-container">
-  <div
-    [class.alert-success]="notification()?.type === NotificationType.Success"
-    [class.alert-danger]="notification()?.type === NotificationType.Error"
-    class="alert alert-dismissible"
-  >
-    {{ notification()?.message }}
-    <button
-      type="button"
-      class="btn-close"
-      (click)="onDismissAlert()"
-    ></button>
+<div *ngIf="notification() as notif" class="alert-container">
+  <div class="alert alert-dismissible" [ngClass]="notificationCssClass()">
+    {{ notif.message }}
+    <button type="button" class="btn-close" (click)="onDismissAlert()"></button>
   </div>
 </div>
 

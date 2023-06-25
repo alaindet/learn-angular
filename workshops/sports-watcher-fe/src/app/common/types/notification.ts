@@ -8,7 +8,3 @@ export type Notification = {
   type: NotificationType;
   message: string;
 };
-
-export type RuntimeNotification = Notification & {
-  more: number; // Remaining notifications count
-};

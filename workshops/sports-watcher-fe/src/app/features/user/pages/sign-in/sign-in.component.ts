@@ -1,11 +1,13 @@
-import { Component, inject } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Component, OnInit, inject } from '@angular/core';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
+import { NgIf } from '@angular/common';
 
-import { UserService } from '../../services';
 import { signInActions } from '../../store';
+import { uiSetPageTitle } from '@app/core/store/ui';
 
 const imports = [
+  NgIf,
   ReactiveFormsModule,
 ];
 
@@ -16,16 +18,17 @@ const imports = [
   templateUrl: './sign-in.component.html',
   styleUrls: ['./sign-in.component.scss'],
 })
-export class SignInPageComponent {
+export class SignInPageComponent implements OnInit {
 
-  private userService = inject(UserService);
   private store = inject(Store);
   private formBuilder = inject(FormBuilder);
 
-  loginForm = this.formBuilder.group({
-    email: ['', [Validators.required, Validators.email]],
-    password: ['', [Validators.required]],
-  });
+  loginForm!: FormGroup;
+
+  ngOnInit() {
+    this.store.dispatch(uiSetPageTitle({ title: 'Sign In - Sports Watcher' }));
+    this.initForm();
+  }
 
   onSubmit() {
 
@@ -41,18 +44,19 @@ export class SignInPageComponent {
   }
 
   onSignInAsBasic() {
-    const credentials = {
-      email: 'basic@example.com',
-      password: 'basic@example.com',
-    };
+    const credentials = { email: 'basic@example.com', password: 'basic@example.com' };
     this.store.dispatch(signInActions.signIn({ credentials }));
   }
 
   onSignInAsAdmin() {
-    const credentials = {
-      email: 'admin@example.com',
-      password: 'admin@example.com',
-    };
+    const credentials = { email: 'admin@example.com', password: 'admin@example.com' };
     this.store.dispatch(signInActions.signIn({ credentials }));
+  }
+
+  private initForm(): void {
+    this.loginForm = this.formBuilder.group({
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required]],
+    });
   }
 }

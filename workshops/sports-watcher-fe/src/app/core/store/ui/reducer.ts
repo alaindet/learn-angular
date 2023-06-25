@@ -10,20 +10,17 @@ export const uiReducer = createReducer(
   on(uiNotificationsActions.addSuccess, (state, { message }) => {
     const id = Date.now() + Math.random();
     const notification = { id, type: NotificationType.Success, message };
-    const notifications = [...state.notifications, notification];
-    return { ...state, notifications };
+    return { ...state, notification };
   }),
 
   on(uiNotificationsActions.addSuccess, (state, { message }) => {
     const id = Date.now() + Math.random();
     const notification = { id, type: NotificationType.Error, message };
-    const notifications = [...state.notifications, notification];
-    return { ...state, notifications };
+    return { ...state, notification };
   }),
 
   on(uiNotificationsActions.dismiss, state => {
-    const notifications = state.notifications.slice(0, -1);
-    return { ...state, notifications };
+    return { ...state, notification: null };
   }),
 
   on(uiLoaderActions.start, state => {
