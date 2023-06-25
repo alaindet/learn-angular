@@ -8,12 +8,19 @@ const results = [];
 for (const team of teams) {
   const otherTeams = teams.filter(t => t.id !== team.id);
   for (const otherTeam of otherTeams) {
-    for (const game of [1, 2, 3]) {
+    for (const _ of [1, 2, 3]) {
+
+      const rnd = Math.random();
+
+      const winner = rnd < 0.333
+        ? null
+        : (rnd < 0.666 ? team.id : otherTeam.id);
+
       results.push({
         id: String(Date.now() * Math.random()),
         home: team.id,
         away: otherTeam.id,
-        winner: Math.random() > 0.5 ? team.id : otherTeam.id,
+        winner,
       });
     }
   }
