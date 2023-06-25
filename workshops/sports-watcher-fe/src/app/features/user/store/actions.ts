@@ -1,13 +1,13 @@
 import { createActionGroup, emptyProps, props } from '@ngrx/store';
 
-import { UserCredentials } from '../types';
+import { User, UserCredentials } from '../types';
 
-export const loginActions = createActionGroup({
-  source: 'User/Login',
+export const signInActions = createActionGroup({
+  source: 'User',
   events: {
-    login : props<{ credentials: UserCredentials }>(),
-    loginSuccess: props<{ payload: any }>(), // TODO
-    loginError: props<{ error: string }>(),
-    logout: emptyProps(),
+    signIn: props<{ credentials: UserCredentials }>(),
+    signInSuccess: props<{ user: User }>(),
+    signInError: props<{ message: string }>(),
+    signOut: emptyProps(),
   },
 });

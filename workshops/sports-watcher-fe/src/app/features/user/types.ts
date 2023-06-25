@@ -7,3 +7,9 @@ export enum UserRole {
   Basic = 'basic',
   Admin = 'admin',
 }
+
+export type User = {
+  email: string;
+  role: UserRole;
+  token: string;
+};

@@ -1,3 +1,24 @@
-<h1>Sports Watcher App</h1>
+<!-- Notification -->
+<div *ngIf="notificationExists()" class="alert-container">
+  <div
+    [class.alert-success]="notification()?.type === NotificationType.Success"
+    [class.alert-danger]="notification()?.type === NotificationType.Error"
+    class="alert alert-dismissible"
+  >
+    {{ notification()?.message }}
+    <button
+      type="button"
+      class="btn-close"
+      (click)="onDismissAlert()"
+    ></button>
+  </div>
+</div>
 
-<!-- <app-navbar /> -->
+<pre>{{ notification() | json }}</pre>
+<pre>{{ notification$ | async | json }}</pre>
+
+<!-- TODO: Remove -->
+<button type="button" (click)="onAddError()">Add error</button>
+<button type="button" (click)="onAddSuccess()">Add success</button>
+
+<router-outlet />

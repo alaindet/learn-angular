@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router';
 
 import { LoggedLayoutComponent } from '@app/core/layouts';
+import { isLoggedGuard } from '@app/core/guards';
 import { SignInPageComponent } from './features/user/pages/sign-in/sign-in.component';
 
 const DEFAULT_ROUTE = '/rankings';
@@ -14,24 +15,22 @@ let routes: Routes = [
   {
     path: '',
     component: LoggedLayoutComponent,
-    canActivate: [], // TODO: Add logged user check
+    canActivate: [isLoggedGuard],
     children: [
-      {
-        path: 'matches',
-        loadChildren: () => import('@app/features/matches'),
-      },
+      // {
+      //   path: 'matches',
+      //   loadChildren: () => import('@app/features/matches'),
+      // },
       {
         path: 'teams',
         loadChildren: () => import('@app/features/teams'),
       },
     ],
   },
-
   {
     path: 'signin',
     component: SignInPageComponent,
   },
-
   {
     path: '**',
     redirectTo: DEFAULT_ROUTE,

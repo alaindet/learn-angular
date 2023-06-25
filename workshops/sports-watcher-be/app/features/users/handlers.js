@@ -28,7 +28,11 @@ function signIn(req, res) {
   const jwt = generateAccessToken(user.email, user.role);
   res.json({
     message: 'You signed in',
-    data: jwt,
+    data: {
+      token: jwt,
+      email: user.email,
+      role: user.role,
+    },
   });
 }
 

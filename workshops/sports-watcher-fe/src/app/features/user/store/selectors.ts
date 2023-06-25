@@ -16,6 +16,21 @@ export const selectUser = createSelector(
   },
 );
 
+export const selectUserIsLogged = createSelector(
+  selectUserFeature,
+  state => (
+    state.email !== null &&
+    state.role !== null &&
+    state.token !== null &&
+    state.status === LoadingStatus.Idle
+  ),
+);
+
+export const selectUserToken = createSelector(
+  selectUserFeature,
+  state => state.token,
+);
+
 export const selectUserRole = createSelector(
   selectUserFeature,
   state => state.role ?? null,
