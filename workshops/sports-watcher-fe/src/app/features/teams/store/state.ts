@@ -2,7 +2,7 @@ import { LoadingStatus } from '@app/common/types';
 import { Team } from '../types';
 
 export type TeamsFeatureState = {
-  teams: Team[];
+  teams: Team[] | null;
   status: LoadingStatus;
   lastUpdated: number | null;
 };
@@ -10,7 +10,7 @@ export type TeamsFeatureState = {
 export const TEAMS_FEATURE_NAME = 'teams';
 
 export const TEAMS_FEATURE_INITIAL_STATE: TeamsFeatureState = {
-  teams: [],
+  teams: null,
   status: LoadingStatus.Pristine,
   lastUpdated: null,
 };

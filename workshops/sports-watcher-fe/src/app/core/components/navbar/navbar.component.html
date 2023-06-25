@@ -1,19 +1,13 @@
-<nav class="the-navbar">
-  <ul>
-    <li><strong>Sports Watcher App</strong></li>
-  </ul>
-  <ul>
-    <li>
-      <a routerLink="/teams" routerLinkActive="active">Teams</a>
-    </li>
-    <li>
-      <a routerLink="/matches" routerLinkActive="active">Matches</a>
-    </li>
-    <li>
-      <a routerLink="/rankings" routerLinkActive="active">Rankings</a>
-    </li>
-    <li>
-      <button type="button" (click)="onSignOut()">Sign Out</button>
-    </li>
-  </ul>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
+  <div class="container">
+    <a class="navbar-brand" routerLink="/">Sports Watcher</a>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav">
+        <a class="nav-link" routerLink="/teams" routerLinkActive="active">Teams</a>
+        <a class="nav-link" routerLink="/matches" routerLinkActive="active">Matches</a>
+        <a class="nav-link" routerLink="/rankings" routerLinkActive="active">Rankings</a>
+        <a class="nav-link" (click)="onSignOut($event)" href="/signout">Sign Out</a>
+      </div>
+    </div>
+  </div>
 </nav>

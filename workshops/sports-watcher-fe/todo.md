@@ -1,2 +1,10 @@
-- [x] Add interceptor for JWT
-- [x] Add guard for roles
+- [ ] Notification does not work
+
+# Features
+- [ ] No modules
+- [ ] Standalone
+- [ ] Functional guards
+- [ ] Functional interceptors
+- [ ] Functional pipes?
+- [ ] Grouped NgRx actions
+- [ ] NgRx selectSignal()

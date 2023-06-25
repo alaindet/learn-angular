@@ -2,6 +2,7 @@ import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { TEAMS_FEATURE_NAME, TeamsFeatureState } from './state';
 import { LoadingStatus } from '@app/common/types';
 import { CACHE_MAX_AGE } from '@app/core/constants';
+import { ascendingByKey } from '@app/common/utils';
 
 const selectTeamsFeature = createFeatureSelector<TeamsFeatureState>(
   TEAMS_FEATURE_NAME,
@@ -43,10 +44,24 @@ export const selectTeamsShouldFetch = createSelector(
       return true;
     }
 
+    if (!state.teams) {
+      return true;
+    }
+
     if (!state.teams.length) {
       return true;
     }
 
     return false;
   },
+);
+
+export const selectTeams = createSelector(
+  selectTeamsFeature,
+  state => [...state.teams ?? []].sort(ascendingByKey('name')),
+);
+
+export const selectTeam = (teamId: string) => createSelector(
+  selectTeamsFeature,
+  state => state.teams!.find(t => t.id === teamId)!,
 );

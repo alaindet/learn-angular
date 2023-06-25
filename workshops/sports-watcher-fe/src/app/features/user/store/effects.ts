@@ -1,6 +1,6 @@
 import { Injectable, inject } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { catchError, map, of, switchMap, tap } from 'rxjs';
+import { EMPTY, catchError, map, of, switchMap, tap } from 'rxjs';
 import { Router } from '@angular/router';
 
 import { createUiController } from '@app/core/store/ui';
@@ -14,6 +14,15 @@ export class UserEffects {
   private router = inject(Router);
   private userService = inject(UserService);
   private ui = createUiController(this.actions);
+
+  autoSignIn$ = createEffect(() => this.actions.pipe(
+    ofType(signInActions.autoSignIn),
+    switchMap(() => {
+      const user = this.userService.fetchFromStorage();
+      if (!user) return EMPTY;
+      return of(signInActions.signInSuccess({ user: user! }));
+    }),
+  ));
 
   signIn$ = createEffect(() => this.actions.pipe(
     ofType(signInActions.signIn),
@@ -42,6 +51,10 @@ export class UserEffects {
   stopLoader$ = this.ui.stopLoaderOn(
     signInActions.signInSuccess,
     signInActions.signInError,
+  );
+
+  showSuccess$ = this.ui.showSuccessOn(
+    signInActions.signInSuccess,
   );
 
   showError$ = this.ui.showErrorOn(

@@ -10,24 +10,24 @@ export const teamsReducer = createReducer(TEAMS_FEATURE_INITIAL_STATE,
     teamsFetchActions.fetchTeams,
     teamsFetchActions.forceFetchTeams,
     state => {
-      const loading = LoadingStatus.Loading;
-      return { ...state, loading };
+      const status = LoadingStatus.Loading;
+      return { ...state, status };
     },
   ),
 
   on(teamsFetchActions.fetchTeamsCached, state => {
-    const loading = LoadingStatus.Idle;
-    return { ...state, loading };
+    const status = LoadingStatus.Idle;
+    return { ...state, status };
   }),
 
   on(teamsFetchActions.fetchTeamsSuccess, (state, { teams }) => {
-    const loading = LoadingStatus.Idle;
+    const status = LoadingStatus.Idle;
     const lastUpdated = Date.now();
-    return { ...state, loading, teams, lastUpdated };
+    return { ...state, status, teams, lastUpdated };
   }),
 
   on(teamsFetchActions.fetchTeamsError, (state, message) => {
-    const loading = LoadingStatus.Error;
-    return { ...state, loading };
+    const status = LoadingStatus.Error;
+    return { ...state, status };
   }),
 );

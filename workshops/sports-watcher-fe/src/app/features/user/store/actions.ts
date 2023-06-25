@@ -5,6 +5,7 @@ import { User, UserCredentials } from '../types';
 export const signInActions = createActionGroup({
   source: 'User',
   events: {
+    autoSignIn: emptyProps(),
     signIn: props<{ credentials: UserCredentials }>(),
     signInSuccess: props<{ user: User }>(),
     signInError: props<{ message: string }>(),

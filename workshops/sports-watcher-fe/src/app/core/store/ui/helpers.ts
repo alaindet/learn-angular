@@ -25,6 +25,16 @@ export function createUiController(actions$: Observable<any>) {
     ));
   }
 
+  function showSuccessOn(...targetActions: any[]) {
+    return createEffect(() => actions$.pipe(
+      onActions(targetActions),
+      switchMap(action => {
+        const message = action.message;
+        return of(uiNotificationsActions.addSuccess({ message }));
+      }),
+    ));
+  }
+
   function showErrorOn(...targetActions: any[]) {
     return createEffect(() => actions$.pipe(
       onActions(targetActions),
@@ -38,6 +48,7 @@ export function createUiController(actions$: Observable<any>) {
   return {
     startLoaderOn,
     stopLoaderOn,
+    showSuccessOn,
     showErrorOn,
   };
 }

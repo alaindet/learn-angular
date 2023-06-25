@@ -1,0 +1,53 @@
+<h1 class="mb-5">Teams</h1>
+
+<ng-container *ngIf="isAdmin()">
+  <form
+    class="row row-cols-lg-auto g-3 align-items-center mb-5"
+    [formGroup]="teamForm"
+    (ngSubmit)="onCreateTeam()"
+  >
+
+    <!-- ID -->
+    <div class="col-12">
+      <label class="visually-hidden" for="teamid">ID</label>
+      <input
+        type="text"
+        class="form-control"
+        formControlName="id"
+        id="teamid"
+        placeholder="Team ID..."
+      >
+    </div>
+
+    <!-- Name -->
+    <div class="col-12">
+      <label class="visually-hidden" for="teamname">Name</label>
+      <input
+        type="text"
+        class="form-control"
+        formControlName="name"
+        id="teamname"
+        placeholder="Team Name..."
+      >
+    </div>
+
+    <!-- Submit -->
+    <div class="col-12">
+      <button type="submit" class="btn btn-primary">Create team</button>
+    </div>
+  </form>
+
+</ng-container>
+
+<ng-container *ngIf="loaded(); else loadingRef">
+  <ul class="list-group">
+    <li *ngFor="let team of teams() ?? []" class="list-group-item">
+      <a [routerLink]="['/teams', team.id]">{{ team.name }}</a>
+    </li>
+  </ul>
+</ng-container>
+
+<!-- Template: loading -->
+<ng-template #loadingRef>
+  Loading...
+</ng-template>
