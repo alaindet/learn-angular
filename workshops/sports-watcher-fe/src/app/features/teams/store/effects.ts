@@ -5,7 +5,7 @@ import { Store } from '@ngrx/store';
 
 import { createUiController } from '@app/core/store/ui';
 import { TeamsService } from '../services';
-import { teamsCreateActions, teamsDeleteActions, teamsFetchActions } from './actions';
+import { teamCreateActions, teamDeleteActions, teamsFetchActions } from './actions';
 import { selectTeamsShouldFetch } from './selectors';
 
 @Injectable()
@@ -16,7 +16,7 @@ export class TeamsEffects {
   private teamsService = inject(TeamsService);
   private ui = createUiController(this.actions);
 
-  fetchItems$ = createEffect(() => this.actions.pipe(
+  fetchTeams$ = createEffect(() => this.actions.pipe(
     ofType(teamsFetchActions.fetchTeams),
     withLatestFrom(this.store.select(selectTeamsShouldFetch)),
     switchMap(([_, shouldFetch]) => {
@@ -32,7 +32,7 @@ export class TeamsEffects {
     }),
   ));
 
-  forceFetchItems$ = createEffect(() => this.actions.pipe(
+  forceFetchTeams$ = createEffect(() => this.actions.pipe(
     ofType(teamsFetchActions.forceFetchTeams),
     switchMap(() => this.teamsService.getAllTeams().pipe(
       map(teams => teamsFetchActions.fetchTeamsSuccess({ teams })),
@@ -40,49 +40,49 @@ export class TeamsEffects {
     )),
   ));
 
-  createItem$ = createEffect(() => this.actions.pipe(
-    ofType(teamsCreateActions.createTeam),
+  createTeam$ = createEffect(() => this.actions.pipe(
+    ofType(teamCreateActions.createTeam),
     switchMap(({ team }) => this.teamsService.createTeam(team).pipe(
-      map(team => teamsCreateActions.createTeamSuccess({ team })),
-      catchError(({ message }) => of(teamsCreateActions.createTeamError({ message }))),
+      map(team => teamCreateActions.createTeamSuccess({ team })),
+      catchError(({ message }) => of(teamCreateActions.createTeamError({ message }))),
     )),
   ));
 
-  deleteItem$ = createEffect(() => this.actions.pipe(
-    ofType(teamsDeleteActions.deleteTeam),
+  deleteTeam$ = createEffect(() => this.actions.pipe(
+    ofType(teamDeleteActions.deleteTeam),
     switchMap(({ team }) => this.teamsService.deleteTeam(team.id).pipe(
-      map(() => teamsDeleteActions.deleteTeamSuccess({ team })),
-      catchError(({ message }) => of(teamsDeleteActions.deleteTeamError({ message }))),
+      map(() => teamDeleteActions.deleteTeamSuccess({ team })),
+      catchError(({ message }) => of(teamDeleteActions.deleteTeamError({ message }))),
     )),
   ));
 
   startLoader$ = this.ui.startLoaderOn(
     teamsFetchActions.fetchTeams,
     teamsFetchActions.forceFetchTeams,
-    teamsCreateActions.createTeam,
-    teamsDeleteActions.deleteTeam,
+    teamCreateActions.createTeam,
+    teamDeleteActions.deleteTeam,
   );
 
   stopLoader$ = this.ui.stopLoaderOn(
     teamsFetchActions.fetchTeamsSuccess,
     teamsFetchActions.fetchTeamsCached,
     teamsFetchActions.fetchTeamsError,
-    teamsCreateActions.createTeamSuccess,
-    teamsCreateActions.createTeamError,
-    teamsDeleteActions.deleteTeamSuccess,
-    teamsDeleteActions.deleteTeamError,
+    teamCreateActions.createTeamSuccess,
+    teamCreateActions.createTeamError,
+    teamDeleteActions.deleteTeamSuccess,
+    teamDeleteActions.deleteTeamError,
   );
 
   showSuccess$ = this.ui.showSuccessOn(
     teamsFetchActions.fetchTeamsSuccess,
-    teamsCreateActions.createTeamSuccess,
-    teamsDeleteActions.deleteTeamSuccess,
+    teamCreateActions.createTeamSuccess,
+    teamDeleteActions.deleteTeamSuccess,
   );
 
   showError$ = this.ui.showErrorOn(
     teamsFetchActions.fetchTeamsError,
-    teamsCreateActions.createTeamError,
-    teamsDeleteActions.deleteTeamError,
+    teamCreateActions.createTeamError,
+    teamDeleteActions.deleteTeamError,
   );
 }
 

@@ -3,7 +3,7 @@ import { Component, OnInit, inject } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { RouterLink } from '@angular/router';
 
-import { selectTeams, selectTeamsIsLoaded, teamsCreateActions, teamsFetchActions } from '../../store';
+import { selectTeams, selectTeamsIsLoaded, teamCreateActions, teamsFetchActions } from '../../store';
 import { selectUserIsAdmin } from '@app/features/user/store';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { uiSetPageTitle } from '@app/core/store/ui';
@@ -47,7 +47,7 @@ export class TeamsPageComponent implements OnInit {
 
     const { id, name } = this.teamForm.value;
     const team = { id, name };
-    this.store.dispatch(teamsCreateActions.createTeam({ team }));
+    this.store.dispatch(teamCreateActions.createTeam({ team }));
     this.store.dispatch(teamsFetchActions.forceFetchTeams());
   }
 

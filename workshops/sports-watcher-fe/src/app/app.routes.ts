@@ -17,10 +17,10 @@ let routes: Routes = [
     component: LoggedLayoutComponent,
     canActivate: [isLoggedGuard],
     children: [
-      // {
-      //   path: 'matches',
-      //   loadChildren: () => import('@app/features/matches'),
-      // },
+      {
+        path: 'matches',
+        loadChildren: () => import('@app/features/matches'),
+      },
       {
         path: 'teams',
         loadChildren: () => import('@app/features/teams'),

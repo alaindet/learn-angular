@@ -1,0 +1,81 @@
+<h1 class="mb-4">Matches</h1>
+
+<div *ngIf="isAdmin()" class="card mb-4 bg-light">
+  <div class="card-body">
+    <h2>Create a new match</h2>
+    <div class="container-fluid">
+      <form
+        class="row g-3 align-items-center"
+        *ngIf="matchForm"
+        [formGroup]="matchForm"
+        (ngSubmit)="onCreateMatch()"
+      >
+
+        <!-- Home team -->
+        <div class="col-3">
+          <label class="visually-hidden" for="matchhome">Home Team</label>
+          <select
+            id="matchhome"
+            formControlName="home"
+            class="form-control"
+          >
+            <option value="">Select team...</option>
+            <option *ngFor="let team of homeTeamOptions()" [value]="team.id">
+              {{ team.name }}
+            </option>
+          </select>
+        </div>
+
+        <!-- Away team -->
+        <div class="col-3">
+          <label class="visually-hidden" for="matchaway">Away Team</label>
+          <select
+            id="matchaway"
+            formControlName="away"
+            class="form-control"
+          >
+            <option value="">Select team...</option>
+            <option *ngFor="let team of awayTeamOptions()" [value]="team.id">
+              {{ team.name }}
+            </option>
+          </select>
+        </div>
+
+        <!-- Winner team -->
+        <div class="col-3">
+          <label class="visually-hidden" for="matchwinner">Winner Team</label>
+          <select
+            id="matchwinner"
+            formControlName="winner"
+            class="form-control"
+          >
+            <option value="">Select team...</option>
+            <option *ngFor="let team of winnerTeamOptions()" [value]="team.id">
+              {{ team.name }}
+            </option>
+          </select>
+        </div>
+
+        <!-- Submit -->
+        <div class="col-3">
+          <button
+            type="submit"
+            class="btn btn-primary"
+            [disabled]="matchForm.invalid"
+          >
+            Create match
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<ng-container *ngIf="loaded(); else loadingRef">
+  <p>Matches count: {{ matches()?.length ?? 0 }}</p>
+</ng-container>
+
+<!-- Template: loading -->
+<ng-template #loadingRef>
+  Loading...
+</ng-template>

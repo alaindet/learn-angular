@@ -3,7 +3,7 @@ import { Component, OnInit, inject } from '@angular/core';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { Store } from '@ngrx/store';
 
-import { selectTeam, selectTeamsIsLoaded, teamsDeleteActions, teamsFetchActions } from '../../store';
+import { selectTeam, selectTeamsIsLoaded, teamDeleteActions, teamsFetchActions } from '../../store';
 import { selectUserIsAdmin } from '@app/features/user/store';
 
 const imports = [
@@ -37,7 +37,7 @@ export class TeamPageComponent implements OnInit {
 
   onRemoveTeam() {
     const team = this.team();
-    this.store.dispatch(teamsDeleteActions.deleteTeam({ team }));
+    this.store.dispatch(teamDeleteActions.deleteTeam({ team }));
     this.store.dispatch(teamsFetchActions.forceFetchTeams());
     // TODO: Force download of matches too
     // TODO: Show notification

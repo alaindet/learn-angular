@@ -13,7 +13,7 @@ export const teamsFetchActions = createActionGroup({
   },
 });
 
-export const teamsCreateActions = createActionGroup({
+export const teamCreateActions = createActionGroup({
   source: 'Teams',
   events: {
     createTeam: props<{ team: Team }>(),
@@ -22,7 +22,7 @@ export const teamsCreateActions = createActionGroup({
   },
 });
 
-export const teamsDeleteActions = createActionGroup({
+export const teamDeleteActions = createActionGroup({
   source: 'Teams',
   events: {
     deleteTeam: props<{ team: Team }>(),
