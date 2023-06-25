@@ -1,20 +1,27 @@
-import { JsonPipe, NgClass, NgFor, NgIf } from '@angular/common';
+import { AsyncPipe, NgClass, NgFor, NgIf, NgTemplateOutlet } from '@angular/common';
 import { Component, OnInit, inject, signal } from '@angular/core';
-import { Store } from '@ngrx/store';
 import { RouterLink } from '@angular/router';
+import { toSignal } from '@angular/core/rxjs-interop';
+import { Store } from '@ngrx/store';
+import { Observable, map } from 'rxjs';
 
 import { selectUserIsAdmin } from '@app/features/user/store';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { uiSetPageTitle } from '@app/core/store/ui';
-import { matchCreateActions, matchesFetchActions, selectMatches, selectMatchesGroupedByTeam, selectMatchesIsLoaded } from '../../store';
 import { selectTeams, selectTeamsMap } from '@app/features/teams/store';
+import { matchCreateActions, matchesFetchActions, selectMatches, selectMatchesGroupedByTeam, selectMatchesIsLoaded } from '../../store';
+import { ResultBadgePipe } from './result-badge.pipe';
+import { WINNER_TEAM_OPTIONS, WinnerTeam } from './winner-team-options';
 
 const imports = [
   NgIf,
   NgFor,
+  AsyncPipe,
+  NgTemplateOutlet,
   RouterLink,
   ReactiveFormsModule,
   NgClass,
+  ResultBadgePipe,
 ];
 
 @Component({
@@ -35,11 +42,12 @@ export class MatchesPageComponent implements OnInit {
   matchesGroupedByTeam = this.store.selectSignal(selectMatchesGroupedByTeam);
   homeTeamOptions = this.store.selectSignal(selectTeams); // TODO: Filter
   awayTeamOptions = this.store.selectSignal(selectTeams); // TODO: Filter
-  winnerTeamOptions = this.store.selectSignal(selectTeams); // TODO: Filter
+  winnerTeamOptions = WINNER_TEAM_OPTIONS;
   teamsMap = this.store.selectSignal(selectTeamsMap);
   openAccordion = signal<string | null>(null);
 
   matchForm!: FormGroup;
+  matchFormSameTeamError!: Observable<boolean>;
 
   ngOnInit() {
     this.store.dispatch(matchesFetchActions.fetchMatches());
@@ -59,7 +67,20 @@ export class MatchesPageComponent implements OnInit {
       return;
     }
 
-    const { home, away, winner } = this.matchForm.value;
+    let { home, away, winner } = this.matchForm.value;
+
+    switch (winner) {
+      case WinnerTeam.Home:
+        winner = home;
+        break;
+      case WinnerTeam.Away:
+        winner = away;
+        break;
+      case WinnerTeam.Draw:
+        winner = null;
+        break;
+    }
+
     const dto = { home, away, winner };
     this.store.dispatch(matchCreateActions.createMatch({ dto }));
     this.store.dispatch(matchesFetchActions.forceFetchMatches());
@@ -71,5 +92,8 @@ export class MatchesPageComponent implements OnInit {
       away: ['', [Validators.required]],
       winner: ['', [Validators.required]],
     });
+
+    this.matchFormSameTeamError = this.matchForm.valueChanges
+      .pipe(map(values => values.home === values.away));
   }
 }

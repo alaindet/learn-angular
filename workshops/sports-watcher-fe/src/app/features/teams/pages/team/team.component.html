@@ -23,19 +23,22 @@
       <strong>Name: </strong> {{ team()!.name }}
     </li>
     <li class="list-group-item">
-      <strong>Ranking:</strong> #1
+      <strong>Ranking:</strong> TODO #1
     </li>
     <li class="list-group-item">
-      <strong>Score:</strong> 123
+      <strong>Score:</strong> TODO 123
     </li>
     <li class="list-group-item">
-      <strong>Wins:</strong> 12
+      <strong>Wins:</strong> {{ matchesReport().wins }}
     </li>
     <li class="list-group-item">
-      <strong>Losses:</strong> 10
+      <strong>Draws:</strong> {{ matchesReport().draws }}
     </li>
     <li class="list-group-item">
-      <strong>Total games:</strong> 22
+      <strong>Losses:</strong> {{ matchesReport().losses }}
+    </li>
+    <li class="list-group-item">
+      <strong>Total matches:</strong> {{ matchesReport().total }}
     </li>
   </ul>
 </ng-container>

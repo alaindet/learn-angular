@@ -8,3 +8,10 @@ export type Match = {
 };
 
 export type CreateMatchDto = Omit<Match, 'id'>;
+
+export type MatchesReport = {
+  wins: number;
+  draws: number;
+  losses: number;
+  total: number;
+};

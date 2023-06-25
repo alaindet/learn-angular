@@ -50,8 +50,8 @@
             class="form-control"
           >
             <option value="">Select team...</option>
-            <option *ngFor="let team of winnerTeamOptions()" [value]="team.id">
-              {{ team.name }}
+            <option *ngFor="let option of winnerTeamOptions" [value]="option.value">
+              {{ option.label }}
             </option>
           </select>
         </div>
@@ -61,13 +61,14 @@
           <button
             type="submit"
             class="btn btn-primary"
-            [disabled]="matchForm.invalid"
+            [disabled]="matchForm.invalid || (matchFormSameTeamError | async)"
           >
             Create match
           </button>
         </div>
       </form>
     </div>
+    <p *ngIf="matchFormSameTeamError | async">Cannot choose the same team!</p>
   </div>
 </div>
 
@@ -101,30 +102,34 @@
           <ul>
             <li *ngFor="let match of teamMatches.matches">
 
-              <span [ngClass]="[
-                'badge',
-                match.winner === teamMatches.team.id ? 'bg-success' : 'bg-danger'
-              ]">
-                {{ match.winner === teamMatches.team.id ? 'WIN' : 'LOSS' }}
-              </span>
+              <!-- Result badge -->
+              <ng-container
+                [ngTemplateOutlet]="resultBadgeRef"
+                [ngTemplateOutletContext]="{
+                  $implicit: match | appResultBadge:teamMatches.team
+                }"
+              />
 
               &nbsp;
 
-              <strong *ngIf="match.home === teamMatches.team.id; else opponentHomeTeam">
-                {{ teamsMap()![match.home].name }}
-              </strong>
-              <ng-template #opponentHomeTeam>
-                <span>{{ teamsMap()![match.home].name }}</span>
-              </ng-template>
+              <!-- Home team -->
+              <ng-container
+                [ngTemplateOutlet]="match.home === teamMatches.team.id
+                  ? highlightedTeamNameRef
+                  : normalTeamNameRef"
+                [ngTemplateOutletContext]="{ $implicit: match.home }"
+              />
 
               vs.
 
-              <strong *ngIf="match.away === teamMatches.team.id; else opponentAwayTeam">
-                {{ teamsMap()![match.away].name }}
-              </strong>
-              <ng-template #opponentAwayTeam>
-                <span>{{ teamsMap()![match.away].name }}</span>
-              </ng-template>
+              <!-- Away team -->
+              <ng-container
+                [ngTemplateOutlet]="match.away === teamMatches.team.id
+                  ? highlightedTeamNameRef
+                  : normalTeamNameRef"
+                [ngTemplateOutletContext]="{ $implicit: match.away }"
+              />
+
             </li>
           </ul>
         </div>
@@ -136,4 +141,25 @@
 <!-- Template: loading -->
 <ng-template #loadingRef>
   Loading...
+</ng-template>
+
+<!-- Template: Result badge -->
+<ng-template #resultBadgeRef let-result>
+  <span [ngClass]="['badge', result.cssClass]">
+    {{ result.label }}
+  </span>
+</ng-template>
+
+<!-- Template: Highlighted team name -->
+<ng-template #highlightedTeamNameRef let-team>
+  <strong>
+    {{ teamsMap()![team].name }}
+  </strong>
+</ng-template>
+
+<!-- Template: Normal team name -->
+<ng-template #normalTeamNameRef let-team>
+  <span>
+    {{ teamsMap()![team].name }}
+  </span>
 </ng-template>

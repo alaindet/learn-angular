@@ -5,6 +5,7 @@ import { CACHE_MAX_AGE } from '@app/core/constants';
 import { Team, TeamWithMatches } from '@app/features/teams';
 import { selectTeamsMap } from '@app/features/teams/store/selectors';
 import { MATCHES_FEATURE_NAME, MatchesFeatureState } from './state';
+import { MatchesReport } from '../types';
 
 const selectMatchesFeature = createFeatureSelector<MatchesFeatureState>(
   MATCHES_FEATURE_NAME,
@@ -91,5 +92,44 @@ export const selectMatchesGroupedByTeam = createSelector(
     }
 
     return Object.values(matchesMap);
+  },
+);
+
+export const selectMatchesReportByTeam = (teamId: string) => createSelector(
+  selectMatchesGroupedByTeam,
+  groupedMatches => {
+
+    let wins = 0;
+    let draws = 0;
+    let losses = 0;
+    let total = 0;
+
+    if (groupedMatches === null) {
+      return { wins, draws, losses, total };
+    }
+
+    const grouped = groupedMatches.find(g => g.team.id === teamId);
+
+    if (!grouped) {
+      return { wins, draws, losses, total };
+    }
+
+    grouped.matches.forEach(match => {
+      switch (match.winner) {
+        case teamId:
+          wins++;
+          break;
+        case null:
+          draws++;
+          break;
+        default:
+          losses++;
+          break;
+      }
+    });
+
+    total = wins + draws + losses;
+
+    return { wins, draws, losses, total };
   },
 );
