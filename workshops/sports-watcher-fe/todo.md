@@ -1,4 +1,3 @@
-- [ ] Notification does not work
 - [ ] Sign out does not work
 
 # Features

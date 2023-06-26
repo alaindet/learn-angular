@@ -61,14 +61,17 @@
           <button
             type="submit"
             class="btn btn-primary"
-            [disabled]="matchForm.invalid || (matchFormSameTeamError | async)"
+            [disabled]="matchForm.invalid"
           >
             Create match
           </button>
         </div>
+
       </form>
     </div>
-    <p *ngIf="matchFormSameTeamError | async">Cannot choose the same team!</p>
+    <p *ngIf="matchForm.hasError('sameTeam')">
+      {{ matchForm.errors!['sameTeam'] }}
+    </p>
   </div>
 </div>
 

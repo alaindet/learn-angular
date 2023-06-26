@@ -2,7 +2,6 @@ import { AsyncPipe, NgClass, NgFor, NgIf, NgTemplateOutlet } from '@angular/comm
 import { Component, OnInit, inject, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { Observable, map } from 'rxjs';
 
 import { selectUserIsAdmin } from '@app/features/user/store';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -11,6 +10,7 @@ import { selectTeams, selectTeamsMap } from '@app/features/teams/store';
 import { matchCreateActions, matchesFetchActions, selectMatches, selectMatchesGroupedByTeam, selectMatchesIsLoaded } from '../../store';
 import { ResultBadgePipe } from './result-badge.pipe';
 import { WINNER_TEAM_OPTIONS, WinnerTeam } from './winner-team-options';
+import { sameTeamValidator } from './same-team.validator';
 
 const imports = [
   NgIf,
@@ -35,6 +35,7 @@ export class MatchesPageComponent implements OnInit {
   private store = inject(Store);
   private formBuilder = inject(FormBuilder);
 
+  matchForm!: FormGroup;
   loaded = this.store.selectSignal(selectMatchesIsLoaded);
   matches = this.store.selectSignal(selectMatches);
   isAdmin = this.store.selectSignal(selectUserIsAdmin);
@@ -44,9 +45,6 @@ export class MatchesPageComponent implements OnInit {
   winnerTeamOptions = WINNER_TEAM_OPTIONS;
   teamsMap = this.store.selectSignal(selectTeamsMap);
   openAccordion = signal<string | null>(null);
-
-  matchForm!: FormGroup;
-  matchFormSameTeamError!: Observable<boolean>;
 
   ngOnInit() {
     this.store.dispatch(matchesFetchActions.fetchMatches());
@@ -86,13 +84,15 @@ export class MatchesPageComponent implements OnInit {
   }
 
   private initForm(): void {
-    this.matchForm = this.formBuilder.group({
+
+    const controls = {
       home: ['', [Validators.required]],
       away: ['', [Validators.required]],
       winner: ['', [Validators.required]],
-    });
+    };
 
-    this.matchFormSameTeamError = this.matchForm.valueChanges
-      .pipe(map(values => values.home === values.away));
+    const validators = [sameTeamValidator];
+
+    this.matchForm = this.formBuilder.group(controls, { validators });
   }
 }
