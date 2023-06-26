@@ -1,4 +1,4 @@
-import { Component, OnInit, computed, effect, inject } from '@angular/core';
+import { Component, OnInit, computed, inject } from '@angular/core';
 import { JsonPipe, NgClass, NgIf } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import { Store } from '@ngrx/store';
@@ -7,7 +7,6 @@ import { selectUiIsLoading, selectUiNotification, uiNotificationsActions } from 
 import { LinearSpinnerComponent } from '@app/common/components';
 import { NotificationType } from '@app/common/types';
 import { signInActions } from '@app/features/user/store';
-import { interval } from 'rxjs';
 
 const imports = [
   NgIf,
