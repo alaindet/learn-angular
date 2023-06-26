@@ -4,6 +4,7 @@ import { Store } from '@ngrx/store';
 
 import { uiSetPageTitle } from '@app/core/store/ui';
 import { matchesFetchActions, selectMatchesIsLoaded, selectMatchesRankings } from '@app/features/matches/store';
+import { teamsFetchActions } from '@app/features/teams/store';
 
 const imports = [
   NgIf,
@@ -25,6 +26,7 @@ export class RankingsPageComponent implements OnInit {
   rankings = this.store.selectSignal(selectMatchesRankings);
 
   ngOnInit() {
+    this.store.dispatch(teamsFetchActions.fetchTeams());
     this.store.dispatch(matchesFetchActions.fetchMatches());
     this.store.dispatch(uiSetPageTitle({ title: 'Rankings - Sports Watcher' }));
   }

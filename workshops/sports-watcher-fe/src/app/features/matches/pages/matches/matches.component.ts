@@ -6,7 +6,7 @@ import { Store } from '@ngrx/store';
 import { selectUserIsAdmin } from '@app/features/user/store';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { uiSetPageTitle } from '@app/core/store/ui';
-import { selectTeams, selectTeamsMap } from '@app/features/teams/store';
+import { selectTeams, selectTeamsMap, teamsFetchActions } from '@app/features/teams/store';
 import { matchCreateActions, matchesFetchActions, selectMatches, selectMatchesGroupedByTeam, selectMatchesIsLoaded } from '../../store';
 import { ResultBadgePipe } from './result-badge.pipe';
 import { WINNER_TEAM_OPTIONS, WinnerTeam } from './winner-team-options';
@@ -47,6 +47,7 @@ export class MatchesPageComponent implements OnInit {
   openAccordion = signal<string | null>(null);
 
   ngOnInit() {
+    this.store.dispatch(teamsFetchActions.fetchTeams());
     this.store.dispatch(matchesFetchActions.fetchMatches());
     this.store.dispatch(uiSetPageTitle({ title: 'Matches - Sports Watcher' }));
     this.initForm();

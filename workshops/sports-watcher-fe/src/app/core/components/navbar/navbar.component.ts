@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { Router, RouterLink, RouterLinkActive } from '@angular/router';
+import { RouterLink, RouterLinkActive } from '@angular/router';
 import { NgIf } from '@angular/common';
 import { Store } from '@ngrx/store';
 
@@ -20,12 +20,10 @@ const imports = [
 })
 export class NavbarComponent {
 
-  private router = inject(Router);
   private store = inject(Store);
 
   onSignOut() {
     const message = 'You signed out';
     this.store.dispatch(signInActions.signOut({ message }));
-    this.router.navigate(['/signin']);
   }
 }

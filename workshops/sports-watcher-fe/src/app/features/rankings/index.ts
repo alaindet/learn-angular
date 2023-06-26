@@ -1,3 +1,3 @@
-import { RANKINGS_ROUTES } from './rankings.routes';
+import { RankingsPageComponent } from './rankings.component';
 
-export default RANKINGS_ROUTES;
+export default RankingsPageComponent;
