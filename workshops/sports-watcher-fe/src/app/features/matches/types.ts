@@ -11,7 +11,10 @@ export type CreateMatchDto = Omit<Match, 'id'>;
 
 export type MatchesReport = {
   wins: number;
+  winsPercentage: number;
   draws: number;
+  drawsPercentage: number;
   losses: number;
+  lossesPercentage: number;
   total: number;
 };

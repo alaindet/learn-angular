@@ -29,13 +29,19 @@
       <strong>Score:</strong> TODO 123
     </li>
     <li class="list-group-item">
-      <strong>Wins:</strong> {{ matchesReport().wins }}
+      <strong>Wins:</strong>
+      {{ matchesReport().wins }}
+      ({{ matchesReport().winsPercentage }}%)
     </li>
     <li class="list-group-item">
-      <strong>Draws:</strong> {{ matchesReport().draws }}
+      <strong>Draws:</strong>
+      {{ matchesReport().draws }}
+      ({{ matchesReport().drawsPercentage }}%)
     </li>
     <li class="list-group-item">
-      <strong>Losses:</strong> {{ matchesReport().losses }}
+      <strong>Losses:</strong>
+      {{ matchesReport().losses }}
+      ({{ matchesReport().lossesPercentage }}%)
     </li>
     <li class="list-group-item">
       <strong>Total matches:</strong> {{ matchesReport().total }}

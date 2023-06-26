@@ -40,6 +40,14 @@ export class MatchesEffects {
     )),
   ));
 
+  autoFetchMatchesAfterWrite$ = createEffect(() => this.actions.pipe(
+    ofType(
+      matchCreateActions.createMatchSuccess,
+      matchDeleteActions.deleteMatchSuccess,
+    ),
+    switchMap(() => of(matchesFetchActions.forceFetchMatches())),
+  ));
+
   createMatch$ = createEffect(() => this.actions.pipe(
     ofType(matchCreateActions.createMatch),
     switchMap(({ dto }) => this.matchesService.createMatch(dto).pipe(

@@ -97,21 +97,20 @@ export const selectMatchesGroupedByTeam = createSelector(
 
 export const selectMatchesReportByTeam = (teamId: string) => createSelector(
   selectMatchesGroupedByTeam,
-  groupedMatches => {
+  (groupedMatches): MatchesReport => {
 
     let wins = 0;
     let draws = 0;
     let losses = 0;
-    let total = 0;
 
     if (groupedMatches === null) {
-      return { wins, draws, losses, total };
+      return createEmptyMatchesReport();
     }
 
     const grouped = groupedMatches.find(g => g.team.id === teamId);
 
     if (!grouped) {
-      return { wins, draws, losses, total };
+      return createEmptyMatchesReport();
     }
 
     grouped.matches.forEach(match => {
@@ -128,8 +127,32 @@ export const selectMatchesReportByTeam = (teamId: string) => createSelector(
       }
     });
 
-    total = wins + draws + losses;
+    const total = wins + draws + losses;
+    const winsPercentage = Number((100 * (wins / total)).toFixed(2));
+    const drawsPercentage = Number((100 * (draws / total)).toFixed(2));
+    const lossesPercentage = Number((100 * (losses / total)).toFixed(2));
 
-    return { wins, draws, losses, total };
+    return {
+      wins,
+      winsPercentage,
+      draws,
+      drawsPercentage,
+      losses,
+      lossesPercentage,
+      total,
+    };
   },
 );
+
+// Helper
+function createEmptyMatchesReport(): MatchesReport {
+  return {
+    wins: 0,
+    winsPercentage: 0,
+    draws: 0,
+    drawsPercentage: 0,
+    losses: 0,
+    lossesPercentage: 0,
+    total: 0,
+  };
+}
