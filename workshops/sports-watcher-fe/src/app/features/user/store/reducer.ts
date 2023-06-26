@@ -11,14 +11,18 @@ export const userReducer = createReducer(USER_FEATURE_INITIAL_STATE,
     return { ...state, status };
   }),
 
-  on(signInActions.signInSuccess, (state, { user }) => {
-    const newState = { ...state };
-    newState.status = LoadingStatus.Idle;
-    newState.email = user.email;
-    newState.role = user.role;
-    newState.token = user.token;
-    return newState;
-  }),
+  on(
+    signInActions.signInSuccess,
+    signInActions.autoSignInSuccess,
+    (state, { user }) => {
+      const newState = { ...state };
+      newState.status = LoadingStatus.Idle;
+      newState.email = user.email;
+      newState.role = user.role;
+      newState.token = user.token;
+      return newState;
+    },
+  ),
 
   on(signInActions.signInError, state => {
     const newState = { ...state };

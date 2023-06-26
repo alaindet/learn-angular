@@ -20,10 +20,7 @@ export class UserEffects {
     switchMap(() => {
       const user = this.userService.fetchFromStorage();
       if (!user) return EMPTY;
-      return of(signInActions.signInSuccess({
-        user: user!,
-        message: 'You signed in',
-      }));
+      return of(signInActions.autoSignInSuccess({ user: user! }));
     }),
   ));
 
@@ -31,11 +28,17 @@ export class UserEffects {
     ofType(signInActions.signIn),
     switchMap(({ credentials }) => this.userService.signIn(credentials).pipe(
       map(({ data: user, message }) => {
+
+        // TODO: Remove
+        console.log('Trying to sign in...');
+
         return signInActions.signInSuccess({ user, message });
       }),
-      catchError(({ message }) => of(signInActions.signInError({ message }))),
+      catchError(err => {
+        return of(signInActions.signInError({ message: err.error.message }));
+      })),
     )),
-  ));
+  );
 
   onSignIn$ = createEffect(() => this.actions.pipe(
     ofType(signInActions.signInSuccess),

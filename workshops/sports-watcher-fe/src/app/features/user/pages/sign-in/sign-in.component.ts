@@ -39,7 +39,6 @@ export class SignInPageComponent implements OnInit {
     const email = this.loginForm.value.email!;
     const password = this.loginForm.value.password!;
     const credentials = { email, password };
-
     this.store.dispatch(signInActions.signIn({ credentials }));
   }
 
