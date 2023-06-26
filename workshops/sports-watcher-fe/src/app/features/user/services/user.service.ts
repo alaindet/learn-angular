@@ -1,6 +1,6 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, map } from 'rxjs';
+import { Observable } from 'rxjs';
 
 import { User, UserCredentials } from '../types';
 import { DataResponse } from '@app/common/types';
@@ -14,10 +14,9 @@ export class UserService {
   private http = inject(HttpClient);
   private storageKey = 'sports_watcher.user';
 
-  signIn(credentials: UserCredentials): Observable<User> {
+  signIn(credentials: UserCredentials): Observable<DataResponse<User>> {
     const url = `${environment.apiUrl}/users/signin`;
-    return this.http.post<DataResponse<User>>(url, credentials)
-      .pipe(map(res => res.data));
+    return this.http.post<DataResponse<User>>(url, credentials);
   }
 
   fetchFromStorage(): User | null {

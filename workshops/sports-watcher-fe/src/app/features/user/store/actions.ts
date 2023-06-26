@@ -7,9 +7,9 @@ export const signInActions = createActionGroup({
   events: {
     'Auto sign in': emptyProps(),
     'Sign in': props<{ credentials: UserCredentials }>(),
-    'Sign in success': props<{ user: User }>(),
+    'Sign in success': props<{ user: User, message: string }>(),
     'Sign in error': props<{ message: string }>(),
-    'Sign out': emptyProps(),
+    'Sign out': props<{ message: string }>(),
   },
 });
 

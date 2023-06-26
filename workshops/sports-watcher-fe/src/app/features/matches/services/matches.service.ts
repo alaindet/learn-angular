@@ -13,18 +13,18 @@ export class MatchesService {
 
   private http = inject(HttpClient);
 
-  getAllMatches(): Observable<Match[]> {
+  getAllMatches(): Observable<DataResponse<Match[]>> {
     const url = `${environment.apiUrl}/matches`;
-    return this.http.get<DataResponse<Match[]>>(url).pipe(map(r => r.data));
+    return this.http.get<DataResponse<Match[]>>(url);
   }
 
-  createMatch(dto: CreateMatchDto): Observable<Match> {
+  createMatch(dto: CreateMatchDto): Observable<DataResponse<Match>> {
     const url = `${environment.apiUrl}/matches`;
-    return this.http.post<DataResponse<Match>>(url, dto).pipe(map(r => r.data));
+    return this.http.post<DataResponse<Match>>(url, dto);
   }
 
-  deleteMatch(matchId: Match['id']): Observable<string> {
+  deleteMatch(matchId: Match['id']): Observable<{ message: string }> {
     const url = `${environment.apiUrl}/matches/${matchId}`;
-    return this.http.delete<{ message: string }>(url).pipe(map(r => r.message));
+    return this.http.delete<{ message: string }>(url);
   }
 }

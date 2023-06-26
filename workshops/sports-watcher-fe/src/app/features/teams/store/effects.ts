@@ -27,8 +27,12 @@ export class TeamsEffects {
       }
 
       return this.teamsService.getAllTeams().pipe(
-        map(teams => teamsFetchActions.fetchTeamsSuccess({ teams })),
-        catchError(({ message }) => of(teamsFetchActions.fetchTeamsError({ message }))),
+        map(({ data: teams, message }) => {
+          return teamsFetchActions.fetchTeamsSuccess({ teams, message });
+        }),
+        catchError(({ message }) => {
+          return of(teamsFetchActions.fetchTeamsError({ message }));
+        }),
       );
     }),
   ));
@@ -36,8 +40,12 @@ export class TeamsEffects {
   forceFetchTeams$ = createEffect(() => this.actions.pipe(
     ofType(teamsFetchActions.forceFetchTeams),
     switchMap(() => this.teamsService.getAllTeams().pipe(
-      map(teams => teamsFetchActions.fetchTeamsSuccess({ teams })),
-      catchError(({ message }) => of(teamsFetchActions.fetchTeamsError({ message }))),
+      map(({ data: teams, message }) => {
+        return teamsFetchActions.fetchTeamsSuccess({ teams, message });
+      }),
+      catchError(({ message }) => {
+        return of(teamsFetchActions.fetchTeamsError({ message }));
+      }),
     )),
   ));
 
@@ -60,7 +68,9 @@ export class TeamsEffects {
   createTeam$ = createEffect(() => this.actions.pipe(
     ofType(teamCreateActions.createTeam),
     switchMap(({ team }) => this.teamsService.createTeam(team).pipe(
-      map(team => teamCreateActions.createTeamSuccess({ team })),
+      map(({ data: team, message }) => {
+        return teamCreateActions.createTeamSuccess({ team, message });
+      }),
       catchError(({ message }) => of(teamCreateActions.createTeamError({ message }))),
     )),
   ));
@@ -68,8 +78,12 @@ export class TeamsEffects {
   deleteTeam$ = createEffect(() => this.actions.pipe(
     ofType(teamDeleteActions.deleteTeam),
     switchMap(({ team }) => this.teamsService.deleteTeam(team.id).pipe(
-      map(() => teamDeleteActions.deleteTeamSuccess({ team })),
-      catchError(({ message }) => of(teamDeleteActions.deleteTeamError({ message }))),
+      map(({ message }) => {
+        return teamDeleteActions.deleteTeamSuccess({ team, message });
+      }),
+      catchError(({ message }) => {
+        return of(teamDeleteActions.deleteTeamError({ message }));
+      }),
     )),
   ));
 

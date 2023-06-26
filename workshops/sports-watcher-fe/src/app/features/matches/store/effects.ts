@@ -26,8 +26,12 @@ export class MatchesEffects {
       }
 
       return this.matchesService.getAllMatches().pipe(
-        map(matches => matchesFetchActions.fetchMatchesSuccess({ matches })),
-        catchError(({ message }) => of(matchesFetchActions.fetchMatchesError({ message }))),
+        map(({ data: matches, message}) => {
+          return matchesFetchActions.fetchMatchesSuccess({ matches, message });
+        }),
+        catchError(({ message }) => {
+          return of(matchesFetchActions.fetchMatchesError({ message }));
+        }),
       );
     }),
   ));
@@ -35,8 +39,12 @@ export class MatchesEffects {
   forceFetchMatches$ = createEffect(() => this.actions.pipe(
     ofType(matchesFetchActions.forceFetchMatches),
     switchMap(() => this.matchesService.getAllMatches().pipe(
-      map(matches => matchesFetchActions.fetchMatchesSuccess({ matches })),
-      catchError(({ message }) => of(matchesFetchActions.fetchMatchesError({ message }))),
+      map(({ data: matches, message }) => {
+        return matchesFetchActions.fetchMatchesSuccess({ matches, message });
+      }),
+      catchError(({ message }) => {
+        return of(matchesFetchActions.fetchMatchesError({ message }));
+      }),
     )),
   ));
 
@@ -51,16 +59,24 @@ export class MatchesEffects {
   createMatch$ = createEffect(() => this.actions.pipe(
     ofType(matchCreateActions.createMatch),
     switchMap(({ dto }) => this.matchesService.createMatch(dto).pipe(
-      map(match => matchCreateActions.createMatchSuccess({ match })),
-      catchError(({ message }) => of(matchCreateActions.createMatchError({ message }))),
+      map(({ data: match, message }) => {
+        return matchCreateActions.createMatchSuccess({ match, message });
+      }),
+      catchError(({ message }) => {
+        return of(matchCreateActions.createMatchError({ message }));
+      }),
     )),
   ));
 
   deleteMatch$ = createEffect(() => this.actions.pipe(
     ofType(matchDeleteActions.deleteMatch),
     switchMap(({ match }) => this.matchesService.deleteMatch(match.id).pipe(
-      map(() => matchDeleteActions.deleteMatchSuccess({ match })),
-      catchError(({ message }) => of(matchDeleteActions.deleteMatchError({ message }))),
+      map(({ message }) => {
+        return matchDeleteActions.deleteMatchSuccess({ match, message });
+      }),
+      catchError(({ message }) => {
+        return of(matchDeleteActions.deleteMatchError({ message }));
+      }),
     )),
   ));
 

@@ -1,5 +1,5 @@
 import { Component, OnInit, computed, effect, inject } from '@angular/core';
-import { NgClass, NgIf } from '@angular/common';
+import { JsonPipe, NgClass, NgIf } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import { Store } from '@ngrx/store';
 
@@ -7,11 +7,13 @@ import { selectUiIsLoading, selectUiNotification, uiNotificationsActions } from 
 import { LinearSpinnerComponent } from '@app/common/components';
 import { NotificationType } from '@app/common/types';
 import { signInActions } from '@app/features/user/store';
+import { interval } from 'rxjs';
 
 const imports = [
   NgIf,
   NgClass,
   RouterOutlet,
+  JsonPipe,
   LinearSpinnerComponent,
 ];
 
@@ -29,16 +31,11 @@ export class AppComponent implements OnInit {
   notificationCssClass = computed(() => {
     switch (this.notification()?.type) {
       case NotificationType.Success: return 'alert-success';
-      case NotificationType.Error: return 'alert-error';
+      case NotificationType.Error: return 'alert-danger';
       default: return '';
     }
   });
   loading = false;
-
-  // TODO: Remove
-  onNotificationChange = effect(() => {
-    console.log('Notification changed', this.notification());
-  });
 
   ngOnInit() {
     this.store.dispatch(signInActions.autoSignIn());

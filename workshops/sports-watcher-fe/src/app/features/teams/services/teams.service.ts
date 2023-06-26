@@ -13,18 +13,18 @@ export class TeamsService {
 
   private http = inject(HttpClient);
 
-  getAllTeams(): Observable<Team[]> {
+  getAllTeams(): Observable<DataResponse<Team[]>> {
     const url = `${environment.apiUrl}/teams`;
-    return this.http.get<DataResponse<Team[]>>(url).pipe(map(r => r.data));
+    return this.http.get<DataResponse<Team[]>>(url);
   }
 
-  createTeam(team: Team): Observable<Team> {
+  createTeam(team: Team): Observable<DataResponse<Team>> {
     const url = `${environment.apiUrl}/teams`;
-    return this.http.post<DataResponse<Team>>(url, team).pipe(map(r => r.data));
+    return this.http.post<DataResponse<Team>>(url, team);
   }
 
-  deleteTeam(teamId: Team['id']): Observable<string> {
+  deleteTeam(teamId: Team['id']): Observable<{ message: string }> {
     const url = `${environment.apiUrl}/teams/${teamId}`;
-    return this.http.delete<{ message: string }>(url).pipe(map(r => r.message));
+    return this.http.delete<{ message: string }>(url);
   }
 }

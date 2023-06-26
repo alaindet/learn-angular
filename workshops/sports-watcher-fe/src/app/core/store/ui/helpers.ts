@@ -28,8 +28,7 @@ export function createUiController(actions$: Observable<any>) {
   function showSuccessOn(...targetActions: any[]) {
     return createEffect(() => actions$.pipe(
       onActions(targetActions),
-      switchMap(action => {
-        const message = action.message;
+      switchMap(({ message }) => {
         return of(uiNotificationsActions.addSuccess({ message }));
       }),
     ));
@@ -38,8 +37,7 @@ export function createUiController(actions$: Observable<any>) {
   function showErrorOn(...targetActions: any[]) {
     return createEffect(() => actions$.pipe(
       onActions(targetActions),
-      switchMap(action => {
-        const message = action.message;
+      switchMap(({ message }) => {
         return of(uiNotificationsActions.addError({ message }));
       }),
     ));

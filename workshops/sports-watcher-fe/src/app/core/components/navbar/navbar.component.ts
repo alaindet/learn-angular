@@ -24,7 +24,8 @@ export class NavbarComponent {
   private store = inject(Store);
 
   onSignOut() {
-    this.store.dispatch(signInActions.signOut());
+    const message = 'You signed out';
+    this.store.dispatch(signInActions.signOut({ message }));
     this.router.navigate(['/signin']);
   }
 }

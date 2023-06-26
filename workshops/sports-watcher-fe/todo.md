@@ -1,4 +1,5 @@
 - [ ] Notification does not work
+- [ ] Sign out does not work
 
 # Features
 - [ ] No modules

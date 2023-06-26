@@ -13,7 +13,7 @@ export const uiReducer = createReducer(
     return { ...state, notification };
   }),
 
-  on(uiNotificationsActions.addSuccess, (state, { message }) => {
+  on(uiNotificationsActions.addError, (state, { message }) => {
     const id = Date.now() + Math.random();
     const notification = { id, type: NotificationType.Error, message };
     return { ...state, notification };
