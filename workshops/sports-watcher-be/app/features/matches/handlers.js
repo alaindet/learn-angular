@@ -25,7 +25,13 @@ function createMatch(req, res) {
     });
   }
 
-  if (!inputWinner) {
+  if (
+    !(
+      inputWinner === null || // Draw
+      inputWinner === inputHome || // Home wins
+      inputWinner === inputAway // Away wins
+    )
+  ) {
     return res.status(400).send({
       message: 'Missing/invalid winner team ID',
     });

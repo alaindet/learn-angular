@@ -12,9 +12,9 @@ for (const team of teams) {
 
       const rnd = Math.random();
 
-      const winner = rnd < 0.333
+      const winner = rnd < 0.2
         ? null
-        : (rnd < 0.666 ? team.id : otherTeam.id);
+        : (rnd < 0.6 ? team.id : otherTeam.id);
 
       results.push({
         id: String(Date.now() * Math.random()),
