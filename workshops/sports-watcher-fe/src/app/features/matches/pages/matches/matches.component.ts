@@ -1,7 +1,6 @@
 import { AsyncPipe, NgClass, NgFor, NgIf, NgTemplateOutlet } from '@angular/common';
 import { Component, OnInit, inject, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { toSignal } from '@angular/core/rxjs-interop';
 import { Store } from '@ngrx/store';
 import { Observable, map } from 'rxjs';
 
@@ -40,8 +39,8 @@ export class MatchesPageComponent implements OnInit {
   matches = this.store.selectSignal(selectMatches);
   isAdmin = this.store.selectSignal(selectUserIsAdmin);
   matchesGroupedByTeam = this.store.selectSignal(selectMatchesGroupedByTeam);
-  homeTeamOptions = this.store.selectSignal(selectTeams); // TODO: Filter
-  awayTeamOptions = this.store.selectSignal(selectTeams); // TODO: Filter
+  homeTeamOptions = this.store.selectSignal(selectTeams); // TODO: Filter?
+  awayTeamOptions = this.store.selectSignal(selectTeams); // TODO: Filter?
   winnerTeamOptions = WINNER_TEAM_OPTIONS;
   teamsMap = this.store.selectSignal(selectTeamsMap);
   openAccordion = signal<string | null>(null);

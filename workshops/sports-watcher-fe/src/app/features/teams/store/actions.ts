@@ -5,28 +5,28 @@ import { Team } from '../types';
 export const teamsFetchActions = createActionGroup({
   source: 'Teams',
   events: {
-    fetchTeams: emptyProps(),
-    fetchTeamsCached: emptyProps(),
-    forceFetchTeams: emptyProps(),
-    fetchTeamsSuccess: props<{ teams: Team[] }>(),
-    fetchTeamsError: props<{ message: string }>(),
+    'Fetch teams': emptyProps(),
+    'Fetch teams cached': emptyProps(),
+    'Force fetch teams': emptyProps(),
+    'Fetch teams success': props<{ teams: Team[] }>(),
+    'Fetch teams error': props<{ message: string }>(),
   },
 });
 
 export const teamCreateActions = createActionGroup({
   source: 'Teams',
   events: {
-    createTeam: props<{ team: Team }>(),
-    createTeamSuccess: props<{ team: Team }>(),
-    createTeamError: props<{ message: string }>(),
+    'Create team': props<{ team: Team }>(),
+    'Create team success': props<{ team: Team }>(),
+    'Create team error': props<{ message: string }>(),
   },
 });
 
 export const teamDeleteActions = createActionGroup({
   source: 'Teams',
   events: {
-    deleteTeam: props<{ team: Team }>(),
-    deleteTeamSuccess: props<{ team: Team }>(),
-    deleteTeamError: props<{ message: string }>(),
+    'Delete team': props<{ team: Team }>(),
+    'Delete team success': props<{ team: Team }>(),
+    'Delete team error': props<{ message: string }>(),
   },
 });

@@ -18,3 +18,10 @@ export type MatchesReport = {
   lossesPercentage: number;
   total: number;
 };
+
+export type TeamRanking = {
+  ranking: number;
+  score: number;
+  team: Team;
+  report: MatchesReport;
+};

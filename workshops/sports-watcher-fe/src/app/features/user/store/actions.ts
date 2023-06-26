@@ -5,18 +5,18 @@ import { User, UserCredentials } from '../types';
 export const signInActions = createActionGroup({
   source: 'User',
   events: {
-    autoSignIn: emptyProps(),
-    signIn: props<{ credentials: UserCredentials }>(),
-    signInSuccess: props<{ user: User }>(),
-    signInError: props<{ message: string }>(),
-    signOut: emptyProps(),
+    'Auto sign in': emptyProps(),
+    'Sign in': props<{ credentials: UserCredentials }>(),
+    'Sign in success': props<{ user: User }>(),
+    'Sign in error': props<{ message: string }>(),
+    'Sign out': emptyProps(),
   },
 });
 
 export const storageActions = createActionGroup({
   source: 'User',
   events: {
-    storeUser: props<{ user: User }>(),
-    fetchUser: emptyProps(),
+    'Store user': props<{ user: User }>(),
+    'Fetch user': emptyProps(),
   },
 });

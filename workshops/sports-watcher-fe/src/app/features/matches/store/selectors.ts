@@ -4,8 +4,9 @@ import { LoadingStatus } from '@app/common/types';
 import { CACHE_MAX_AGE } from '@app/core/constants';
 import { Team, TeamWithMatches } from '@app/features/teams';
 import { selectTeamsMap } from '@app/features/teams/store/selectors';
+import { MatchesReport, TeamRanking } from '../types';
 import { MATCHES_FEATURE_NAME, MatchesFeatureState } from './state';
-import { MatchesReport } from '../types';
+import { calculateMatchesReport, createEmptyMatchesReport, sortRankings } from './helpers';
 
 const selectMatchesFeature = createFeatureSelector<MatchesFeatureState>(
   MATCHES_FEATURE_NAME,
@@ -99,10 +100,6 @@ export const selectMatchesReportByTeam = (teamId: string) => createSelector(
   selectMatchesGroupedByTeam,
   (groupedMatches): MatchesReport => {
 
-    let wins = 0;
-    let draws = 0;
-    let losses = 0;
-
     if (groupedMatches === null) {
       return createEmptyMatchesReport();
     }
@@ -113,46 +110,32 @@ export const selectMatchesReportByTeam = (teamId: string) => createSelector(
       return createEmptyMatchesReport();
     }
 
-    grouped.matches.forEach(match => {
-      switch (match.winner) {
-        case teamId:
-          wins++;
-          break;
-        case null:
-          draws++;
-          break;
-        default:
-          losses++;
-          break;
-      }
-    });
-
-    const total = wins + draws + losses;
-    const winsPercentage = Number((100 * (wins / total)).toFixed(2));
-    const drawsPercentage = Number((100 * (draws / total)).toFixed(2));
-    const lossesPercentage = Number((100 * (losses / total)).toFixed(2));
-
-    return {
-      wins,
-      winsPercentage,
-      draws,
-      drawsPercentage,
-      losses,
-      lossesPercentage,
-      total,
-    };
+    return calculateMatchesReport(teamId, grouped.matches);
   },
 );
 
-// Helper
-function createEmptyMatchesReport(): MatchesReport {
-  return {
-    wins: 0,
-    winsPercentage: 0,
-    draws: 0,
-    drawsPercentage: 0,
-    losses: 0,
-    lossesPercentage: 0,
-    total: 0,
-  };
-}
+export const selectMatchesRankings = createSelector(
+  selectMatchesGroupedByTeam,
+  (groupedMatches): TeamRanking[] | null => {
+
+    if (groupedMatches === null) {
+      return [];
+    }
+
+    let rankings = groupedMatches.map(({ matches, team }) => {
+      const report = calculateMatchesReport(team.id, matches);
+      let score = report.wins * 3 + report.draws * 1;
+      return { ranking: -1, score, report, team };
+    });
+
+    rankings.sort(sortRankings);
+
+    let rank = 0;
+    rankings = rankings.map(r => {
+      rank++;
+      return { ...r, ranking: rank };
+    });
+
+    return rankings;
+  },
+);

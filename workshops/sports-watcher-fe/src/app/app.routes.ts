@@ -22,6 +22,10 @@ let routes: Routes = [
         loadChildren: () => import('@app/features/matches'),
       },
       {
+        path: 'rankings',
+        loadChildren: () => import('@app/features/rankings'),
+      },
+      {
         path: 'teams',
         loadChildren: () => import('@app/features/teams'),
       },

@@ -5,17 +5,17 @@ import { Notification } from '@app/common/types';
 export const uiNotificationsActions = createActionGroup({
   source: 'UI/Notifications',
   events: {
-    addSuccess: props<{ message: Notification['message'] }>(),
-    addError: props<{ message: Notification['message'] }>(),
-    dismiss: emptyProps(),
+    'Add success': props<{ message: Notification['message'] }>(),
+    'Add error': props<{ message: Notification['message'] }>(),
+    'Dismiss': emptyProps(),
   },
 });
 
 export const uiLoaderActions = createActionGroup({
   source: 'UI/Loader',
   events: {
-    start: emptyProps(),
-    stop: emptyProps(),
+    'Start': emptyProps(),
+    'Stop': emptyProps(),
   },
 });
 

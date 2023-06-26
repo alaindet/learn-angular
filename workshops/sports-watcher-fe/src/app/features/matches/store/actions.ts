@@ -5,28 +5,28 @@ import { CreateMatchDto, Match } from '../types';
 export const matchesFetchActions = createActionGroup({
   source: 'Matches',
   events: {
-    fetchMatches: emptyProps(),
-    fetchMatchesCached: emptyProps(),
-    forceFetchMatches: emptyProps(),
-    fetchMatchesSuccess: props<{ matches: Match[] }>(),
-    fetchMatchesError: props<{ message: string }>(),
+    'Fetch matches': emptyProps(),
+    'Fetch matches cached': emptyProps(),
+    'Force fetch matches': emptyProps(),
+    'Fetch matches success': props<{ matches: Match[] }>(),
+    'Fetch matches error': props<{ message: string }>(),
   },
 });
 
 export const matchCreateActions = createActionGroup({
   source: 'Matches',
   events: {
-    createMatch: props<{ dto: CreateMatchDto }>(),
-    createMatchSuccess: props<{ match: Match }>(),
-    createMatchError: props<{ message: string }>(),
+    'Create match': props<{ dto: CreateMatchDto }>(),
+    'Create match success': props<{ match: Match }>(),
+    'Create match error': props<{ message: string }>(),
   },
 });
 
 export const matchDeleteActions = createActionGroup({
   source: 'Matches',
   events: {
-    deleteMatch: props<{ match: Match }>(),
-    deleteMatchSuccess: props<{ match: Match }>(),
-    deleteMatchError: props<{ message: string }>(),
+    'Delete match': props<{ match: Match }>(),
+    'Delete match success': props<{ match: Match }>(),
+    'Delete match error': props<{ message: string }>(),
   },
 });
