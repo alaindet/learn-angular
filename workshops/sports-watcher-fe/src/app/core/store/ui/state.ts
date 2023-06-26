@@ -11,7 +11,7 @@ export const UI_FEATURE_NAME = 'ui';
 
 export const UI_FEATURE_INITIAL_STATE: UiFeatureState = {
   notification: null,
-  notificationTimeout: 3000,
+  notificationTimeout: 5000,
   loading: false,
   title: 'Sports Watcher App',
 };
