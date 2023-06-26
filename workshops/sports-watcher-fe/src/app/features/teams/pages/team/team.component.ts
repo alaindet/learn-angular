@@ -5,7 +5,7 @@ import { Store } from '@ngrx/store';
 
 import { selectTeam, selectTeamsIsLoaded, teamDeleteActions, teamsFetchActions } from '../../store';
 import { selectUserIsAdmin } from '@app/features/user/store';
-import { matchesFetchActions, selectMatchesReportByTeam } from '@app/features/matches/store';
+import { matchesFetchActions, selectMatchesRankingByTeam, selectMatchesReportByTeam } from '@app/features/matches/store';
 
 const imports = [
   NgIf,
@@ -31,6 +31,7 @@ export class TeamPageComponent implements OnInit {
   team = this.store.selectSignal(selectTeam(this.teamId));
   isAdmin = this.store.selectSignal(selectUserIsAdmin);
   matchesReport = this.store.selectSignal(selectMatchesReportByTeam(this.teamId));
+  ranking = this.store.selectSignal(selectMatchesRankingByTeam(this.teamId));
 
   ngOnInit() {
     this.store.dispatch(teamsFetchActions.fetchTeams());

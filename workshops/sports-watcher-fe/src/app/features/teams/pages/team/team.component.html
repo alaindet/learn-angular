@@ -19,32 +19,54 @@
 
 <ng-container *ngIf="loaded(); else loadingRef">
   <ul class="list-group">
+
+    <!-- Name -->
     <li class="list-group-item">
-      <strong>Name: </strong> {{ team()!.name }}
+      <strong>Name: </strong>
+      {{ team()!.name }}
     </li>
-    <li class="list-group-item">
-      <strong>Ranking:</strong> TODO #1
-    </li>
-    <li class="list-group-item">
-      <strong>Score:</strong> TODO 123
-    </li>
+
+    <ng-container *ngIf="ranking() as ranking">
+
+      <!-- Ranking -->
+      <li class="list-group-item">
+        <strong>Ranking:</strong>
+        {{ ranking.ranking }}
+      </li>
+
+      <!-- Score -->
+      <li class="list-group-item">
+        <strong>Score:</strong>
+        {{ ranking.score }}
+      </li>
+
+    </ng-container>
+
+    <!-- Wins -->
     <li class="list-group-item">
       <strong>Wins:</strong>
       {{ matchesReport().wins }}
       ({{ matchesReport().winsPercentage }}%)
     </li>
+
+    <!-- Draws -->
     <li class="list-group-item">
       <strong>Draws:</strong>
       {{ matchesReport().draws }}
       ({{ matchesReport().drawsPercentage }}%)
     </li>
+
+    <!-- Losses -->
     <li class="list-group-item">
       <strong>Losses:</strong>
       {{ matchesReport().losses }}
       ({{ matchesReport().lossesPercentage }}%)
     </li>
+
+    <!-- Total matches -->
     <li class="list-group-item">
-      <strong>Total matches:</strong> {{ matchesReport().total }}
+      <strong>Total matches:</strong>
+      {{ matchesReport().total }}
     </li>
   </ul>
 </ng-container>

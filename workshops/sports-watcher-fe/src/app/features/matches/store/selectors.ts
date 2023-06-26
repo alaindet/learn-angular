@@ -68,7 +68,7 @@ export const selectMatches = createSelector(
 export const selectMatchesGroupedByTeam = createSelector(
   selectMatches,
   selectTeamsMap,
-  (matches, teamsMap) => {
+  (matches, teamsMap): TeamWithMatches[] | null => {
     if (matches === null || teamsMap === null) {
       return null;
     }
@@ -92,7 +92,7 @@ export const selectMatchesGroupedByTeam = createSelector(
       matchesMap[match.away].matches.push(match);
     }
 
-    return Object.values(matchesMap);
+    return Object.values(matchesMap).filter(t => !!t.team);
   },
 );
 
@@ -137,5 +137,18 @@ export const selectMatchesRankings = createSelector(
     });
 
     return rankings;
+  },
+);
+
+export const selectMatchesRankingByTeam = (teamId: string) => createSelector(
+  selectMatchesRankings,
+  rankings => {
+
+    if (rankings === null) {
+      return null;
+    }
+
+    const ranking = rankings.find(r => r.team.id === teamId)!;
+    return ranking;
   },
 );
