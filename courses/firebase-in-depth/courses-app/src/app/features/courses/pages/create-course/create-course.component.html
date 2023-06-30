@@ -1,0 +1,60 @@
+<h1>Create course</h1>
+
+<form [formGroup]="theForm" (ngSubmit)="onSubmit()">
+
+  <!-- Title -->
+  <div class="form-control">
+    <label for="course-title">Title</label>
+    <input
+      type="text"
+      formControlName="title"
+      placeholder="Course title..."
+    >
+    <p *ngIf="fTitle.hasError('required')" class="form-control-error">
+      Required
+    </p>
+    <p
+      *ngIf="fTitle.hasError('minLength') || fTitle.hasError('maxLength')"
+      class="form-control-error"
+    >
+      Enter between 5 and 30 characters
+    </p>
+  </div>
+
+  <!-- Description -->
+  <div class="form-control">
+    <label for="course-title">Description</label>
+    <input
+      type="text"
+      formControlName="description"
+      placeholder="Course description..."
+    >
+    <p *ngIf="fTitle.hasError('required')" class="form-control-error">
+      Required
+    </p>
+    <p
+      *ngIf="fTitle.hasError('minLength') || fTitle.hasError('maxLength')"
+      class="form-control-error"
+    >
+      Enter between 5 and 144 characters
+    </p>
+  </div>
+
+  <!-- Category -->
+  <div class="form-control">
+    <label for="course-title">Category</label>
+    <select formControlName="category">
+      <option value="beginner">Beginner</option>
+      <option value="advanced">Advanced</option>
+    </select>
+    <p *ngIf="fCategory.hasError('required')" class="form-control-error">
+      Required
+    </p>
+  </div>
+
+  <!-- Submit -->
+  <div class="form-control">
+    <button type="submit">Create</button>
+  </div>
+
+</form>

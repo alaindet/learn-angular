@@ -1,1 +1,9 @@
 /* You can add global styles to this file, and also import other style files */
+.form-control {
+  display: block;
+  margin: 1rem 0;
+}
+
+.form-control-error {
+  color: red;
+}

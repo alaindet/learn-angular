@@ -1,5 +1,8 @@
 <h1>Courses</h1>
 
+<a routerLink="/courses/create">Create new course</a>
+<hr>
+
 <h2>Beginner</h2>
 <ng-container *ngIf="beginnerCourses$ | async as beginnerCourses">
   <ul *ngIf="beginnerCourses.length; else noBeginnerCoursesRef">

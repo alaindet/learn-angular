@@ -1,5 +1,5 @@
 import { Component, OnInit, inject } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { Observable } from 'rxjs';
 
 import { AsyncPipe, NgFor, NgIf } from '@angular/common';
@@ -10,6 +10,7 @@ const imports = [
   NgIf,
   NgFor,
   AsyncPipe,
+  RouterLink,
 ];
 
 @Component({
