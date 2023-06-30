@@ -22,6 +22,26 @@
 
 <hr>
 
+<h2>Intermediate</h2>
+
+<ng-container *ngIf="intermediateCourses$ | async as intermediateCourses">
+  <ul *ngIf="intermediateCourses.length; else noIntermediateCoursesRef">
+    <li *ngFor="let course of intermediateCourses">
+      <ul>
+        <li><strong>ID: </strong> {{ course.id }}</li>
+        <li><strong>Title: </strong> {{ course.title }}</li>
+        <li><strong>Description: </strong> {{ course.description }}</li>
+      </ul>
+    </li>
+  </ul>
+</ng-container>
+
+<ng-template #noIntermediateCoursesRef>
+  <p>No advanced courses</p>
+</ng-template>
+
+<hr>
+
 <h2>Advanced</h2>
 
 <ng-container *ngIf="advancedCourses$ | async as advancedCourses">

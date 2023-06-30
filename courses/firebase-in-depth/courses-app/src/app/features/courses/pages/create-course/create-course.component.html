@@ -44,8 +44,9 @@
   <div class="form-control">
     <label for="course-title">Category</label>
     <select formControlName="category">
-      <option value="beginner">Beginner</option>
-      <option value="advanced">Advanced</option>
+      <option value="Beginner">Beginner</option>
+      <option value="Intermediate">Intermediate</option>
+      <option value="Advanced">Advanced</option>
     </select>
     <p *ngIf="fCategory.hasError('required')" class="form-control-error">
       Required
@@ -54,7 +55,7 @@
 
   <!-- Submit -->
   <div class="form-control">
-    <button type="submit">Create</button>
+    <button type="submit" [disabled]="theForm.invalid">Create</button>
   </div>
 
 </form>

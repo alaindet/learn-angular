@@ -21,11 +21,11 @@ const imports = [
 })
 export class CoursesPageComponent implements OnInit {
 
-  private router = inject(Router);
   private svc = inject(CoursesService);
 
   beginnerCourses$!: Observable<Course[]>;
   advancedCourses$!: Observable<Course[]>;
+  intermediateCourses$!: Observable<Course[]>;
 
   ngOnInit() {
     this.fetchCourses();
@@ -33,6 +33,7 @@ export class CoursesPageComponent implements OnInit {
 
   private fetchCourses(): void {
     this.beginnerCourses$ = this.svc.loadCoursesByCategory('Beginner');
-    this.advancedCourses$ = this.svc.loadCoursesByCategory('Intermediate');
+    this.intermediateCourses$ = this.svc.loadCoursesByCategory('Intermediate');
+    this.advancedCourses$ = this.svc.loadCoursesByCategory('Advanced');
   }
 }

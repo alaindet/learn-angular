@@ -4,3 +4,5 @@ export type Course = {
   description: string;
   categories: string[];
 };
+
+export type CreateCourseDto = Omit<Course, 'id'>;

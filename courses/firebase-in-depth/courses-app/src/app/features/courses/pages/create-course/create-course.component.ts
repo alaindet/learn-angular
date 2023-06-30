@@ -1,6 +1,8 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { NgIf } from '@angular/common';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { CreateCourseDto } from 'src/app/core/types';
+import { CoursesService } from '../../services';
 
 const FIELD = {
   TITLE: 'title',
@@ -22,6 +24,7 @@ const imports = [
 export class CreateCoursePageComponent implements OnInit {
 
   private formBuilder = inject(FormBuilder);
+  private coursesService = inject(CoursesService);
 
   theForm!: FormGroup;
 
@@ -39,7 +42,18 @@ export class CreateCoursePageComponent implements OnInit {
       return;
     }
 
-    console.log(this.theForm.value);
+    const formVal = this.theForm.value;
+
+    const dto: CreateCourseDto = {
+      title: formVal[FIELD.TITLE],
+      description: formVal[FIELD.DESCRIPTION],
+      categories: [formVal[FIELD.CATEGORY]],
+    };
+
+    this.coursesService.createCourse(dto).subscribe({
+      error: err => console.error(err),
+      next: () => console.log('Course created'),
+    });
   }
 
   private initForm(): void {
