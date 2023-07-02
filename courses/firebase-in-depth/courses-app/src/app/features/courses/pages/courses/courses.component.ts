@@ -18,6 +18,7 @@ const imports = [
   standalone: true,
   imports,
   templateUrl: './courses.component.html',
+  styleUrls: ['./courses.component.scss'],
 })
 export class CoursesPageComponent implements OnInit {
 

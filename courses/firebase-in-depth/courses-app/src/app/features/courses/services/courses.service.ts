@@ -1,6 +1,6 @@
 import { Injectable, inject } from '@angular/core';
 import { Firestore, addDoc, collection, orderBy, query, where } from '@angular/fire/firestore';
-import { Observable, firstValueFrom, from, of } from 'rxjs';
+import { Observable, from } from 'rxjs';
 
 import { firebaseQueryToObservable } from 'src/app/common/utils';
 import { Course, CreateCourseDto } from 'src/app/core/types/courses';

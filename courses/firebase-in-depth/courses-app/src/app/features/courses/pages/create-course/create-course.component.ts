@@ -1,5 +1,6 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { NgIf } from '@angular/common';
+import { Router } from '@angular/router';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CreateCourseDto } from 'src/app/core/types';
 import { CoursesService } from '../../services';
@@ -24,6 +25,7 @@ const imports = [
 export class CreateCoursePageComponent implements OnInit {
 
   private formBuilder = inject(FormBuilder);
+  private router = inject(Router);
   private coursesService = inject(CoursesService);
 
   theForm!: FormGroup;
@@ -52,7 +54,10 @@ export class CreateCoursePageComponent implements OnInit {
 
     this.coursesService.createCourse(dto).subscribe({
       error: err => console.error(err),
-      next: () => console.log('Course created'),
+      next: () => {
+        console.log('Course created');
+        this.router.navigate(['/courses']);
+      },
     });
   }
 
