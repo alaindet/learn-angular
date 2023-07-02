@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CreateCourseDto } from 'src/app/core/types';
 import { CoursesService } from '../../services';
+import { Firestore } from '@angular/fire/firestore';
 
 const FIELD = {
   TITLE: 'title',
@@ -54,8 +55,8 @@ export class CreateCoursePageComponent implements OnInit {
 
     this.coursesService.createCourse(dto).subscribe({
       error: err => console.error(err),
-      next: () => {
-        console.log('Course created');
+      next: newCourse => {
+        console.log('Course created', newCourse);
         this.router.navigate(['/courses']);
       },
     });

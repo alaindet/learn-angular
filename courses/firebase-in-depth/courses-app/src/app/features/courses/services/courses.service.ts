@@ -1,6 +1,7 @@
 import { Injectable, inject } from '@angular/core';
-import { Firestore, addDoc, collection, orderBy, query, where } from '@angular/fire/firestore';
-import { Observable, from } from 'rxjs';
+import { idToken } from '@angular/fire/auth';
+import { DocumentData, DocumentReference, Firestore, addDoc, collection, doc, getDoc, orderBy, query, where } from '@angular/fire/firestore';
+import { Observable, from, map } from 'rxjs';
 
 import { firebaseQueryToObservable } from 'src/app/common/utils';
 import { Course, CreateCourseDto } from 'src/app/core/types/courses';
@@ -23,8 +24,20 @@ export class CoursesService {
   }
 
   // Create a new course with no lessons assigned to it
-  createCourse(dto: CreateCourseDto): Observable<any> {
+  createCourse(dto: CreateCourseDto): Observable<Course> {
     const coursesRef = collection(this.db, 'courses');
-    return from(addDoc(coursesRef, dto));
+
+    let id!: string;
+
+    return from(
+      addDoc(coursesRef, dto)
+        .then(courseRef => {
+          id = courseRef.id;
+          return getDoc(courseRef);
+        })
+        .then(courseDoc => {
+          return { id, ...courseDoc.data() } as Course;
+        })
+    );
   }
 }

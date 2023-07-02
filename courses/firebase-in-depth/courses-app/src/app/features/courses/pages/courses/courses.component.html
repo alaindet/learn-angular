@@ -3,59 +3,45 @@
 <a routerLink="/courses/create">Create new course</a>
 </div>
 
-<h2>Beginner</h2>
-<ng-container *ngIf="beginnerCourses$ | async as beginnerCourses">
-  <ul *ngIf="beginnerCourses.length; else noBeginnerCoursesRef">
-    <li *ngFor="let course of beginnerCourses">
-      <ul>
-        <li><strong>ID: </strong> {{ course.id }}</li>
-        <li><strong>Title: </strong> {{ course.title }}</li>
-        <li><strong>Description: </strong> {{ course.description }}</li>
-      </ul>
+<section *ngFor="let category of categories">
+  <h2>{{ category }}</h2>
+
+  <ng-container
+    *ngIf="courses$[category] | async as courses"
+    [ngTemplateOutlet]="courses.length ? courseCardsRef : noCoursesRef"
+    [ngTemplateOutletContext]="{
+      category: category,
+      courses: courses
+    }"
+  />
+</section>
+
+<!-- Template: Category -->
+<ng-template #courseCardsRef let-category="category" let-courses="courses">
+  <ul class="course-cards">
+    <li *ngFor="let course of courses">
+      <ng-container
+        [ngTemplateOutlet]="courseCardRef"
+        [ngTemplateOutletContext]="{ course: course }"
+      />
     </li>
   </ul>
-</ng-container>
-
-<ng-template #noBeginnerCoursesRef>
-  <p>No beginner courses</p>
 </ng-template>
 
-<hr>
-
-<h2>Intermediate</h2>
-
-<ng-container *ngIf="intermediateCourses$ | async as intermediateCourses">
-  <ul *ngIf="intermediateCourses.length; else noIntermediateCoursesRef">
-    <li *ngFor="let course of intermediateCourses">
-      <ul>
-        <li><strong>ID: </strong> {{ course.id }}</li>
-        <li><strong>Title: </strong> {{ course.title }}</li>
-        <li><strong>Description: </strong> {{ course.description }}</li>
-      </ul>
-    </li>
-  </ul>
-</ng-container>
-
-<ng-template #noIntermediateCoursesRef>
-  <p>No advanced courses</p>
+<!-- Template -->
+<ng-template #courseCardRef let-course="course">
+  <div class="course-card">
+    <div class="course-card__header">
+      <h3 class="course-card__header__title">{{ course.title }}</h3>
+      <div class="course-card__header__id">{{ course.id }}</div>
+    </div>
+    <div class="course-card__body">
+      {{ course.description }}
+    </div>
+  </div>
 </ng-template>
 
-<hr>
-
-<h2>Advanced</h2>
-
-<ng-container *ngIf="advancedCourses$ | async as advancedCourses">
-  <ul *ngIf="advancedCourses.length; else noAdvancedCoursesRef">
-    <li *ngFor="let course of advancedCourses">
-      <ul>
-        <li><strong>ID: </strong> {{ course.id }}</li>
-        <li><strong>Title: </strong> {{ course.title }}</li>
-        <li><strong>Description: </strong> {{ course.description }}</li>
-      </ul>
-    </li>
-  </ul>
-</ng-container>
-
-<ng-template #noAdvancedCoursesRef>
-  <p>No advanced courses</p>
+<!-- Template: No courses -->
+<ng-template #noCoursesRef let-category="category">
+  <p>{{ category }} courses not found</p>
 </ng-template>

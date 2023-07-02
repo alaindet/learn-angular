@@ -1,14 +1,16 @@
-import { Component, OnInit, inject } from '@angular/core';
-import { Router, RouterLink } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Component, inject } from '@angular/core';
+import { RouterLink } from '@angular/router';
+import { AsyncPipe, NgFor, NgIf, NgTemplateOutlet } from '@angular/common';
 
-import { AsyncPipe, NgFor, NgIf } from '@angular/common';
-import { Course } from 'src/app/core/types/courses';
+import { COURSE_CATEGORY } from '../../../../core/types';
 import { CoursesService } from '../../services';
+
+const { BEGINNER, INTERMEDIATE, ADVANCED } = COURSE_CATEGORY;
 
 const imports = [
   NgIf,
   NgFor,
+  NgTemplateOutlet,
   AsyncPipe,
   RouterLink,
 ];
@@ -20,21 +22,15 @@ const imports = [
   templateUrl: './courses.component.html',
   styleUrls: ['./courses.component.scss'],
 })
-export class CoursesPageComponent implements OnInit {
+export class CoursesPageComponent {
 
   private svc = inject(CoursesService);
 
-  beginnerCourses$!: Observable<Course[]>;
-  advancedCourses$!: Observable<Course[]>;
-  intermediateCourses$!: Observable<Course[]>;
+  categories = [BEGINNER, INTERMEDIATE, ADVANCED];
 
-  ngOnInit() {
-    this.fetchCourses();
-  }
-
-  private fetchCourses(): void {
-    this.beginnerCourses$ = this.svc.loadCoursesByCategory('Beginner');
-    this.intermediateCourses$ = this.svc.loadCoursesByCategory('Intermediate');
-    this.advancedCourses$ = this.svc.loadCoursesByCategory('Advanced');
-  }
+  courses$ = {
+    [BEGINNER]: this.svc.loadCoursesByCategory(BEGINNER),
+    [INTERMEDIATE]: this.svc.loadCoursesByCategory(INTERMEDIATE),
+    [ADVANCED]: this.svc.loadCoursesByCategory(ADVANCED),
+  };
 }
