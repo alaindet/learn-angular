@@ -12,5 +12,21 @@
 
   <h2>Lessons</h2>
 
-  <p>todo...</p>
+  <ng-container *ngIf="!!lessons && lessons.length">
+    <ul>
+      <li *ngFor="let lesson of lessons">
+        {{ lesson.title }} ({{ lesson.duration }})
+      </li>
+    </ul>
+
+    <!-- Load more -->
+    <button
+      *ngIf="lessonsShowLoadMore()"
+      type="button"
+      (click)="onLoadMoreLessons()"
+    >
+      Load more lessons
+    </button>
+
+  </ng-container>
 </ng-container>

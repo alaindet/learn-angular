@@ -1,5 +1,5 @@
 import { Injectable, inject } from '@angular/core';
-import { Firestore, addDoc, collection, deleteDoc, doc, getDoc, getDocs, orderBy, query, updateDoc, where, writeBatch } from '@angular/fire/firestore';
+import { DocumentData, Firestore, OrderByDirection, QueryDocumentSnapshot, QuerySnapshot, addDoc, collection, deleteDoc, doc, getDoc, getDocs, limit, orderBy, query, startAfter, updateDoc, where, writeBatch } from '@angular/fire/firestore';
 import { Observable, from, of } from 'rxjs';
 
 import { convertSnapshots, firebaseQueryToObservable, toSlug } from 'src/app/common/utils';
@@ -32,6 +32,28 @@ export class CoursesService {
     return from(
       getDocs(theQuery)
         .then(snaps => snaps.empty ? null : convertSnapshots<Course>(snaps)[0])
+    );
+  }
+
+  findLessons(
+    courseId: string,
+    sortDir: OrderByDirection = 'asc',
+    afterDocSnapshot: QueryDocumentSnapshot<DocumentData> | 0 = 0,
+    pageSize = 2,
+  ) {
+    const theQuery = query(
+      collection(this.db, 'courses', courseId, 'lessons'),
+      orderBy('title', sortDir),
+      startAfter(afterDocSnapshot),
+      limit(pageSize),
+    );
+
+    return from(
+      getDocs(theQuery).then(snaps => {
+        const lessons = convertSnapshots(snaps);
+        const lastLessonCursor = snaps.docs[snaps.docs.length - 1];
+        return { lessons, lastLessonCursor };
+      }),
     );
   }
 
