@@ -21,13 +21,13 @@ export const appConfig: ApplicationConfig = {
         }
         return firestore;
       }),
-      // provideAuth(() => {
-      //   const auth = getAuth();
-      //   if (environment.firebase.useEmulators) {
-      //     connectAuthEmulator(auth, 'http://localhost:9099');
-      //   }
-      //   return auth;
-      // }),
+      provideAuth(() => {
+        const auth = getAuth();
+        if (environment.firebase.useEmulators) {
+          connectAuthEmulator(auth, 'http://localhost:9099');
+        }
+        return auth;
+      }),
       // provideFunctions(() => {
       //   const functions = getFunctions();
       //   if (environment.firebase.useEmulators) {
