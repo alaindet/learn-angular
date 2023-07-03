@@ -1,0 +1,16 @@
+<ng-container *ngIf="course">
+  <div class="ui-page-header">
+    <h1 class="ui-page-header__title">{{ course.title }}</h1>
+
+    <app-breadcrumbs>
+      <app-breadcrumb url="/courses" isFirst>Courses</app-breadcrumb>
+      <app-breadcrumb>View: {{ course.slug }}</app-breadcrumb>
+    </app-breadcrumbs>
+  </div>
+
+  <p>{{ course.description }}</p>
+
+  <h2>Lessons</h2>
+
+  <p>todo...</p>
+</ng-container>

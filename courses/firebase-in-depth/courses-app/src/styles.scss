@@ -7,3 +7,13 @@
 .form-control-error {
   color: red;
 }
+
+.ui-page-header {
+  &__title {
+    margin-bottom: 1rem;
+  }
+
+  padding-bottom: 0.5rem;
+  margin-bottom: 2rem;
+  border-bottom: 2px solid #ccc;
+}

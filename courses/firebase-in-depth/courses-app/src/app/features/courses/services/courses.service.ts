@@ -2,7 +2,7 @@ import { Injectable, inject } from '@angular/core';
 import { Firestore, addDoc, collection, deleteDoc, doc, getDoc, getDocs, orderBy, query, updateDoc, where, writeBatch } from '@angular/fire/firestore';
 import { Observable, from, of } from 'rxjs';
 
-import { firebaseQueryToObservable } from 'src/app/common/utils';
+import { convertSnapshots, firebaseQueryToObservable, toSlug } from 'src/app/common/utils';
 import { Course, WriteCourseDto } from 'src/app/core/types/courses';
 
 @Injectable({
@@ -22,7 +22,20 @@ export class CoursesService {
     );
   }
 
-  getCourse(courseId: string): Observable<Course | null> {
+  findCourseBySlug(slug: string): Observable<Course | null> {
+
+    const theQuery = query(
+      collection(this.db, 'courses'),
+      where('slug', '==', slug),
+    );
+
+    return from(
+      getDocs(theQuery)
+        .then(snaps => snaps.empty ? null : convertSnapshots<Course>(snaps)[0])
+    );
+  }
+
+  getCourseById(courseId: string): Observable<Course | null> {
     const courseRef = doc(this.db, 'courses', courseId);
     return from(
       getDoc(courseRef).then(doc => {
@@ -41,6 +54,9 @@ export class CoursesService {
     const coursesRef = collection(this.db, 'courses');
 
     let id!: string;
+    if (!dto.slug) {
+      dto.slug = toSlug(dto.title);
+    }
 
     return from(
       addDoc(coursesRef, dto)
@@ -56,6 +72,11 @@ export class CoursesService {
 
   updateCourse(courseId: string, dto: WriteCourseDto): Observable<void> {
     const courseRef = doc(this.db, 'courses', courseId);
+
+    if (!dto.slug) {
+      dto.slug = toSlug(dto.title);
+    }
+
     return from(updateDoc(courseRef, dto));
   }
 

@@ -36,12 +36,12 @@ export class CoursesPageComponent implements OnInit {
     this.fetchCourses();
   }
 
-  onView(courseId: string) {
-    this.router.navigate(['courses/view', courseId]);
+  onView(courseSlug: string) {
+    this.router.navigate(['courses/view', courseSlug]);
   }
 
-  onEdit(courseId: string) {
-    this.router.navigate(['courses/edit', courseId]);
+  onEdit(courseSlug: string) {
+    this.router.navigate(['courses/edit', courseSlug]);
   }
 
   onRemove(courseId: string) {

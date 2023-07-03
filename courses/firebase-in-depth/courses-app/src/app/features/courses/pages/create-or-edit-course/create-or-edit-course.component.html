@@ -1,4 +1,18 @@
-<h1>Create course</h1>
+<div class="ui-page-header">
+  <h1 class="ui-page-header__title">
+    {{ isEditing ? 'Edit' : 'Create' }} course
+  </h1>
+
+  <app-breadcrumbs>
+    <app-breadcrumb url="/courses" isFirst>Courses</app-breadcrumb>
+    <app-breadcrumb *ngIf="isEditing; else createBreadcrumbRef">
+      Edit: {{ course?.slug }}
+    </app-breadcrumb>
+    <ng-template #createBreadcrumbRef>
+      <app-breadcrumb>Create</app-breadcrumb>
+    </ng-template>
+  </app-breadcrumbs>
+</div>
 
 <form *ngIf="theForm" [formGroup]="theForm" (ngSubmit)="onSubmit()">
 
@@ -8,17 +22,17 @@
     <input
       type="text"
       id="course-title"
-      formControlName="title"
+      [formControlName]="FIELD.TITLE.id"
       placeholder="Course title..."
     >
     <p *ngIf="fTitle.hasError('required')" class="form-control-error">
       Required
     </p>
     <p
-      *ngIf="fTitle.hasError('minLength') || fTitle.hasError('maxLength')"
+      *ngIf="fTitle.hasError('minlength') || fTitle.hasError('maxlength')"
       class="form-control-error"
     >
-      Enter between 5 and 30 characters
+      Enter between {{ FIELD.TITLE.minLen }} and {{ FIELD.TITLE.maxLen }} characters
     </p>
   </div>
 
@@ -28,17 +42,17 @@
     <input
       type="text"
       id="course-description"
-      formControlName="description"
+      [formControlName]="FIELD.DESCRIPTION.id"
       placeholder="Course description..."
     >
-    <p *ngIf="fTitle.hasError('required')" class="form-control-error">
+    <p *ngIf="fDescription.hasError('required')" class="form-control-error">
       Required
     </p>
     <p
-      *ngIf="fTitle.hasError('minLength') || fTitle.hasError('maxLength')"
+      *ngIf="fDescription.hasError('minlength') || fDescription.hasError('maxlength')"
       class="form-control-error"
     >
-      Enter between 5 and 144 characters
+      Enter between {{ FIELD.DESCRIPTION.minLen }} and {{ FIELD.DESCRIPTION.maxLen }} characters
     </p>
   </div>
 

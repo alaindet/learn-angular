@@ -9,6 +9,7 @@ export type CourseCategory = typeof COURSE_CATEGORY[keyof typeof COURSE_CATEGORY
 export type Course = {
   id: string;
   title: string;
+  slug: string;
   description: string;
   categories: string[];
 };

@@ -7,6 +7,6 @@ import { ViewCoursePageComponent } from './pages/view-course/view-course.compone
 export const COURSES_ROUTES: Routes = [
   { path: '', component: CoursesPageComponent },
   { path: 'create', component: CreateOrEditCoursePageComponent },
-  { path: 'edit/:id', component: CreateOrEditCoursePageComponent },
-  { path: 'view/:id', component: ViewCoursePageComponent },
+  { path: 'edit/:slug', component: CreateOrEditCoursePageComponent },
+  { path: 'view/:slug', component: ViewCoursePageComponent },
 ];
