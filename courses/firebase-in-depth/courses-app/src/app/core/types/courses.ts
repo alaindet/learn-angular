@@ -13,4 +13,4 @@ export type Course = {
   categories: string[];
 };
 
-export type CreateCourseDto = Omit<Course, 'id'>;
+export type WriteCourseDto = Omit<Course, 'id'>;

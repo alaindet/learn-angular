@@ -38,6 +38,11 @@
     <div class="course-card__body">
       {{ course.description }}
     </div>
+    <div class="course-card__footer">
+      <button type="button" (click)="onRemove(course.id)">Remove</button>
+      <button type="button" (click)="onEdit(course.id)">Edit</button>
+      <button type="button" (click)="onView(course.id)">View</button>
+    </div>
   </div>
 </ng-template>
 

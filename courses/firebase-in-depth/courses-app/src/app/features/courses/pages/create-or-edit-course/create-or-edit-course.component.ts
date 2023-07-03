@@ -1,10 +1,10 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { NgIf } from '@angular/common';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { CreateCourseDto } from 'src/app/core/types';
+
+import { Course, WriteCourseDto, COURSE_CATEGORY } from 'src/app/core/types';
 import { CoursesService } from '../../services';
-import { Firestore } from '@angular/fire/firestore';
 
 const FIELD = {
   TITLE: 'title',
@@ -18,17 +18,23 @@ const imports = [
 ];
 
 @Component({
-  selector: 'app-page-create-course',
+  selector: 'app-page-create-or-edit-course',
   standalone: true,
   imports,
-  templateUrl: './create-course.component.html',
+  templateUrl: './create-or-edit-course.component.html',
 })
-export class CreateCoursePageComponent implements OnInit {
+export class CreateOrEditCoursePageComponent implements OnInit {
 
   private formBuilder = inject(FormBuilder);
   private router = inject(Router);
+  private route = inject(ActivatedRoute);
   private coursesService = inject(CoursesService);
 
+  BEGINNER = COURSE_CATEGORY.BEGINNER;
+  INTERMEDIATE = COURSE_CATEGORY.INTERMEDIATE;
+  ADVANCED = COURSE_CATEGORY.ADVANCED;
+  id = this.route.snapshot.params['id'];
+  isEditing = !!this.id;
   theForm!: FormGroup;
 
   get fTitle() { return this.getFormField(FIELD.TITLE) }
@@ -36,7 +42,15 @@ export class CreateCoursePageComponent implements OnInit {
   get fCategory() { return this.getFormField(FIELD.CATEGORY) }
 
   ngOnInit() {
-    this.initForm();
+    if (!this.isEditing) {
+      this.initForm();
+      return;
+    }
+
+    this.coursesService.getCourse(this.id).subscribe({
+      error: err => console.error(err),
+      next: course => this.initForm(course),
+    });
   }
 
   onSubmit() {
@@ -47,11 +61,22 @@ export class CreateCoursePageComponent implements OnInit {
 
     const formVal = this.theForm.value;
 
-    const dto: CreateCourseDto = {
+    const dto: WriteCourseDto = {
       title: formVal[FIELD.TITLE],
       description: formVal[FIELD.DESCRIPTION],
       categories: [formVal[FIELD.CATEGORY]],
     };
+
+    if (this.isEditing) {
+      this.coursesService.updateCourse(this.id, dto).subscribe({
+        error: err => console.error(err),
+        next: () => {
+          console.log('Course updated');
+          this.router.navigate(['/courses']);
+        },
+      });
+      return;
+    }
 
     this.coursesService.createCourse(dto).subscribe({
       error: err => console.error(err),
@@ -62,13 +87,15 @@ export class CreateCoursePageComponent implements OnInit {
     });
   }
 
-  private initForm(): void {
+  private initForm(course: Course | null = null): void {
     const { required, minLength, maxLength } = Validators;
 
+    const category = course?.categories ? course.categories[0] : '';
+
     this.theForm = this.formBuilder.group({
-      [FIELD.TITLE]: ['', [required, minLength(5), maxLength(30)]],
-      [FIELD.DESCRIPTION]: ['', [minLength(5), maxLength(144)]],
-      [FIELD.CATEGORY]: ['beginner', [required]],
+      [FIELD.TITLE]: [course?.title, [required, minLength(5), maxLength(30)]],
+      [FIELD.DESCRIPTION]: [course?.description, [minLength(5), maxLength(144)]],
+      [FIELD.CATEGORY]: [category, [required]],
     });
   }
 

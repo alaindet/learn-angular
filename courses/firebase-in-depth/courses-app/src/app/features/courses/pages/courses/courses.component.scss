@@ -40,4 +40,16 @@
   // &__body {
 
   // }
+
+  &__footer {
+    margin-top: 1rem;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 0.5rem;
+
+    button {
+      width: initial;
+    }
+  }
 }
