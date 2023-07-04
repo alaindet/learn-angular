@@ -1,6 +1,7 @@
-import { Component, signal } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { NgTemplateOutlet } from '@angular/common';
-import { RouterLink, RouterLinkActive } from '@angular/router';
+import { Router, RouterLink, RouterLinkActive } from '@angular/router';
+import { AuthenticationService } from 'src/app/features/users/services';
 
 const imports = [
   NgTemplateOutlet,
@@ -17,9 +18,15 @@ const imports = [
 })
 export class NavbarComponent {
 
-  isSignedIn = signal(false);
+  private router = inject(Router);
+  private authService = inject(AuthenticationService);
 
-  onSignOut() {
-    console.log('onSignOut');
+  isSignedIn = this.authService.isSignedIn;
+
+  onSignOut(event: Event) {
+    event.preventDefault();
+    event.stopImmediatePropagation();
+    this.authService.signOut();
+    this.router.navigate(['/users/sign-in']);
   }
 }

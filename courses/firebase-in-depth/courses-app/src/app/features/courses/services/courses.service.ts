@@ -1,6 +1,6 @@
 import { Injectable, inject } from '@angular/core';
-import { DocumentData, Firestore, OrderByDirection, QueryDocumentSnapshot, QuerySnapshot, addDoc, collection, deleteDoc, doc, getDoc, getDocs, limit, orderBy, query, startAfter, updateDoc, where, writeBatch } from '@angular/fire/firestore';
-import { Observable, from, of } from 'rxjs';
+import { DocumentData, Firestore, OrderByDirection, QueryDocumentSnapshot, addDoc, collection, doc, getDoc, getDocs, limit, orderBy, query, startAfter, updateDoc, where, writeBatch } from '@angular/fire/firestore';
+import { Observable, from } from 'rxjs';
 
 import { convertSnapshots, firebaseQueryToObservable, toSlug } from 'src/app/common/utils';
 import { Course, WriteCourseDto } from 'src/app/core/types/courses';
@@ -107,12 +107,12 @@ export class CoursesService {
 
     const batch = writeBatch(this.db);
     const courseRef = doc(this.db, 'courses', courseId);
-    batch.delete(courseRef);
     const lessonsRef = collection(this.db, 'courses', courseId, 'lessons');
 
     return from(
       getDocs(lessonsRef)
-        .then(lessonSnaps => lessonSnaps.forEach(snap => batch.delete(snap.ref)))
+        .then(lessons => lessons.forEach(snap => batch.delete(snap.ref)))
+        .then(() => batch.delete(courseRef))
         .then(() => batch.commit())
     );
   }

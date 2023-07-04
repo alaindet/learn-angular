@@ -25,15 +25,17 @@
       [formControlName]="FIELD.TITLE.id"
       placeholder="Course title..."
     >
-    <p *ngIf="fTitle.hasError('required')" class="form-control-error">
-      Required
-    </p>
-    <p
-      *ngIf="fTitle.hasError('minlength') || fTitle.hasError('maxlength')"
-      class="form-control-error"
-    >
-      Enter between {{ FIELD.TITLE.minLen }} and {{ FIELD.TITLE.maxLen }} characters
-    </p>
+    <ng-container *ngIf="fTitle.touched">
+      <p *ngIf="fTitle.hasError('required')" class="form-control-error">
+        Required
+      </p>
+      <p
+        *ngIf="fTitle.hasError('minlength') || fTitle.hasError('maxlength')"
+        class="form-control-error"
+      >
+        Enter between {{ FIELD.TITLE.minLen }} and {{ FIELD.TITLE.maxLen }} characters
+      </p>
+    </ng-container>
   </div>
 
   <!-- Description -->
@@ -45,15 +47,17 @@
       [formControlName]="FIELD.DESCRIPTION.id"
       placeholder="Course description..."
     >
-    <p *ngIf="fDescription.hasError('required')" class="form-control-error">
-      Required
-    </p>
-    <p
-      *ngIf="fDescription.hasError('minlength') || fDescription.hasError('maxlength')"
-      class="form-control-error"
-    >
-      Enter between {{ FIELD.DESCRIPTION.minLen }} and {{ FIELD.DESCRIPTION.maxLen }} characters
-    </p>
+    <ng-container *ngIf="fDescription.touched">
+      <p *ngIf="fDescription.hasError('required')" class="form-control-error">
+        Required
+      </p>
+      <p
+        *ngIf="fDescription.hasError('minlength') || fDescription.hasError('maxlength')"
+        class="form-control-error"
+      >
+        Enter between {{ FIELD.DESCRIPTION.minLen }} and {{ FIELD.DESCRIPTION.maxLen }} characters
+      </p>
+    </ng-container>
   </div>
 
   <!-- Category -->
@@ -64,9 +68,11 @@
       <option [value]="INTERMEDIATE">{{ INTERMEDIATE }}</option>
       <option [value]="ADVANCED">{{ ADVANCED }}</option>
     </select>
-    <p *ngIf="fCategory.hasError('required')" class="form-control-error">
-      Required
-    </p>
+    <ng-container *ngIf="fCategory.touched">
+      <p *ngIf="fCategory.hasError('required')" class="form-control-error">
+        Required
+      </p>
+    </ng-container>
   </div>
 
   <!-- Submit -->
