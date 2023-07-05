@@ -64,7 +64,7 @@ export class CreateOrEditCoursePageComponent implements OnInit {
 
   onSubmit() {
 
-    if (this.theForm.invalid || !this.course) {
+    if (this.theForm.invalid || (this.isEditing && !this.course)) {
       return;
     }
 
@@ -78,7 +78,7 @@ export class CreateOrEditCoursePageComponent implements OnInit {
     };
 
     if (this.isEditing) {
-      this.coursesService.updateCourse(this.course.id, dto).subscribe({
+      this.coursesService.updateCourse(this.course!.id, dto).subscribe({
         error: err => console.error(err),
         next: () => {
           console.log('Course updated');
