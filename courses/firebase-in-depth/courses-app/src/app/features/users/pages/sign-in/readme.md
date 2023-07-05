@@ -1,0 +1,4 @@
+- https://firebase.google.com/docs/auth/web/start
+- How to re-authenticate?
+- How to sign in via link?
+- How to sign up via link?

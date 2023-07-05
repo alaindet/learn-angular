@@ -1,0 +1,41 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function isAuthenticated() {
+      return request.auth.uid != null
+    }
+
+    function isAdmin() {
+      return isAuthenticated() &&
+        'role' in request.auth.token &&
+        request.auth.token.role == 'admin'
+    }
+
+    function isWhitelistedUser() {
+      return isAuthenticated() &&
+        exists(/databases/$(database)/documents/allowed-users/$(request.auth.uid));
+    }
+
+    function isNonEmptyString(fieldName) {
+      return request.resource.data[fieldName] is string &&
+        request.resource.data[fieldName].size() > 0
+    }
+
+    function isValidCourse() {
+      return isNonEmptyString('title') &&
+        isNonEmptyString('slug')
+    }
+
+    match /courses/{courseId} {
+      allow read: if isAuthenticated();
+      allow create, update: if isAdmin() && isValidCourse();
+      allow delete: if isAdmin();
+
+      match /lessons/{lessonId} {
+        allow read: if isWhitelistedUser();
+      }
+    }
+  }
+}

@@ -1,0 +1,27 @@
+<p>Playground page</p>
+
+<button type="button" (click)="onPopulateDatabase()">
+  Populate database
+</button>
+
+<button type="button" (click)="onFetchFromDatabase()">
+  Fetch from database
+</button>
+
+<pre *ngIf="courses$">{{ courses$ | async | json }}</pre>
+
+<button type="button" (click)="onSearchDatabase()">
+  Search on the database (check console)
+</button>
+
+<button type="button" (click)="onFetchNestedCollection()">
+  Fetch lessons for specific course (check console)
+</button>
+
+<button type="button" (click)="onSearchNestedCollection()">
+  Search lessons for first course (check console)
+</button>
+
+<button type="button" (click)="onListenToDataChange()">
+  Listen to data change (check console)
+</button>

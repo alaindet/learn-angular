@@ -1,0 +1,52 @@
+<div class="ui-page-header">
+  <h1 class="ui-page-header__title">Courses</h1>
+  <a *ngIf="userIsAdmin()" routerLink="/courses/create">Create new course</a>
+</div>
+
+<section *ngFor="let category of categories">
+  <h2>{{ category }}</h2>
+
+  <ng-container
+    *ngIf="courses$[category] | async as courses"
+    [ngTemplateOutlet]="courses.length ? courseCardsRef : noCoursesRef"
+    [ngTemplateOutletContext]="{
+      category: category,
+      courses: courses
+    }"
+  />
+</section>
+
+<!-- Template: Category -->
+<ng-template #courseCardsRef let-category="category" let-courses="courses">
+  <ul class="course-cards">
+    <li *ngFor="let course of courses">
+      <ng-container
+        [ngTemplateOutlet]="courseCardRef"
+        [ngTemplateOutletContext]="{ course: course }"
+      />
+    </li>
+  </ul>
+</ng-template>
+
+<!-- Template -->
+<ng-template #courseCardRef let-course="course">
+  <div class="course-card">
+    <div class="course-card__header">
+      <h3 class="course-card__header__title">{{ course.title }}</h3>
+      <div class="course-card__header__id">{{ course.id }}</div>
+    </div>
+    <div class="course-card__body">
+      {{ course.description }}
+    </div>
+    <div class="course-card__footer">
+      <button type="button" (click)="onRemove(course.id)">Remove</button>
+      <button type="button" (click)="onEdit(course.slug)">Edit</button>
+      <button type="button" (click)="onView(course.slug)">View</button>
+    </div>
+  </div>
+</ng-template>
+
+<!-- Template: No courses -->
+<ng-template #noCoursesRef let-category="category">
+  <p>{{ category }} courses not found</p>
+</ng-template>
