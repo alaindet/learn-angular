@@ -10,7 +10,7 @@
   <ul>
     <li><a routerLink="/courses" routerLinkActive="active">Courses</a></li>
     <li><a routerLink="/playground" routerLinkActive="active">Playground</a></li>
-    <!-- <li><a routerLink="/users/invite" routerLinkActive="active">Invite</a></li> -->
+    <li>{{ email() }}</li>
     <li><a role="button" href="#" (click)="onSignOut($event)">Sign Out</a></li>
   </ul>
 </ng-template>

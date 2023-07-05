@@ -3,6 +3,7 @@ import { Router, RouterLink } from '@angular/router';
 import { AsyncPipe, NgFor, NgIf, NgTemplateOutlet } from '@angular/common';
 import { Observable } from 'rxjs';
 
+import { AuthService } from 'src/app/features/users';
 import { COURSE_CATEGORY, Course, CourseCategory } from '../../../../core/types';
 import { CoursesService } from '../../services';
 
@@ -26,10 +27,11 @@ const imports = [
 export class CoursesPageComponent implements OnInit {
 
   private router = inject(Router);
-  private svc = inject(CoursesService);
+  private coursesService = inject(CoursesService);
+  private authService = inject(AuthService);
 
   categories = [BEGINNER, INTERMEDIATE, ADVANCED];
-
+  userIsAdmin = this.authService.userIsAdmin;
   courses$!: { [category in CourseCategory]: Observable<Course[]> };
 
   ngOnInit() {
@@ -47,7 +49,7 @@ export class CoursesPageComponent implements OnInit {
   onRemove(courseId: string) {
     const confirmed = confirm(`Do you want to remove course #${courseId}?`);
     if (confirmed) {
-      this.svc.removeCourse(courseId).subscribe({
+      this.coursesService.removeCourse(courseId).subscribe({
         error: err => console.error(err),
         next: () => {
           console.log(`Course #${courseId} removed`);
@@ -59,9 +61,9 @@ export class CoursesPageComponent implements OnInit {
 
   private fetchCourses(): void {
     this.courses$ = {
-      [BEGINNER]: this.svc.loadCoursesByCategory(BEGINNER),
-      [INTERMEDIATE]: this.svc.loadCoursesByCategory(INTERMEDIATE),
-      [ADVANCED]: this.svc.loadCoursesByCategory(ADVANCED),
+      [BEGINNER]: this.coursesService.loadCoursesByCategory(BEGINNER),
+      [INTERMEDIATE]: this.coursesService.loadCoursesByCategory(INTERMEDIATE),
+      [ADVANCED]: this.coursesService.loadCoursesByCategory(ADVANCED),
     };
   }
 }

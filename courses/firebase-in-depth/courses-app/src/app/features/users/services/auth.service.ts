@@ -7,13 +7,30 @@ import { UserCredentials } from '../types';
 @Injectable({
   providedIn: 'root',
 })
-export class AuthenticationService {
+export class AuthService {
 
   private auth = inject(Auth);
 
   user = signal<User | null>(null);
+  userRole = signal<'basic' | 'admin' | null>(null);
+  userIsAdmin = computed(() => this.userRole() === 'admin');
+  userIsBasic = computed(() => this.userRole() === 'basic');
   isSignedIn = computed(() => this.user() !== null);
-  userChanged = effect(() => console.log('User changed', this.user()));
+  userRoleEffect = effect(
+    () => {
+
+      // Sign out
+      if (!this.user) {
+        this.userRole.set(null);
+      }
+
+      // Sign in as...?
+      this.user()?.getIdTokenResult().then(res => {
+        this.userRole.set(res.claims['role'] ?? null);
+      });
+    },
+    { allowSignalWrites: true },
+  );
 
   constructor() {
     this.registerToAuthChange();

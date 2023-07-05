@@ -3,15 +3,16 @@ import { Router } from '@angular/router';
 
 import { AuthService } from '../services';
 
-export function isAuthenticatedGuard(): boolean {
+export function isAdminGuard(): boolean {
+
   const auth = inject(AuthService);
   const router = inject(Router);
 
-  const isSignedIn = auth.isSignedIn();
+  const isAdmin = auth.userIsAdmin();
 
-  if (!isSignedIn) {
+  if (!isAdmin) {
     router.navigate(['/users/sign-in']);
   }
 
-  return isSignedIn;
+  return isAdmin;
 }

@@ -1,6 +1,6 @@
 <div class="ui-page-header">
   <h1 class="ui-page-header__title">Courses</h1>
-  <a routerLink="/courses/create">Create new course</a>
+  <a *ngIf="userIsAdmin()" routerLink="/courses/create">Create new course</a>
 </div>
 
 <section *ngFor="let category of categories">

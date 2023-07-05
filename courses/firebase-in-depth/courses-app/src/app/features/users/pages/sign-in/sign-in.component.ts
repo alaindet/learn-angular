@@ -2,7 +2,7 @@ import { NgIf } from '@angular/common';
 import { Component, OnInit, inject } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 
-import { AuthenticationService } from '../../services';
+import { AuthService } from '../../services';
 import { UserCredentials } from '../../types';
 import { Router } from '@angular/router';
 
@@ -26,7 +26,7 @@ export class SignInUserPageComponent implements OnInit {
 
   private formBuilder = inject(FormBuilder);
   private router = inject(Router);
-  private authService = inject(AuthenticationService);
+  private authService = inject(AuthService);
 
   theForm!: FormGroup;
   FIELD = FIELD;
@@ -49,16 +49,16 @@ export class SignInUserPageComponent implements OnInit {
 
   onSignInAsBasicUser() {
     const credentials: UserCredentials = {
-      email: 'foo.admin@example.com',
-      password: 'foo.admin@example.com',
+      email: 'bar.basic@example.com',
+      password: 'bar.basic@example.com',
     };
     this.signIn(credentials);
   }
 
   onSignInAsAdmin() {
     const credentials: UserCredentials = {
-      email: 'bar.basic@example.com',
-      password: 'bar.basic@example.com',
+      email: 'foo.admin@example.com',
+      password: 'foo.admin@example.com',
     };
     this.signIn(credentials);
   }
@@ -80,7 +80,7 @@ export class SignInUserPageComponent implements OnInit {
   private signIn(credentials: UserCredentials): void {
     this.authService.signIn(credentials).subscribe({
       error: err => console.error(err),
-      next: user => this.router.navigate(['/courses']),
+      next: () => this.router.navigate(['/courses']),
     });
   }
 }

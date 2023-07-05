@@ -7,13 +7,15 @@ service cloud.firestore {
       return request.auth.uid != null
     }
 
+    function isAdmin() {
+      return isAuthenticated() &&
+        'role' in request.auth.token &&
+        request.auth.token.role == 'admin'
+    }
+
     function isWhitelistedUser() {
       return isAuthenticated() &&
         exists(/databases/$(database)/documents/allowed-users/$(request.auth.uid));
-
-      // Alternative
-      // return isAuthenticated() &&
-      //   get(/databases/$(database)/documents/allowed-users/$(request.auth.uid)).data.allowed;
     }
 
     function isNonEmptyString(fieldName) {
@@ -28,7 +30,8 @@ service cloud.firestore {
 
     match /courses/{courseId} {
       allow read: if isAuthenticated();
-      allow write: if isAuthenticated() && isValidCourse();
+      allow create, update: if isAdmin() && isValidCourse();
+      allow delete: if isAdmin();
 
       match /lessons/{lessonId} {
         allow read: if isWhitelistedUser();
