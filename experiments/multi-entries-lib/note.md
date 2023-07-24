@@ -1,0 +1,1 @@
+- Based on [https://sandroroth.com/blog/angular-library](https://sandroroth.com/blog/angular-library)
